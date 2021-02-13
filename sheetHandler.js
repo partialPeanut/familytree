@@ -74,7 +74,7 @@ function handleSignoutClick(event) {
 
 // Get raw spreadsheet data and convert it into a dope-ass data structure.
 function getSheetValues() {
-    console.log("Place Siblings: Workable Ver. Final?")
+    console.log("Getting sheet values...")
 
     // Get the spreadsheet
     gapi.client.sheets.spreadsheets.values.get({
