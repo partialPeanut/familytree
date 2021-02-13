@@ -10,6 +10,8 @@ var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
 
 var authorizeButton = document.querySelector('#authorize_button')
 var signoutButton = document.querySelector('#signout_button')
+console.log(authorizeButton)
+console.log(signoutButton)
 
 /**
  *  On load, called to load the auth2 library and API client library.
