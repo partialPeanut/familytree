@@ -87,7 +87,7 @@ function rowToJSON(row) {
 }
 
 function placeSiblings() {
-    console.log("Place siblings: Layer Spam ver.")
+    console.log("Place siblings: Layer Spam ver. 2")
 
     // Get the spreadsheet
     gapi.client.sheets.spreadsheets.values.get({
@@ -120,9 +120,14 @@ function placeSiblings() {
                     i = parseInt(key)
                     console.log("i is: " + i)
                     if (val.hasOwnProperty(sibJSON.bigName)) {
+                        console.log(sibJSON.name + "'s big is in this layer!")
+
                         // Create a new level if necessary
-                        if (!siblings.hasOwnProperty(toString(i+1)))
+                        if (!siblings.hasOwnProperty(toString(i+1))) {
+                            console.log("Creating new layer.")
                             siblings[toString(i+1)] = {}
+                            console.log("Siblings is now: ", siblings)
+                        }
 
                         // If they have no house, inherit their big's, otherwise, they're a founder
                         if (sibJSON.house === null) sibJSON.house = val[sibJSON.bigName].house
