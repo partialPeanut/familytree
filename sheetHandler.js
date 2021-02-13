@@ -86,8 +86,9 @@ function rowToJSON(row) {
     return sibJSON
 }
 
+// Get raw spreadsheet data and convert it into a dope-ass data structure.
 function placeSiblings() {
-    console.log("Place siblings: Workable Ver. Final?")
+    console.log("Place Siblings: Workable Ver. Final?")
 
     // Get the spreadsheet
     gapi.client.sheets.spreadsheets.values.get({
