@@ -92,12 +92,23 @@ function listNames() {
         range: 'Brothers!A2:F'
       }).then((response) => {
         var result = response.result
-        siblings = []
+        sibList = {}
         for (i = 0; i < result.values.length; i++) {
-            siblings.push(rowToJSON(result.values[i]))
+            sibJSON = rowToJSON(result.values[i])
+            sibList[sibJSON.name] = sibJSON
         }
+
         var numRows = result.values ? result.values.length : 0
         console.log(`${numRows} siblings retrieved.`)
-        console.log(siblings)
+
+        $.each(sibList, function(i, val) {
+            if (val.bigName = null) {
+                val.bigList = []
+                return
+            }
+            else val.bigList = sibList[bigName].bigList.concat([val.bigName])
+        })
+
+        console.log(sibList)
       })
 }
