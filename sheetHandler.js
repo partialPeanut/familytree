@@ -87,7 +87,7 @@ function rowToJSON(row) {
 }
 
 function placeSiblings() {
-    console.log("Place siblings: Quotation Marks, Fuck ver. 1")
+    console.log("Place siblings: Workable Ver. Final?")
 
     // Get the spreadsheet
     gapi.client.sheets.spreadsheets.values.get({
@@ -127,7 +127,7 @@ function placeSiblings() {
 
                         // Create a new level if necessary
                         if (!siblings.hasOwnProperty(i+1)) {
-                            console.log("Creating new layer: " + (i+1))
+                            //console.log("Creating new layer: " + (i+1))
                             siblings[i+1] = {}
                             //console.log("Siblings is now: " + JSON.stringify(siblings))
                         }
@@ -165,6 +165,7 @@ function placeSiblings() {
             }
         }
 
+        console.log("Siblings:")
         console.log(siblings)
       })
 }

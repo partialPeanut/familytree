@@ -1,4 +1,6 @@
 function main() {
+    console.log("Main: Slap Em Down ver. 1")
+
     // Loop through the rows
     $.each(siblings, function(key, val) {
         i = parseInt(key)
