@@ -51,7 +51,7 @@ function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
         authorizeButton.style.display = 'none'
         signoutButton.style.display = 'block'
-        placeSiblings()
+        getSheetValues()
     } else {
         authorizeButton.style.display = 'block'
         signoutButton.style.display = 'none'
@@ -73,7 +73,7 @@ function handleSignoutClick(event) {
 }
 
 // Get raw spreadsheet data and convert it into a dope-ass data structure.
-function placeSiblings() {
+function getSheetValues() {
     console.log("Place Siblings: Workable Ver. Final?")
 
     // Get the spreadsheet
