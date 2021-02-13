@@ -102,11 +102,15 @@ function listNames() {
         console.log(`${numRows} siblings retrieved.`)
 
         $.each(sibList, function(i, val) {
-            if (val.bigName = null) {
+            if (val.bigName === null) {
                 val.bigList = []
+                if (val.house === null) val.house = "Field of Lost Souls"
                 return
             }
-            else val.bigList = sibList[bigName].bigList.concat([val.bigName])
+            else {
+                val.bigList = sibList[bigName].bigList.concat([val.bigName])
+                if (val.house === null) val.house = sibList[bigName].house
+            }
         })
 
         console.log(sibList)
