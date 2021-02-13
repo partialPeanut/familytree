@@ -80,6 +80,7 @@ function rowToJSON(row) {
     sibJSON.name = row[0]
     sibJSON.pledgeClass = row[1]
     sibJSON.bigName = row[3] == 'XXX' ?  null : row[3]
+    sibJSON.littleNames = []
     sibJSON.house = row[4] == 'XXX' ? null : row[4]
     sibJSON.tags = row[5] == 'XXX' ? [] : row[5].split(';')
 
@@ -92,26 +93,35 @@ function listNames() {
         range: 'Brothers!A2:F'
       }).then((response) => {
         var result = response.result
-        sibList = {}
-        for (i = 0; i < result.values.length; i++) {
-            sibJSON = rowToJSON(result.values[i])
-            sibList[sibJSON.name] = sibJSON
-        }
 
         var numRows = result.values ? result.values.length : 0
         console.log(`${numRows} siblings retrieved.`)
 
-        $.each(sibList, function(i, val) {
-            if (val.bigName === null) {
-                val.bigList = []
-                if (val.house === null) val.house = "Field of Lost Souls"
-                return
+        sibList = {}
+        for (i = 0; i < result.values.length; i++) {
+            sibJSON = rowToJSON(result.values[i])
+            if (sibJSON.bigName === null) {
+                if (sibJSON.house === null) sibJSON.house = "Field of Lost Souls"
+                else sibJSON.tags.push("Founder")
+
+                sibJSON.height = 0
+                sibList['0'][sibJSON.name] = sibJSON
             }
             else {
-                val.bigList = sibList[bigName].bigList.concat([val.bigName])
-                if (val.house === null) val.house = sibList[bigName].house
+                $.each(sibList, function(i, val) {
+                    if (val.hasOwnProperty(sibJSON.bigName)) {
+                        if (!sibList.hasOwnProperty(toString(i+1)))
+                            sibList[toString(i+1)] = {}
+
+                        if (sibJSON.house === null) sibJSON.house = val[sibJSON.bigName].house
+                        else sibJSON.tags.push("Founder")
+
+                        sibJSON.height = i+1
+                        sibList[toString(i+1)][sibJSON.name] = sibJSON
+                    }
+                })
             }
-        })
+        }
 
         console.log(sibList)
       })
