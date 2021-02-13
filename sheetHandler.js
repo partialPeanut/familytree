@@ -87,7 +87,7 @@ function rowToJSON(row) {
 }
 
 function placeSiblings() {
-    console.log("Place siblings: Layer Spam ver. 2")
+    console.log("Place siblings: Layer Spam ver. 3")
 
     // Get the spreadsheet
     gapi.client.sheets.spreadsheets.values.get({
@@ -118,7 +118,7 @@ function placeSiblings() {
                 // Scan iteratively through each structure level for the sib's big
                 $.each(siblings, function(key, val) {
                     i = parseInt(key)
-                    console.log("i is: " + i)
+                    console.log("key is: " + key + " and i is: " + i)
                     if (val.hasOwnProperty(sibJSON.bigName)) {
                         console.log(sibJSON.name + "'s big is in this layer!")
 
