@@ -90,6 +90,8 @@ function rowToJSON(row) {
 }
 
 function placeSiblings() {
+    console.log("Place siblings: Key ver.")
+
     // Get the spreadsheet
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
