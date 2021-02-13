@@ -79,9 +79,9 @@ function rowToJSON(row) {
     sibJSON = {}
     sibJSON.name = row[0]
     sibJSON.pledgeClass = row[1]
-    sibJSON.bigName = row[3] == 'XXX' ? row[3] : null
-    sibJSON.house = row[4] == 'XXX' ? row[4] : null
-    sibJSON.tags = row[5] == 'XXX' ? row[5].split(';') : []
+    sibJSON.bigName = row[3] == 'XXX' ?  null : row[3]
+    sibJSON.house = row[4] == 'XXX' ? null : row[4]
+    sibJSON.tags = row[5] == 'XXX' ? [] : row[5].split(';')
 
     return sibJSON
 }
