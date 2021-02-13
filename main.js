@@ -72,6 +72,7 @@ function placeSiblings(result) {
     }
 
     console.log("Siblings:")
+    console.log(JSON.stringify(siblings))
     console.log(siblings)
 
     drawTree()
@@ -83,6 +84,8 @@ function drawTree() {
     // Loop through the rows
     $.each(siblings, function(key, val) {
         i = parseInt(key)
+
+        // Create rows
         row = document.createElement('div')
         row.id = 'row-' + i
         row.className = 'row'
