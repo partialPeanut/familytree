@@ -87,7 +87,7 @@ function rowToJSON(row) {
 }
 
 function placeSiblings() {
-    console.log("Place siblings: Layer Spam ver. 3")
+    console.log("Place siblings: Layer Spam ver. 4")
 
     // Get the spreadsheet
     gapi.client.sheets.spreadsheets.values.get({
@@ -123,10 +123,10 @@ function placeSiblings() {
                         console.log(sibJSON.name + "'s big is in this layer!")
 
                         // Create a new level if necessary
-                        if (!siblings.hasOwnProperty(toString(i+1))) {
+                        if (!siblings.hasOwnProperty(i+1)) {
                             console.log("Creating new layer.")
-                            siblings[toString(i+1)] = {}
-                            console.log("Siblings is now: ", siblings)
+                            siblings[i+1] = {}
+                            console.log("Siblings is now: " + JSON.stringify(siblings))
                         }
 
                         // If they have no house, inherit their big's, otherwise, they're a founder
@@ -135,7 +135,7 @@ function placeSiblings() {
 
                         // Place them in the structure at the level just below their big
                         sibJSON.height = i+1
-                        siblings[toString(i+1)][sibJSON.name] = sibJSON
+                        siblings[i+1][sibJSON.name] = sibJSON
                     } else console.log(sibJSON.name + "'s big is not in this layer.")
                 })
             }
