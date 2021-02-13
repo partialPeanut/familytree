@@ -88,7 +88,7 @@ function listNames() {
       }).then((response) => {
         var result = response.result
         for (i = 0; i < result.values.length; i++) {
-            appendName(range.values[i][0])
+            appendName(result.values[i][0])
         }
         var numRows = result.values ? result.values.length : 0
         console.log(`${numRows} rows retrieved.`)
