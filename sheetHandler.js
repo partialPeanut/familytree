@@ -17,7 +17,6 @@ console.log(signoutButton)
  *  On load, called to load the auth2 library and API client library.
  */
 function handleClientLoad() {
-    console.log("Running...")
     gapi.load('client:auth2', initClient)
 }
 
@@ -26,14 +25,12 @@ function handleClientLoad() {
  *  listeners.
  */
 function initClient() {
-    console.log("Running 2...")
     gapi.client.init({
         apiKey: API_KEY,
         clientId: CLIENT_ID,
         discoveryDocs: DISCOVERY_DOCS,
         scope: SCOPES
     }).then(function () {
-        console.log("Worked!")
         // Listen for sign-in state changes.
         gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus)
 
