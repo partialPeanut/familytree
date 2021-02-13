@@ -12,7 +12,7 @@ function main() {
         tree = document.querySelector('#tree')
         tree.append(row)
 
-        $.each(val, function(j, sib) {
+        $.each(val, function(sibName, sib) {
             space = document.createElement('div')
             space.className = 'space'
             // space.style.width = '200px'
