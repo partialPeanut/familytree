@@ -1,5 +1,7 @@
 function main() {
-    $.each(siblings, function(i, val) {
+    // Loop through the rows
+    $.each(siblings, function(key, val) {
+        i = parseInt(key)
         row = document.createElement('div')
         row.id = 'row-' + i
         row.className = 'row'

@@ -75,6 +75,7 @@ function handleSignoutClick(event) {
     gapi.auth2.getAuthInstance().signOut()
 }
 
+// Converts a single sibling into a JSON format
 function rowToJSON(row) {
     sibJSON = {}
     sibJSON.name = row[0]
@@ -89,34 +90,45 @@ function rowToJSON(row) {
 }
 
 function placeSiblings() {
+    // Get the spreadsheet
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
         range: 'Brothers!A2:F'
       }).then((response) => {
         var result = response.result
-
+        
+        // Log the number of siblings
         var numRows = result.values ? result.values.length : 0
         console.log(`${numRows} siblings retrieved.`)
 
+        // Put all siblings into a JSON structure. This only works if the sheet is properly sorted and there are no spelling errors.
         siblings = {'0': {}}
         for (x = 0; x < result.values.length; x++) {
             sibJSON = rowToJSON(result.values[x])
+            // If the sib has no big, they're at height 0.
             if (sibJSON.bigName === null) {
+                // If they have no house, they're in the FoLS, otherwise, they're a founder
                 if (sibJSON.house === null) sibJSON.house = "Field of Lost Souls"
                 else sibJSON.tags.push("Founder")
 
+                // Place them in the structure at height 0
                 sibJSON.height = 0
                 siblings['0'][sibJSON.name] = sibJSON
             }
             else {
-                $.each(siblings, function(i, val) {
+                // Scan iteratively through each structure level for the sib's big
+                $.each(siblings, function(key, val) {
+                    i = parseInt(key)
                     if (val.hasOwnProperty(sibJSON.bigName)) {
+                        // Create a new level if necessary
                         if (!siblings.hasOwnProperty(toString(i+1)))
                             siblings[toString(i+1)] = {}
 
+                        // If they have no house, inherit their big's, otherwise, they're a founder
                         if (sibJSON.house === null) sibJSON.house = val[sibJSON.bigName].house
                         else sibJSON.tags.push("Founder")
 
+                        // Place them in the structure at the level just below their big
                         sibJSON.height = i+1
                         siblings[toString(i+1)][sibJSON.name] = sibJSON
                     }
