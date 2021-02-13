@@ -86,6 +86,7 @@ function listNames() {
         spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
         range: 'Brothers!A1:A25'
       }).then((response) => {
+        // this is dumb but it's a test
         var result = response.result
         for (i = 0; i < result.values.length; i++) {
             appendName(result.values[i][0])
