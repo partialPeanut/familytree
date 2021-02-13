@@ -54,7 +54,7 @@ function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
         authorizeButton.style.display = 'none'
         signoutButton.style.display = 'block'
-        listNames()
+        placeSiblings()
     } else {
         authorizeButton.style.display = 'block'
         signoutButton.style.display = 'none'
@@ -79,6 +79,7 @@ function rowToJSON(row) {
     sibJSON = {}
     sibJSON.name = row[0]
     sibJSON.pledgeClass = row[1]
+    sibJSON.gradYear = row[2]
     sibJSON.bigName = row[3] == 'XXX' ?  null : row[3]
     sibJSON.littleNames = []
     sibJSON.house = row[4] == 'XXX' ? null : row[4]
@@ -87,7 +88,7 @@ function rowToJSON(row) {
     return sibJSON
 }
 
-function listNames() {
+function placeSiblings() {
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
         range: 'Brothers!A2:F'
@@ -97,7 +98,7 @@ function listNames() {
         var numRows = result.values ? result.values.length : 0
         console.log(`${numRows} siblings retrieved.`)
 
-        sibList = {}
+        sibList = {'0': {}}
         for (i = 0; i < result.values.length; i++) {
             sibJSON = rowToJSON(result.values[i])
             if (sibJSON.bigName === null) {
