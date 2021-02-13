@@ -87,7 +87,7 @@ function rowToJSON(row) {
 }
 
 function placeSiblings() {
-    console.log("Place siblings: Layer Spam ver. 5")
+    console.log("Place siblings: Quotation Marks, Fuck ver. 1")
 
     // Get the spreadsheet
     gapi.client.sheets.spreadsheets.values.get({
@@ -115,12 +115,15 @@ function placeSiblings() {
                 siblings['0'][sibJSON.name] = sibJSON
             }
             else {
+                found = false
+
                 // Scan iteratively through each structure level for the sib's big
                 $.each(siblings, function(key, val) {
                     i = parseInt(key)
                     //console.log("key is: " + key + " and i is: " + i)
                     if (val.hasOwnProperty(sibJSON.bigName)) {
                         //console.log(sibJSON.name + "'s big is in this layer!")
+                        found = true
 
                         // Create a new level if necessary
                         if (!siblings.hasOwnProperty(i+1)) {
@@ -133,11 +136,32 @@ function placeSiblings() {
                         if (sibJSON.house === null) sibJSON.house = val[sibJSON.bigName].house
                         else sibJSON.tags.push("Founder")
 
+                        // Add themselves to their big's list of littles
+                        val[sibJSON.bigName].littleNames.push(sibJSON.name)
+
                         // Place them in the structure at the level just below their big
                         sibJSON.height = i+1
                         siblings[i+1][sibJSON.name] = sibJSON
+                        return false
                     } //else console.log(sibJSON.name + "'s big is not in this layer.")
                 })
+
+                // There has been some error or misspelling.
+                if (!found) {
+                    // Create a new level if necessary
+                    if (!siblings.hasOwnProperty('-1')) {
+                        console.log("Creating error layer.")
+                        siblings['-1'] = {}
+                    }
+
+                    // If they have no house, inherit their big's, otherwise, they're a founder
+                    if (sibJSON.house === null) sibJSON.house = "Field of Lost Souls"
+                    else sibJSON.tags.push("Founder")
+
+                    // Place them in the structure at height -1
+                    sibJSON.height = -1
+                    siblings['-1'][sibJSON.name] = sibJSON
+                }
             }
         }
 
