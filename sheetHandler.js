@@ -75,23 +75,29 @@ function handleSignoutClick(event) {
     gapi.auth2.getAuthInstance().signOut()
 }
 
-function appendName(text) {
-    nameButton = document.querySelector('#namesList')
-    aName = document.createTextNode(text + '\n')
-    nameButton.appendChild(aName)
+function rowToJSON(row) {
+    sibJSON = {}
+    sibJSON.name = row[0]
+    sibJSON.pledgeClass = row[1]
+    sibJSON.bigName = row[3] == 'XXX' ? row[3] : null
+    sibJSON.house = row[4] == 'XXX' ? row[4] : null
+    sibJSON.tags = row[5] == 'XXX' ? row[5].split(';') : []
+
+    return sibJSON
 }
 
 function listNames() {
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
-        range: 'Brothers!A1:A25'
+        range: 'Brothers!A2:F'
       }).then((response) => {
-        // this is dumb but it's a test
         var result = response.result
+        siblings = []
         for (i = 0; i < result.values.length; i++) {
-            appendName(result.values[i][0])
+            siblings.push(rowToJSON(result.values[i]))
         }
         var numRows = result.values ? result.values.length : 0
-        console.log(`${numRows} rows retrieved.`)
+        console.log(`${numRows} siblings retrieved.`)
+        console.log(siblings)
       })
 }
