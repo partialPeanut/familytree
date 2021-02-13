@@ -1,4 +1,4 @@
-function main() {
+function drawTree() {
     console.log("Main: Slap Em Down ver. 1")
 
     // Loop through the rows

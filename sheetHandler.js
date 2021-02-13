@@ -168,5 +168,7 @@ function placeSiblings() {
 
         console.log("Siblings:")
         console.log(siblings)
+
+        drawTree()
       })
 }
