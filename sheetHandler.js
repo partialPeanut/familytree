@@ -98,32 +98,32 @@ function placeSiblings() {
         var numRows = result.values ? result.values.length : 0
         console.log(`${numRows} siblings retrieved.`)
 
-        sibList = {'0': {}}
-        for (i = 0; i < result.values.length; i++) {
-            sibJSON = rowToJSON(result.values[i])
+        siblings = {'0': {}}
+        for (x = 0; x < result.values.length; x++) {
+            sibJSON = rowToJSON(result.values[x])
             if (sibJSON.bigName === null) {
                 if (sibJSON.house === null) sibJSON.house = "Field of Lost Souls"
                 else sibJSON.tags.push("Founder")
 
                 sibJSON.height = 0
-                sibList['0'][sibJSON.name] = sibJSON
+                siblings['0'][sibJSON.name] = sibJSON
             }
             else {
-                $.each(sibList, function(i, val) {
+                $.each(siblings, function(i, val) {
                     if (val.hasOwnProperty(sibJSON.bigName)) {
-                        if (!sibList.hasOwnProperty(toString(i+1)))
-                            sibList[toString(i+1)] = {}
+                        if (!siblings.hasOwnProperty(toString(i+1)))
+                            siblings[toString(i+1)] = {}
 
                         if (sibJSON.house === null) sibJSON.house = val[sibJSON.bigName].house
                         else sibJSON.tags.push("Founder")
 
                         sibJSON.height = i+1
-                        sibList[toString(i+1)][sibJSON.name] = sibJSON
+                        siblings[toString(i+1)][sibJSON.name] = sibJSON
                     }
                 })
             }
         }
 
-        console.log(sibList)
+        console.log(siblings)
       })
 }
