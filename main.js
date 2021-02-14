@@ -14,7 +14,8 @@ function placeSiblings(result) {
         if (sibJSON.bigName === null) {
             // If they have no house, they're in the Lone Wolves or FoLS, otherwise, they're a founder
             if (sibJSON.house === null) {
-                if (sibJSON.className == "Alpha") sibJSON.house = "Lone Wolves"
+                console.log(sibJSON.pledgeClass)
+                if (sibJSON.pledgeClass == "Alpha") sibJSON.house = "Lone Wolves"
                 else sibJSON.house = "Field of Lost Souls"
             }
             else sibJSON.tags.push("Founder")
@@ -100,69 +101,89 @@ function drawTree() {
     $.each(siblings, function(key, val) {
         i = parseInt(key)
 
-        // Create rows
+        // Create the row element where all of the blocks and spaces will be stored
         row = document.createElement('div')
         row.id = 'row-' + i
-        row.className = 'row'
+        row.classList.add('row')
         if (i == 0 || i == siblings.length-1) {
-            row.className = 'row end'
+            row.classList.add('end')
         }
         
+        // Find the tree and add the row to it
         tree = document.querySelector('#tree')
         tree.append(row)
 
+        // Loop through the siblings in this row
         $.each(val, function(sibName, sib) {
+            // Create a space before the block, can be empty
             space = document.createElement('div')
-            space.className = 'space'
+            space.classList.add('space')
             // space.style.width = '200px'
             row.append(space)
 
+            // Create a block where all the stuff for an individual sibling is held
             block = document.createElement('div')
-            block.className = 'block'
+            block.classList.add('block')
             row.append(block)
 
+            // Get a class name from the sib's house
+            houseClean = sib.house.replace(/ |\'/g, '')
+
+            // If the sib has a big, add a line above the nas
             if (sib.bigName) {
                 topLine = document.createElement('div')
-                topLine.className = 'line vert'
+                topLine.classList.add('line')
+                topLine.classList.add('vert')
+                topLine.classList.add(houseClean)
                 block.append(topLine)
             }
 
+            // The nas (name and symbols), which contains the sib's name and all the symbols attached to them
             nas = document.createElement('div')
-            nas.className = 'nameAndSymbols'
+            nas.classList.add('nameAndSymbols')
             block.append(nas)
 
+            // The name button, a button with the sib's name on it
             nameButton = document.createElement("BUTTON")
-            nameButton.className = 'name'
+            nameButton.classList.add('name')
+            nameButton.classList.add(houseClean)
             nas.append(nameButton)
 
+            // The name itself
             nameName = document.createTextNode(sib.name)
             nameButton.appendChild(nameName)
 
+            // Some debugging stuff with the position and width of the block
             nameBreak = document.createElement("br")
-            nameInfo = document.createTextNode(nameButton.offsetLeft + ' ' + nameButton.offsetWidth)
+            nameInfo = document.createTextNode(block.offsetLeft + ' ' + block.offsetWidth)
             nameButton.appendChild(nameBreak)
             nameButton.appendChild(nameInfo)
 
+            // If the sib has any littles, add a line below the nas
             if (sib.littleNames.length > 0) {
                 botLine = document.createElement('div')
-                botLine.className = 'line vert'
+                botLine.classList.add('line')
+                botLine.classList.add('vert')
+                botLine.classList.add(houseClean)
                 block.append(botLine)
             }
         })
 
+        // Temporary across lines
         if (i != siblings.length-1) {
             across = document.createElement('div')
             across.id = 'across-' + i
-            across.className = 'across'
+            across.classList.add('across')
             tree.append(across)
 
             space = document.createElement('div')
-            space.className = 'space'
+            space.classList.add('space')
             // space.style.width = '200px'
             across.append(space)
 
             line = document.createElement('div')
-            line.className = 'line horiz'
+            line.classList.add('line')
+            line.classList.add('horiz')
             // line.style.width = '200px'
             across.append(line)
         }

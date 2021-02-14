@@ -1,0 +1,60 @@
+body{
+    margin: 0 auto;
+}
+
+#tree{
+    width: fit-content;
+    white-space: nowrap;
+}
+
+.row{
+    height: 80px;
+    white-space: nowrap;
+}
+
+.row.end{
+    height: 60px;
+}
+
+.block{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    margin-right: 10px;
+}
+
+.space{
+    display: inline-block;
+    width: 0px;
+}
+
+.nameAndSymbols{
+    height: 40px;
+}
+
+.name{
+    height: 100%;
+}
+
+.line{
+    background-color: black;
+}
+
+.line.vert{
+    width: 4px;
+    height: 20px;
+}
+
+.line.horiz{
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+    height: 4px;
+}
+
+.across{
+    height: 4px;
+    white-space: nowrap;
+}
