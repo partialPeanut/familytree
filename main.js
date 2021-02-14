@@ -12,8 +12,11 @@ function placeSiblings(result) {
         sibJSON = rowToJSON(result.values[x])
         // If the sib has no big, they're at height 0.
         if (sibJSON.bigName === null) {
-            // If they have no house, they're in the FoLS, otherwise, they're a founder
-            if (sibJSON.house === null) sibJSON.house = "Field of Lost Souls"
+            // If they have no house, they're in the Lone Wolves or FoLS, otherwise, they're a founder
+            if (sibJSON.house === null) {
+                if (sibJSON.className == "Alpha") sibJSON.house = "Lone Wolves"
+                else sibJSON.house = "Field of Lost Souls"
+            }
             else sibJSON.tags.push("Founder")
 
             // Place them in the structure at height 0
@@ -71,6 +74,18 @@ function placeSiblings(result) {
         }
     }
 
+    // Sorts siblings into the order they should appear in on the tree.
+    $.each(siblings, function(key, val) {
+        nextRow = parseInt(key) + 1
+        $.each(val, function(sibName, sib) {
+            sib.littleNames.forEach(function(littleName) {
+                little = siblings[nextRow][littleName]
+                delete siblings[nextRow][littleName]
+                siblings[nextRow][littleName] = little
+            })
+        })
+    })
+
     console.log("Siblings:")
     console.log(JSON.stringify(siblings))
     console.log(siblings)
@@ -120,8 +135,13 @@ function drawTree() {
             nameButton.className = 'name'
             nas.append(nameButton)
 
-            nameName = document.createTextNode(sib.name + ' ' + nameButton.offsetLeft)
+            nameName = document.createTextNode(sib.name)
             nameButton.appendChild(nameName)
+
+            nameBreak = document.createElement("br")
+            nameInfo = document.createTextNode(nameButton.offsetLeft + ' ' + nameButton.offsetWidth)
+            nameButton.appendChild(nameBreak)
+            nameButton.appendChild(nameInfo)
 
             if (sib.littleNames.length > 0) {
                 botLine = document.createElement('div')

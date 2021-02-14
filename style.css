@@ -1,11 +1,10 @@
 body{
-    margin: 0;
+    margin: 0 auto;
 }
 
 #tree{
-    width: auto;
+    width: fit-content;
     margin: auto;
-    overflow: auto;
     white-space: nowrap;
 }
 
