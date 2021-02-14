@@ -1,5 +1,14 @@
+@font-face {
+    font-family: fontenstein;
+    src: url(FontensteinStd-Regular.ttf);
+}
+
 .name {
     border-width: 3px;
+    border-radius: 0px;
+    font-family: fontenstein;
+    font-size: 32px;
+    line-height: 30px;
 }
 
 .LoneWolves {
@@ -84,4 +93,9 @@
 }
 .BertschTree.line {
     background-color: #F1973E;
+}
+
+.Head {
+    border-width: 5px;
+    border-color: #5A2895;
 }

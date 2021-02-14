@@ -79,7 +79,7 @@ function getSheetValues() {
     // Get the spreadsheet
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
-        range: 'Brothers!A2:F'
+        range: 'Brothers!A2:G'
       }).then((response) => {
         placeSiblings(response.result)
       })

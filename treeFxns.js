@@ -3,6 +3,7 @@ function rowToJSON(row) {
     sibJSON = {}
     sibJSON.name = row[0]
     sibJSON.pledgeClass = row[1]
+    sibJSON.pledgeClassNumber = row[6]
     sibJSON.gradYear = row[2]
     sibJSON.bigName = row[3] == 'XXX' ?  null : row[3]
     sibJSON.littleNames = []
@@ -10,4 +11,14 @@ function rowToJSON(row) {
     sibJSON.tags = row[5] == 'XXX' ? [] : row[5].split(';')
 
     return sibJSON
+}
+
+// Prepares a string to be used as a class name
+function cleanStr(string) {
+    newStr = string.replace(/ |\'|\./g, '')
+    return newStr
+}
+
+function pledgeClassToSymbols(pledgeClassNumber) {
+    return ''
 }

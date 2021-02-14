@@ -127,7 +127,7 @@ function drawTree() {
             row.append(block)
 
             // Get a class name from the sib's house
-            houseClean = sib.house.replace(/ |\'/g, '')
+            houseClean = cleanStr(sib.house)
 
             // If the sib has a big, add a line above the nas
             if (sib.bigName) {
@@ -149,15 +149,31 @@ function drawTree() {
             nameButton.classList.add(houseClean)
             nas.append(nameButton)
 
+            // Add all tags to classes
+            sib.tags.forEach(function(tag) {
+                nameButton.classList.add(cleanStr(tag))
+            })
+
             // The name itself
-            nameName = document.createTextNode(sib.name)
+            nameName = document.createTextNode(sib.name + pledgeClassToSymbols(sib.pledgeClassNumber))
             nameButton.appendChild(nameName)
 
+            // Strikethrough if the sib dropped
+            if (nameButton.classList.contains("Dropped")) {
+                buttonStyle = window.getComputedStyle(nameButton)
+                backgroundCol = buttonStyle.backgroundColor
+                borderCol = buttonStyle.borderColor
+                struckThroughString = "linear-gradient(0deg, " + backgroundCol + " 45%, " + borderCol + " 45%, " + borderCol + " 55%, " + backgroundCol + " 55%)"
+                nameButton.style.background = struckThroughString
+            }
+
+            /*
             // Some debugging stuff with the position and width of the block
             nameBreak = document.createElement("br")
             nameInfo = document.createTextNode(block.offsetLeft + ' ' + block.offsetWidth)
             nameButton.appendChild(nameBreak)
             nameButton.appendChild(nameInfo)
+            */
 
             // If the sib has any littles, add a line below the nas
             if (sib.littleNames.length > 0) {
