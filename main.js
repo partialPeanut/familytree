@@ -99,7 +99,7 @@ function parseTags(result) {
         tagData[cleanStr(row[0])] = tagRowToJSON(row)
     })
 
-    console.log(JSON.stringify)
+    console.log(JSON.stringify(tagData))
     console.log(tagData)
 }
 
