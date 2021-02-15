@@ -185,7 +185,7 @@ function drawTree() {
             nameButton.classList.forEach(function(tag) {
                 if (tagData.hasOwnProperty(tag)) {
                     tagJSON = tagData[tag]
-                    if (tagJSON.hasOwnProperty(imageAddress)) {
+                    if (tagJSON.hasOwnProperty("imageAddress")) {
                         tagImage = document.createElement("img")
                         tagImage.src = "img/" + tagJSON.imageAddress
                         tagImage.classList.add("tagSymbol")
