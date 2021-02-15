@@ -95,11 +95,11 @@ function placeSiblings(result) {
 // Covert tag set into a usable json
 function parseTags(result) {
     tagData = {}
-    result.forEach(function(row) {
+    result.values.forEach(function(row) {
         tagData[cleanStr(row[0])] = tagRowtoJSON(tag)
     })
 
-    console.log(JSON.stringify(tagData))
+    console.log(JSON.stringify)
     console.log(tagData)
 }
 
