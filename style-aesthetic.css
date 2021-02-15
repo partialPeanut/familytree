@@ -6,9 +6,7 @@
 .name {
     border-width: 3px;
     border-radius: 0px;
-    font-family: fontenstein;
-    font-size: 32px;
-    line-height: 30px;
+    font: 32px/1 fontenstein;
 }
 
 .LoneWolves {
@@ -95,7 +93,18 @@
     background-color: #F1973E;
 }
 
-.Head {
+.LazarusInc {
+    border-color: #006600;
+}
+
+.Head, .SupremeCommander {
     border-width: 5px;
     border-color: #5A2895;
+}
+
+.PurpleLegionnaire, .SectionChief, .ChiefofChiefs {
+    border-width: 5px;
+    border-color: #5A2895;
+    background-color: #E8CD41;
+    color: #5A2895;
 }

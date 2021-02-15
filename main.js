@@ -1,7 +1,5 @@
-// Get raw spreadsheet data and convert it into a dope-ass data structure.
+// Get raw spreadsheet data and convert it into a dope-ass data structure
 function placeSiblings(result) {
-    console.log("Place Siblings: Workable Ver.")
-
     // Log the number of siblings
     var numRows = result.values ? result.values.length : 0
     console.log(`${numRows} siblings retrieved.`)
@@ -9,7 +7,7 @@ function placeSiblings(result) {
     // Put all siblings into a JSON structure. This only works if the sheet is properly sorted and there are no spelling errors.
     siblings = {'0': {}}
     for (x = 0; x < result.values.length; x++) {
-        sibJSON = rowToJSON(result.values[x])
+        sibJSON = sibRowToJSON(result.values[x])
         // If the sib has no big, they're at height 0.
         if (sibJSON.bigName === null) {
             // If they have no house, they're in the Lone Wolves or FoLS, otherwise, they're a founder
@@ -94,9 +92,19 @@ function placeSiblings(result) {
     drawTree()
 }
 
-function drawTree() {
-    console.log("Main: Slap Em Down ver. 1")
+// Covert tag set into a usable json
+function parseTags(result) {
+    tagData = {}
+    result.forEach(function(row) {
+        tagData[cleanStr(row[0])] = tagRowtoJSON(tag)
+    })
 
+    console.log(JSON.stringify(tagData))
+    console.log(tagData)
+}
+
+// Draw the whole tree
+function drawTree() {
     // Loop through the rows
     $.each(siblings, function(key, val) {
         i = parseInt(key)
@@ -155,7 +163,7 @@ function drawTree() {
             })
 
             // The name itself
-            nameName = document.createTextNode(sib.name + pledgeClassToSymbols(sib.pledgeClassNumber))
+            nameName = document.createTextNode(sib.name + ' ' + pledgeClassToSymbols(sib.pledgeClassNumber))
             nameButton.appendChild(nameName)
 
             // Strikethrough if the sib dropped
@@ -167,13 +175,24 @@ function drawTree() {
                 nameButton.style.background = struckThroughString
             }
 
-            /*
             // Some debugging stuff with the position and width of the block
             nameBreak = document.createElement("br")
             nameInfo = document.createTextNode(block.offsetLeft + ' ' + block.offsetWidth)
             nameButton.appendChild(nameBreak)
             nameButton.appendChild(nameInfo)
-            */
+
+            // Add tag images to nas
+            nameButton.classList.forEach(function(tag) {
+                if (tagData.hasOwnProperty(tag)) {
+                    tagJSON = tagData[tag]
+                    if (tagJSON.hasOwnProperty(imageAddress)) {
+                        tagImage = document.createElement("img")
+                        tagImage.src = "img/" + tagJSON.imageAddress
+                        tagImage.classList.add("tagSymbol")
+                        nas.appendChild(tagImage)
+                    }
+                }
+            })
 
             // If the sib has any littles, add a line below the nas
             if (sib.littleNames.length > 0) {

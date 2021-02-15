@@ -83,4 +83,12 @@ function getSheetValues() {
       }).then((response) => {
         placeSiblings(response.result)
       })
+
+    // Get the spreadsheet, but the tags one
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
+        range: 'Tag Data!A2:B'
+      }).then((response) => {
+        parseTags(response.result)
+      })
 }
