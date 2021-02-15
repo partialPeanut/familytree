@@ -1,5 +1,5 @@
 // Converts a single sibling into a JSON format
-function sibRowtoJSON(row) {
+function sibRowToJSON(row) {
     sibJSON = {}
     sibJSON.name = row[0]
     sibJSON.pledgeClass = row[1]
@@ -14,7 +14,7 @@ function sibRowtoJSON(row) {
 }
 
 // Converts a single set of tag data into a JSON format
-function tagRowtoJSON(row) {
+function tagRowToJSON(row) {
     tagJSON = {}
     tagJSON.name = row[0]
     tagJSON.imageAddress = row[1]

@@ -96,7 +96,7 @@ function placeSiblings(result) {
 function parseTags(result) {
     tagData = {}
     result.values.forEach(function(row) {
-        tagData[cleanStr(row[0])] = tagRowtoJSON(tag)
+        tagData[cleanStr(row[0])] = tagRowToJSON(row)
     })
 
     console.log(JSON.stringify)
