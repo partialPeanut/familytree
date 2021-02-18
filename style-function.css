@@ -5,6 +5,7 @@ body{
 #tree{
     width: fit-content;
     white-space: nowrap;
+    margin: 40px 30px;
 }
 
 .row{
@@ -21,11 +22,8 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-}
 
-.space{
-    display: inline-block;
-    width: 10px;
+    margin-left: 10px;
 }
 
 .nameAndSymbols{
@@ -45,17 +43,17 @@ body{
 .line{
     background-color: black;
 }
-
 .line.vert{
     width: 4px;
     height: 20px;
 }
-
 .line.horiz{
     display: inline-block;
     vertical-align: top;
-    width: 200px;
+    width: 4px;
     height: 4px;
+
+    margin-left: 40px;
 }
 
 .across{

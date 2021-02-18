@@ -1,5 +1,7 @@
 // Get raw spreadsheet data and convert it into a dope-ass data structure
 function placeSiblings(result) {
+    console.log("placeSiblings Ver. All Done, I Fuckin' Hope")
+    
     // Log the number of siblings
     var numRows = result.values ? result.values.length : 0
     console.log(`${numRows} siblings retrieved.`)
@@ -12,7 +14,7 @@ function placeSiblings(result) {
         if (sibJSON.bigName === null) {
             // If they have no house, they're in the Lone Wolves or FoLS, otherwise, they're a founder
             if (sibJSON.house === null) {
-                console.log(sibJSON.pledgeClass)
+                //console.log(sibJSON.pledgeClass)
                 if (sibJSON.pledgeClass == "Alpha") sibJSON.house = "Lone Wolves"
                 else sibJSON.house = "Field of Lost Souls"
             }
@@ -99,12 +101,23 @@ function parseTags(result) {
         tagData[cleanStr(row[0])] = tagRowToJSON(row)
     })
 
+    console.log("Tags:")
     console.log(JSON.stringify(tagData))
     console.log(tagData)
 }
 
 // Draw the whole tree
 function drawTree() {
+    createUnspacedTree()
+    setTimeout(function(){
+        drawAcrossLines()
+       }, 100);
+}
+
+// Places all blocks roughly down, in the right order but not correctly positioned
+function createUnspacedTree() {
+    console.log("createUnspacedTree Ver. Probably Done")
+
     // Loop through the rows
     $.each(siblings, function(key, val) {
         i = parseInt(key)
@@ -123,15 +136,10 @@ function drawTree() {
 
         // Loop through the siblings in this row
         $.each(val, function(sibName, sib) {
-            // Create a space before the block, can be empty
-            space = document.createElement('div')
-            space.classList.add('space')
-            // space.style.width = '200px'
-            row.append(space)
-
             // Create a block where all the stuff for an individual sibling is held
             block = document.createElement('div')
             block.classList.add('block')
+            block.id = cleanStr(sibName)
             row.append(block)
 
             // Get a class name from the sib's house
@@ -175,12 +183,6 @@ function drawTree() {
                 nameButton.style.background = struckThroughString
             }
 
-            // Some debugging stuff with the position and width of the block
-            nameBreak = document.createElement("br")
-            nameInfo = document.createTextNode(block.offsetLeft + ' ' + block.offsetWidth)
-            nameButton.appendChild(nameBreak)
-            nameButton.appendChild(nameInfo)
-
             // Add tag images to nas
             nameButton.classList.forEach(function(tag) {
                 if (tagData.hasOwnProperty(tag)) {
@@ -203,24 +205,71 @@ function drawTree() {
                 block.append(botLine)
             }
         })
+    })
+}
 
-        // Temporary across lines
-        if (i != siblings.length-1) {
-            across = document.createElement('div')
-            across.id = 'across-' + i
-            across.classList.add('across')
-            tree.append(across)
+// Draws the lines that connect littles across to their big
+function drawAcrossLines() {
+    console.log("drawAcrossLines Ver. Just Made It Work, No Color Yet, Off By One Error")
 
-            space = document.createElement('div')
-            space.classList.add('space')
-            // space.style.width = '200px'
-            across.append(space)
+    tree = document.querySelector('#tree')
 
-            line = document.createElement('div')
-            line.classList.add('line')
-            line.classList.add('horiz')
-            // line.style.width = '200px'
-            across.append(line)
-        }
+    $.each(siblings, function(height, row) {
+        prevEnd = 30
+
+        divRow = document.querySelector('#row-' + height)
+        divAcross = document.createElement("div")
+        divAcross.id = "across-" + height
+        divAcross.classList.add("across")
+        tree.insertBefore(divAcross, divRow.nextSibling)
+
+        nextHeight = parseInt(height)+1
+        if (nextHeight >= Object.keys(siblings).length) return false
+        $.each(row, function(idx, sib) {
+            if (sib.littleNames.length == 1) {
+                little = siblings[nextHeight][sib.littleNames[0]]
+
+                thisBlockName = '#' + cleanStr(little.name)
+                thisX = $(thisBlockName).offset().left
+                thisW = $(thisBlockName).width()
+
+                //console.log(little)
+                //console.log(thisX + ' ' + thisW)
+
+                leftSpace = thisX + thisW/2 - prevEnd - 2
+                lineWidth = 4
+            }
+            else if (sib.littleNames.length > 1) {
+                firstLittle = siblings[nextHeight][sib.littleNames[0]]
+                lastLittle = siblings[nextHeight][sib.littleNames[sib.littleNames.length-1]]
+
+                firstBlockName = '#' + cleanStr(firstLittle.name)
+                firstX = $(firstBlockName).offset().left
+                firstW = $(firstBlockName).width()
+
+                //console.log(firstLittle)
+                //console.log(Math.floor(firstX) + ' ' + Math.floor(firstW))
+
+                lastBlockName = '#' + cleanStr(lastLittle.name)
+                lastX = $(lastBlockName).offset().left
+                lastW = $(lastBlockName).width()
+
+                leftSpace = firstX + firstW/2 - prevEnd - 2
+                lineWidth = (lastX + lastW/2) - (firstX + firstW/2) + 4
+            }
+            else return
+
+            //console.log(leftSpace + ' ' + lineWidth)
+
+            acrossLine = document.createElement("div")
+            acrossLine.classList.add("line")
+            acrossLine.classList.add("horiz")
+            acrossLine.style.marginLeft = leftSpace.toFixed(3) + "px"
+            acrossLine.style.width = lineWidth.toFixed(3) + "px"
+
+            divAcross.appendChild(acrossLine)
+
+            prevEnd += leftSpace + lineWidth
+        })
     })
 }

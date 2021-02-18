@@ -8,6 +8,9 @@
     border-radius: 0px;
     font: 32px/1 fontenstein;
 }
+.name:hover, .tagSymbol:hover {
+    transform: scale(1.1);
+}
 
 .LoneWolves {
     border-color: #349C98;
