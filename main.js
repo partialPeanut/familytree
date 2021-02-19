@@ -112,7 +112,7 @@ function drawTree() {
     setTimeout(function(){
         spaceTree()
         drawAcrossLines()
-       }, 100);
+       }, 1000);
 }
 
 // Places all blocks roughly down, in the right order but not correctly positioned
@@ -151,7 +151,7 @@ function createUnspacedTree() {
                 topLine = document.createElement('div')
                 topLine.classList.add('line')
                 topLine.classList.add('vert')
-                topLine.classList.add(houseClean)
+                topLine.classList.add(cleanStr(getBig(sib).house))
                 block.append(topLine)
             }
 
@@ -212,17 +212,20 @@ function createUnspacedTree() {
 // Spaces the tree correctly
 function spaceTree() {
     console.log("spaceTree ver. I haven't run this code in three hours and I am terrified")
-    prevSib = {
-        position: 0,
-        height: 0,
-        branchWidths: [[0,0]]
-    }
     prevEnd = 0
     $.each(siblings[0], function(sibName, sib) {
         calculateRelativePositions(sib)
 
         // Put siblings at height 0 in the correct position*
-        sib.position = prevSib.position + distToTouch(prevSib, sib) + 10 // TODO: MARGIN VARIABLE
+        position = 0
+        $.each(siblings[0], function(prevSibName, prevSib) {
+            if (prevSibName == sibName) {
+                position = Math.max(sib.branchWidths[0][0] + 10, position)
+                return false
+            }
+            else position = Math.max(prevSib.position + distToTouch(prevSib, sib) + 10, position) // TODO: MARGIN VARIABLE
+        })
+        sib.position = Math.floor(position)
 
         // *Prevent boxes from going negative
         sib.branchWidths.forEach(function(widths, height) {
@@ -237,8 +240,7 @@ function spaceTree() {
         sibBlock = document.querySelector(sibBlockName)
         sibBlock.style.marginLeft = space + "px"
 
-        prevSib = sib
-        prevEnd = sibBlock.getBoundingClientRect().right - 30 // TODO: TREE MARGIN VARIABLE
+        prevEnd = sib.position + sib.branchWidths[0][1]
     })
 
     $.each(siblings, function(height, row) {
@@ -272,7 +274,7 @@ function drawAcrossLines() {
     tree = document.querySelector('#tree')
 
     $.each(siblings, function(height, row) {
-        prevEnd = 30
+        prevEnd = 0
 
         divRow = document.querySelector('#row-' + height)
         divAcross = document.createElement("div")
@@ -280,39 +282,20 @@ function drawAcrossLines() {
         divAcross.classList.add("across")
         tree.insertBefore(divAcross, divRow.nextSibling)
 
-        nextHeight = parseInt(height)+1
-        if (nextHeight >= Object.keys(siblings).length) return false
+        if (parseInt(height)+1 >= Object.keys(siblings).length) return false
         $.each(row, function(idx, sib) {
             if (sib.littleNames.length == 1) {
-                little = siblings[nextHeight][sib.littleNames[0]]
+                little = getLittle(sib, 0)
 
-                thisBlockName = '#' + cleanStr(little.name)
-                thisX = $(thisBlockName).offset().left
-                thisW = $(thisBlockName).width()
-
-                //console.log(little)
-                //console.log(thisX + ' ' + thisW)
-
-                leftSpace = thisX + thisW/2 - prevEnd - 2 // TODO: LINEWIDTH VARIABLE
+                leftSpace = little.position - prevEnd - 2 // TODO: LINEWIDTH VARIABLE
                 lineWidth = 4 // TODO: LINEWIDTH VARIABLE
             }
             else if (sib.littleNames.length > 1) {
-                firstLittle = siblings[nextHeight][sib.littleNames[0]]
-                lastLittle = siblings[nextHeight][sib.littleNames[sib.littleNames.length-1]]
+                firstLittle = getLittle(sib, 0)
+                lastLittle = getLittle(sib, sib.littleNames.length-1)
 
-                firstBlockName = '#' + cleanStr(firstLittle.name)
-                firstX = $(firstBlockName).offset().left
-                firstW = $(firstBlockName).width()
-
-                //console.log(firstLittle)
-                //console.log(Math.floor(firstX) + ' ' + Math.floor(firstW))
-
-                lastBlockName = '#' + cleanStr(lastLittle.name)
-                lastX = $(lastBlockName).offset().left
-                lastW = $(lastBlockName).width()
-
-                leftSpace = firstX + firstW/2 - prevEnd - 2 // TODO: LINEWIDTH VARIABLE
-                lineWidth = (lastX + lastW/2) - (firstX + firstW/2) + 4 // TODO: LINEWIDTH VARIABLE
+                leftSpace = firstLittle.position - prevEnd - 2 // TODO: LINEWIDTH VARIABLE
+                lineWidth = lastLittle.position - firstLittle.position + 4 // TODO: LINEWIDTH VARIABLE
             }
             else return
 
@@ -322,8 +305,8 @@ function drawAcrossLines() {
             acrossLine.classList.add("line")
             acrossLine.classList.add("horiz")
             acrossLine.classList.add(cleanStr(sib.house))
-            acrossLine.style.marginLeft = leftSpace.toFixed(3) + "px"
-            acrossLine.style.width = lineWidth.toFixed(3) + "px"
+            acrossLine.style.marginLeft = leftSpace + "px"
+            acrossLine.style.width = lineWidth.toFixed(0) + "px"
 
             divAcross.appendChild(acrossLine)
 

@@ -39,6 +39,11 @@ function pledgeClassToSymbols(pledgeClassNumber) {
     return classSymbols[classNum] + metaClassSymbols[metaClassNum]
 }
 
+// Returns a little's big's JSON
+function getBig(sib) {
+    return siblings[sib.height-1][sib.bigName]
+}
+
 // Returns a big's little's JSON from their index
 function getLittle(big, littleIndex) {
     return siblings[big.height+1][big.littleNames[littleIndex]]
@@ -106,6 +111,8 @@ function evenSpacing(big, leftCap, rightCap, rightPos) {
 function calculateRelativePositions(sib) {
     thisBlockName = '#' + cleanStr(sib.name)
     thisW = $(thisBlockName).width()
+    thisW = Math.ceil(thisW)
+    $(thisBlockName).width(thisW)
 
     sib.width = thisW
     sib.branchWidths = [[]]
@@ -193,7 +200,7 @@ function setLittleAbsolutePositions(sib) {
         little = getLittle(sib, idx)
         relPos = sib.littleRelPos[idx]
 
-        little.position = sib.position + relPos
+        little.position = Math.floor(sib.position + relPos)
         setLittleAbsolutePositions(little)
     })
 }
