@@ -211,7 +211,7 @@ function createUnspacedTree() {
 
 // Spaces the tree correctly
 function spaceTree() {
-    console.log("spaceTree ver. I haven't run this code in three hours and I am terrified")
+    console.log("spaceTree ver. Foolish Mortals I Am The Goddess Of Creation And All Will Tremble Before Me")
     prevEnd = 0
     $.each(siblings[0], function(sibName, sib) {
         calculateRelativePositions(sib)

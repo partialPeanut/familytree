@@ -75,36 +75,27 @@ function distToTouch(sibLeft, sibRight) {
 }
 
 // Evenly spaces all littles between two "cap" littles
-function evenSpacing(big, leftCap, rightCap, rightPos) {
+function evenSpacing(big, leftCap, rightCap) {
     capDiff = rightCap - leftCap
     if (capDiff == 1) {
         console.log("Something's gone horribly wrong with the evenSpacing thing")
         return
     }
 
-    leftPos = big.littleRelPos[leftCap]
-    posDiff = rightPos - leftPos
-
-    // Test if the even spacing is valid
-    evenAsIntended = leftPos + posDiff*(capDiff-1)/capDiff
-
-    thisLittle = getLittle(big, rightCap-1)
+    // Do a bunch of calculating
+    rightestMiddleLittle = getLittle(big, rightCap-1)
+    rightestMiddlePos = big.littleRelPos[rightCap-1]
     rightLittle = getLittle(big, rightCap)
-    newDist = distToTouch(thisLittle, rightLittle)
+    rightPos = big.littleRelPos[rightCap]
+    gap = rightPos + rightLittle.branchWidths[0][0] - rightestMiddlePos - rightestMiddleLittle.branchWidths[0][1] - 10 // TODO: MARGIN
 
-    // If it's not valid, make it valid and evenly space the rest with that valid calculation
-    if (newDist + evenAsIntended > rightPos) {
-        fixedPos = rightPos - newDist - 10 // TODO: MARGIN VARIABLE
-        big.littleRelPos[rightCap-1] = fixedPos
-        evenSpacing(big, leftCap, rightCap-1, fixedPos)
-        return
-    } else if (capDiff == 2) return
-
-    // Evenly space the rest
-    for (Ldx = rightCap-2; Ldx >= leftCap+1; Ldx--) {
-        evenAsIntended = leftPos + posDiff*(Ldx-leftCap)/capDiff
-        big.littleRelPos[Ldx] = evenAsIntended
+    // Evenly space them
+    for (Ldx = leftCap+1; Ldx < rightCap; Ldx++) {
+        marginIncrease = Math.floor(gap*(Ldx-leftCap)/capDiff)
+        big.littleRelPos[Ldx] += marginIncrease
     }
+
+    console.log("Making " + big.name + "'s littles more evenly spaced!")
 }
 
 // Stores the corrected relative positions and hitboxes of a sib's descendants.
@@ -139,27 +130,43 @@ function calculateRelativePositions(sib) {
         little = getLittle(sib, idx)
 
         pos = 0
+        limiter = idx-1
         for (jdx = idx-1; jdx >= 0; jdx--) {
             testLittle = getLittle(sib, jdx)
-            thisPos = sib.littleRelPos[jdx] + distToTouch(testLittle, little) + 10 // TODO: MARGIN
+            thisPos = Math.floor(sib.littleRelPos[jdx] + distToTouch(testLittle, little) + 10) // TODO: MARGIN
 
             // This little is indeed pushed back by a prior little
             if (thisPos > pos) {
                 pos = thisPos
-                // If it can, evenly space littles that have wiggle room
-                if (jdx < idx-1) {
-                    //evenSpacing(sib, jdx, idx, pos)
-                }
+                limiter = jdx
             }
         }
 
         sib.littleRelPos.push(pos)
+
+        // If it can, evenly space littles that have wiggle room
+        if (limiter < idx-1) {
+            evenSpacing(sib, limiter, idx)
+        }
     })
 
     // Adjust to make big in the center
     rightestPos = sib.littleRelPos[sib.littleRelPos.length-1]
     sib.littleRelPos.forEach(function(val, vdx) {
-        sib.littleRelPos[vdx] = val - rightestPos/2
+        sib.littleRelPos[vdx] = val - Math.floor(rightestPos/2)
+    })
+
+    // Adjust slightly for ocd if littles are close enough to make a straight line
+    adj = 0
+    sib.littleRelPos.forEach(function(val, vdx) {
+        if (Math.abs(val) < 10) { // TODO: OCD TOLERANCE SETTING (snap to option?)
+            adj = -val
+            if (adj != 0) console.log("Adjusting " + sib.name +"'s littles by " + val + " for OCD reasons!")
+            return false
+        }
+    })
+    sib.littleRelPos.forEach(function(val, vdx) {
+        sib.littleRelPos[vdx] = val + adj
     })
 
     // Determine the deepest this rabbit hole goes
