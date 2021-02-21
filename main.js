@@ -109,6 +109,7 @@ function parseTags(result) {
 
 // Apply tag settings
 function applyTagSettings() {
+    stylesheet = document.styleSheets[1]
     $.each(tagData, function(tagName, tag) {
         if (tag.type.includes("STYLE")) {
             rule = "." + cleanStr(tag.name) + " {\n"
@@ -118,14 +119,14 @@ function applyTagSettings() {
             if (tag.textColor != '') rule += "color: " + tag.textColor + ";\n"
             rule += "}"
 
-            document.styleSheets[1].insertRule(rule, 0)
+            stylesheet.insertRule(rule, stylesheet.cssRules.length)
         }
         if (tag.type.includes("HOUSE")) {
             rule = "." + cleanStr(tag.name) + ".line {\n"
             rule += "background-color: " + tag.borderColor + ";\n"
             rule += "}"
 
-            document.styleSheets[1].insertRule(rule, 0)
+            stylesheet.insertRule(rule, stylesheet.cssRules.length)
         }
     })
 }
