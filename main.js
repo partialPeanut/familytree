@@ -249,6 +249,10 @@ function createUnspacedTree() {
                             buttonStyle = window.getComputedStyle(nameButton)
                             borderCol = buttonStyle.borderColor
                             nameButton.style.color = borderCol
+
+                            nameButton.style.backgroundImage = 'url("img/' + tagJSON.imageAddress + '")'
+                            nameButton.style.backgroundRepeat = "repeat-x"
+                            nameButton.style.backgroundSize = "contain"
                         }
                     }
                 }
