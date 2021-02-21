@@ -84,7 +84,7 @@ function getSheetValues() {
         ranges = response.result.valueRanges
         parseTags(ranges[1])
         placeSiblings(ranges[0])
-        setDefaultSettings(ranges[2])
+        setDefaultSizeSettings(ranges[2])
         drawTree()
       })
 }
