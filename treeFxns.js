@@ -18,14 +18,14 @@ function tagRowToJSON(row) {
     tagJSON = {}
     tagJSON.name = row[0]
     tagJSON.type = row[1]
-    tagJSON.imageAddress = row[2]
-    tagJSON.borderWidth = row[3]
-    tagJSON.borderColor = row[4]
-    tagJSON.backgroundColor = row[5]
-    tagJSON.textColor = row[6]
-    tagJSON.fontSize = row[7]
-    tagJSON.lineHeight = row[8]
-    tagJSON.fontName = row[9]
+    if (row[2] != '') tagJSON.imageAddress = row[2]
+    if (row[3] != '') tagJSON.borderWidth = row[3]
+    if (row[4] != '') tagJSON.borderColor = row[4]
+    if (row[5] != '') tagJSON.backgroundColor = row[5]
+    if (row[6] != '') tagJSON.textColor = row[6]
+    if (row[7] != '') tagJSON.fontSize = row[7]
+    if (row[8] != '') tagJSON.lineHeight = row[8]
+    if (row[9] != '') tagJSON.fontName = row[9]
 
     return tagJSON
 }
