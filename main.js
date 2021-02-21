@@ -96,12 +96,38 @@ function placeSiblings(result) {
 function parseTags(result) {
     tagData = {}
     result.values.forEach(function(row) {
-        tagData[cleanStr(row[0])] = tagRowToJSON(row)
+        tag = tagRowToJSON(row)
+        tagData[cleanStr(row[0])] = tag
     })
+
+    applyTagSettings()
 
     console.log("Tags:")
     console.log(JSON.stringify(tagData))
     console.log(tagData)
+}
+
+// Apply tag settings
+function applyTagSettings() {
+    $.each(tagData, function(tagName, tag) {
+        if (tag.type.contains("STYLE")) {
+            rule = "." + cleanStr(tag.name) + " {\n"
+            if (tag.borderWidth != '') rule += "border-width: " + tag.borderWidth + "px;\n"
+            if (tag.borderColor != '') rule += "border-color: " + tag.borderColor + ";\n"
+            if (tag.backgroundColor != '') rule += "background-color: " + tag.backgroundColor + ";\n"
+            if (tag.textColor != '') rule += "color: " + tag.textColor + ";\n"
+            rule += "}"
+
+            document.styleSheets[1].insertRule(rule, 0)
+        }
+        if (tag.type.contains("HOUSE")) {
+            rule = "." + cleanStr(tag.name) + ".line {\n"
+            rule += "background-color: " + tag.borderColor + ";\n"
+            rule += "}"
+
+            document.styleSheets[1].insertRule(rule, 0)
+        }
+    })
 }
 
 // Apply default settings given by spreadsheet
@@ -194,24 +220,32 @@ function createUnspacedTree() {
             nameName = document.createTextNode(sib.name + ' ' + pledgeClassToSymbols(sib.pledgeClassNumber))
             nameButton.appendChild(nameName)
 
-            // Strikethrough if the sib dropped
-            if (nameButton.classList.contains("Dropped")) {
-                buttonStyle = window.getComputedStyle(nameButton)
-                backgroundCol = buttonStyle.backgroundColor
-                borderCol = buttonStyle.borderColor
-                struckThroughString = "linear-gradient(0deg, " + backgroundCol + " 45%, " + borderCol + " 45%, " + borderCol + " 55%, " + backgroundCol + " 55%)"
-                nameButton.style.background = struckThroughString
-            }
-
-            // Add tag images to nas
+            // Apply tag effects to nas
             nameButton.classList.forEach(function(tag) {
+                // If the class is a tag, do stuff
                 if (tagData.hasOwnProperty(tag)) {
                     tagJSON = tagData[tag]
-                    if (tagJSON.hasOwnProperty("imageAddress")) {
+                    // If it's a symbol, add the symbol
+                    if (tagJSON.type.contains("SYMBOL")) {
                         tagImage = document.createElement("img")
                         tagImage.src = "img/" + tagJSON.imageAddress
                         tagImage.classList.add("tagSymbol")
                         nas.appendChild(tagImage)
+                    }
+                    // If it's special, do whatever crazy bullshit
+                    else if (tagJSON.type.contains("SPECIAL")) {
+                        if (tagJSON.name == "Dropped") {
+                            buttonStyle = window.getComputedStyle(nameButton)
+                            backgroundCol = buttonStyle.backgroundColor
+                            borderCol = buttonStyle.borderColor
+                            struckThroughString = "linear-gradient(0deg, " + backgroundCol + " 45%, " + borderCol + " 45%, " + borderCol + " 55%, " + backgroundCol + " 55%)"
+                            nameButton.style.background = struckThroughString
+                        }
+                        if (tagJSON.name == "Malcolm Tartan") {
+                            buttonStyle = window.getComputedStyle(nameButton)
+                            borderCol = buttonStyle.borderColor
+                            nameButton.style.color = borderCol
+                        }
                     }
                 }
             })

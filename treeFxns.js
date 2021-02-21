@@ -17,7 +17,12 @@ function sibRowToJSON(row) {
 function tagRowToJSON(row) {
     tagJSON = {}
     tagJSON.name = row[0]
-    tagJSON.imageAddress = row[1]
+    tagJSON.type = row[1]
+    tagJSON.imageAddress = row[2]
+    tagJSON.borderWidth = row[3]
+    tagJSON.borderColor = row[4]
+    tagJSON.backgroundColor = row[5]
+    tagJSON.textColor = row[6]
 
     return tagJSON
 }

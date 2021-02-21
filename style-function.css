@@ -47,6 +47,10 @@ body{
 
 .name{
     height: 100%;
+    border-radius: 0px;
+}
+.name:hover, .tagSymbol:hover {
+    transform: scale(1.1);
 }
 
 .tagSymbol {
