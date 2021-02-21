@@ -110,7 +110,7 @@ function parseTags(result) {
 // Apply tag settings
 function applyTagSettings() {
     $.each(tagData, function(tagName, tag) {
-        if (tag.type.contains("STYLE")) {
+        if (tag.type.includes("STYLE")) {
             rule = "." + cleanStr(tag.name) + " {\n"
             if (tag.borderWidth != '') rule += "border-width: " + tag.borderWidth + "px;\n"
             if (tag.borderColor != '') rule += "border-color: " + tag.borderColor + ";\n"
@@ -120,7 +120,7 @@ function applyTagSettings() {
 
             document.styleSheets[1].insertRule(rule, 0)
         }
-        if (tag.type.contains("HOUSE")) {
+        if (tag.type.includes("HOUSE")) {
             rule = "." + cleanStr(tag.name) + ".line {\n"
             rule += "background-color: " + tag.borderColor + ";\n"
             rule += "}"
@@ -226,14 +226,14 @@ function createUnspacedTree() {
                 if (tagData.hasOwnProperty(tag)) {
                     tagJSON = tagData[tag]
                     // If it's a symbol, add the symbol
-                    if (tagJSON.type.contains("SYMBOL")) {
+                    if (tagJSON.type.includes("SYMBOL")) {
                         tagImage = document.createElement("img")
                         tagImage.src = "img/" + tagJSON.imageAddress
                         tagImage.classList.add("tagSymbol")
                         nas.appendChild(tagImage)
                     }
                     // If it's special, do whatever crazy bullshit
-                    else if (tagJSON.type.contains("SPECIAL")) {
+                    else if (tagJSON.type.includes("SPECIAL")) {
                         if (tagJSON.name == "Dropped") {
                             buttonStyle = window.getComputedStyle(nameButton)
                             backgroundCol = buttonStyle.backgroundColor
