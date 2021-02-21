@@ -107,12 +107,12 @@ function parseTags(result) {
 }
 
 // Apply default settings given by spreadsheet
-function setDefaultSettings(result) {
+function setDefaultSizeSettings(result) {
     settings = {}
     docStyle = document.body.style
     result.values.forEach(function(row) {
         docStyle.setProperty('--' + cleanStr(row[0]), row[1] + 'px')
-        settings[cleanStr(row[0])] = row[1]
+        settings[cleanStr(row[0])] = parseInt(row[1])
     })
 
     nameHeight = settings['nameHeight']
