@@ -76,27 +76,15 @@ function handleSignoutClick(event) {
 function getSheetValues() {
     console.log("Getting sheet values...")
 
-    // Get the spreadsheet, but the settings one
-    gapi.client.sheets.spreadsheets.values.get({
+    // Get the spreadsheet bits and do stuff to em
+    gapi.client.sheets.spreadsheets.values.batchGet({
         spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
-        range: 'Size Settings!A2:B'
+        ranges: ['Siblings!A2:G', 'Tag Data!A2:B', 'Size Settings!A2:B']
       }).then((response) => {
-        setDefaultSettings(response.result)
-      })
-
-    // Get the spreadsheet, but the tags one
-    gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
-        range: 'Tag Data!A2:B'
-      }).then((response) => {
-        parseTags(response.result)
-      })
-
-    // Get the spreadsheet
-    gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
-        range: 'Siblings!A2:G'
-      }).then((response) => {
-        placeSiblings(response.result)
+        ranges = response.result.valueRanges
+        parseTags(ranges[1])
+        placeSiblings(ranges[0])
+        setDefaultSettings(ranges[2])
+        drawTree()
       })
 }

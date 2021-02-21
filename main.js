@@ -90,8 +90,6 @@ function placeSiblings(result) {
     console.log("Siblings:")
     console.log(JSON.stringify(siblings))
     console.log(siblings)
-
-    drawTree()
 }
 
 // Convert tag set into a usable json
