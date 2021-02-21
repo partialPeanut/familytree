@@ -1,8 +1,4 @@
 @font-face {
-    font-family: fontenstein;
+    font-family: Fontenstein;
     src: url(FontensteinStd-Regular.ttf);
-}
-
-.name {
-    font: 32px/1 fontenstein;
 }

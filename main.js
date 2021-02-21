@@ -117,6 +117,9 @@ function applyTagSettings() {
             if (tag.borderColor != '') rule += "border-color: " + tag.borderColor + ";\n"
             if (tag.backgroundColor != '') rule += "background-color: " + tag.backgroundColor + ";\n"
             if (tag.textColor != '') rule += "color: " + tag.textColor + ";\n"
+            if (tag.fontSize != '') rule += "font-size: " + tag.fontSize + "px;\n"
+            if (tag.lineHeight != '') rule += "line-height: " + tag.lineHeight + "px;\n"
+            if (tag.fontName != '') rule += "font-family: " + tag.fontName + ";\n"
             rule += "}"
 
             stylesheet.insertRule(rule, stylesheet.cssRules.length)

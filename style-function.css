@@ -1,16 +1,5 @@
 body{
     margin: 0 auto;
-    --treeMarginTop: 40px;
-    --treeMarginLeft: 40px;
-    --treeMarginBottom: 40px;
-    --treeMarginRight: 40px;
-    --blockMargin: 10px;
-    --endBlockHeight: 60px;
-    --blockHeight: 80px;
-    --nameHeight: 40px;
-    --tagMargin: 5px;
-    --lineHeight: 20px;
-    --lineWeight: 4px;
 }
 
 #tree{

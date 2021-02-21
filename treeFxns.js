@@ -23,6 +23,9 @@ function tagRowToJSON(row) {
     tagJSON.borderColor = row[4]
     tagJSON.backgroundColor = row[5]
     tagJSON.textColor = row[6]
+    tagJSON.fontSize = row[7]
+    tagJSON.lineHeight = row[8]
+    tagJSON.fontName = row[9]
 
     return tagJSON
 }
