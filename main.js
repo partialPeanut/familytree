@@ -94,7 +94,7 @@ function placeSiblings(result) {
     drawTree()
 }
 
-// Covert tag set into a usable json
+// Convert tag set into a usable json
 function parseTags(result) {
     tagData = {}
     result.values.forEach(function(row) {
@@ -104,6 +104,27 @@ function parseTags(result) {
     console.log("Tags:")
     console.log(JSON.stringify(tagData))
     console.log(tagData)
+}
+
+// Apply default settings given by spreadsheet
+function setDefaultSettings(result) {
+    settings = {}
+    docStyle = document.body.style
+    result.values.forEach(function(row) {
+        docStyle.setProperty('--' + cleanStr(row[0]), row[1] + 'px')
+        settings[cleanStr(row[0])] = row[1]
+    })
+
+    nameHeight = settings['nameHeight']
+    lineHeight = settings['lineHeight']
+    endBlockHeight = nameHeight + lineHeight
+    docStyle.setProperty('--endBlockHeight', endBlockHeight + 'px')
+    blockHeight = nameHeight + 2*lineHeight
+    docStyle.setProperty('--blockHeight', blockHeight + 'px')
+
+    console.log("Settings:")
+    console.log(JSON.stringify(settings))
+    console.log(settings)
 }
 
 // Draw the whole tree
@@ -213,6 +234,8 @@ function createUnspacedTree() {
 function spaceTree() {
     console.log("spaceTree ver. Foolish Mortals I Am The Goddess Of Creation And All Will Tremble Before Me")
     prevEnd = 0
+    blockMargin = settings['blockMargin']
+    treeMarginLeft = settings['treeMarginLeft']
     $.each(siblings[0], function(sibName, sib) {
         calculateRelativePositions(sib)
 
@@ -220,16 +243,16 @@ function spaceTree() {
         position = 0
         $.each(siblings[0], function(prevSibName, prevSib) {
             if (prevSibName == sibName) {
-                position = Math.max(sib.branchWidths[0][0] + 10, position)
+                position = Math.max(sib.branchWidths[0][0] + blockMargin, position)
                 return false
             }
-            else position = Math.max(prevSib.position + distToTouch(prevSib, sib) + 10, position) // TODO: MARGIN VARIABLE
+            else position = Math.max(prevSib.position + distToTouch(prevSib, sib) + blockMargin, position)
         })
         sib.position = Math.floor(position)
 
         // *Prevent boxes from going negative
         sib.branchWidths.forEach(function(widths, height) {
-            if (widths[0] + sib.position < 10) sib.position = 10 - widths[0]
+            if (widths[0] + sib.position < blockMargin) sib.position = blockMargin - widths[0]
         })
 
         setLittleAbsolutePositions(sib)
@@ -261,7 +284,7 @@ function spaceTree() {
             sibBlock.style.marginLeft = space + "px"
 
             prevSib = sib
-            prevEnd = sibBlock.getBoundingClientRect().right - 30 // TODO: TREE MARGIN VARIABLE
+            prevEnd = sibBlock.getBoundingClientRect().right - treeMarginLeft
         })
     })
     console.log(siblings)
@@ -269,7 +292,8 @@ function spaceTree() {
 
 // Draws the lines that connect littles across to their big
 function drawAcrossLines() {
-    console.log("drawAcrossLines Ver. Off By One Error")
+    console.log("drawAcrossLines Ver. Fucking Gucci")
+    lineWeight = settings['lineWidth']
 
     tree = document.querySelector('#tree')
 
@@ -287,19 +311,17 @@ function drawAcrossLines() {
             if (sib.littleNames.length == 1) {
                 little = getLittle(sib, 0)
 
-                leftSpace = little.position - prevEnd - 2 // TODO: LINEWIDTH VARIABLE
-                lineWidth = 4 // TODO: LINEWIDTH VARIABLE
+                leftSpace = little.position - prevEnd - lineWeight/2
+                lineWidth = lineWeight
             }
             else if (sib.littleNames.length > 1) {
                 firstLittle = getLittle(sib, 0)
                 lastLittle = getLittle(sib, sib.littleNames.length-1)
 
-                leftSpace = firstLittle.position - prevEnd - 2 // TODO: LINEWIDTH VARIABLE
-                lineWidth = lastLittle.position - firstLittle.position + 4 // TODO: LINEWIDTH VARIABLE
+                leftSpace = firstLittle.position - prevEnd - lineWeight/2
+                lineWidth = lastLittle.position - firstLittle.position + lineWeight
             }
             else return
-
-            //console.log(leftSpace + ' ' + lineWidth)
 
             acrossLine = document.createElement("div")
             acrossLine.classList.add("line")

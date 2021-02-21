@@ -76,6 +76,14 @@ function handleSignoutClick(event) {
 function getSheetValues() {
     console.log("Getting sheet values...")
 
+    // Get the spreadsheet, but the settings one
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
+        range: 'Size Settings!A2:B'
+      }).then((response) => {
+        setDefaultSettings(response.result)
+      })
+
     // Get the spreadsheet, but the tags one
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
@@ -87,7 +95,7 @@ function getSheetValues() {
     // Get the spreadsheet
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
-        range: 'Brothers!A2:G'
+        range: 'Siblings!A2:G'
       }).then((response) => {
         placeSiblings(response.result)
       })

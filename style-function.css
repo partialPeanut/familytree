@@ -1,20 +1,34 @@
 body{
     margin: 0 auto;
+    --treeMarginTop: 40px;
+    --treeMarginLeft: 40px;
+    --treeMarginBottom: 40px;
+    --treeMarginRight: 40px;
+    --blockMargin: 10px;
+    --endBlockHeight: 60px;
+    --blockHeight: 80px;
+    --nameHeight: 40px;
+    --tagMargin: 5px;
+    --lineHeight: 20px;
+    --lineWeight: 4px;
 }
 
 #tree{
     width: fit-content;
     white-space: nowrap;
-    margin: 40px 30px;
+    margin-top: var(--treeMarginTop);
+    margin-left: var(--treeMarginLeft);
+    margin-bottom: var(--treeMarginBottom);
+    margin-right: var(--treeMarginRight);
 }
 
 .row{
-    height: 80px;
+    height: var(--blockHeight);
     white-space: nowrap;
 }
 
 .row.end{
-    height: 60px;
+    height: var(--endBlockHeight);
 }
 
 .block{
@@ -23,12 +37,12 @@ body{
     align-items: center;
     justify-content: flex-start;
 
-    margin-left: 10px;
+    margin-left: var(--blockMargin);
 }
 
 .nameAndSymbols{
     display: inline-flex;
-    height: 40px;
+    height: var(--nameHeight);
 }
 
 .name{
@@ -36,27 +50,22 @@ body{
 }
 
 .tagSymbol {
-    margin-left: 5px;
-    height: 40px;
+    margin-left: var(--tagMargin);
+    height: var(--nameHeight);
 }
 
-.line{
-    background-color: black;
-}
 .line.vert{
-    width: 4px;
-    height: 20px;
+    width: var(--lineWeight);
+    height: var(--lineHeight);
 }
 .line.horiz{
     display: inline-block;
     vertical-align: top;
-    width: 4px;
-    height: 4px;
-
-    margin-left: 40px;
+    width: var(--lineWeight);
+    height: var(--lineWeight);
 }
 
 .across{
-    height: 4px;
+    height: var(--lineWeight);
     white-space: nowrap;
 }

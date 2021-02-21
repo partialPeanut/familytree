@@ -28,6 +28,11 @@ function cleanStr(string) {
     return newStr
 }
 
+// Turns a number of pixels into an integer
+function pxToInt(pixels) {
+    return parseInt(pixels.replace(/px/g, ''))
+}
+
 // Turns a pledge class's number into its corresponding unicode symbols
 function pledgeClassToSymbols(pledgeClassNumber) {
     classNum = (pledgeClassNumber-1) % 24
@@ -87,7 +92,7 @@ function evenSpacing(big, leftCap, rightCap) {
     rightestMiddlePos = big.littleRelPos[rightCap-1]
     rightLittle = getLittle(big, rightCap)
     rightPos = big.littleRelPos[rightCap]
-    gap = rightPos + rightLittle.branchWidths[0][0] - rightestMiddlePos - rightestMiddleLittle.branchWidths[0][1] - 10 // TODO: MARGIN
+    gap = rightPos + rightLittle.branchWidths[0][0] - rightestMiddlePos - rightestMiddleLittle.branchWidths[0][1] - settings['blockMargin']
 
     // Evenly space them
     for (Ldx = leftCap+1; Ldx < rightCap; Ldx++) {
@@ -133,7 +138,7 @@ function calculateRelativePositions(sib) {
         limiter = idx-1
         for (jdx = idx-1; jdx >= 0; jdx--) {
             testLittle = getLittle(sib, jdx)
-            thisPos = Math.floor(sib.littleRelPos[jdx] + distToTouch(testLittle, little) + 10) // TODO: MARGIN
+            thisPos = Math.floor(sib.littleRelPos[jdx] + distToTouch(testLittle, little) + settings['blockMargin'])
 
             // This little is indeed pushed back by a prior little
             if (thisPos > pos) {
@@ -150,7 +155,7 @@ function calculateRelativePositions(sib) {
         }
     })
 
-    // Adjust to make big in the center
+    // Adjust to make big in the center // TODO: SNAP TO FIRST SETTING
     rightestPos = sib.littleRelPos[sib.littleRelPos.length-1]
     sib.littleRelPos.forEach(function(val, vdx) {
         sib.littleRelPos[vdx] = val - Math.floor(rightestPos/2)
