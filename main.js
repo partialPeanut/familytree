@@ -291,7 +291,7 @@ function spaceTree() {
 // Draws the lines that connect littles across to their big
 function drawAcrossLines() {
     console.log("drawAcrossLines Ver. Fucking Gucci")
-    lineWeight = settings['lineWidth']
+    lineWeight = settings['lineWeight']
 
     tree = document.querySelector('#tree')
 
