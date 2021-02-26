@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style-function.css">
     <link rel="stylesheet" href="style-aesthetic.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
 
     <script src="treeFxns.js"></script>
@@ -24,7 +25,9 @@
     </script>
     <!---->
 
-    <div id="tree"></div>
+    <div id="treeVue">
+        <div id="tree" v-if="displayTab != 'mainMenu'" :class="{ fullWidth: displayTab == 'tree', col: displayTab != 'tree', left: displayTab != 'tree' }"></div>
+    </div>
 
     <!--
     <script type="text/javascript">
