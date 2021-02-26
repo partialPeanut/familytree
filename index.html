@@ -10,7 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
 
-    <script src="treeFxns.js"></script>
+    <script src="vue.js"></script>
+    <script src="util.js"></script>
     <script src="main.js"></script>
 </head>
 <body>
@@ -25,7 +26,7 @@
     </script>
     <!---->
 
-    <div id="treeVue">
+    <div id="app">
         <div id="tree" v-if="displayTab != 'mainMenu'" :class="{ fullWidth: displayTab == 'tree', col: displayTab != 'tree', left: displayTab != 'tree' }"></div>
     </div>
 
@@ -51,8 +52,7 @@
             "treeMarginTop":40,"treeMarginLeft":30,"treeMarginBottom":40,"treeMarginRight":40,"blockMargin":10,"nameHeight":40,"tagMargin":5,"lineHeight":20,"lineWeight":4
         }
 
-        applyTagSettings()
-        drawTree()
+        main()
     </script>
     -->
 </body>

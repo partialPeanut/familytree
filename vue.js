@@ -1,9 +1,8 @@
 function loadVue() {
-    treeVue = new Vue({
-        el: '#treeVue',
+    app = new Vue({
+        el: '#app',
         data: {
-            active: true,
-            fullWidth: true
+            displayTab: 'tree'
         }
     })
 }
