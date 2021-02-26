@@ -124,7 +124,7 @@ function setDefaultSizeSettings(result) {
 
     settings.sizes = defaultSizes
 
-    console.log("Style Settings:")
+    console.log("Size Settings:")
     console.log(JSON.stringify(settings.sizes))
     console.log(settings.sizes)
 }
