@@ -1,6 +1,5 @@
 // It's main!
 function main() {
-    loadVue()
     applySettings()
     drawTree()
 }

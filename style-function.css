@@ -2,6 +2,28 @@ body{
     margin: 0 auto;
 }
 
+#app {
+	column-count: 2;
+	column-width: 50%;
+	min-height: 100%;
+}
+
+.col {
+	min-width: 49.5%;
+	max-width: 49.5%;
+	width: 49.5%;
+	height: 100%;
+	min-height: 100%;
+	column-span: 1;
+	position: absolute;
+	overflow-y: auto;
+	overflow-x: auto;
+}
+.col.right {
+	top: 0;
+	right: 0;
+}
+
 #tree{
     width: fit-content;
     white-space: nowrap;
@@ -15,7 +37,6 @@ body{
     height: var(--blockHeight);
     white-space: nowrap;
 }
-
 .row.end{
     height: var(--endBlockHeight);
 }
