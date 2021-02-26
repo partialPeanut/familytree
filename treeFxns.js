@@ -100,7 +100,7 @@ function evenSpacing(big, leftCap, rightCap) {
     rightestMiddlePos = big.littleRelPos[rightCap-1]
     rightLittle = getLittle(big, rightCap)
     rightPos = big.littleRelPos[rightCap]
-    gap = rightPos + rightLittle.branchWidths[0][0] - rightestMiddlePos - rightestMiddleLittle.branchWidths[0][1] - settings['blockMargin']
+    gap = rightPos + rightLittle.branchWidths[0][0] - rightestMiddlePos - rightestMiddleLittle.branchWidths[0][1] - settings.sizes['blockMargin']
 
     // Evenly space them
     for (Ldx = leftCap+1; Ldx < rightCap; Ldx++) {
@@ -146,7 +146,7 @@ function calculateRelativePositions(sib) {
         limiter = idx-1
         for (jdx = idx-1; jdx >= 0; jdx--) {
             testLittle = getLittle(sib, jdx)
-            thisPos = Math.floor(sib.littleRelPos[jdx] + distToTouch(testLittle, little) + settings['blockMargin'])
+            thisPos = Math.floor(sib.littleRelPos[jdx] + distToTouch(testLittle, little) + settings.sizes['blockMargin'])
 
             // This little is indeed pushed back by a prior little
             if (thisPos > pos) {

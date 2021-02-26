@@ -82,9 +82,11 @@ function getSheetValues() {
         ranges: ['Siblings!A2:G', 'Tag Settings!A2:J', 'Size Settings!A2:B']
       }).then((response) => {
         ranges = response.result.valueRanges
+        settings = {}
         parseTags(ranges[1])
         placeSiblings(ranges[0])
         setDefaultSizeSettings(ranges[2])
+        applySettings()
         drawTree()
       })
 }

@@ -94,23 +94,51 @@ function placeSiblings(result) {
 
 // Convert tag set into a usable json
 function parseTags(result) {
-    tagData = {}
+    defaultTagData = {}
     result.values.forEach(function(row) {
         tag = tagRowToJSON(row)
-        tagData[cleanStr(row[0])] = tag
+        defaultTagData[cleanStr(row[0])] = tag
     })
 
-    applyTagSettings()
+    settings.tagData = defaultTagData
 
     console.log("Tags:")
-    console.log(JSON.stringify(tagData))
-    console.log(tagData)
+    console.log(JSON.stringify(settings.tagData))
+    console.log(settings.tagData)
 }
 
-// Apply tag settings
-function applyTagSettings() {
+// Apply default settings given by spreadsheet
+function setDefaultSizeSettings(result) {
+    defaultSizes = {}
+    docStyle = document.body.style
+    result.values.forEach(function(row) {
+        defaultSizes[cleanStr(row[0])] = parseInt(row[1])
+    })
+
+    defaultSizes = settings['nameHeight']
+    defaultSizes = settings['lineHeight']
+    endBlockHeight = nameHeight + lineHeight
+    defaultSizes['endBlockHeight'] = endBlockHeight
+    blockHeight = nameHeight + 2*lineHeight
+    defaultSizes['blockHeight'] = blockHeight
+
+    settings.sizes = defaultSizes
+
+    console.log("Style Settings:")
+    console.log(JSON.stringify(settings.sizes))
+    console.log(settings.sizes)
+}
+
+// Apply settings JSON to stylesheet and other places
+function applySettings() {
+    // Size settings
+    $.each(settings.sizes, function(prop, val) {
+        document.body.style.setProperty('--' + prop, val + 'px')
+    })
+
+    // Tag data
     stylesheet = document.styleSheets[1]
-    $.each(tagData, function(tagName, tag) {
+    $.each(settings.tagData, function(tagName, tag) {
         if (tag.type.includes("STYLE")) {
             rule = "." + cleanStr(tag.name) + " {\n"
             if (tag.borderWidth) rule += "border-width: " + tag.borderWidth + "px;\n"
@@ -132,27 +160,6 @@ function applyTagSettings() {
             stylesheet.insertRule(rule, stylesheet.cssRules.length)
         }
     })
-}
-
-// Apply default settings given by spreadsheet
-function setDefaultSizeSettings(result) {
-    settings = {}
-    docStyle = document.body.style
-    result.values.forEach(function(row) {
-        docStyle.setProperty('--' + cleanStr(row[0]), row[1] + 'px')
-        settings[cleanStr(row[0])] = parseInt(row[1])
-    })
-
-    nameHeight = settings['nameHeight']
-    lineHeight = settings['lineHeight']
-    endBlockHeight = nameHeight + lineHeight
-    docStyle.setProperty('--endBlockHeight', endBlockHeight + 'px')
-    blockHeight = nameHeight + 2*lineHeight
-    docStyle.setProperty('--blockHeight', blockHeight + 'px')
-
-    console.log("Settings:")
-    console.log(JSON.stringify(settings))
-    console.log(settings)
 }
 
 // Draw the whole tree
@@ -227,8 +234,8 @@ function createUnspacedTree() {
             // Apply tag effects to nas
             nameButton.classList.forEach(function(tag) {
                 // If the class is a tag, do stuff
-                if (tagData.hasOwnProperty(tag)) {
-                    tagJSON = tagData[tag]
+                if (settings.tagData.hasOwnProperty(tag)) {
+                    tagJSON = settings.tagData[tag]
                     // If it's a symbol, add the symbol
                     if (tagJSON.type.includes("SYMBOL")) {
                         tagImage = document.createElement("img")
@@ -274,8 +281,8 @@ function createUnspacedTree() {
 function spaceTree() {
     console.log("spaceTree ver. Foolish Mortals I Am The Goddess Of Creation And All Will Tremble Before Me")
     prevEnd = 0
-    blockMargin = settings['blockMargin']
-    treeMarginLeft = settings['treeMarginLeft']
+    blockMargin = settings.sizes['blockMargin']
+    treeMarginLeft = settings.sizes['treeMarginLeft']
     $.each(siblings[0], function(sibName, sib) {
         calculateRelativePositions(sib)
 
@@ -333,7 +340,7 @@ function spaceTree() {
 // Draws the lines that connect littles across to their big
 function drawAcrossLines() {
     console.log("drawAcrossLines Ver. Fucking Gucci")
-    lineWeight = settings['lineWeight']
+    lineWeight = settings.sizes['lineWeight']
 
     tree = document.querySelector('#tree')
 
