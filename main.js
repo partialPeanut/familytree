@@ -64,6 +64,7 @@ function createUnspacedTree() {
         
         // Create the tree and add the row to it
         tree = document.querySelector('#tree')
+        makeDraggable(tree)
         tree.append(row)
 
         // Loop through the siblings in this row
@@ -150,6 +151,23 @@ function createUnspacedTree() {
             }
         })
     })
+}
+
+// Allows the tree to be grabbed and dragged to scroll
+function makeDraggable(ele) {
+    tree = document.querySelector('#tree')
+    pos = { top: 0, left: 0, x: 0, y: 0 }
+
+    const mouseDownHandler = function(e) {
+        pos = {
+            // The current scroll 
+            left: ele.scrollLeft,
+            top: ele.scrollTop,
+            // Get the current mouse position
+            x: e.clientX,
+            y: e.clientY,
+        };
+    }
 }
 
 // Spaces the tree correctly

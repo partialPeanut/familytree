@@ -43,6 +43,7 @@ body {
     margin-left: var(--treeMarginLeft);
     margin-bottom: var(--treeMarginBottom);
     margin-right: var(--treeMarginRight);
+    cursor: grab;
 }
 
 .row{

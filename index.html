@@ -27,7 +27,9 @@
     </div>
 
     <div id="app">
-        <div id="tree" v-if="displayTab != 'mainMenu'" :class="{ fullWidth: displayTab == 'tree', col: displayTab != 'tree', left: displayTab != 'tree' }"></div>
+        <div id="treeContainer" v-if="displayTab != 'mainMenu'" :class="{ fullWidth: displayTab == 'tree', col: displayTab != 'tree', left: displayTab != 'tree' }">
+            <div id="tree"></div>
+        </div>
         <div id="settings" v-if="displayTab == 'settings'" class="col right"></div>
     </div>
 </body>
