@@ -36,6 +36,11 @@ function cleanStr(string) {
     return newStr
 }
 
+function filterInvisText(string) {
+    newStr = string.split('_')[0]
+    return newStr
+}
+
 // Turns a number of pixels into an integer
 function pxToInt(pixels) {
     return parseInt(pixels.replace(/px/g, ''))

@@ -107,7 +107,7 @@ function createUnspacedTree() {
             })
 
             // The name itself
-            nameName = document.createTextNode(sib.name + ' ' + pledgeClassToSymbols(sib.pledgeClassNumber))
+            nameName = document.createTextNode(filterInvisText(sib.name) + ' ' + pledgeClassToSymbols(sib.pledgeClassNumber))
             nameButton.appendChild(nameName)
 
             // Apply tag effects to nas
@@ -187,6 +187,9 @@ function makeDraggable(ele) {
     const mouseUpHandler = function() {
         ele.style.cursor = 'grab'
         ele.style.removeProperty('user-select')
+
+        document.removeEventListener('mousemove', mouseMoveHandler)
+        document.removeEventListener('mouseup', mouseUpHandler)
     }
 
     ele.addEventListener('mousedown', mouseDownHandler)
