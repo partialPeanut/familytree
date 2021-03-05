@@ -2,7 +2,7 @@
 function main() {
     applySettings()
 
-    document.querySelector('#treeContainer')
+    treeContainer = document.querySelector('#treeContainer')
     makeDraggable(treeContainer)
 
     drawTree()
