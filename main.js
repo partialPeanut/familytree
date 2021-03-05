@@ -99,7 +99,7 @@ function createUnspacedTree() {
             nameButton = document.createElement("BUTTON")
             nameButton.classList.add('name')
             nameButton.classList.add(houseClean)
-            addNameClicker(nameButton)
+            addNameClicker(nameButton, sib)
             nas.append(nameButton)
 
             // Add all tags to classes

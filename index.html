@@ -35,15 +35,15 @@
             <h1>{{ name }}</h1>
             <h2>{{ pledgeClass }}</h2>
             <h2>{{ house }}</h2>
-            <ul>
+            <ul v-if="tags.length > 0">
                 <li v-for="tag in tags">
                     {{ tag }}
                 </li>
             </ul>
-            <p>Big's Name: {{ bigName }}</p>
+            <p v-if="bigName != null">Big's Name: {{ bigName }}</p>
             <p v-if="littleNames.length == 1">"Little's Name:</p>
             <p v-if="littleNames.length > 1">Littles' Names:</p>
-            <ul>
+            <ul v-if="littleNames.length > 0">
                 <li v-for="littleName in littleNames">
                     {{ littleName }}
                 </li>
