@@ -32,6 +32,7 @@ html, body {
 }
 
 #tree{
+    column-span: 1;
     width: fit-content;
     white-space: nowrap;
     margin-top: var(--treeMarginTop);
