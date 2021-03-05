@@ -36,6 +36,9 @@ body {
     position: absolute;
 }
 
+#treeContainer {
+    cursor: grab;
+}
 #tree{
     width: fit-content;
     white-space: nowrap;
@@ -43,7 +46,6 @@ body {
     margin-left: var(--treeMarginLeft);
     margin-bottom: var(--treeMarginBottom);
     margin-right: var(--treeMarginRight);
-    cursor: grab;
 }
 
 .row{

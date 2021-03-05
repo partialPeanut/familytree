@@ -1,6 +1,10 @@
 // It's main!
 function main() {
     applySettings()
+
+    document.querySelector('#treeContainer')
+    makeDraggable(treeContainer)
+
     drawTree()
 }
 
@@ -64,7 +68,6 @@ function createUnspacedTree() {
         
         // Create the tree and add the row to it
         tree = document.querySelector('#tree')
-        makeDraggable(tree)
         tree.append(row)
 
         // Loop through the siblings in this row
@@ -155,7 +158,6 @@ function createUnspacedTree() {
 
 // Allows the tree to be grabbed and dragged to scroll
 function makeDraggable(ele) {
-    tree = document.querySelector('#tree')
     pos = { top: 0, left: 0, x: 0, y: 0 }
 
     const mouseDownHandler = function(e) {
@@ -166,8 +168,28 @@ function makeDraggable(ele) {
             // Get the current mouse position
             x: e.clientX,
             y: e.clientY,
-        };
+        }
+
+        ele.style.cursor = 'grabbing'
+        ele.style.userSelect = 'none'
+        document.addEventListener('mousemove', mouseMoveHandler)
+        document.addEventListener('mouseup', mouseUpHandler)
     }
+
+    const mouseMoveHandler = function(e) {
+        const dx = e.clientX - pos.x
+        const dy = e.clientY - pos.y
+
+        ele.scrollTop = pos.top - dy
+        ele.scrollLeft = pos.left - dx
+    }
+
+    const mouseUpHandler = function() {
+        ele.style.cursor = 'grab'
+        ele.style.removeProperty('user-select')
+    }
+
+    ele.addEventListener('mousedown', mouseDownHandler)
 }
 
 // Spaces the tree correctly
