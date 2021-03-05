@@ -62,7 +62,7 @@ function createUnspacedTree() {
             row.classList.add('end')
         }
         
-        // Find the tree and add the row to it
+        // Create the tree and add the row to it
         tree = document.querySelector('#tree')
         tree.append(row)
 
