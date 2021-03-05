@@ -4,10 +4,15 @@ html, body {
     height: 100%;
     display: contents;
 }
+body {
+    --columnCount: 1;
+}
 
 #app {
+    column-count: var(--columnCount);
 	column-width: 50%;
 	min-height: 100%;
+    column-rule: 4px solid black;
 }
 
 .col {
