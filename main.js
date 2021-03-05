@@ -99,6 +99,7 @@ function createUnspacedTree() {
             nameButton = document.createElement("BUTTON")
             nameButton.classList.add('name')
             nameButton.classList.add(houseClean)
+            addNameClicker(nameButton)
             nas.append(nameButton)
 
             // Add all tags to classes
@@ -154,45 +155,6 @@ function createUnspacedTree() {
             }
         })
     })
-}
-
-// Allows the tree to be grabbed and dragged to scroll
-function makeDraggable(ele) {
-    pos = { top: 0, left: 0, x: 0, y: 0 }
-
-    const mouseDownHandler = function(e) {
-        pos = {
-            // The current scroll 
-            left: ele.scrollLeft,
-            top: ele.scrollTop,
-            // Get the current mouse position
-            x: e.clientX,
-            y: e.clientY,
-        }
-
-        ele.style.cursor = 'grabbing'
-        ele.style.userSelect = 'none'
-        document.addEventListener('mousemove', mouseMoveHandler)
-        document.addEventListener('mouseup', mouseUpHandler)
-    }
-
-    const mouseMoveHandler = function(e) {
-        const dx = e.clientX - pos.x
-        const dy = e.clientY - pos.y
-
-        ele.scrollTop = pos.top - dy
-        ele.scrollLeft = pos.left - dx
-    }
-
-    const mouseUpHandler = function() {
-        ele.style.cursor = 'grab'
-        ele.style.removeProperty('user-select')
-
-        document.removeEventListener('mousemove', mouseMoveHandler)
-        document.removeEventListener('mouseup', mouseUpHandler)
-    }
-
-    ele.addEventListener('mousedown', mouseDownHandler)
 }
 
 // Spaces the tree correctly

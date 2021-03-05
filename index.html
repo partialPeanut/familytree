@@ -31,6 +31,24 @@
             <div id="tree"></div>
         </div>
         <div id="settings" v-if="displayTab == 'settings'" class="col right"></div>
+        <div id="nameTab" v-if="displayTab == 'nameTab'" class="col right">
+            <h1>{{ name }}</h1>
+            <h2>{{ pledgeClass }}</h2>
+            <h2>{{ house }}</h2>
+            <ul>
+                <li v-for="tag in tags">
+                    {{ tag }}
+                </li>
+            </ul>
+            <p>Big's Name: {{ bigName }}</p>
+            <p v-if="littleNames.length == 1">"Little's Name:</p>
+            <p v-if="littleNames.length > 1">Littles' Names:</p>
+            <ul>
+                <li v-for="littleName in littleNames">
+                    {{ littleName }}
+                </li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
