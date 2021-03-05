@@ -4,26 +4,17 @@ html, body {
     height: 100%;
     display: contents;
 }
-body {
-    --columnCount: 1;
-}
 
 #app {
-    column-count: var(--columnCount);
-	column-width: 50%;
 	height: 100%;
-    column-rule: 4px solid black;
-    overflow: auto;
 }
 
 .col {
-	min-width: 49.5%;
-	max-width: 49.5%;
-	width: 49.5%;
+	width: 50%;
 	top: 0;
     bottom: 0;
-	column-span: 1;
 	position: absolute;
+    overflow: auto;
 }
 .col.right {
 	right: 0;
