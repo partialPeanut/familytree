@@ -6,16 +6,10 @@ function loadVue() {
         }
     })
 
-    app = new Vue({
+    appElement = new Vue({
         el: '#app',
         data: {
-            displayTab: 'tree',
-            tabCount: 1
-        },
-        methods: {
-            showTab: function(tab) {
-                displayTab = tab
-            }
+            displayTab: 'tree'
         }
     })
 }

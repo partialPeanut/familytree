@@ -224,3 +224,8 @@ function setLittleAbsolutePositions(sib) {
         setLittleAbsolutePositions(little)
     })
 }
+
+// Changes tab displayed alongside tree, or only the tree itself.
+function showTab(tabName) {
+    appElement.displayTab = tabName
+}
