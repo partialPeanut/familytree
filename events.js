@@ -37,6 +37,23 @@ function makeDraggable(ele) {
     ele.addEventListener('mousedown', mouseDownHandler)
 }
 
+// Changes column size to make resizing possible.
+function linkElementToColumnSize(ele, container) {
+    $(ele).resizable({
+      handles: 'e',
+      maxWidth: 450,
+      minWidth: 120,
+      resize: function(event, ui){
+          currentWidth = ui.size.width;
+          containerWidth = $(container).width()
+          padding = 0;
+
+          $(this).width(currentWidth);
+          $(".col.right").width(containerWidth - currentWidth - padding);
+      }
+    })
+}
+
 // Allows a name to be clicked on
 function addNameClicker(ele, sib) {
     const clickedNameHandler = function(e) {
