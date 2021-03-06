@@ -121,6 +121,7 @@ function createUnspacedTree() {
                         tagImage = document.createElement("img")
                         tagImage.src = "img/" + tagJSON.imageAddress
                         tagImage.classList.add("tagSymbol")
+                        addTagClicker(tagImage, tagJSON)
                         nas.appendChild(tagImage)
                     }
                     // If it's special, do whatever crazy bullshit

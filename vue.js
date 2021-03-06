@@ -17,6 +17,10 @@ function loadVue() {
                 tags: ['Tag 1', 'Tag 2'],
                 bigName: 'Big Name',
                 littleNames: ['Little 1', 'Little 2']
+            },
+            tagTabData: {
+                name: 'Name',
+                description: 'Description'
             }
         }
     })

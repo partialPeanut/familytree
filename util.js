@@ -241,3 +241,12 @@ function setLittleAbsolutePositions(sib) {
 function showTab(tabName) {
     appElement.displayTab = tabName
 }
+
+// Shows information for a given tag
+function displayTagInfo(tag) {
+    appElement.displayTab = "tagTab"
+    appElement.tagTabData = {
+        name: tag.name,
+        description: tag.type
+    }
+}

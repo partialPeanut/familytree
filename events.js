@@ -55,3 +55,13 @@ function addNameClicker(ele, sib) {
 
     ele.addEventListener('click', clickedNameHandler)
 }
+
+// Allows a tag to be clicked on
+function addTagClicker(ele, tag) {
+    const clickedTagHandler = function(e) {
+        displayTagInfo(tag)
+        ele.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+    }
+
+    ele.addEventListener('click', clickedTagHandler)
+}

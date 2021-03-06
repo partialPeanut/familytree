@@ -31,24 +31,30 @@
         <div id="treeContainer" v-if="displayTab != 'mainMenu'" :class="{ fullWidth: displayTab == 'tree', col: displayTab != 'tree', left: displayTab != 'tree' }">
             <div id="tree"></div>
         </div>
-        <div id="settings" v-if="displayTab == 'settings'" class="col right"></div>
-        <div id="nameTab" v-if="displayTab == 'nameTab'" class="col right">
-            <h1>{{ unspecialText(nameTabData.name) }}</h1>
-            <h2>{{ nameTabData.pledgeClass }}</h2>
-            <h2>{{ nameTabData.house }}</h2>
-            <ul v-if="nameTabData.tags.length > 0">
-                <li v-for="tag in nameTabData.tags">
-                    {{ tag }}
-                </li>
-            </ul>
-            <p v-if="nameTabData.bigName != null">Big's Name: {{ unspecialText(nameTabData.bigName) }}</p>
-            <p v-if="nameTabData.littleNames.length == 1">Little's Name:</p>
-            <p v-if="nameTabData.littleNames.length > 1">Littles' Names:</p>
-            <ul v-if="nameTabData.littleNames.length > 0">
-                <li v-for="littleName in nameTabData.littleNames">
-                    {{ unspecialText(littleName) }}
-                </li>
-            </ul>
+        <div id="rightColContainer" v-if="displayTab != 'tree'" class="col right">
+            <div id="settings" v-if="displayTab == 'settings'"></div>
+            <div id="nameTab" v-if="displayTab == 'nameTab'">
+                <h1>{{ unspecialText(nameTabData.name) }}</h1>
+                <h2>{{ nameTabData.pledgeClass }}</h2>
+                <h2>{{ nameTabData.house }}</h2>
+                <ul v-if="nameTabData.tags.length > 0">
+                    <li v-for="tag in nameTabData.tags">
+                        {{ tag }}
+                    </li>
+                </ul>
+                <p v-if="nameTabData.bigName != null">Big's Name: {{ unspecialText(nameTabData.bigName) }}</p>
+                <p v-if="nameTabData.littleNames.length == 1">Little's Name:</p>
+                <p v-if="nameTabData.littleNames.length > 1">Littles' Names:</p>
+                <ul v-if="nameTabData.littleNames.length > 0">
+                    <li v-for="littleName in nameTabData.littleNames">
+                        {{ unspecialText(littleName) }}
+                    </li>
+                </ul>
+            </div>
+            <div id="tagTab" v-if="displayTab == 'tagTab'">
+                <h1>{{ tagTabData.name }}</h1>
+                <p>{{ tagTabData.description }}</p>
+            </div>
         </div>
     </div>
 </body>
