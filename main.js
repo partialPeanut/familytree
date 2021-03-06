@@ -5,7 +5,7 @@ function main() {
     app = document.querySelector('#app')
     treeContainer = document.querySelector('#treeContainer')
     makeDraggable(treeContainer)
-    linkElementToColumnSize(treeContainer, app)
+    linkColumnSize(app)
 
     drawTree()
 }
