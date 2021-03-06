@@ -32,7 +32,7 @@ function tagRowToJSON(row) {
 
 // Prepares a string to be used as a class name
 function cleanStr(string) {
-    newStr = string.replace(/ |\'|\"|\.|@/g, '')
+    newStr = string.replace(/ |\'|\"|\.|\+|@/g, '')
     return newStr
 }
 
