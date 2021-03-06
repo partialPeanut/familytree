@@ -41,14 +41,14 @@ function makeDraggable(ele) {
 function addNameClicker(ele, sib) {
     const clickedNameHandler = function(e) {
         appElement.displayTab = "nameTab"
-        nameTab.data = {
+        /*nameTab.data = {
             name: sib.name,
             pledgeClass: sib.pledgeClass,
             house: sib.house,
             tags: sib.tags,
             bigName: sib.bigName,
             littleNames: sib.littleNames
-        }
+        }*/
     }
 
     ele.addEventListener('click', clickedNameHandler)
