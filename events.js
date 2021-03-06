@@ -42,7 +42,7 @@ function addNameClicker(ele, sib) {
     const clickedNameHandler = function(e) {
         appElement.displayTab = "nameTab"
         appElement.nameTabData = {
-            name: sib.name,
+            name: filterInvisText(sib.name),
             pledgeClass: sib.pledgeClass,
             house: sib.house,
             tags: sib.tags,
