@@ -33,7 +33,7 @@
         </div>
         <div id="settings" v-if="displayTab == 'settings'" class="col right"></div>
         <div id="nameTab" v-if="displayTab == 'nameTab'" class="col right">
-            <h1>{{ filterInvisText(nameTabData.name) }}</h1>
+            <h1>{{ unspecialText(nameTabData.name) }}</h1>
             <h2>{{ nameTabData.pledgeClass }}</h2>
             <h2>{{ nameTabData.house }}</h2>
             <ul v-if="nameTabData.tags.length > 0">
@@ -41,12 +41,12 @@
                     {{ tag }}
                 </li>
             </ul>
-            <p v-if="nameTabData.bigName != null">Big's Name: {{ filterInvisText(nameTabData.bigName) }}</p>
+            <p v-if="nameTabData.bigName != null">Big's Name: {{ unspecialText(nameTabData.bigName) }}</p>
             <p v-if="nameTabData.littleNames.length == 1">Little's Name:</p>
             <p v-if="nameTabData.littleNames.length > 1">Littles' Names:</p>
             <ul v-if="nameTabData.littleNames.length > 0">
                 <li v-for="littleName in nameTabData.littleNames">
-                    {{ filterInvisText(littleName) }}
+                    {{ unspecialText(littleName) }}
                 </li>
             </ul>
         </div>

@@ -36,8 +36,15 @@ function cleanStr(string) {
     return newStr
 }
 
+// Makes invisible text invisible
 function filterInvisText(string) {
-    newStr = string.split('_')[0].replace(/@/g, 'o')
+    newStr = string.split('_')[0]
+    return newStr
+}
+
+// Makes special text not special
+function unspecialText(string) {
+    newStr = filterInvisText(string).replace(/@/g, 'o')
     return newStr
 }
 
