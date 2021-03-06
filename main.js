@@ -2,10 +2,8 @@
 function main() {
     applySettings()
 
-    app = document.querySelector('#app')
     treeContainer = document.querySelector('#treeContainer')
     makeDraggable(treeContainer)
-    linkColumnSize(app)
 
     drawTree()
 }

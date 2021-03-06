@@ -10,13 +10,16 @@ html, body {
 }
 
 .col {
-	width: 50%;
 	top: 0;
     bottom: 0;
 	position: absolute;
     overflow: auto;
 }
+.col.left {
+    width: 67%;
+}
 .col.right {
+    width: 33%;
 	right: 0;
 }
 
