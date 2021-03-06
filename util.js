@@ -17,15 +17,16 @@ function sibRowToJSON(row) {
 function tagRowToJSON(row) {
     tagJSON = {}
     tagJSON.name = row[0]
-    tagJSON.type = row[1]
-    if (row[2] != '') tagJSON.imageAddress = row[2]
-    if (row[3] != '') tagJSON.borderWidth = row[3]
-    if (row[4] != '') tagJSON.borderColor = row[4]
-    if (row[5] != '') tagJSON.backgroundColor = row[5]
-    if (row[6] != '') tagJSON.textColor = row[6]
-    if (row[7] != '') tagJSON.fontSize = row[7]
-    if (row[8] != '') tagJSON.lineHeight = row[8]
-    if (row[9] != '') tagJSON.fontName = row[9]
+    tagJSON.description = row[1]
+    tagJSON.type = row[2]
+    if (row[3] != '') tagJSON.imageAddress = row[3]
+    if (row[4] != '') tagJSON.borderWidth = row[4]
+    if (row[5] != '') tagJSON.borderColor = row[5]
+    if (row[6] != '') tagJSON.backgroundColor = row[6]
+    if (row[7] != '') tagJSON.textColor = row[7]
+    if (row[8] != '') tagJSON.fontSize = row[8]
+    if (row[9] != '') tagJSON.lineHeight = row[9]
+    if (row[10] != '') tagJSON.fontName = row[10]
 
     return tagJSON
 }
@@ -247,6 +248,6 @@ function displayTagInfo(tag) {
     appElement.displayTab = "tagTab"
     appElement.tagTabData = {
         name: tag.name,
-        description: tag.type
+        description: tag.description
     }
 }
