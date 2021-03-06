@@ -49,6 +49,8 @@ function addNameClicker(ele, sib) {
             bigName: sib.bigName,
             littleNames: sib.littleNames
         }
+
+        ele.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
     }
 
     ele.addEventListener('click', clickedNameHandler)
