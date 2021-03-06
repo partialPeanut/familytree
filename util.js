@@ -37,7 +37,7 @@ function cleanStr(string) {
 }
 
 function filterInvisText(string) {
-    newStr = string.split('_')[0]
+    newStr = string.split('_')[0].replace(/@/g, 'o')
     return newStr
 }
 
