@@ -33,19 +33,19 @@
         </div>
         <div id="settings" v-if="displayTab == 'settings'" class="col right"></div>
         <div id="nameTab" v-if="displayTab == 'nameTab'" class="col right">
-            <h1>{{ name }}</h1>
-            <h2>{{ pledgeClass }}</h2>
-            <h2>{{ house }}</h2>
-            <ul v-if="tags.length > 0">
-                <li v-for="tag in tags">
+            <h1>{{ nameTabData.name }}</h1>
+            <h2>{{ nameTabData.pledgeClass }}</h2>
+            <h2>{{ nameTabData.house }}</h2>
+            <ul v-if="nameTabData.tags.length > 0">
+                <li v-for="tag in nameTabData.tags">
                     {{ tag }}
                 </li>
             </ul>
-            <p v-if="bigName != null">Big's Name: {{ bigName }}</p>
-            <p v-if="littleNames.length == 1">"Little's Name:</p>
-            <p v-if="littleNames.length > 1">Littles' Names:</p>
-            <ul v-if="littleNames.length > 0">
-                <li v-for="littleName in littleNames">
+            <p v-if="nameTabData.bigName != null">Big's Name: {{ nameTabData.bigName }}</p>
+            <p v-if="nameTabData.littleNames.length == 1">"Little's Name:</p>
+            <p v-if="nameTabData.littleNames.length > 1">Littles' Names:</p>
+            <ul v-if="nameTabData.littleNames.length > 0">
+                <li v-for="littleName in nameTabData.littleNames">
                     {{ littleName }}
                 </li>
             </ul>
