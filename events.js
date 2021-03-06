@@ -39,13 +39,13 @@ function makeDraggable(ele) {
 
 // Changes column size to make resizing possible.
 function linkElementToColumnSize(ele, container) {
-    $(ele).resizable({
+    ele.resizable({
       handles: 'e',
       maxWidth: 450,
       minWidth: 120,
       resize: function(event, ui){
           currentWidth = ui.size.width;
-          containerWidth = $(container).width()
+          containerWidth = container.width()
           padding = 0;
 
           $(this).width(currentWidth);
