@@ -20,6 +20,7 @@ function loadVue() {
             },
             tagTabData: {
                 name: 'Name',
+                imgSrc: '',
                 description: 'Description'
             }
         },
