@@ -37,21 +37,27 @@
                 <h1>{{ unspecialText(nameTabData.name) }}</h1>
                 <h2>{{ nameTabData.pledgeClass }}</h2>
                 <h2>{{ nameTabData.house }}</h2>
-                <ul v-if="nameTabData.tags.length > 0">
+
+                <ol v-if="nameTabData.tags.length > 0">
                     <li v-for="tag in nameTabData.tags">
                         <button onclick="displayTagInfo(tag)">{{ tag }}</button>
                     </li>
-                </ul>
+                </ol>
+
                 <p v-if="nameTabData.bigName != null">Big:
                     <button onclick="goToName(nameTabData.bigName)">{{ unspecialText(nameTabData.bigName) }}</button>
                 </p>
-                <p v-if="nameTabData.littleNames.length == 1">Little:</p>
-                <p v-if="nameTabData.littleNames.length > 1">Littles:</p>
-                <ul v-if="nameTabData.littleNames.length > 0">
-                    <li v-for="littleName in nameTabData.littleNames">
-                        <button onclick="goToName(littleName)">{{ unspecialText(littleName) }}</button>
-                    </li>
-                </ul>
+
+                <p v-if="nameTabData.littleNames.length == 1">Little:
+                    <button onclick="goToName(nameTabData.littleNames[0])">{{ unspecialText(nameTabData.littleNames[0]) }}</button>
+                </p>
+                <p v-if="nameTabData.littleNames.length > 1">Littles:
+                    <ol>
+                        <li v-for="littleName in nameTabData.littleNames">
+                            <button onclick="goToName(littleName)">{{ unspecialText(littleName) }}</button>
+                        </li>
+                    </ol>
+                </p>
             </div>
             <div id="tagTab" v-if="displayTab == 'tagTab'">
                 <h1>{{ tagTabData.name }}</h1>
