@@ -26,11 +26,14 @@ function loadVue() {
         methods: {
             displayTagInfo: function(tagName) {
                 console.log("Displaying " + tagName)
-                displayTagInfo(tagName)
+                tag = settings.tagData[tagName]
+                displayTagInfo(tag)
             },
             goToName: function(sibName) {
                 console.log("Displaying " + sibName)
-                $('#' + cleanStr(sibName)).trigger("click")
+                sibBlock = document.querySelector(('#' + cleanStr(sibName)))
+                console.log(sibBlock)
+                sibBlock.trigger("click")
             }
         }
     })
