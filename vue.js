@@ -20,19 +20,18 @@ function loadVue() {
             },
             tagTabData: {
                 name: 'Name',
-                imgSrc: '',
+                imgSrc: 'img/gay.png',
                 description: 'Description'
             }
         },
         methods: {
             displayTagInfo: function(tagName) {
-                console.log("Displaying " + tagName)
+                console.log("Displaying " + tagName + " from menu")
                 tag = settings.tagData[cleanStr(tagName)]
                 displayTagInfo(tag)
             },
             goToName: function(sibName) {
-                console.log("Displaying " + sibName)
-                console.log($('#' + cleanStr(sibName) + ' button'))
+                console.log("Displaying " + sibName + " from menu")
                 $('#' + cleanStr(sibName) + ' button').trigger("click")
             }
         }
