@@ -39,8 +39,8 @@
                 <h2>{{ nameTabData.house }}</h2>
 
                 <ol v-if="nameTabData.tags.length > 0">
-                    <li v-for="tag in nameTabData.tags">
-                        <button onclick="displayTagInfo(tag)">{{ tag }}</button>
+                    <li v-for="tagName in nameTabData.tags">
+                        <button onclick="displayTagInfo(tagName)">{{ tagName }}</button>
                     </li>
                 </ol>
 
