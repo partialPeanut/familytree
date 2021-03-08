@@ -39,17 +39,17 @@
                 <h2>{{ nameTabData.house }}</h2>
                 <ul v-if="nameTabData.tags.length > 0">
                     <li v-for="tag in nameTabData.tags">
-                        <button>{{ tag }}</button>
+                        <button onclick="displayTagInfo(tag)">{{ tag }}</button>
                     </li>
                 </ul>
                 <p v-if="nameTabData.bigName != null">Big:
-                    <button>{{ unspecialText(nameTabData.bigName) }}</button>
+                    <button onclick="goToName(nameTabData.bigName)">{{ unspecialText(nameTabData.bigName) }}</button>
                 </p>
                 <p v-if="nameTabData.littleNames.length == 1">Little:</p>
                 <p v-if="nameTabData.littleNames.length > 1">Littles:</p>
                 <ul v-if="nameTabData.littleNames.length > 0">
                     <li v-for="littleName in nameTabData.littleNames">
-                        <button>{{ unspecialText(littleName) }}</button>
+                        <button onclick="goToName(littleName)">{{ unspecialText(littleName) }}</button>
                     </li>
                 </ul>
             </div>
