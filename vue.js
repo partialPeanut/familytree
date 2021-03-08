@@ -31,9 +31,8 @@ function loadVue() {
             },
             goToName: function(sibName) {
                 console.log("Displaying " + sibName)
-                sibBlock = document.querySelector(('#' + cleanStr(sibName)))
-                console.log(sibBlock)
-                $(sibBlock).trigger("click")
+                console.log($('#' + cleanStr(sibName) + ' button'))
+                $('#' + cleanStr(sibName) + ' button').trigger("click")
             }
         }
     })
