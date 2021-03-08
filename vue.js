@@ -25,9 +25,11 @@ function loadVue() {
         },
         methods: {
             displayTagInfo: function(tagName) {
+                console.log("Displaying " + tagName)
                 displayTagInfo(tagName)
             },
             goToName: function(sibName) {
+                console.log("Displaying " + sibName)
                 $('#' + cleanStr(sibName)).trigger("click")
             }
         }
