@@ -40,21 +40,21 @@
 
                 <ol v-if="nameTabData.tags.length > 0">
                     <li v-for="tag in nameTabData.tags">
-                        <button onclick="displayTagInfo(tag)">{{ tag }}</button>
+                        <button v-on:click="displayTagInfo(tag)">{{ tag }}</button>
                     </li>
                 </ol>
 
                 <p v-if="nameTabData.bigName != null">Big:
-                    <button onclick="goToName(appElement.nameTabData.bigName)">{{ unspecialText(nameTabData.bigName) }}</button>
+                    <button v-on:click="goToName(appElement.nameTabData.bigName)">{{ unspecialText(nameTabData.bigName) }}</button>
                 </p>
 
                 <p v-if="nameTabData.littleNames.length == 1">Little:
-                    <button onclick="goToName(appElement.nameTabData.littleNames[0])">{{ unspecialText(nameTabData.littleNames[0]) }}</button>
+                    <button v-on:click="goToName(appElement.nameTabData.littleNames[0])">{{ unspecialText(nameTabData.littleNames[0]) }}</button>
                 </p>
                 <p v-if="nameTabData.littleNames.length > 1">Littles:</p>
                 <ol v-if="nameTabData.littleNames.length > 1">
                     <li v-for="littleName in nameTabData.littleNames">
-                        <button onclick="goToName(littleName)">{{ unspecialText(littleName) }}</button>
+                        <button v-on:click="goToName(littleName)">{{ unspecialText(littleName) }}</button>
                     </li>
                 </ol>
             </div>
