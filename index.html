@@ -51,13 +51,12 @@
                 <p v-if="nameTabData.littleNames.length == 1">Little:
                     <button onclick="goToName(appElement.nameTabData.littleNames[0])">{{ unspecialText(nameTabData.littleNames[0]) }}</button>
                 </p>
-                <p v-if="nameTabData.littleNames.length > 1">Littles:
-                    <ol>
-                        <li v-for="littleName in nameTabData.littleNames">
-                            <button onclick="goToName(littleName)">{{ unspecialText(littleName) }}</button>
-                        </li>
-                    </ol>
-                </p>
+                <p v-if="nameTabData.littleNames.length > 1">Littles:</p>
+                <ol v-if="nameTabData.littleNames.length > 1">
+                    <li v-for="littleName in nameTabData.littleNames">
+                        <button onclick="goToName(littleName)">{{ unspecialText(littleName) }}</button>
+                    </li>
+                </ol>
             </div>
             <div id="tagTab" v-if="displayTab == 'tagTab'">
                 <h1>{{ tagTabData.name }}</h1>
