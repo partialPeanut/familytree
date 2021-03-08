@@ -39,7 +39,7 @@
                 <h2>{{ nameTabData.house }}</h2>
                 <ul v-if="nameTabData.tags.length > 0">
                     <li v-for="tag in nameTabData.tags">
-                        {{ tag }}
+                        <button>{{ tag }}</button>
                     </li>
                 </ul>
                 <p v-if="nameTabData.bigName != null">Big's Name: {{ unspecialText(nameTabData.bigName) }}</p>
@@ -47,7 +47,7 @@
                 <p v-if="nameTabData.littleNames.length > 1">Littles' Names:</p>
                 <ul v-if="nameTabData.littleNames.length > 0">
                     <li v-for="littleName in nameTabData.littleNames">
-                        {{ unspecialText(littleName) }}
+                        <button>{{ unspecialText(littleName) }}</button>
                     </li>
                 </ul>
             </div>
