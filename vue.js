@@ -26,7 +26,7 @@ function loadVue() {
         methods: {
             displayTagInfo: function(tagName) {
                 console.log("Displaying " + tagName)
-                tag = settings.tagData[tagName]
+                tag = settings.tagData[cleanStr(tagName)]
                 displayTagInfo(tag)
             },
             goToName: function(sibName) {
