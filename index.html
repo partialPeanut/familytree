@@ -45,11 +45,11 @@
                 </ol>
 
                 <p v-if="nameTabData.bigName != null">Big:
-                    <button v-on:click="goToName(appElement.nameTabData.bigName)">{{ unspecialText(nameTabData.bigName) }}</button>
+                    <button v-on:click="goToName(nameTabData.bigName)">{{ unspecialText(nameTabData.bigName) }}</button>
                 </p>
 
                 <p v-if="nameTabData.littleNames.length == 1">Little:
-                    <button v-on:click="goToName(appElement.nameTabData.littleNames[0])">{{ unspecialText(nameTabData.littleNames[0]) }}</button>
+                    <button v-on:click="goToName(nameTabData.littleNames[0])">{{ unspecialText(nameTabData.littleNames[0]) }}</button>
                 </p>
                 <p v-if="nameTabData.littleNames.length > 1">Littles:</p>
                 <ol v-if="nameTabData.littleNames.length > 1">

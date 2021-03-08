@@ -22,6 +22,14 @@ function loadVue() {
                 name: 'Name',
                 description: 'Description'
             }
+        },
+        methods: {
+            displayTagInfo: function(tagName) {
+                displayTagInfo(tagName)
+            },
+            goToName: function(sibName) {
+                $('#' + cleanStr(sibName)).trigger("click")
+            }
         }
     })
 }
