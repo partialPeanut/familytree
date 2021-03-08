@@ -27,7 +27,7 @@
         </script>
     </div>
 
-    <div id="app">
+    <div id="app" v-cloak>
         <div id="treeContainer" v-if="displayTab != 'mainMenu'" :class="{ fullWidth: displayTab == 'tree', col: displayTab != 'tree', left: displayTab != 'tree' }">
             <div id="tree"></div>
         </div>
@@ -39,17 +39,17 @@
                 <h2>{{ nameTabData.house }}</h2>
 
                 <ol v-if="nameTabData.tags.length > 0">
-                    <li v-for="tagName in nameTabData.tags">
-                        <button onclick="displayTagInfo(tagName)">{{ tagName }}</button>
+                    <li v-for="tag in nameTabData.tags">
+                        <button onclick="displayTagInfo(tag)">{{ tag }}</button>
                     </li>
                 </ol>
 
                 <p v-if="nameTabData.bigName != null">Big:
-                    <button onclick="goToName(nameTabData.bigName)">{{ unspecialText(nameTabData.bigName) }}</button>
+                    <button onclick="goToName(appElement.nameTabData.bigName)">{{ unspecialText(nameTabData.bigName) }}</button>
                 </p>
 
                 <p v-if="nameTabData.littleNames.length == 1">Little:
-                    <button onclick="goToName(nameTabData.littleNames[0])">{{ unspecialText(nameTabData.littleNames[0]) }}</button>
+                    <button onclick="goToName(appElement.nameTabData.littleNames[0])">{{ unspecialText(nameTabData.littleNames[0]) }}</button>
                 </p>
                 <p v-if="nameTabData.littleNames.length > 1">Littles:
                     <ol>

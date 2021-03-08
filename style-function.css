@@ -5,6 +5,10 @@ html, body {
     display: contents;
 }
 
+[v-cloak] {
+    display: none;
+}
+
 #app {
 	height: 100%;
 }
