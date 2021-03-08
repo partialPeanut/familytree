@@ -254,5 +254,5 @@ function displayTagInfo(tag) {
 
 // Acts as if a sibling with the given name has been clicked
 function goToName(sibName) {
-    $(sibName).trigger("click")
+    $('#' + cleanStr(sibName)).trigger("click")
 }
