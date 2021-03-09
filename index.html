@@ -36,7 +36,7 @@
             <div id="nameTab" v-if="displayTab == 'nameTab'">
                 <h1>{{ unspecialText(nameTabData.name) }}</h1>
                 <h2>{{ nameTabData.pledgeClass }}</h2>
-                <h2>{{ nameTabData.house }}</h2>
+                <h2><button v-on:click="displayTagInfo(nameTabData.house)">{{ nameTabData.house }}</button></h2>
 
                 <ol v-if="nameTabData.tags.length > 0">
                     <li v-for="tag in nameTabData.tags">
