@@ -36,31 +36,30 @@
             <div id="nameTab" v-if="displayTab == 'nameTab'">
                 <h1>{{ unspecialText(nameTabData.name) }}</h1>
                 <h2>{{ nameTabData.pledgeClass }}</h2>
-                <h2><button v-on:click="displayTagInfo(nameTabData.house)">{{ nameTabData.house }}</button></h2>
+                <h2><button @click="displayTagInfo(nameTabData.house)">{{ nameTabData.house }}</button></h2>
 
                 <ol v-if="nameTabData.tags.length > 0">
                     <li v-for="tag in nameTabData.tags">
-                        <button v-on:click="displayTagInfo(tag)">{{ tag }}</button>
+                        <button @click="displayTagInfo(tag)">{{ tag }}</button>
                     </li>
                 </ol>
 
                 <p v-if="nameTabData.bigName != null">Big:
-                    <button v-on:click="goToName(nameTabData.bigName)">{{ unspecialText(nameTabData.bigName) }}</button>
+                    <button @click="goToName(nameTabData.bigName)">{{ unspecialText(nameTabData.bigName) }}</button>
                 </p>
 
                 <p v-if="nameTabData.littleNames.length == 1">Little:
-                    <button v-on:click="goToName(nameTabData.littleNames[0])">{{ unspecialText(nameTabData.littleNames[0]) }}</button>
+                    <button @click="goToName(nameTabData.littleNames[0])">{{ unspecialText(nameTabData.littleNames[0]) }}</button>
                 </p>
                 <p v-if="nameTabData.littleNames.length > 1">Littles:</p>
                 <ol v-if="nameTabData.littleNames.length > 1">
                     <li v-for="littleName in nameTabData.littleNames">
-                        <button v-on:click="goToName(littleName)">{{ unspecialText(littleName) }}</button>
+                        <button @click="goToName(littleName)">{{ unspecialText(littleName) }}</button>
                     </li>
                 </ol>
             </div>
             <div id="tagTab" v-if="displayTab == 'tagTab'">
-                <h1>{{ tagTabData.name }}</h1>
-                <img class="tagSymbol" :src="tagTabData.imgSrc">
+                <h1><img class="tagSymbol" :src="tagTabData.imgSrc"> {{ tagTabData.name }}</h1>
                 <p>{{ tagTabData.description }}</p>
             </div>
         </div>
