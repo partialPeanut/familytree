@@ -80,6 +80,7 @@ html, body {
 }
 
 .tagSymbol {
+    display: inline;
     margin-left: var(--tagMargin);
     height: var(--nameHeight);
 }
