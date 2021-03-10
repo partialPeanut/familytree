@@ -59,7 +59,10 @@
                 </ol>
             </div>
             <div id="tagTab" v-if="displayTab == 'tagTab'">
-                <h1><img class="tagSymbol" :src="tagTabData.imgSrc"> {{ tagTabData.name }}</h1>
+                <h1>
+                    <img class="tagSymbol" :src="tagTabData.imgSrc">
+                    {{ tagTabData.name }}
+                </h1>
                 <p>{{ tagTabData.description }}</p>
             </div>
         </div>
