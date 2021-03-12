@@ -8,11 +8,6 @@ var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"
 // included, separated by spaces.
 var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
 
-var authorizeButton = document.querySelector('#authorize_button')
-var signoutButton = document.querySelector('#signout_button')
-console.log(authorizeButton)
-console.log(signoutButton)
-
 /**
  *  On load, called to load the auth2 library and API client library.
  */
@@ -31,45 +26,10 @@ function initClient() {
         discoveryDocs: DISCOVERY_DOCS,
         scope: SCOPES
     }).then(function () {
-        // Listen for sign-in state changes.
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus)
-
-        // Handle the initial sign-in state.
-        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get())
-        authorizeButton.onclick = handleAuthClick
-        signoutButton.onclick = handleSignoutClick
+        getSheetValues()
     }, function(error) {
         console.log(error)
     });
-}
-
-/**
- *  Called when the signed in status changes, to update the UI
- *  appropriately. After a sign-in, the API is called.
- */
-function updateSigninStatus(isSignedIn) {
-    if (isSignedIn) {
-        authorizeButton.style.display = 'none'
-        signoutButton.style.display = 'none'
-        getSheetValues()
-    } else {
-        authorizeButton.style.display = 'block'
-        signoutButton.style.display = 'none'
-    }
-}
-
-/**
- *  Sign in the user upon button click.
- */
-function handleAuthClick(event) {
-    gapi.auth2.getAuthInstance().signIn()
-}
-
-/**
- *  Sign out the user upon button click.
- */
-function handleSignoutClick(event) {
-    gapi.auth2.getAuthInstance().signOut()
 }
 
 // Get raw spreadsheet data and convert it into a dope-ass data structure.
