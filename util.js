@@ -248,7 +248,7 @@ function displayTagInfo(tag) {
     appElement.displayTab = "tagTab"
     appElement.tagTabData = {
         name: tag.name,
-        imgSrc: tag.imageAddress == undefined ? false : 'img/' + tag.imageAddress,
+        imgSrc: tag.imageAddress ? 'img/' + tag.imageAddress : undefined,
         description: tag.description
     }
 }
