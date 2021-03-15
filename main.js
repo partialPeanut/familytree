@@ -29,8 +29,8 @@ function applySettings() {
             if (tag.fontSize) rule += "font-size: " + tag.fontSize + "px;\n"
             if (tag.lineHeight) rule += "line-height: " + tag.lineHeight + "px;\n"
             if (tag.fontName) rule += "font-family: " + tag.fontName + ";\n"
-            if (tag.outlineType) rule += "outline: " + tag.outlineType + " " + tag.borderWidth + "px;\n"
-            if (tag.shadowColor) rule += "box-shadow: 0 0 0 " + tag.borderWidth + "px " + tag.shadowColor + ";\n"
+            if (tag.outlineType) rule += "outline: " + tag.outlineType + " " + tag.outerWidth + "px;\n"
+            if (tag.shadowColor) rule += "box-shadow: 0 0 0 " + tag.outerWidth + "px " + tag.shadowColor + ";\n"
             rule += "}"
 
             stylesheet.insertRule(rule, stylesheet.cssRules.length)

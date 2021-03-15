@@ -29,6 +29,7 @@ function tagRowToJSON(row) {
     if (row[10] != '') tagJSON.fontName = row[10]
     if (row[11] != '') tagJSON.outlineType = row[11]
     if (row[12] != '') tagJSON.shadowColor = row[12]
+    if (row[13] != '') tagJSON.outerWidth = row[13]
 
     return tagJSON
 }
