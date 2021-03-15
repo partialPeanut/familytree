@@ -1,11 +1,13 @@
 // It's main!
 function main() {
     applySettings()
-
-    treeContainer = document.querySelector('#treeContainer')
-    makeDraggable(treeContainer)
-
-    drawTree()
+    createUnspacedTree()
+    setTimeout(function(){
+        spaceTree()
+        drawAcrossLines()
+        treeContainer = document.querySelector('#treeContainer')
+        makeDraggable(treeContainer)
+       }, 1000);
 }
 
 // Apply settings JSON to stylesheet and other places
@@ -41,15 +43,6 @@ function applySettings() {
             stylesheet.insertRule(rule, stylesheet.cssRules.length)
         }
     })
-}
-
-// Draw the whole tree
-function drawTree() {
-    createUnspacedTree()
-    setTimeout(function(){
-        spaceTree()
-        drawAcrossLines()
-       }, 1000);
 }
 
 // Places all blocks roughly down, in the right order but not correctly positioned
