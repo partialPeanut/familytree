@@ -74,15 +74,15 @@ html, body {
     border-radius: 0px;
     user-select: none;
 }
-.name:hover, .tagSymbol:hover {
-    transform: scale(1.1);
-    cursor: pointer;
-}
 
 .tagSymbol {
     display: inline;
     margin-left: var(--tagMargin);
     height: var(--nameHeight);
+}
+.name:hover, .tagSymbol:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 .line.vert{

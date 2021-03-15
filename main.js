@@ -22,11 +22,13 @@ function applySettings() {
             rule = "." + cleanStr(tag.name) + " {\n"
             if (tag.borderWidth) rule += "border-width: " + tag.borderWidth + "px;\n"
             if (tag.borderColor) rule += "border-color: " + tag.borderColor + ";\n"
+            if (tag.borderType) rule += "border-style: " + tag.borderType + ";\n"
             if (tag.backgroundColor) rule += "background-color: " + tag.backgroundColor + ";\n"
             if (tag.textColor) rule += "color: " + tag.textColor + ";\n"
             if (tag.fontSize) rule += "font-size: " + tag.fontSize + "px;\n"
             if (tag.lineHeight) rule += "line-height: " + tag.lineHeight + "px;\n"
             if (tag.fontName) rule += "font-family: " + tag.fontName + ";\n"
+            if (tag.shadowColor) rule += "box-shadow: 0 0 0 " + tag.borderWidth + "px " + tag.shadowColor + ";\n"
             rule += "}"
 
             stylesheet.insertRule(rule, stylesheet.cssRules.length)
@@ -125,7 +127,7 @@ function createUnspacedTree() {
                         nas.appendChild(tagImage)
                     }
                     // If it's special, do whatever crazy bullshit
-                    else if (tagJSON.type.includes("SPECIAL")) {
+                    if (tagJSON.type.includes("SPECIAL")) {
                         if (tagJSON.name == "Dropped") {
                             buttonStyle = window.getComputedStyle(nameButton)
                             backgroundCol = buttonStyle.backgroundColor
