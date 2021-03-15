@@ -30,7 +30,7 @@ function applySettings() {
             if (tag.fontSize) rule += "font-size: " + tag.fontSize + "px;\n"
             if (tag.lineHeight) rule += "line-height: " + tag.lineHeight + "px;\n"
             if (tag.fontName) rule += "font-family: " + tag.fontName + ";\n"
-            if (tag.shadowColor) rule += "box-shadow: 0 0 0 " + tag.borderWidth + "px " + tag.shadowColor + ";\n"
+            if (tag.shadowColor) rule += "box-shadow: 0 0 0 " + tag.borderWidth + "px " + tag.shadowColor + " inset;\n"
             rule += "}"
 
             stylesheet.insertRule(rule, stylesheet.cssRules.length)
