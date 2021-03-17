@@ -34,7 +34,7 @@ function applySettings() {
             if (tag.lineHeight) rule += "line-height: " + tag.lineHeight + "px;\n"
             if (tag.fontName) rule += "font-family: " + tag.fontName + ";\n"
             if (tag.outlineType) rule += "outline-style: " + tag.outlineType + ";\n"
-            if (tag.outlineColor) rule += "outline-style: " + tag.outlineColor + ";\n"
+            if (tag.outlineColor) rule += "outline-color: " + tag.outlineColor + ";\n"
             rule += "}"
 
             stylesheet.insertRule(rule, stylesheet.cssRules.length)
