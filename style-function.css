@@ -38,7 +38,7 @@ html, body {
 #treeContainer {
     cursor: grab;
 }
-#tree{
+.tree{
     width: fit-content;
     white-space: nowrap;
     margin-top: var(--treeMarginTop);
