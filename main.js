@@ -53,6 +53,12 @@ function applySettings() {
 function createUnspacedTree() {
     console.log("createUnspacedTree Ver. Probably Done")
 
+    // Create the tree and add the row to it
+    tree = document.createElement('div')
+    tree.classList.add('tree')
+    treeContainer = document.querySelector('#treeContainer')
+    treeContainer.append(tree)
+
     // Loop through the rows
     $.each(siblings, function(key, val) {
         i = parseInt(key)
@@ -64,13 +70,6 @@ function createUnspacedTree() {
         if (i == 0 || i == siblings.length-1) {
             row.classList.add('end')
         }
-        
-        // Create the tree and add the row to it
-        tree = document.createElement('div')
-        tree.classList.add('tree')
-        treeContainer = document.querySelector('#treeContainer')
-        treeContainer.append(tree)
-
         tree.append(row)
 
         // Loop through the siblings in this row
