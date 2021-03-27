@@ -66,7 +66,11 @@ function createUnspacedTree() {
         }
         
         // Create the tree and add the row to it
-        tree = document.querySelector('#tree')
+        tree = document.createElement('div')
+        tree.classList.add('tree')
+        treeContainer = document.querySelector('#treeContainer')
+        treeContainer.append(tree)
+
         tree.append(row)
 
         // Loop through the siblings in this row
