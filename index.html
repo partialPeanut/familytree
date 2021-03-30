@@ -25,7 +25,7 @@
     </div>
 
     <div id="app" v-cloak>
-        <div id="treeContainer" v-if="displayTab != 'mainMenu'" :class="container { fullWidth: displayTab == 'tree', col: displayTab != 'tree', left: displayTab != 'tree' }"></div>
+        <div id="treeContainer" v-if="displayTab != 'mainMenu'" class="container" :class="{ fullWidth: displayTab == 'tree', col: displayTab != 'tree', left: displayTab != 'tree' }"></div>
         <div id="rightColContainer" v-if="displayTab != 'tree'" class="col right">
             <div id="settings" v-if="displayTab == 'settings'"></div>
             <div id="nameTab" v-if="displayTab == 'nameTab'">
