@@ -55,7 +55,7 @@ function createUnspacedTree() {
 
     // Create the tree and add the row to it
     tree = document.createElement('div')
-    tree.classList.add('tree')
+    tree.id = "tree"
     treeContainer = document.querySelector('#treeContainer')
     treeContainer.append(tree)
 
@@ -225,7 +225,7 @@ function drawAcrossLines() {
     console.log("drawAcrossLines Ver. Fucking Gucci")
     lineWeight = settings.sizes['lineWeight']
 
-    tree = document.querySelector('.tree')
+    tree = document.querySelector('#tree')
 
     $.each(siblings, function(height, row) {
         prevEnd = 0
