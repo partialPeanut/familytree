@@ -34,7 +34,7 @@ function initClient() {
 }
 
 function getImages() {
-    drive.files.list({
+    gapi.client.drive.files.list({
         q: "'14DZKB1KB-m61xvU-quLF6GA3VUeyyUbr' in parents",
       })
       .then((response) => {
@@ -49,7 +49,7 @@ function getImages() {
 
 function downloadImage(id, filename) {
     dest = fs.createWriteStream('/img/' + filename)
-    drive.files.get({
+    gapi.client.drive.files.get({
         fileId: id,
         alt: 'media'
       })
