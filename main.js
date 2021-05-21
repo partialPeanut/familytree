@@ -121,7 +121,7 @@ function createUnspacedTree() {
                     // If it's a symbol, add the symbol
                     if (tagJSON.type.includes("SYMBOL")) {
                         tagImage = document.createElement("img")
-                        tagImage.src = "img/" + tagJSON.imageAddress
+                        tagImage.src = "https://drive.google.com/thumbnail?id=" + tagJSON.imageAddress
                         tagImage.classList.add("tagSymbol")
                         addTagClicker(tagImage, tagJSON)
                         nas.appendChild(tagImage)

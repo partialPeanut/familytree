@@ -6,7 +6,7 @@ var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"
 
 // Authorization scopes required by the API; multiple scopes can be
 // included, separated by spaces.
-var SCOPES = "https://www.googleapis.com/auth/drive";
+var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
 
 /**
  *  On load, called to load the auth2 library and API client library.
@@ -26,40 +26,10 @@ function initClient() {
         discoveryDocs: DISCOVERY_DOCS,
         scope: SCOPES
     }).then(function () {
-        getImages()
         getSheetValues()
     }, function(error) {
         console.log(error)
     })
-}
-
-function getImages() {
-    gapi.client.drive.files.list({
-        q: "'14DZKB1KB-m61xvU-quLF6GA3VUeyyUbr' in parents",
-      })
-      .then((response) => {
-        files = response.files
-        for(i = 0; i < files.length; i++) {
-            thisFile = files[i]
-            if (thisFile.mimeType == "image/png")
-                downloadImage(thisFile.id, thisFile.name)
-        }
-      })
-}
-
-function downloadImage(id, filename) {
-    dest = fs.createWriteStream('/img/' + filename)
-    gapi.client.drive.files.get({
-        fileId: id,
-        alt: 'media'
-      })
-      .on('end', function () {
-        console.log('Done');
-      })
-      .on('error', function (err) {
-        console.log('Error during download', err)
-      })
-      .pipe(dest)
 }
 
 // Get raw spreadsheet data and convert it into a dope-ass data structure.
