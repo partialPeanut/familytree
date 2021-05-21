@@ -250,7 +250,7 @@ function displayTagInfo(tag) {
     appElement.displayTab = "tagTab"
     appElement.tagTabData = {
         name: tag.name,
-        imgSrc: tag.imageAddress ? 'img/' + tag.imageAddress : undefined,
+        imgSrc: tag.imageAddress ? "https://drive.google.com/thumbnail?id=" + tag.imageAddress : undefined,
         description: tag.description
     }
 }
