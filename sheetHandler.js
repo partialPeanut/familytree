@@ -34,7 +34,7 @@ function initClient() {
 }
 
 function getImages() {
-    gapi.client.files.list({
+    drive.files.list({
         q: "'14DZKB1KB-m61xvU-quLF6GA3VUeyyUbr' in parents",
       }).then((response) => {
         files = response.files
