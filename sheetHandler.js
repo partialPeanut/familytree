@@ -30,13 +30,14 @@ function initClient() {
         getSheetValues()
     }, function(error) {
         console.log(error)
-    });
+    })
 }
 
 function getImages() {
     drive.files.list({
         q: "'14DZKB1KB-m61xvU-quLF6GA3VUeyyUbr' in parents",
-      }).then((response) => {
+      })
+      .then((response) => {
         files = response.files
         for(i = 0; i < files.length; i++) {
             thisFile = files[i]
@@ -49,16 +50,16 @@ function getImages() {
 function downloadImage(id, filename) {
     dest = fs.createWriteStream('/img/' + filename)
     drive.files.get({
-    fileId: id,
-    alt: 'media'
-    })
-        .on('end', function () {
+        fileId: id,
+        alt: 'media'
+      })
+      .on('end', function () {
         console.log('Done');
-        })
-        .on('error', function (err) {
-        console.log('Error during download', err);
-        })
-        .pipe(dest);
+      })
+      .on('error', function (err) {
+        console.log('Error during download', err)
+      })
+      .pipe(dest)
 }
 
 // Get raw spreadsheet data and convert it into a dope-ass data structure.
