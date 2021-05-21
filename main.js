@@ -140,7 +140,7 @@ function createUnspacedTree() {
                             borderCol = buttonStyle.borderColor
                             nameButton.style.color = borderCol
 
-                            nameButton.style.backgroundImage = 'url("img/' + tagJSON.imageAddress + '")'
+                            nameButton.style.backgroundImage = 'url("https://drive.google.com/thumbnail?id=' + tagJSON.imageAddress + '")'
                             nameButton.style.backgroundRepeat = "repeat-x"
                             nameButton.style.backgroundSize = "contain"
                         }
