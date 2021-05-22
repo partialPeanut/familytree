@@ -16,6 +16,7 @@
     <script src="main.js"></script>
 </head>
 <body onload="loadVue()">
+    <!-- This gets all data from Google -->
     <div id="dataGetter">
         <script src="sheetHandler.js"></script>
         <script defer src="https://apis.google.com/js/api.js"
@@ -23,12 +24,26 @@
             onreadystatechange="if (this.readyState === 'complete') this.onload()">
         </script>
     </div>
-
+    
+    <!-- All visible items -->
     <div id="app" v-cloak>
-        <div id="treeContainer" v-if="displayTab != 'mainMenu'" class="container" :class="{ fullWidth: displayTab == 'tree', col: displayTab != 'tree', left: displayTab != 'tree' }"></div>
-        <div id="rightColContainer" v-if="displayTab != 'tree'" class="col right">
-            <div id="settings" v-if="displayTab == 'settings'"></div>
-            <div id="nameTab" v-if="displayTab == 'nameTab'">
+        <!-- The tab with the tree in it, autofilled by script -->
+        <div id="treeContainer" v-if="getDisplayTab() != 'mainMenu'" class="container" :class="{ fullWidth: getDisplayTab() == 'tree', col: getDisplayTab() != 'tree', left: getDisplayTab() != 'tree' }"></div>
+        
+        <!-- All versions of things that can pop up on the right -->
+        <div id="rightColContainer" v-if="getDisplayTab() != 'tree'" class="col right">
+            <!-- Buttons -->
+            <div class="tabNavButtonContainer">
+                <button v-if="canGoBack()" onclick="goBack()" class="tabNavButton clickable">←</button>
+                <button v-if="canGoForward()" onclick="goForward()" class="tabNavButton clickable">→</button>
+                <button onclick="exitTab()" class="tabNavButton right clickable">×</button>
+            </div>
+
+            <!-- Settings tab -->
+            <div id="settings" v-if="getDisplayTab() == 'settings'"></div>
+
+            <!-- Tab that opens when you click a name. -->
+            <div id="nameTab" v-if="getDisplayTab() == 'nameTab'">
                 <h1>{{ unspecialText(nameTabData.name) }}</h1>
                 <h2>{{ nameTabData.pledgeClass }}</h2>
                 <h2><button @click="displayTagInfo(nameTabData.house)">{{ nameTabData.house }}</button></h2>
@@ -53,7 +68,9 @@
                     </li>
                 </ol>
             </div>
-            <div id="tagTab" v-if="displayTab == 'tagTab'">
+
+            <!-- Tag that opens when you click a tab. Wait no -->
+            <div id="tagTab" v-if="getDisplayTab() == 'tagTab'">
                 <h1>
                     <img v-if="tagTabData.imgSrc" class="tagSymbol" :src="tagTabData.imgSrc">
                     {{ tagTabData.name }}

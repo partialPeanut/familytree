@@ -27,12 +27,34 @@ html, body {
 	right: 0;
 }
 
+.tabNavButtonContainer {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 24px;
+    display: flex;
+}
+
+.tabNavButton {
+    background-color: transparent;
+	border: 1px solid transparent;
+	font-size: 40px;
+}
+.tabNavButton.right {
+    justify-self: end;
+}
+
 .fullWidth {
     width: 100%;
     top: 0;
     bottom: 0;
     position: absolute;
     overflow: auto;
+}
+
+.clickable:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 #treeContainer {
@@ -79,10 +101,6 @@ html, body {
     display: inline;
     margin-left: var(--tagMargin);
     height: var(--nameHeight);
-}
-.name:hover, .tagSymbol:hover {
-    transform: scale(1.1);
-    cursor: pointer;
 }
 
 .line.vert{

@@ -100,6 +100,7 @@ function createUnspacedTree() {
             // The name button, a button with the sib's name on it
             nameButton = document.createElement("BUTTON")
             nameButton.classList.add('name')
+            nameButton.classList.add('clickable')
             nameButton.classList.add(houseClean)
             addNameClicker(nameButton, sib)
             nas.append(nameButton)
@@ -123,6 +124,7 @@ function createUnspacedTree() {
                         tagImage = document.createElement("img")
                         tagImage.src = "https://drive.google.com/thumbnail?id=" + tagJSON.imageAddress
                         tagImage.classList.add("tagSymbol")
+                        tagImage.classList.add("clickable")
                         addTagClicker(tagImage, tagJSON)
                         nas.appendChild(tagImage)
                     }

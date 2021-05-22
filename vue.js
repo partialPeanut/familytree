@@ -9,7 +9,8 @@ function loadVue() {
     appElement = new Vue({
         el: '#app',
         data: {
-            displayTab: 'tree',
+            tabHistory: ['tree'],
+            tabPosition: 0,
             nameTabData: {
                 name: 'Name',
                 pledgeClass: 'Pledge Class',
@@ -25,6 +26,15 @@ function loadVue() {
             }
         },
         methods: {
+            getDisplayTab: function() {
+                return tabHistory[tabPosition]
+            },
+            canGoBack: function() {
+                return tabPosition > 0
+            },
+            canGoForward: function() {
+                return tabPosition < tabHistory.length - 1
+            },
             displayTagInfo: function(tagName) {
                 console.log("Displaying " + tagName + " from menu")
                 tag = settings.tagData[cleanStr(tagName)]
