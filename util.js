@@ -257,7 +257,17 @@ function goForward() {
 
 // Goes back to tree
 function exitTab() {
-    appElement.tabHistory = ['tree']
+    appElement.tabHistory = [{
+        tabType: 'tree',
+        name: 'Name',
+        imgSrc: 'img/gay.png',
+        description: 'Description',
+        pledgeClass: 'Pledge Class',
+        house: 'House',
+        tags: ['Tag 1', 'Tag 2'],
+        bigName: 'Big Name',
+        littleNames: ['Little 1', 'Little 2']
+    }]
     appElement.tabPosition = 0
 }
 
