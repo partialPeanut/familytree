@@ -249,10 +249,16 @@ function showTab(tabData) {
 
 function goBack() {
     if (appElement.tabPosition == 1) exitTab()
-    else appElement.tabPosition--
+    else {
+        appElement.tabPosition--
+        if (appElement.getDisplayTab() == "nameTab")
+            $('#' + cleanStr(appElement.getTabData().name)).scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+    }
 }
 function goForward() {
     appElement.tabPosition++
+    if (appElement.getDisplayTab() == "nameTab")
+        $('#' + cleanStr(appElement.getTabData().name)).scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
 }
 
 // Goes back to tree
