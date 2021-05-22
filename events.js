@@ -51,7 +51,9 @@ function addNameClicker(ele, sib) {
         }
         showTab(tabData)
 
-        ele.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+        setTimeout(function() {
+            ele.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+        }, 360)
     }
 
     ele.addEventListener('click', clickedNameHandler)

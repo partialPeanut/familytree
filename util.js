@@ -252,13 +252,13 @@ function goBack() {
     else {
         appElement.tabPosition--
         if (appElement.getDisplayTab() == "nameTab")
-            $('#' + cleanStr(appElement.getTabData().name)).scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+            $('#' + cleanStr(appElement.getTabData().name))[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
     }
 }
 function goForward() {
     appElement.tabPosition++
     if (appElement.getDisplayTab() == "nameTab")
-        $('#' + cleanStr(appElement.getTabData().name)).scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+        $('#' + cleanStr(appElement.getTabData().name))[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
 }
 
 // Goes back to tree
