@@ -44,26 +44,26 @@
 
             <!-- Tab that opens when you click a name. -->
             <div id="nameTab" v-if="getDisplayTab() == 'nameTab'">
-                <h1>{{ unspecialText(nameTabData.name) }}</h1>
-                <h2>{{ nameTabData.pledgeClass }}</h2>
-                <h2><button @click="displayTagInfo(nameTabData.house)">{{ nameTabData.house }}</button></h2>
+                <h1>{{ unspecialText(getTabData().name) }}</h1>
+                <h2>{{ getTabData().pledgeClass }}</h2>
+                <h2><button @click="displayTagInfo(getTabData().house)">{{ getTabData().house }}</button></h2>
 
-                <ol v-if="nameTabData.tags.length > 0">
-                    <li v-for="tag in nameTabData.tags">
+                <ol v-if="getTabData().tags.length > 0">
+                    <li v-for="tag in getTabData().tags">
                         <button @click="displayTagInfo(tag)">{{ tag }}</button>
                     </li>
                 </ol>
 
-                <p v-if="nameTabData.bigName != null">Big:
-                    <button @click="goToName(nameTabData.bigName)">{{ unspecialText(nameTabData.bigName) }}</button>
+                <p v-if="getTabData().bigName != null">Big:
+                    <button @click="goToName(getTabData().bigName)">{{ unspecialText(getTabData().bigName) }}</button>
                 </p>
 
-                <p v-if="nameTabData.littleNames.length == 1">Little:
-                    <button @click="goToName(nameTabData.littleNames[0])">{{ unspecialText(nameTabData.littleNames[0]) }}</button>
+                <p v-if="getTabData().littleNames.length == 1">Little:
+                    <button @click="goToName(getTabData().littleNames[0])">{{ unspecialText(getTabData().littleNames[0]) }}</button>
                 </p>
-                <p v-if="nameTabData.littleNames.length > 1">Littles:</p>
-                <ol v-if="nameTabData.littleNames.length > 1">
-                    <li v-for="littleName in nameTabData.littleNames">
+                <p v-if="getTabData().littleNames.length > 1">Littles:</p>
+                <ol v-if="getTabData().littleNames.length > 1">
+                    <li v-for="littleName in getTabData().littleNames">
                         <button @click="goToName(littleName)">{{ unspecialText(littleName) }}</button>
                     </li>
                 </ol>
@@ -72,10 +72,10 @@
             <!-- Tag that opens when you click a tab. Wait no -->
             <div id="tagTab" v-if="getDisplayTab() == 'tagTab'">
                 <h1>
-                    <img v-if="tagTabData.imgSrc" class="tagSymbol" :src="tagTabData.imgSrc">
-                    {{ tagTabData.name }}
+                    <img v-if="getTabData().imgSrc" class="tagSymbol" :src="getTabData().imgSrc">
+                    {{ getTabData().name }}
                 </h1>
-                <p>{{ tagTabData.description }}</p>
+                <p>{{ getTabData().description }}</p>
             </div>
         </div>
     </div>

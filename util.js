@@ -241,9 +241,9 @@ function setLittleAbsolutePositions(sib) {
 }
 
 // Changes tab displayed alongside tree, or only the tree itself.
-function showTab(tabName) {
+function showTab(tabData) {
     appElement.tabHistory = appElement.tabHistory.slice(0, appElement.tabPosition+1)
-    appElement.tabHistory.push(tabName)
+    appElement.tabHistory.push(tabData)
     appElement.tabPosition++
 }
 
@@ -263,12 +263,13 @@ function exitTab() {
 
 // Shows information for a given tag
 function displayTagInfo(tag) {
-    showTab("tagTab")
-    appElement.tagTabData = {
+    tabData = {
+        tabType: "tagTab",
         name: tag.name,
         imgSrc: tag.imageAddress ? "https://drive.google.com/thumbnail?id=" + tag.imageAddress : undefined,
         description: tag.description
     }
+    showTab(tabData)
 }
 
 // Acts as if a sibling with the given name has been clicked

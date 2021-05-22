@@ -9,24 +9,24 @@ function loadVue() {
     appElement = new Vue({
         el: '#app',
         data: {
-            tabHistory: ['tree'],
-            tabPosition: 0,
-            nameTabData: {
+            tabHistory: [{
+                tabType: 'tree',
                 name: 'Name',
+                imgSrc: 'img/gay.png',
+                description: 'Description',
                 pledgeClass: 'Pledge Class',
                 house: 'House',
                 tags: ['Tag 1', 'Tag 2'],
                 bigName: 'Big Name',
                 littleNames: ['Little 1', 'Little 2']
-            },
-            tagTabData: {
-                name: 'Name',
-                imgSrc: 'img/gay.png',
-                description: 'Description'
-            }
+            }],
+            tabPosition: 0
         },
         methods: {
             getDisplayTab: function() {
+                return this.tabHistory[this.tabPosition].tabType
+            },
+            getTabData: function() {
                 return this.tabHistory[this.tabPosition]
             },
             canGoForward: function() {
