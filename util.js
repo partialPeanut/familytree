@@ -248,7 +248,8 @@ function showTab(tabName) {
 }
 
 function goBack() {
-    appElement.tabPosition--
+    if (appElement.tabPosition == 1) exitTab()
+    else appElement.tabPosition--
 }
 function goForward() {
     appElement.tabPosition++

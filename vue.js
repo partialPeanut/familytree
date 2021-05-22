@@ -29,9 +29,6 @@ function loadVue() {
             getDisplayTab: function() {
                 return this.tabHistory[this.tabPosition]
             },
-            canGoBack: function() {
-                return this.tabPosition > 0
-            },
             canGoForward: function() {
                 return this.tabPosition < this.tabHistory.length - 1
             },
