@@ -262,7 +262,7 @@ function exitTab() {
 
 // Shows information for a given tag
 function displayTagInfo(tag) {
-    appElement.displayTab = "tagTab"
+    showTab("tagTab")
     appElement.tagTabData = {
         name: tag.name,
         imgSrc: tag.imageAddress ? "https://drive.google.com/thumbnail?id=" + tag.imageAddress : undefined,

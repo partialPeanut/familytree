@@ -40,7 +40,7 @@ function makeDraggable(ele) {
 // Allows a name to be clicked on
 function addNameClicker(ele, sib) {
     const clickedNameHandler = function(e) {
-        appElement.displayTab = "nameTab"
+        showTab("nameTab")
         appElement.nameTabData = {
             name: sib.name,
             pledgeClass: sib.pledgeClass,
