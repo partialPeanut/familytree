@@ -242,7 +242,7 @@ function setLittleAbsolutePositions(sib) {
 
 // Changes tab displayed alongside tree, or only the tree itself.
 function showTab(tabName) {
-    appElement.tabHistory = appElement.tabHistory.slice(appElement.tabPosition)
+    appElement.tabHistory = appElement.tabHistory.slice(0, appElement.tabPosition+1)
     appElement.tabHistory.push(tabName)
     appElement.tabPosition++
 }
