@@ -27,13 +27,13 @@ function loadVue() {
         },
         methods: {
             getDisplayTab: function() {
-                return tabHistory[tabPosition]
+                return this.tabHistory[this.tabPosition]
             },
             canGoBack: function() {
-                return tabPosition > 0
+                return this.tabPosition > 0
             },
             canGoForward: function() {
-                return tabPosition < tabHistory.length - 1
+                return this.tabPosition < this.tabHistory.length - 1
             },
             displayTagInfo: function(tagName) {
                 console.log("Displaying " + tagName + " from menu")
