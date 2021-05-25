@@ -66,10 +66,10 @@ html, body {
     cursor: pointer;
 }
 
-#treeContainer {
+.container {
     cursor: grab;
 }
-#tree{
+.tree{
     width: fit-content;
     white-space: nowrap;
     margin-top: var(--treeMarginTop);

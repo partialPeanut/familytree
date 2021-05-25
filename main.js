@@ -61,7 +61,7 @@ function createUnspacedTree() {
 
     // Create the tree and add it to the container
     tree = document.createElement('div')
-    tree.id = "tree"
+    tree.classList.add('tree')
     treeContainer = document.querySelector('#treeContainer')
     treeContainer.append(tree)
 
@@ -236,7 +236,7 @@ function drawAcrossLines() {
     console.log("drawAcrossLines Ver. Fucking Gucci")
     lineWeight = settings.sizes['lineWeight']
 
-    tree = document.querySelector('#tree')
+    tree = document.querySelector('.tree')
 
     maxSibHeight = maxHeight(siblings)
     for (height = 0; height < maxSibHeight; height++) {
