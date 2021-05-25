@@ -248,7 +248,7 @@ function drawAcrossLines() {
         divAcross.classList.add("across")
         tree.insertBefore(divAcross, divRow.nextSibling)
 
-        thisRowSibs = siblings.fliter(thisSib => thisSib.height == height)
+        thisRowSibs = siblings.filter(thisSib => thisSib.height == height)
         thisRowSibs.forEach(sib => {
             if (sib.littleNames.length == 1) {
                 little = getLittle(sib, 0)
