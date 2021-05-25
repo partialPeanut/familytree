@@ -45,6 +45,12 @@ function applySettings() {
             rule += "}"
 
             stylesheet.insertRule(rule, stylesheet.cssRules.length)
+
+            rule = "." + cleanStr(tag.name) + ".stub {\n"
+            rule += "background-color: " + tag.borderColor + ";\n"
+            rule += "}"
+
+            stylesheet.insertRule(rule, stylesheet.cssRules.length)
         }
     })
 }
