@@ -2,12 +2,10 @@
 function main() {
     applySettings()
     createUnspacedTree()
-    setTimeout(function(){
-        spaceTree()
-        drawAcrossLines()
-        treeContainer = document.querySelector('#treeContainer')
-        makeDraggable(treeContainer)
-       }, 1000);
+    spaceTree()
+    drawAcrossLines()
+    treeContainer = document.querySelector('#treeContainer')
+    makeDraggable(treeContainer)
 }
 
 // Apply settings JSON to stylesheet and other places
