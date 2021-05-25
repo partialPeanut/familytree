@@ -18,7 +18,7 @@ function applySettings() {
     })
 
     // Tag data
-    stylesheet = document.styleSheets[1]
+    stylesheet = document.styleSheets[0]
     $.each(settings.tagData, function(tagName, tag) {
         if (tag.type.includes("STYLE")) {
             rule = "." + cleanStr(tag.name) + " {\n"

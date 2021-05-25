@@ -4,7 +4,7 @@ function makeDraggable(ele) {
 
     const mouseDownHandler = function(e) {
         pos = {
-            // The current scroll 
+            // The current scroll
             left: ele.scrollLeft,
             top: ele.scrollTop,
             // Get the current mouse position
