@@ -59,31 +59,30 @@ function applySettings() {
 function createUnspacedTree() {
     console.log("createUnspacedTree Ver. Probably Done")
 
-    // Create the tree and add the row to it
+    // Create the tree and add it to the container
     tree = document.createElement('div')
     tree.id = "tree"
     treeContainer = document.querySelector('#treeContainer')
     treeContainer.append(tree)
 
     // Loop through the rows
-    $.each(siblings, function(key, val) {
-        i = parseInt(key)
-
+    maxSibHeight = maxHeight(siblings)
+    for (i = 0; i <= maxSibHeight; i++) {
         // Create the row element where all of the blocks and spaces will be stored
         row = document.createElement('div')
         row.id = 'row-' + i
         row.classList.add('row')
-        if (i == 0 || i == siblings.length-1) {
+        if (i == 0 || i == maxSibHeight)
             row.classList.add('end')
-        }
         tree.append(row)
 
         // Loop through the siblings in this row
-        $.each(val, function(sibName, sib) {
+        thisHeightSibs = siblings.filter(sib => sib.height == i)
+        thisHeightSibs.forEach(sib => {
             // Create a block where all the stuff for an individual sibling is held
             block = document.createElement('div')
             block.classList.add('block')
-            block.id = cleanStr(sibName)
+            block.id = cleanStr(sib.name)
             row.append(block)
 
             // Get a class name from the sib's house
@@ -165,7 +164,7 @@ function createUnspacedTree() {
                 block.append(botLine)
             }
         })
-    })
+    }
 }
 
 // Spaces the tree correctly
@@ -174,13 +173,15 @@ function spaceTree() {
     prevEnd = 0
     blockMargin = settings.sizes['blockMargin']
     treeMarginLeft = settings.sizes['treeMarginLeft']
-    $.each(siblings[0], function(sibName, sib) {
+
+    heightZeroSibs = siblings.filter(thisSib => thisSib.height == 0)
+    heightZeroSibs.forEach(sib => {
         calculateRelativePositions(sib)
 
         // Put siblings at height 0 in the correct position*
         position = 0
-        $.each(siblings[0], function(prevSibName, prevSib) {
-            if (prevSibName == sibName) {
+        heightZeroSibs.forEach(prevSib => {
+            if (prevSib.name == sib.name) {
                 position = Math.max(sib.branchWidths[0][0] + blockMargin, position)
                 return false
             }
@@ -189,7 +190,7 @@ function spaceTree() {
         sib.position = Math.floor(position)
 
         // *Prevent boxes from going negative
-        sib.branchWidths.forEach(function(widths, height) {
+        sib.branchWidths.forEach((widths, height) => {
             if (widths[0] + sib.position < blockMargin) sib.position = blockMargin - widths[0]
         })
 
@@ -204,9 +205,8 @@ function spaceTree() {
         prevEnd = sib.position + sib.branchWidths[0][1]
     })
 
-    $.each(siblings, function(height, row) {
-        if (height == 0) return
-
+    maxSibHeight = maxHeight(siblings)
+    for (i = 1; i <= maxSibHeight; i++) {
         prevSib = {
             position: 0,
             height: 0,
@@ -214,7 +214,8 @@ function spaceTree() {
         }
         prevEnd = 0
 
-        $.each(row, function(sibName, sib) {
+        thisRowSibs = siblings.fliter(thisSib => thisSib.height == i)
+        thisRowSibs.forEach(sib => {
             space = sib.position - prevEnd + sib.branchWidths[0][0]
 
             sibBlockName = '#' + cleanStr(sib.name)
@@ -224,7 +225,8 @@ function spaceTree() {
             prevSib = sib
             prevEnd = sibBlock.getBoundingClientRect().right - treeMarginLeft
         })
-    })
+    }
+
     console.log(siblings)
 }
 
@@ -235,7 +237,8 @@ function drawAcrossLines() {
 
     tree = document.querySelector('#tree')
 
-    $.each(siblings, function(height, row) {
+    maxSibHeight = maxHeight(siblings)
+    for (height = 0; height < maxSibHeight; height++) {
         prevEnd = 0
 
         divRow = document.querySelector('#row-' + height)
@@ -244,8 +247,8 @@ function drawAcrossLines() {
         divAcross.classList.add("across")
         tree.insertBefore(divAcross, divRow.nextSibling)
 
-        if (parseInt(height)+1 >= Object.keys(siblings).length) return false
-        $.each(row, function(idx, sib) {
+        thisRowSibs = siblings.fliter(thisSib => thisSib.height == height)
+        thisRowSibs.forEach(sib => {
             if (sib.littleNames.length == 1) {
                 little = getLittle(sib, 0)
 
@@ -272,5 +275,5 @@ function drawAcrossLines() {
 
             prevEnd += leftSpace + lineWidth
         })
-    })
+    }
 }

@@ -60,7 +60,7 @@ function placeSiblings(result) {
     console.log(`${numRows} siblings retrieved.`)
 
     // Put all siblings into a JSON structure. This only works if the sheet is properly sorted and there are no spelling errors.
-    siblings = {'0': {}}
+    siblings = []
     for (x = 0; x < result.values.length; x++) {
         sibJSON = sibRowToJSON(result.values[x])
         // If the sib has no big, they're at height 0.
@@ -75,73 +75,48 @@ function placeSiblings(result) {
 
             // Place them in the structure at height 0
             sibJSON.height = 0
-            siblings['0'][sibJSON.name] = sibJSON
+            siblings.push(sibJSON)
         }
         else {
-            found = false
+            // Find the sib's big
+            bigSib = siblings.find(sib => sib.name == sibJSON.bigName)
+            if (bigSib !== undefined) {
+                // If they have no house, inherit their big's, otherwise, they're a founder
+                if (sibJSON.house === null) sibJSON.house = bigSib.house
+                else sibJSON.tags.push("Founder")
 
-            // Scan iteratively through each structure level for the sib's big
-            $.each(siblings, function(key, val) {
-                i = parseInt(key)
-                //console.log("key is: " + key + " and i is: " + i)
-                if (val.hasOwnProperty(sibJSON.bigName)) {
-                    //console.log(sibJSON.name + "'s big is in this layer!")
-                    found = true
+                // Add themselves to their big's list of littles
+                bigSib.littleNames.push(sibJSON.name)
 
-                    // Create a new level if necessary
-                    if (!siblings.hasOwnProperty(i+1)) {
-                        //console.log("Creating new layer: " + (i+1))
-                        siblings[i+1] = {}
-                        //console.log("Siblings is now: " + JSON.stringify(siblings))
-                    }
-
-                    // If they have no house, inherit their big's, otherwise, they're a founder
-                    if (sibJSON.house === null) sibJSON.house = val[sibJSON.bigName].house
-                    else sibJSON.tags.push("Founder")
-
-                    // Add themselves to their big's list of littles
-                    val[sibJSON.bigName].littleNames.push(sibJSON.name)
-
-                    // Place them in the structure at the level just below their big
-                    sibJSON.height = i+1
-                    siblings[i+1][sibJSON.name] = sibJSON
-                    return false
-                } //else console.log(sibJSON.name + "'s big is not in this layer.")
-            })
+                // Put em in the array!
+                sibJSON.height = bigSib.height+1
+                siblings.push(sibJSON)
+            }
 
             // There has been some error or misspelling.
-            if (!found) {
-                // Create a new level if necessary
-                if (!siblings.hasOwnProperty('-1')) {
-                    console.log("Creating error layer.")
-                    siblings['-1'] = {}
-                }
-
-                // If they have no house, inherit their big's, otherwise, they're a founder
+            else {
+                // If they have no house, inherit their big's, otherwise, they're FoLS
                 if (sibJSON.house === null) sibJSON.house = "Field of Lost Souls"
                 else sibJSON.tags.push("Founder")
 
-                // Place them in the structure at height -1
+                // Put em in the array! But at -1.....
                 sibJSON.height = -1
-                siblings['-1'][sibJSON.name] = sibJSON
+                siblings.push(sibJSON)
+
+                console.log("Something went wrong and " + sibJSON.name + " could not find their big, " + sibJSON.bigName)
             }
         }
     }
 
     // Sorts siblings into the order they should appear in on the tree.
-    $.each(siblings, function(key, val) {
-        nextRow = parseInt(key) + 1
-        $.each(val, function(sibName, sib) {
-            sib.littleNames.forEach(function(littleName) {
-                little = siblings[nextRow][littleName]
-                delete siblings[nextRow][littleName]
-                siblings[nextRow][littleName] = little
-            })
-        })
-    })
+    function recursiveSort(sibA, sibB) {
+        if (sibA.height != sibB.height) return sibA.height < sibB.height ? -1 : 1
+        else if (sibA.height == 0 || sibA.bigName == sibB.bigName) return sibA.name < sibB.name ? -1 : 1
+        else return recursiveSort(getBig(sibA), getBig(sibB))
+    }
+    siblings.sort(recursiveSort)
 
     console.log("Siblings:")
-    console.log(JSON.stringify(siblings))
     console.log(siblings)
 }
 

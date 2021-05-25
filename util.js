@@ -69,12 +69,19 @@ function pledgeClassToSymbols(pledgeClassNumber) {
 
 // Returns a little's big's JSON
 function getBig(sib) {
-    return siblings[sib.height-1][sib.bigName]
+    return siblings.find(sibling => sibling.name == sib.bigName)
 }
 
 // Returns a big's little's JSON from their index
 function getLittle(big, littleIndex) {
-    return siblings[big.height+1][big.littleNames[littleIndex]]
+    return siblings.find(sibling => sibling.name == big.littleNames[littleIndex])
+}
+
+// Returns the height of the furthest-down sibling.
+function maxHeight(sibArray) {
+    height = 0
+    while (sibArray.some(sib => sib.height > height)) height++
+    return height
 }
 
 // Determines the distance of separation needed to make two siblings touch
