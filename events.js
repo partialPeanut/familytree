@@ -53,7 +53,7 @@ function addNameClicker(ele, sib) {
 
         setTimeout(function() {
             ele.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
-        }, 360)
+        }, 0)
     }
 
     ele.addEventListener('click', clickedNameHandler)
@@ -63,7 +63,9 @@ function addNameClicker(ele, sib) {
 function addTagClicker(ele, tag) {
     const clickedTagHandler = function(e) {
         displayTagInfo(tag)
-        ele.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+        setTimeout(function() {
+            ele.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+        }, 0)
     }
 
     ele.addEventListener('click', clickedTagHandler)
