@@ -180,12 +180,13 @@ function spaceTree() {
 
         // Put siblings at height 0 in the correct position*
         position = 0
-        heightZeroSibs.forEach(prevSib => {
+        heightZeroSibs.every(prevSib => {
             if (prevSib.name == sib.name) {
                 position = Math.max(sib.branchWidths[0][0] + blockMargin, position)
                 return false
             }
             else position = Math.max(prevSib.position + distToTouch(prevSib, sib) + blockMargin, position)
+            return true
         })
         sib.position = Math.floor(position)
 
@@ -214,7 +215,7 @@ function spaceTree() {
         }
         prevEnd = 0
 
-        thisRowSibs = siblings.fliter(thisSib => thisSib.height == i)
+        thisRowSibs = siblings.filter(thisSib => thisSib.height == i)
         thisRowSibs.forEach(sib => {
             space = sib.position - prevEnd + sib.branchWidths[0][0]
 

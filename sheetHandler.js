@@ -111,7 +111,10 @@ function placeSiblings(result) {
     // Sorts siblings into the order they should appear in on the tree.
     function recursiveSort(sibA, sibB) {
         if (sibA.height != sibB.height) return sibA.height < sibB.height ? -1 : 1
-        else if (sibA.height == 0 || sibA.bigName == sibB.bigName) return sibA.name < sibB.name ? -1 : 1
+        else if (sibA.height == 0 || sibA.bigName == sibB.bigName) {
+            if (sibA.pledgeClassNumber != sibB.pledgeClassNumber) return sibA.pledgeClassNumber - sibB.pledgeClassNumber
+            else return sibA.name < sibB.name ? -1 : 1
+        }
         else return recursiveSort(getBig(sibA), getBig(sibB))
     }
     siblings.sort(recursiveSort)
