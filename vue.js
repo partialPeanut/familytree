@@ -12,7 +12,7 @@ function loadVue() {
             tabHistory: [{
                 tabType: 'tree',
                 name: 'Name',
-                imgSrc: 'img/gay.png',
+                imgSrc: 'https://drive.google.com/thumbnail?id=1pIIIWQAERbpfE7mdgzFOvIzZnF7RKVjs',
                 description: 'Description',
                 pledgeClass: 'Pledge Class',
                 house: 'House',

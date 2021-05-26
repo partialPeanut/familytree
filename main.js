@@ -5,7 +5,7 @@ function main() {
     setTimeout(function(){
         spaceTree()
         drawAcrossLines()
-        treeContainer = document.querySelector('#treeContainer')
+        treeContainer = document.querySelector('.container')
         makeDraggable(treeContainer)
        }, 480);
 }
@@ -62,7 +62,7 @@ function createUnspacedTree() {
     // Create the tree and add it to the container
     tree = document.createElement('div')
     tree.classList.add('tree')
-    treeContainer = document.querySelector('#treeContainer')
+    treeContainer = document.querySelector('.container')
     treeContainer.append(tree)
 
     // Loop through the rows

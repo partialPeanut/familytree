@@ -36,6 +36,14 @@ html, body {
 	right: 0;
 }
 
+.fullWidth {
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    overflow: auto;
+}
+
 .tabNavButtonContainer {
     position: absolute;
     top: 0;
@@ -53,14 +61,6 @@ html, body {
     justify-self: end;
 }
 
-.fullWidth {
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    overflow: auto;
-}
-
 .clickable:hover {
     transform: scale(1.1);
     cursor: pointer;
@@ -68,6 +68,8 @@ html, body {
 
 .container {
     cursor: grab;
+    width: 100%;
+    height: 100%;
 }
 .tree{
     width: fit-content;
