@@ -15,7 +15,7 @@ function main() {
 
         createUnspacedTree(treeDiv, container)
         setTimeout(function(){
-            spaceTree(container)
+            spaceTree(treeDiv, container)
             drawAcrossLines(treeDiv, container)
             makeDraggable(containerDiv)
         }, 480);
@@ -211,7 +211,7 @@ function createUnspacedTree(treeDiv) {
 }
 
 // Spaces the tree correctly
-function spaceTree(container) {
+function spaceTree(treeDiv, container) {
     prevEnd = 0
     blockMargin = settings.sizes['blockMargin']
     treeMarginLeft = settings.sizes['treeMarginLeft']
@@ -242,7 +242,7 @@ function spaceTree(container) {
         space = sib.position - prevEnd + sib.branchWidths[0][0]
 
         sibBlockName = '#' + cleanStr(sib.name)
-        sibBlock = document.querySelector(sibBlockName)
+        sibBlock = treeDiv.querySelector(sibBlockName)
         sibBlock.style.marginLeft = space + "px"
 
         prevEnd = sib.position + sib.branchWidths[0][1]
@@ -262,7 +262,7 @@ function spaceTree(container) {
             space = sib.position - prevEnd + sib.branchWidths[0][0]
 
             sibBlockName = '#' + cleanStr(sib.name)
-            sibBlock = document.querySelector(sibBlockName)
+            sibBlock = treeDiv.querySelector(sibBlockName)
             sibBlock.style.marginLeft = space + "px"
 
             prevSib = sib
@@ -282,7 +282,7 @@ function drawAcrossLines(treeDiv, container) {
     for (height = 0; height < maxSibHeight; height++) {
         prevEnd = 0
 
-        divRow = document.querySelector('#row-' + height)
+        divRow = treeDiv.querySelector('#row-' + height)
         divAcross = document.createElement("div")
         divAcross.id = "across-" + height
         divAcross.classList.add("across")
