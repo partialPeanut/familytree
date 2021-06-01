@@ -84,8 +84,17 @@ html, body {
     overflow: auto;
 }
 .resizer {
-    min-width: 3px;
-    min-height: 3px;
+    min-width: 6px;
+    min-height: 6px;
+}
+.resizer:hover {
+    background-color: black;
+}
+.resizer [resize-direction="horizontal"] {
+    cursor: col-resize;
+}
+.resizer [resize-direction="vertical"] {
+    cursor: row-resize;
 }
 
 .treeContainer {
