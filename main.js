@@ -136,6 +136,8 @@ function createUnspacedTree(container) {
             block.id = cleanStr(sib.name)
             row.append(block)
 
+            sib.div = block
+
             // Get a class name from the sib's house
             houseClean = cleanStr(sib.house)
 
@@ -144,7 +146,7 @@ function createUnspacedTree(container) {
                 topLine = document.createElement('div')
                 topLine.classList.add('line')
                 topLine.classList.add('vert')
-                topLine.classList.add(cleanStr(getBig(sib).house))
+                topLine.classList.add(cleanStr(getBig(container, sib).house))
                 block.append(topLine)
             }
 
@@ -228,7 +230,7 @@ function spaceTree(container) {
 
     heightZeroSibs = container.siblings.filter(thisSib => thisSib.height == 0)
     heightZeroSibs.forEach(sib => {
-        calculateRelativePositions(sib)
+        calculateRelativePositions(container, sib)
 
         // Put siblings at height 0 in the correct position*
         position = 0
@@ -247,12 +249,11 @@ function spaceTree(container) {
             if (widths[0] + sib.position < blockMargin) sib.position = blockMargin - widths[0]
         })
 
-        setLittleAbsolutePositions(sib)
+        setLittleAbsolutePositions(container, sib)
 
         space = sib.position - prevEnd + sib.branchWidths[0][0]
 
-        sibBlockName = '#' + cleanStr(sib.name)
-        sibBlock = treeDiv.querySelector(sibBlockName)
+        sibBlock = sib.div
         sibBlock.style.marginLeft = space + "px"
 
         prevEnd = sib.position + sib.branchWidths[0][1]
@@ -271,8 +272,7 @@ function spaceTree(container) {
         thisRowSibs.forEach(sib => {
             space = sib.position - prevEnd + sib.branchWidths[0][0]
 
-            sibBlockName = '#' + cleanStr(sib.name)
-            sibBlock = treeDiv.querySelector(sibBlockName)
+            sibBlock = sib.div
             sibBlock.style.marginLeft = space + "px"
 
             prevSib = sib
@@ -304,14 +304,14 @@ function drawAcrossLines(container) {
         thisRowSibs = container.siblings.filter(thisSib => thisSib.height == height)
         thisRowSibs.forEach(sib => {
             if (sib.littleNames.length == 1) {
-                little = getLittle(sib, 0)
+                little = getLittle(container, sib, 0)
 
                 leftSpace = little.position - prevEnd - lineWeight/2
                 lineWidth = lineWeight
             }
             else if (sib.littleNames.length > 1) {
-                firstLittle = getLittle(sib, 0)
-                lastLittle = getLittle(sib, sib.littleNames.length-1)
+                firstLittle = getLittle(container, sib, 0)
+                lastLittle = getLittle(container, sib, sib.littleNames.length-1)
 
                 leftSpace = firstLittle.position - prevEnd - lineWeight/2
                 lineWidth = lastLittle.position - firstLittle.position + lineWeight

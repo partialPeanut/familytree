@@ -79,13 +79,13 @@ function pledgeClassToSymbols(pledgeClassNumber) {
 }
 
 // Returns a little's big's JSON
-function getBig(sib) {
-    return siblings.find(sibling => sibling.name == sib.bigName)
+function getBig(container, sib) {
+    return container.siblings.find(sibling => sibling.name == sib.bigName)
 }
 
 // Returns a big's little's JSON from their index
-function getLittle(big, littleIndex) {
-    return siblings.find(sibling => sibling.name == big.littleNames[littleIndex])
+function getLittle(container, big, littleIndex) {
+    return container.siblings.find(sibling => sibling.name == big.littleNames[littleIndex])
 }
 
 // Returns the maximum value of a key in an array of JSONs.
@@ -121,7 +121,7 @@ function distToTouch(sibLeft, sibRight) {
 }
 
 // Evenly spaces all littles between two "cap" littles
-function evenSpacing(big, leftCap, rightCap) {
+function evenSpacing(container, big, leftCap, rightCap) {
     capDiff = rightCap - leftCap
     if (capDiff == 1) {
         console.log("Something's gone horribly wrong with the evenSpacing thing")
@@ -129,9 +129,9 @@ function evenSpacing(big, leftCap, rightCap) {
     }
 
     // Do a bunch of calculating
-    rightestMiddleLittle = getLittle(big, rightCap-1)
+    rightestMiddleLittle = getLittle(container, big, rightCap-1)
     rightestMiddlePos = big.littleRelPos[rightCap-1]
-    rightLittle = getLittle(big, rightCap)
+    rightLittle = getLittle(container, big, rightCap)
     rightPos = big.littleRelPos[rightCap]
     gap = rightPos + rightLittle.branchWidths[0][0] - rightestMiddlePos - rightestMiddleLittle.branchWidths[0][1] - settings.sizes['blockMargin']
 
@@ -145,11 +145,11 @@ function evenSpacing(big, leftCap, rightCap) {
 }
 
 // Stores the corrected relative positions and hitboxes of a sib's descendants.
-function calculateRelativePositions(sib) {
-    thisBlockName = '#' + cleanStr(sib.name)
-    thisW = $(thisBlockName).width()
+function calculateRelativePositions(container, sib) {
+    thisBlock = sib.div
+    thisW = $(thisBlock).width()
     thisW = Math.ceil(thisW)
-    $(thisBlockName).width(thisW)
+    $(thisBlock).width(thisW)
 
     sib.width = thisW
     sib.branchWidths = [[]]
@@ -159,12 +159,12 @@ function calculateRelativePositions(sib) {
     // If has no littles, return, else do recursion
     if (sib.littleNames.length == 0) return
     else sib.littleNames.forEach(function(littleName, idx) {
-        calculateRelativePositions(getLittle(sib, idx))
+        calculateRelativePositions(container, getLittle(container, sib, idx))
     })
 
     // Do simple case of one little
     if (sib.littleNames.length == 1) {
-        little = getLittle(sib, 0)
+        little = getLittle(container, sib, 0)
         sib.branchWidths = sib.branchWidths.concat(little.branchWidths)
         return
     }
@@ -173,12 +173,12 @@ function calculateRelativePositions(sib) {
     // Loop through other littles and determine the necessary distance from each previous other little
     sib.littleNames.forEach(function(littleName, idx) {
         if (idx == 0) return
-        little = getLittle(sib, idx)
+        little = getLittle(container, sib, idx)
 
         pos = 0
         limiter = idx-1
         for (jdx = idx-1; jdx >= 0; jdx--) {
-            testLittle = getLittle(sib, jdx)
+            testLittle = getLittle(container, sib, jdx)
             thisPos = Math.floor(sib.littleRelPos[jdx] + distToTouch(testLittle, little) + settings.sizes['blockMargin'])
 
             // This little is indeed pushed back by a prior little
@@ -192,7 +192,7 @@ function calculateRelativePositions(sib) {
 
         // If it can, evenly space littles that have wiggle room
         if (limiter < idx-1) {
-            evenSpacing(sib, limiter, idx)
+            evenSpacing(container, sib, limiter, idx)
         }
     })
 
@@ -218,7 +218,7 @@ function calculateRelativePositions(sib) {
     // Determine the deepest this rabbit hole goes
     longestLength = 0
     sib.littleNames.forEach(function(littleName, idx) {
-        little = getLittle(sib, idx)
+        little = getLittle(container, sib, idx)
         longestLength = Math.max(longestLength, little.branchWidths.length)
     })
 
@@ -227,18 +227,18 @@ function calculateRelativePositions(sib) {
     rightIdx = sib.littleNames.length-1
     for (i = 0; i < longestLength; i++) {
         // Find the leftest little with a descendent of this height and get how far left it is
-        leftLittle = getLittle(sib, leftIdx)
+        leftLittle = getLittle(container, sib, leftIdx)
         while (leftLittle.branchWidths.length <= i) {
             leftIdx++
-            leftLittle = getLittle(sib, leftIdx)
+            leftLittle = getLittle(container, sib, leftIdx)
         }
         leftWidth = leftLittle.branchWidths[i][0] + sib.littleRelPos[leftIdx]
 
         // Find the rightest little with a descendent of this height and get how far right it is
-        rightLittle = getLittle(sib, rightIdx)
+        rightLittle = getLittle(container, sib, rightIdx)
         while (rightLittle.branchWidths.length <= i) {
             rightIdx--
-            rightLittle = getLittle(sib, rightIdx)
+            rightLittle = getLittle(container, sib, rightIdx)
         }
         rightWidth = rightLittle.branchWidths[i][1] + sib.littleRelPos[rightIdx]
 
@@ -248,13 +248,13 @@ function calculateRelativePositions(sib) {
 }
 
 // Sets littles' absolute positions recursively
-function setLittleAbsolutePositions(sib) {
+function setLittleAbsolutePositions(container, sib) {
     sib.littleNames.forEach(function(littleName, idx) {
-        little = getLittle(sib, idx)
+        little = getLittle(container, sib, idx)
         relPos = sib.littleRelPos[idx]
 
         little.position = Math.floor(sib.position + relPos)
-        setLittleAbsolutePositions(little)
+        setLittleAbsolutePositions(container, little)
     })
 }
 
