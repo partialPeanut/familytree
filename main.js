@@ -8,49 +8,7 @@ function main() {
 
     // Loops through every container and builds individual trees for each
     containers.forEach(container => {
-        function belongsUnaltered(sib) {
-            if (sib !== undefined) return container.houses.includes(sib.house)
-            else return false
-        }
-        // Copies and edits the set of siblings in each container
-        // Filters the set of all siblings down to the siblings that belong in this container
-        filteredSibs = siblings.filter(sib => {
-            if (belongsUnaltered(sib) || belongsUnaltered(getBig(siblings, sib))) return true
-            else {
-                sib.littleNames.forEach((littleName, idx) => {
-                    little = getLittle(siblings, sib, idx)
-                    if (belongsUnaltered(sib)) return true
-                })
-                return false
-            }
-        })
-        // Launders the JSON to make it a copy rather than a reference
-        newFilteredSibs = JSON.parse(JSON.stringify(filteredSibs))
-        // Edits siblings into stubs if necessary
-        container.siblings = newFilteredSibs.map(sib => {
-            if (belongsUnaltered(sib)) return sib
-            else if (belongsUnaltered(getBig(siblings, sib))) return {
-                name: sib.name,
-                bigName: sib.bigName,
-                littleNames: [],
-                house: sib.house,
-                tags: ['stub']
-            }
-            else {
-                validLittleNames = []
-                sib.littleNames.forEach((littleName, idx) => {
-                    little = getLittle(siblings, sib, idx)
-                    if (belongsUnaltered(sib)) validLittleNames.push(littleName)
-                })
-                return {
-                    name: sib.name,
-                    bigName: null,
-                    littleNames: validLittleNames,
-                    house: sib.house,
-                    tags: ['stub']
-                }
-            }
-        })
+        copySiblingSet(container)
 
         createUnspacedTree(container)
         setTimeout(function(){
@@ -152,6 +110,53 @@ function createContainerDivs() {
             thisContainer.treeDiv = treeDiv
         }
     }
+}
+
+// Copies and edits the set of siblings to a container
+function copySiblingSet(container) {
+    function belongsUnaltered(sib) {
+        if (sib !== undefined) return container.houses.includes(sib.house)
+        else return false
+    }
+
+    // Filters the set of all siblings down to the siblings that belong in this container
+    filteredSibs = siblings.filter(sib => {
+        if (belongsUnaltered(sib) || belongsUnaltered(getBig(siblings, sib))) return true
+        else {
+            sib.littleNames.forEach((littleName, idx) => {
+                little = getLittle(siblings, sib, idx)
+                if (belongsUnaltered(little)) return true
+            })
+            return false
+        }
+    })
+    // Launders the JSON to make it a copy rather than a reference
+    newFilteredSibs = JSON.parse(JSON.stringify(filteredSibs))
+    // Edits siblings into stubs if necessary
+    container.siblings = newFilteredSibs.map(sib => {
+        if (belongsUnaltered(sib)) return sib
+        else if (belongsUnaltered(getBig(siblings, sib))) return {
+            name: sib.name,
+            bigName: sib.bigName,
+            littleNames: [],
+            house: sib.house,
+            tags: ['stub']
+        }
+        else {
+            validLittleNames = []
+            sib.littleNames.forEach((littleName, idx) => {
+                little = getLittle(siblings, sib, idx)
+                if (belongsUnaltered(little)) validLittleNames.push(littleName)
+            })
+            return {
+                name: sib.name,
+                bigName: null,
+                littleNames: validLittleNames,
+                house: sib.house,
+                tags: ['stub']
+            }
+        }
+    })
 }
 
 // Places all blocks roughly down, in the right order but not correctly positioned
