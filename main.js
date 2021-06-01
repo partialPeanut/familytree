@@ -21,6 +21,8 @@ function main() {
 
 // Apply settings JSON to stylesheet and other places
 function applySettings() {
+    console.log(`Applying settings...`)
+
     // Size settings
     $.each(settings.sizes, function(prop, val) {
         document.body.style.setProperty('--' + prop, val + 'px')
@@ -66,6 +68,8 @@ function applySettings() {
 
 // Create a whole fuck ton of nested divs to hold all the trees
 function createContainerDivs() {
+    console.log(`Creating all container divs...`)
+
     crc = document.querySelector('#containerRowContainer')
     containerRows = maxValue(containers, 'row') + 1
     for (i = 0; i < containerRows; i++) {
@@ -114,6 +118,8 @@ function createContainerDivs() {
 
 // Copies and edits the set of siblings to a container
 function copySiblingSet(container) {
+    console.log(`Copying the sibling set for container ${container.name}...`)
+
     function belongsUnaltered(sib) {
         if (sib !== undefined) return container.houses.includes(sib.house)
         else return false
@@ -145,7 +151,8 @@ function copySiblingSet(container) {
             bigName: sib.bigName,
             littleNames: [],
             house: sib.house,
-            tags: ['stub']
+            tags: ['stub'],
+            height: sib.height
         }
         else {
             validLittleNames = []
@@ -158,7 +165,8 @@ function copySiblingSet(container) {
                 bigName: null,
                 littleNames: validLittleNames,
                 house: sib.house,
-                tags: ['stub']
+                tags: ['stub'],
+                height: sib.height
             }
         }
     })
@@ -166,6 +174,7 @@ function copySiblingSet(container) {
 
 // Places all blocks roughly down, in the right order but not correctly positioned
 function createUnspacedTree(container) {
+    console.log(`Creating the unspaced tree for ${container.name}...`)
     treeDiv = container.treeDiv
 
     // Loop through the rows
@@ -276,6 +285,7 @@ function createUnspacedTree(container) {
 
 // Spaces the tree correctly
 function spaceTree(container) {
+    console.log(`Spacing the tree for container ${container.name}...`)
     treeDiv = container.treeDiv
 
     prevEnd = 0
@@ -340,9 +350,9 @@ function spaceTree(container) {
 
 // Draws the lines that connect littles across to their big
 function drawAcrossLines(container) {
+    console.log(`Drawing across lines for container ${container.name}...`)
     treeDiv = container.treeDiv
 
-    console.log("drawAcrossLines Ver. Fucking Gucci")
     lineWeight = settings.sizes['lineWeight']
 
     maxSibHeight = maxValue(container.siblings, 'height')

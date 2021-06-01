@@ -118,7 +118,7 @@ function placeSiblings(result) {
     }
     siblings.sort(recursiveSort)
 
-    console.log("Siblings:")
+    console.log("All Siblings:")
     console.log(siblings)
 }
 
@@ -133,7 +133,6 @@ function parseTags(result) {
     settings.tagData = defaultTagData
 
     console.log("Tags:")
-    console.log(JSON.stringify(settings.tagData))
     console.log(settings.tagData)
 }
 
@@ -155,7 +154,6 @@ function setDefaultSizeSettings(result) {
     settings.sizes = defaultSizes
 
     console.log("Size Settings:")
-    console.log(JSON.stringify(settings.sizes))
     console.log(settings.sizes)
 }
 
