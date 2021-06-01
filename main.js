@@ -7,7 +7,7 @@ function main() {
     allResizers.forEach(resizer => makeResizer(resizer))
 
     containers.forEach(container => {
-        filteredSibs = siblings.filter(sib => container.houses.find(sib.house) !== undefined)
+        filteredSibs = siblings.filter(sib => container.houses.find(sib.house !== undefined))
         container.siblings = JSON.parse(JSON.stringify(filteredSibs))
 
         createUnspacedTree(container)
