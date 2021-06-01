@@ -85,7 +85,7 @@ function getBig(sibSet, sib) {
 
 // Returns a big's little's JSON from their index
 function getLittle(sibSet, big, littleIndex) {
-    return sibSet.siblings.find(sibling => sibling.name == big.littleNames[littleIndex])
+    return sibSet.find(sibling => sibling.name == big.littleNames[littleIndex])
 }
 
 // Returns the maximum value of a key in an array of JSONs.
