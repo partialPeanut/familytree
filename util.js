@@ -33,6 +33,17 @@ function tagRowToJSON(row) {
     return tagJSON
 }
 
+// Converts a single container into a JSON format
+function contaierRowToJSON(row) {
+    contJSON = {}
+    contJSON.name = row[0]
+    contJSON.row = parseInt(row[1])
+    contJSON.column = parseInt(row[2])
+    contJSON.houses = row[3].split(';')
+
+    return contJSON
+}
+
 // Prepares a string to be used as a class name
 function cleanStr(string) {
     newStr = string.replace(/ |\'|\"|\.|\+|@/g, '')
@@ -77,11 +88,11 @@ function getLittle(big, littleIndex) {
     return siblings.find(sibling => sibling.name == big.littleNames[littleIndex])
 }
 
-// Returns the height of the furthest-down sibling.
-function maxHeight(sibArray) {
-    height = 0
-    while (sibArray.some(sib => sib.height > height)) height++
-    return height
+// Returns the maximum value of a key in an array of JSONs.
+function maxValue(JSONArray, key) {
+    value = 0
+    while (JSONArray.some(JSON => JSON[key] > value)) value++
+    return value
 }
 
 // Determines the distance of separation needed to make two siblings touch

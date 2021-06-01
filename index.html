@@ -27,10 +27,9 @@
     <!-- All visible items -->
     <div id="app" v-cloak>
         <!-- The tabs with the tree in it, autofilled by script -->
-        <div id="treeContainerContainer" v-if="getDisplayTab() != 'mainMenu'" :class="{ fullWidth: getDisplayTab() == 'tree', col: getDisplayTab() != 'tree', left: getDisplayTab() != 'tree' }">
-            <div id="treeContainer" class="container"></div>
-        </div>
-        
+        <div id="containerRowContainer" v-if="getDisplayTab() != 'mainMenu'" :class="{ fullWidth: getDisplayTab() == 'tree', col: getDisplayTab() != 'tree', left: getDisplayTab() != 'tree' }"></div>
+        <div class="resizer" resize-direction="horizontal"></div>
+
         <!-- All versions of things that can pop up on the right -->
         <div id="rightColContainer" v-if="getDisplayTab() != 'tree' && getDisplayTab() != 'mainMenu'" class="col right">
             <!-- Buttons -->

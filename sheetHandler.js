@@ -39,13 +39,14 @@ function getSheetValues() {
     // Get the spreadsheet bits and do stuff to em
     gapi.client.sheets.spreadsheets.values.batchGet({
         spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
-        ranges: ['Siblings!A2:G', 'Tag Settings!A2:M', 'Size Settings!A2:B']
+        ranges: ['Siblings!A2:G', 'Size Settings!A2:B', 'Tag Settings!A2:M', 'Container Settings!A2:B']
       }).then((response) => {
         ranges = response.result.valueRanges
         settings = {}
-        parseTags(ranges[1])
+        parseTags(ranges[2])
         placeSiblings(ranges[0])
-        setDefaultSizeSettings(ranges[2])
+        setDefaultSizeSettings(ranges[1])
+        createContainerSettings(ranges[3])
 
         main()
       })
@@ -53,8 +54,6 @@ function getSheetValues() {
 
 // Get raw spreadsheet data and convert it into a dope-ass data structure
 function placeSiblings(result) {
-    console.log("placeSiblings Ver. All Done, I Fuckin' Hope")
-    
     // Log the number of siblings
     var numRows = result.values ? result.values.length : 0
     console.log(`${numRows} siblings retrieved.`)
@@ -65,11 +64,11 @@ function placeSiblings(result) {
         sibJSON = sibRowToJSON(result.values[x])
         // If the sib has no big, they're at height 0.
         if (sibJSON.bigName === null) {
-            // If they have no house, they're in the Lone Wolves or FoLS, otherwise, they're a founder
+            // If they have no house, they're in the Lone Wolves or Asphodel, otherwise, they're a founder
             if (sibJSON.house === null) {
                 //console.log(sibJSON.pledgeClass)
                 if (sibJSON.pledgeClass == "Alpha") sibJSON.house = "Lone Wolves"
-                else sibJSON.house = "Field of Lost Souls"
+                else sibJSON.house = "Asphodel Clan"
             }
             else sibJSON.tags.push("Founder")
 
@@ -95,8 +94,8 @@ function placeSiblings(result) {
 
             // There has been some error or misspelling.
             else {
-                // If they have no house, inherit their big's, otherwise, they're FoLS
-                if (sibJSON.house === null) sibJSON.house = "Field of Lost Souls"
+                // If they have no house, inherit their big's, otherwise, they're Asphodel
+                if (sibJSON.house === null) sibJSON.house = "Asphodel Clan"
                 else sibJSON.tags.push("Founder")
 
                 // Put em in the array! But at -1.....
@@ -128,7 +127,7 @@ function parseTags(result) {
     defaultTagData = {}
     result.values.forEach(function(row) {
         tag = tagRowToJSON(row)
-        defaultTagData[cleanStr(row[0])] = tag
+        defaultTagData[tag.name] = tag
     })
 
     settings.tagData = defaultTagData
@@ -138,7 +137,7 @@ function parseTags(result) {
     console.log(settings.tagData)
 }
 
-// Apply default settings given by spreadsheet
+// Apply default size settings given by spreadsheet
 function setDefaultSizeSettings(result) {
     defaultSizes = {}
     docStyle = document.body.style
@@ -158,4 +157,19 @@ function setDefaultSizeSettings(result) {
     console.log("Size Settings:")
     console.log(JSON.stringify(settings.sizes))
     console.log(settings.sizes)
+}
+
+// Apply default container settings given by spreadsheet
+function createContainerSettings(result) {
+    containers = []
+    docStyle = document.body.style
+    result.values.forEach(function(row) {
+        container = contaierRowToJSON(row)
+        containers.push(container)
+    })
+
+    settings.containers = containers
+
+    console.log("Containers:")
+    console.log(settings.containers)
 }
