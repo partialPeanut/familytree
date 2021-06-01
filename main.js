@@ -124,8 +124,10 @@ function copySiblingSet(container) {
         if (belongsUnaltered(sib) || belongsUnaltered(getBig(siblings, sib))) return true
         else {
             sib.littleNames.forEach((littleName, idx) => {
+                console.log(`Testing ${littleName} for above stub rights`)
                 little = getLittle(siblings, sib, idx)
                 if (belongsUnaltered(little)) return true
+                else console.log('Nope.')
             })
             return false
         }
