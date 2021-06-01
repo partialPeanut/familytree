@@ -123,13 +123,16 @@ function copySiblingSet(container) {
     filteredSibs = siblings.filter(sib => {
         if (belongsUnaltered(sib) || belongsUnaltered(getBig(siblings, sib))) return true
         else {
+            found = false
             sib.littleNames.forEach((littleName, idx) => {
-                console.log(`Testing ${littleName} for above stub rights`)
                 little = getLittle(siblings, sib, idx)
-                if (belongsUnaltered(little)) return true
-                else console.log('Nope.')
+                if (belongsUnaltered(little)) {
+                    console.log(`${littleName} granted ${sib.name} above stub rights.`)
+                    found = true
+                    return false
+                }
             })
-            return false
+            return found
         }
     })
     // Launders the JSON to make it a copy rather than a reference
