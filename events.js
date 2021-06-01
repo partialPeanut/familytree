@@ -1,8 +1,10 @@
 // Allows an element to act as a resizer of its two adjacent elements
 function makeResizer(ele) {
+    var x, y, direction, leftSide, leftWidth, leftHeight, rightSide, rightWidth, rightHeight
+
     const mouseDownHandler = function(e) {
-        const x = e.clientX
-        const y = e.clientY
+        x = e.clientX
+        y = e.clientY
 
         direction = ele.getAttribute('resize-direction')
         leftSide = ele.previousElementSibling
@@ -43,7 +45,7 @@ function makeResizer(ele) {
         }
     
         const cursor = direction === 'horizontal' ? 'col-resize' : 'row-resize'
-        resizer.style.cursor = cursor
+        ele.style.cursor = cursor
         document.body.style.cursor = cursor
     
         leftSide.style.userSelect = 'none'
@@ -54,7 +56,7 @@ function makeResizer(ele) {
     }
 
     const mouseUpHandler = function() {
-        resizer.style.removeProperty('cursor')
+        ele.style.removeProperty('cursor')
         document.body.style.removeProperty('cursor')
     
         leftSide.style.removeProperty('user-select')
