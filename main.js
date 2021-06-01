@@ -226,7 +226,7 @@ function spaceTree(container) {
     blockMargin = settings.sizes['blockMargin']
     treeMarginLeft = settings.sizes['treeMarginLeft']
 
-    heightZeroSibs = siblings.filter(thisSib => thisSib.height == 0)
+    heightZeroSibs = container.siblings.filter(thisSib => thisSib.height == 0)
     heightZeroSibs.forEach(sib => {
         calculateRelativePositions(sib)
 
