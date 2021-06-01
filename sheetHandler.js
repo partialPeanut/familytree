@@ -114,7 +114,7 @@ function placeSiblings(result) {
             if (sibA.pledgeClassNumber != sibB.pledgeClassNumber) return sibA.pledgeClassNumber - sibB.pledgeClassNumber
             else return sibA.name < sibB.name ? -1 : 1
         }
-        else return recursiveSort(getBig(sibA), getBig(sibB))
+        else return recursiveSort(getBig(siblings, sibA), getBig(siblings, sibB))
     }
     siblings.sort(recursiveSort)
 

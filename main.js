@@ -146,7 +146,7 @@ function createUnspacedTree(container) {
                 topLine = document.createElement('div')
                 topLine.classList.add('line')
                 topLine.classList.add('vert')
-                topLine.classList.add(cleanStr(getBig(container, sib).house))
+                topLine.classList.add(cleanStr(getBig(container.siblings, sib).house))
                 block.append(topLine)
             }
 

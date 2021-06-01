@@ -79,8 +79,8 @@ function pledgeClassToSymbols(pledgeClassNumber) {
 }
 
 // Returns a little's big's JSON
-function getBig(container, sib) {
-    return container.siblings.find(sibling => sibling.name == sib.bigName)
+function getBig(sibSet, sib) {
+    return sibSet.find(sibling => sibling.name == sib.bigName)
 }
 
 // Returns a big's little's JSON from their index
