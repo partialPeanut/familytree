@@ -7,17 +7,14 @@ function main() {
     allResizers.forEach(resizer => makeResizer(resizer))
 
     containers.forEach(container => {
-        // Create the tree div and add it to the container div
-        treeDiv = document.createElement('div')
-        treeDiv.classList.add('tree')
-        containerDiv = document.querySelector("#tree-container-" + container.row + "-" + container.column)
-        containerDiv.append(treeDiv)
+        filteredSibs = siblings.filter(sib => container.houses.find(sib.house) !== undefined)
+        container.siblings = JSON.parse(JSON.stringify(filteredSibs))
 
-        createUnspacedTree(treeDiv, container)
+        createUnspacedTree(container)
         setTimeout(function(){
-            spaceTree(treeDiv, container)
-            drawAcrossLines(treeDiv, container)
-            makeDraggable(containerDiv)
+            spaceTree(container)
+            drawAcrossLines(container)
+            makeDraggable(container.containerDiv)
         }, 480);
     })
 }
@@ -102,14 +99,25 @@ function createContainerDivs() {
             treeContainerDiv.id = "tree-container-" + i + "-" + j
             treeContainerDiv.classList.add('treeContainer')
             containerColumn.append(treeContainerDiv)
+
+            // Create the tree div and add it to the container div
+            treeDiv = document.createElement('div')
+            treeDiv.classList.add('tree')
+            treeContainerDiv.append(treeDiv)
+
+            thisContainer = containers.find(cont => cont.row == i && cont.column == j)
+            thisContainer.containerDiv = treeContainerDiv
+            thisContainer.treeDiv = treeDiv
         }
     }
 }
 
 // Places all blocks roughly down, in the right order but not correctly positioned
-function createUnspacedTree(treeDiv) {
+function createUnspacedTree(container) {
+    treeDiv = container.treeDiv
+
     // Loop through the rows
-    maxSibHeight = maxValue(siblings, 'height')
+    maxSibHeight = maxValue(container.siblings, 'height')
     for (i = 0; i <= maxSibHeight; i++) {
         // Create the row element where all of the blocks and spaces will be stored
         row = document.createElement('div')
@@ -120,7 +128,7 @@ function createUnspacedTree(treeDiv) {
         treeDiv.append(row)
 
         // Loop through the siblings in this row
-        thisHeightSibs = siblings.filter(sib => sib.height == i)
+        thisHeightSibs = container.siblings.filter(sib => sib.height == i)
         thisHeightSibs.forEach(sib => {
             // Create a block where all the stuff for an individual sibling is held
             block = document.createElement('div')
@@ -211,7 +219,9 @@ function createUnspacedTree(treeDiv) {
 }
 
 // Spaces the tree correctly
-function spaceTree(treeDiv, container) {
+function spaceTree(container) {
+    treeDiv = container.treeDiv
+
     prevEnd = 0
     blockMargin = settings.sizes['blockMargin']
     treeMarginLeft = settings.sizes['treeMarginLeft']
@@ -248,7 +258,7 @@ function spaceTree(treeDiv, container) {
         prevEnd = sib.position + sib.branchWidths[0][1]
     })
 
-    maxSibHeight = maxValue(siblings, 'height')
+    maxSibHeight = maxValue(container.siblings, 'height')
     for (i = 1; i <= maxSibHeight; i++) {
         prevSib = {
             position: 0,
@@ -257,7 +267,7 @@ function spaceTree(treeDiv, container) {
         }
         prevEnd = 0
 
-        thisRowSibs = siblings.filter(thisSib => thisSib.height == i)
+        thisRowSibs = container.siblings.filter(thisSib => thisSib.height == i)
         thisRowSibs.forEach(sib => {
             space = sib.position - prevEnd + sib.branchWidths[0][0]
 
@@ -270,15 +280,18 @@ function spaceTree(treeDiv, container) {
         })
     }
 
-    console.log(siblings)
+    console.log(`Without spacing, container ${container.row}-${container.column} has these siblings:`)
+    console.log(container.siblings)
 }
 
 // Draws the lines that connect littles across to their big
-function drawAcrossLines(treeDiv, container) {
+function drawAcrossLines(container) {
+    treeDiv = container.treeDiv
+
     console.log("drawAcrossLines Ver. Fucking Gucci")
     lineWeight = settings.sizes['lineWeight']
 
-    maxSibHeight = maxValue(siblings, 'height')
+    maxSibHeight = maxValue(container.siblings, 'height')
     for (height = 0; height < maxSibHeight; height++) {
         prevEnd = 0
 
@@ -288,7 +301,7 @@ function drawAcrossLines(treeDiv, container) {
         divAcross.classList.add("across")
         treeDiv.insertBefore(divAcross, divRow.nextSibling)
 
-        thisRowSibs = siblings.filter(thisSib => thisSib.height == height)
+        thisRowSibs = container.siblings.filter(thisSib => thisSib.height == height)
         thisRowSibs.forEach(sib => {
             if (sib.littleNames.length == 1) {
                 little = getLittle(sib, 0)

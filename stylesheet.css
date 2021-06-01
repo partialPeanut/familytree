@@ -75,11 +75,13 @@ html, body {
     width: 100%;
     flex: auto;
     flex-direction: row;
+    overflow: auto;
 }
 .containerColumn {
     display: flex;
     height: 100%;
     flex: auto;
+    overflow: auto;
 }
 .treeContainer {
     cursor: grab;
