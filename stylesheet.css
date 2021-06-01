@@ -83,6 +83,11 @@ html, body {
     flex: auto;
     overflow: auto;
 }
+.resizer {
+    min-width: 3px;
+    min-height: 3px;
+}
+
 .treeContainer {
     cursor: grab;
     width: 100%;
