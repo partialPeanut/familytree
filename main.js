@@ -6,9 +6,48 @@ function main() {
     allResizers = document.querySelectorAll('.resizer')
     allResizers.forEach(resizer => makeResizer(resizer))
 
+    function belongsUnaltered(sib) { container.houses.includes(sib.house) }
+    // Loops through every container and builds individual trees for each
     containers.forEach(container => {
-        filteredSibs = siblings.filter(sib => container.houses.find(house => house == sib.house) !== undefined)
-        container.siblings = JSON.parse(JSON.stringify(filteredSibs))
+        // Copies and edits the set of siblings in each container
+        // Filters the set of all siblings down to the siblings that belong in this container
+        filteredSibs = siblings.filter(sib => {
+            if (belongsUnaltered(sib) || belongsUnaltered(getBig(siblings, sib))) return true
+            else {
+                sib.littleNames.forEach((littleName, idx) => {
+                    little = getLittle(siblings, sib, idx)
+                    if (belongsUnaltered(sib)) return true
+                })
+                return false
+            }
+        })
+        // Launders the JSON to make it a copy rather than a reference
+        newFilteredSibs = JSON.parse(JSON.stringify(filteredSibs))
+        // Edits siblings into stubs if necessary
+        container.siblings = newFilteredSibs.map(sib => {
+            if (belongsUnaltered(sib)) return sib
+            else if (belongsUnaltered(getBig(siblings, sib))) return {
+                name: sib.name,
+                bigName: sib.bigName,
+                littleNames: [],
+                house: sib.house,
+                tags: ['stub']
+            }
+            else {
+                validLittleNames = []
+                sib.littleNames.forEach((littleName, idx) => {
+                    little = getLittle(siblings, sib, idx)
+                    if (belongsUnaltered(sib)) validLittleNames.push(littleName)
+                })
+                return {
+                    name: sib.name,
+                    bigName: null,
+                    littleNames: validLittleNames,
+                    house: sib.house,
+                    tags: ['stub']
+                }
+            }
+        })
 
         createUnspacedTree(container)
         setTimeout(function(){
@@ -169,7 +208,9 @@ function createUnspacedTree(container) {
             })
 
             // The name itself
-            nameName = document.createTextNode(filterInvisText(sib.name) + ' ' + pledgeClassToSymbols(sib.pledgeClassNumber))
+            if (sib.tags.includes('stub')) nameNameName = filterInvisText(sib.house)
+            else nameNameName = filterInvisText(sib.name) + ' ' + pledgeClassToSymbols(sib.pledgeClassNumber)
+            nameName = document.createTextNode(nameNameName)
             nameButton.appendChild(nameName)
 
             // Apply tag effects to nas
@@ -304,14 +345,14 @@ function drawAcrossLines(container) {
         thisRowSibs = container.siblings.filter(thisSib => thisSib.height == height)
         thisRowSibs.forEach(sib => {
             if (sib.littleNames.length == 1) {
-                little = getLittle(container, sib, 0)
+                little = getLittle(container.siblings, sib, 0)
 
                 leftSpace = little.position - prevEnd - lineWeight/2
                 lineWidth = lineWeight
             }
             else if (sib.littleNames.length > 1) {
-                firstLittle = getLittle(container, sib, 0)
-                lastLittle = getLittle(container, sib, sib.littleNames.length-1)
+                firstLittle = getLittle(container.siblings, sib, 0)
+                lastLittle = getLittle(container.siblings, sib, sib.littleNames.length-1)
 
                 leftSpace = firstLittle.position - prevEnd - lineWeight/2
                 lineWidth = lastLittle.position - firstLittle.position + lineWeight

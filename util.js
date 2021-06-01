@@ -84,8 +84,8 @@ function getBig(sibSet, sib) {
 }
 
 // Returns a big's little's JSON from their index
-function getLittle(container, big, littleIndex) {
-    return container.siblings.find(sibling => sibling.name == big.littleNames[littleIndex])
+function getLittle(sibSet, big, littleIndex) {
+    return sibSet.siblings.find(sibling => sibling.name == big.littleNames[littleIndex])
 }
 
 // Returns the maximum value of a key in an array of JSONs.
@@ -129,9 +129,9 @@ function evenSpacing(container, big, leftCap, rightCap) {
     }
 
     // Do a bunch of calculating
-    rightestMiddleLittle = getLittle(container, big, rightCap-1)
+    rightestMiddleLittle = getLittle(container.siblings, big, rightCap-1)
     rightestMiddlePos = big.littleRelPos[rightCap-1]
-    rightLittle = getLittle(container, big, rightCap)
+    rightLittle = getLittle(container.siblings, big, rightCap)
     rightPos = big.littleRelPos[rightCap]
     gap = rightPos + rightLittle.branchWidths[0][0] - rightestMiddlePos - rightestMiddleLittle.branchWidths[0][1] - settings.sizes['blockMargin']
 
@@ -159,12 +159,12 @@ function calculateRelativePositions(container, sib) {
     // If has no littles, return, else do recursion
     if (sib.littleNames.length == 0) return
     else sib.littleNames.forEach(function(littleName, idx) {
-        calculateRelativePositions(container, getLittle(container, sib, idx))
+        calculateRelativePositions(container, getLittle(container.siblings, sib, idx))
     })
 
     // Do simple case of one little
     if (sib.littleNames.length == 1) {
-        little = getLittle(container, sib, 0)
+        little = getLittle(container.siblings, sib, 0)
         sib.branchWidths = sib.branchWidths.concat(little.branchWidths)
         return
     }
@@ -173,12 +173,12 @@ function calculateRelativePositions(container, sib) {
     // Loop through other littles and determine the necessary distance from each previous other little
     sib.littleNames.forEach(function(littleName, idx) {
         if (idx == 0) return
-        little = getLittle(container, sib, idx)
+        little = getLittle(container.siblings, sib, idx)
 
         pos = 0
         limiter = idx-1
         for (jdx = idx-1; jdx >= 0; jdx--) {
-            testLittle = getLittle(container, sib, jdx)
+            testLittle = getLittle(container.siblings, sib, jdx)
             thisPos = Math.floor(sib.littleRelPos[jdx] + distToTouch(testLittle, little) + settings.sizes['blockMargin'])
 
             // This little is indeed pushed back by a prior little
@@ -218,7 +218,7 @@ function calculateRelativePositions(container, sib) {
     // Determine the deepest this rabbit hole goes
     longestLength = 0
     sib.littleNames.forEach(function(littleName, idx) {
-        little = getLittle(container, sib, idx)
+        little = getLittle(container.siblings, sib, idx)
         longestLength = Math.max(longestLength, little.branchWidths.length)
     })
 
@@ -227,18 +227,18 @@ function calculateRelativePositions(container, sib) {
     rightIdx = sib.littleNames.length-1
     for (i = 0; i < longestLength; i++) {
         // Find the leftest little with a descendent of this height and get how far left it is
-        leftLittle = getLittle(container, sib, leftIdx)
+        leftLittle = getLittle(container.siblings, sib, leftIdx)
         while (leftLittle.branchWidths.length <= i) {
             leftIdx++
-            leftLittle = getLittle(container, sib, leftIdx)
+            leftLittle = getLittle(container.siblings, sib, leftIdx)
         }
         leftWidth = leftLittle.branchWidths[i][0] + sib.littleRelPos[leftIdx]
 
         // Find the rightest little with a descendent of this height and get how far right it is
-        rightLittle = getLittle(container, sib, rightIdx)
+        rightLittle = getLittle(container.siblings, sib, rightIdx)
         while (rightLittle.branchWidths.length <= i) {
             rightIdx--
-            rightLittle = getLittle(container, sib, rightIdx)
+            rightLittle = getLittle(container.siblings, sib, rightIdx)
         }
         rightWidth = rightLittle.branchWidths[i][1] + sib.littleRelPos[rightIdx]
 
@@ -250,7 +250,7 @@ function calculateRelativePositions(container, sib) {
 // Sets littles' absolute positions recursively
 function setLittleAbsolutePositions(container, sib) {
     sib.littleNames.forEach(function(littleName, idx) {
-        little = getLittle(container, sib, idx)
+        little = getLittle(container.siblings, sib, idx)
         relPos = sib.littleRelPos[idx]
 
         little.position = Math.floor(sib.position + relPos)
@@ -265,6 +265,7 @@ function showTab(tabData) {
     appElement.tabPosition++
 }
 
+// Goes back one tab in the tab nav
 function goBack() {
     if (appElement.tabPosition == 1) exitTab()
     else {
@@ -273,6 +274,7 @@ function goBack() {
             $('#' + cleanStr(appElement.getTabData().name))[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
     }
 }
+// Goes forward one tab in the tab nav
 function goForward() {
     appElement.tabPosition++
     if (appElement.getDisplayTab() == "nameTab")
