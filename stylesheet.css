@@ -68,14 +68,18 @@ html, body {
 
 #containerRowContainer {
     display: flex;
+    flex-direction: column;
 }
 .containerRow {
     display: flex;
     width: 100%;
+    flex: auto;
+    flex-direction: row;
 }
 .containerColumn {
     display: flex;
     height: 100%;
+    flex: auto;
 }
 .treeContainer {
     cursor: grab;
