@@ -6,7 +6,10 @@ function main() {
     allResizers = document.querySelectorAll('.resizer')
     allResizers.forEach(resizer => makeResizer(resizer))
 
-    function belongsUnaltered(sib) { container.houses.includes(sib.house) }
+    function belongsUnaltered(sib) {
+        if (sib !== undefined) return container.houses.includes(sib.house)
+        else return false
+    }
     // Loops through every container and builds individual trees for each
     containers.forEach(container => {
         // Copies and edits the set of siblings in each container
