@@ -178,13 +178,14 @@ function createUnspacedTree(container) {
     treeDiv = container.treeDiv
 
     // Loop through the rows
+    minSibHeight = minValue(container.siblings, 'height')
     maxSibHeight = maxValue(container.siblings, 'height')
-    for (i = 0; i <= maxSibHeight; i++) {
+    for (i = minSibHeight; i <= maxSibHeight; i++) {
         // Create the row element where all of the blocks and spaces will be stored
         row = document.createElement('div')
         row.id = 'row-' + i
         row.classList.add('row')
-        if (i == 0 || i == maxSibHeight)
+        if (i == minSibHeight || i == maxSibHeight)
             row.classList.add('end')
         treeDiv.append(row)
 
@@ -292,13 +293,14 @@ function spaceTree(container) {
     blockMargin = settings.sizes['blockMargin']
     treeMarginLeft = settings.sizes['treeMarginLeft']
 
-    heightZeroSibs = container.siblings.filter(thisSib => thisSib.height == 0)
-    heightZeroSibs.forEach(sib => {
+    minSibHeight = minValue(container.siblings, 'height')
+    minHeightSibs = container.siblings.filter(thisSib => thisSib.height == minSibHeight)
+    minHeightSibs.forEach(sib => {
         calculateRelativePositions(container, sib)
 
         // Put siblings at height 0 in the correct position*
         position = 0
-        heightZeroSibs.every(prevSib => {
+        minHeightSibs.every(prevSib => {
             if (prevSib.name == sib.name) {
                 position = Math.max(sib.branchWidths[0][0] + blockMargin, position)
                 return false
@@ -324,7 +326,7 @@ function spaceTree(container) {
     })
 
     maxSibHeight = maxValue(container.siblings, 'height')
-    for (i = 1; i <= maxSibHeight; i++) {
+    for (i = minSibHeight + 1; i <= maxSibHeight; i++) {
         prevSib = {
             position: 0,
             height: 0,
@@ -344,7 +346,7 @@ function spaceTree(container) {
         })
     }
 
-    console.log(`Without spacing, container ${container.row}-${container.column} has these siblings:`)
+    console.log(`Without spacing, container ${container.name} has these siblings:`)
     console.log(container.siblings)
 }
 
@@ -355,8 +357,9 @@ function drawAcrossLines(container) {
 
     lineWeight = settings.sizes['lineWeight']
 
+    minSibHeight = minValue(container.siblings, 'height')
     maxSibHeight = maxValue(container.siblings, 'height')
-    for (height = 0; height < maxSibHeight; height++) {
+    for (height = minSibHeight; height < maxSibHeight; height++) {
         prevEnd = 0
 
         divRow = treeDiv.querySelector('#row-' + height)

@@ -88,6 +88,13 @@ function getLittle(sibSet, big, littleIndex) {
     return sibSet.find(sibling => sibling.name == big.littleNames[littleIndex])
 }
 
+// Returns the minimum value of a key in an array of JSONs.
+function minValue(JSONArray, key) {
+    value = JSONArray[0][key]
+    while (JSONArray.some(JSON => JSON[key] < value)) value--
+    return value
+}
+
 // Returns the maximum value of a key in an array of JSONs.
 function maxValue(JSONArray, key) {
     value = 0
