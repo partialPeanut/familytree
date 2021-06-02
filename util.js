@@ -314,8 +314,3 @@ function displayTagInfo(tag) {
     }
     showTab(tabData)
 }
-
-// Acts as if a sibling with the given name has been clicked
-function goToName(sibName) {
-    $('#' + cleanStr(sibName)).trigger("click")
-}

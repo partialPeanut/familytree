@@ -34,7 +34,7 @@ function loadVue() {
             },
             displayTagInfo: function(tagName) {
                 console.log("Displaying " + tagName + " from menu")
-                tag = settings.tagData[cleanStr(tagName)]
+                tag = settings.tagData.find(td => td.name == tagName)
                 displayTagInfo(tag)
             },
             goToName: function(sibName) {

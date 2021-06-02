@@ -30,7 +30,7 @@ function applySettings() {
 
     // Tag data
     stylesheet = document.styleSheets[0]
-    $.each(settings.tagData, function(tagName, tag) {
+    settings.tagData.forEach(tag => {
         if (tag.type.includes("STYLE")) {
             rule = "." + cleanStr(tag.name) + " {\n"
             if (tag.borderWidth) {
@@ -237,34 +237,40 @@ function createUnspacedTree(container) {
             nameButton.appendChild(nameName)
 
             // Apply tag effects to nas
-            nameButton.classList.forEach(function(tag) {
+            nameButton.classList.forEach(function(tagName) {
                 // If the class is a tag, do stuff
-                if (settings.tagData.hasOwnProperty(tag)) {
-                    tagJSON = settings.tagData[tag]
+                if (settings.tagData.includes(td => td.name == tagName)) {
+                    tag = settings.tagData.find(td => td.name == tagName)
                     // If it's a symbol, add the symbol
-                    if (tagJSON.type.includes("SYMBOL")) {
+                    if (tag.type.includes("SYMBOL")) {
                         tagImage = document.createElement("img")
-                        tagImage.src = "https://drive.google.com/thumbnail?id=" + tagJSON.imageAddress
+                        tagImage.src = "https://drive.google.com/thumbnail?id=" + tag.imageAddress
                         tagImage.classList.add("tagSymbol")
                         tagImage.classList.add("clickable")
-                        addTagClicker(tagImage, tagJSON)
+                        addTagClicker(tagImage, tag)
                         nas.appendChild(tagImage)
                     }
+                    // If it's an image background, add the image to the background
+                    if (tag.type.includes("IMGBACKGROUND")) {
+                        nameButton.style.backgroundImage = 'url("https://drive.google.com/thumbnail?id=' + tag.imageAddress + '")'
+                        nameButton.style.backgroundRepeat = "repeat-x"
+                        nameButton.style.backgroundSize = "contain"
+                    }
                     // If it's special, do whatever crazy bullshit
-                    if (tagJSON.type.includes("SPECIAL")) {
-                        if (tagJSON.name == "Dropped") {
+                    if (tag.type.includes("SPECIAL")) {
+                        if (tag.name == "Dropped") {
                             buttonStyle = window.getComputedStyle(nameButton)
                             backgroundCol = buttonStyle.backgroundColor
                             borderCol = buttonStyle.borderColor
                             struckThroughString = "linear-gradient(0deg, " + backgroundCol + " 45%, " + borderCol + " 45%, " + borderCol + " 55%, " + backgroundCol + " 55%)"
                             nameButton.style.background = struckThroughString
                         }
-                        if (tagJSON.name == "Malcolm Tartan") {
+                        if (tag.name == "Malcolm Tartan") {
                             buttonStyle = window.getComputedStyle(nameButton)
                             borderCol = buttonStyle.borderColor
                             nameButton.style.color = borderCol
 
-                            nameButton.style.backgroundImage = 'url("https://drive.google.com/thumbnail?id=' + tagJSON.imageAddress + '")'
+                            nameButton.style.backgroundImage = 'url("https://drive.google.com/thumbnail?id=' + tag.imageAddress + '")'
                             nameButton.style.backgroundRepeat = "repeat-x"
                             nameButton.style.backgroundSize = "contain"
                         }

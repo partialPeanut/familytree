@@ -124,10 +124,10 @@ function placeSiblings(result) {
 
 // Convert tag set into a usable json
 function parseTags(result) {
-    defaultTagData = {}
+    defaultTagData = []
     result.values.forEach(function(row) {
         tag = tagRowToJSON(row)
-        defaultTagData[tag.name] = tag
+        defaultTagData.push(tag)
     })
 
     settings.tagData = defaultTagData
