@@ -5,6 +5,7 @@ function main() {
 
     allResizers = document.querySelectorAll('.resizer')
     allResizers.forEach(resizer => makeResizer(resizer))
+    exitTab()
 
     // Loops through every container and builds individual trees for each
     containers.forEach(container => {

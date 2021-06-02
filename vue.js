@@ -10,7 +10,7 @@ function loadVue() {
         el: '#app',
         data: {
             tabHistory: [{
-                tabType: 'tree',
+                tabType: 'load',
                 name: 'Name',
                 imgSrc: 'https://drive.google.com/thumbnail?id=1pIIIWQAERbpfE7mdgzFOvIzZnF7RKVjs',
                 description: 'Description',

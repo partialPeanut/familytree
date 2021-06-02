@@ -26,17 +26,14 @@ html, body {
 }
 
 .col {
-	top: 0;
-    bottom: 0;
-	position: absolute;
-    overflow: auto;
+	height: 100%;
+    flex: auto;
 }
 .col.left {
     width: 67%;
 }
 .col.right {
     width: 33%;
-	right: 0;
 }
 
 .fullWidth {
