@@ -1,6 +1,6 @@
 // Allows an element to act as a resizer of its two adjacent elements
 function makeResizer(ele) {
-    var x, y, direction, leftSide, leftWidth, leftHeight, rightSide, rightWidth, rightHeight
+    var x, y, direction, leftSide, leftWidth, leftHeight
 
     const mouseDownHandler = function(e) {
         x = e.clientX
@@ -8,15 +8,10 @@ function makeResizer(ele) {
 
         direction = ele.getAttribute('resize-direction')
         leftSide = ele.previousElementSibling
-        rightSide = ele.nextElementSibling
 
         leftRect = leftSide.getBoundingClientRect()
         leftWidth = leftRect.width
         leftHeight = leftRect.height
-
-        rightRect = rightSide.getBoundingClientRect()
-        rightWidth = rightRect.width
-        rightHeight = rightRect.height
 
         document.addEventListener('mousemove', mouseMoveHandler)
         document.addEventListener('mouseup', mouseUpHandler)
@@ -30,17 +25,13 @@ function makeResizer(ele) {
             case 'vertical':
                 percentFactor = 100 / ele.parentNode.getBoundingClientRect().height
                 const leftH = (leftHeight + dy) * percentFactor
-                const rightH = (rightHeight - dy) * percentFactor
                 leftSide.style.height = `${leftH}%`
-                rightSide.style.height = `${rightH}%`
                 break
             case 'horizontal':
             default:
                 percentFactor = 100 / ele.parentNode.getBoundingClientRect().width
                 const leftW = (leftWidth + dx) * percentFactor
-                const rightW = (rightWidth - dx) * percentFactor
                 leftSide.style.width = `${leftW}%`
-                rightSide.style.width = `${rightW}%`
                 break
         }
     
@@ -48,22 +39,16 @@ function makeResizer(ele) {
         ele.style.cursor = cursor
         document.body.style.cursor = cursor
     
-        leftSide.style.userSelect = 'none'
-        leftSide.style.pointerEvents = 'none'
-
-        rightSide.style.userSelect = 'none'
-        rightSide.style.pointerEvents = 'none'
+        document.body.style.userSelect = 'none'
+        document.body.style.pointerEvents = 'none'
     }
 
     const mouseUpHandler = function() {
         ele.style.removeProperty('cursor')
         document.body.style.removeProperty('cursor')
     
-        leftSide.style.removeProperty('user-select')
-        leftSide.style.removeProperty('pointer-events')
-    
-        rightSide.style.removeProperty('user-select')
-        rightSide.style.removeProperty('pointer-events')
+        document.body.style.removeProperty('user-select')
+        document.body.style.removeProperty('pointer-events')
     
         document.removeEventListener('mousemove', mouseMoveHandler)
         document.removeEventListener('mouseup', mouseUpHandler)
