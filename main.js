@@ -225,20 +225,12 @@ function createUnspacedTree(container) {
             addNameClicker(nameButton, sib)
             nas.append(nameButton)
 
-            // Add all tags to classes
-            sib.tags.forEach(function(tag) {
-                nameButton.classList.add(cleanStr(tag))
-            })
+            // Apply tags to nas
+            sib.tags.forEach(tagName => {
+                // Apply tags to classes for formatting
+                nameButton.classList.add(cleanStr(tagName))
 
-            // The name itself
-            if (sib.tags.includes('stub')) nameNameName = filterInvisText(sib.house)
-            else nameNameName = filterInvisText(sib.name) + ' ' + pledgeClassToSymbols(sib.pledgeClassNumber)
-            nameName = document.createTextNode(nameNameName)
-            nameButton.appendChild(nameName)
-
-            // Apply tag effects to nas
-            nameButton.classList.forEach(function(tagName) {
-                // If the class is a tag, do stuff
+                // If the tag exists in tagData, do things!
                 if (settings.tagData.includes(td => td.name == tagName)) {
                     tag = settings.tagData.find(td => td.name == tagName)
                     // If it's a symbol, add the symbol
@@ -265,18 +257,15 @@ function createUnspacedTree(container) {
                             struckThroughString = "linear-gradient(0deg, " + backgroundCol + " 45%, " + borderCol + " 45%, " + borderCol + " 55%, " + backgroundCol + " 55%)"
                             nameButton.style.background = struckThroughString
                         }
-                        if (tag.name == "Malcolm Tartan") {
-                            buttonStyle = window.getComputedStyle(nameButton)
-                            borderCol = buttonStyle.borderColor
-                            nameButton.style.color = borderCol
-
-                            nameButton.style.backgroundImage = 'url("https://drive.google.com/thumbnail?id=' + tag.imageAddress + '")'
-                            nameButton.style.backgroundRepeat = "repeat-x"
-                            nameButton.style.backgroundSize = "contain"
-                        }
                     }
                 }
             })
+
+            // The name itself
+            if (sib.tags.includes('stub')) nameNameName = filterInvisText(sib.house)
+            else nameNameName = filterInvisText(sib.name) + ' ' + pledgeClassToSymbols(sib.pledgeClassNumber)
+            nameName = document.createTextNode(nameNameName)
+            nameButton.appendChild(nameName)
 
             // If the sib has any littles, add a line below the nas
             if (sib.littleNames.length > 0) {
