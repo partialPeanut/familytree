@@ -308,12 +308,12 @@ function spaceTree(container) {
             else position = Math.max(prevSib.position + distToTouch(prevSib, sib) + blockMargin, position)
             return true
         })
+        sib.position = Math.floor(position)
 
         // *Prevent boxes from going negative
         sib.branchWidths.forEach((widths, height) => {
-            if (widths[0] + sib.position < blockMargin) sib.position = blockMargin - widths[0]
+            if (widths[0] + sib.position < blockMargin) sib.position = blockMargin - Math.floor(widths[0])
         })
-        sib.position = Math.floor(position)
 
         setLittleAbsolutePositions(container, sib)
 
