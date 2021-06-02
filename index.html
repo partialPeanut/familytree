@@ -30,8 +30,8 @@
         <div id="containerRowContainer" v-if="getDisplayTab() != 'mainMenu'" :class="{ fullWidth: getDisplayTab() == 'tree', col: getDisplayTab() != 'tree', left: getDisplayTab() != 'tree' }"></div>
 
         <!-- All versions of things that can pop up on the right -->
-        <div class="resizer" resize-direction="horizontal" v-if="getDisplayTab() != 'tree' && getDisplayTab() != 'mainMenu'"></div>
-        <div id="rightColContainer" v-if="getDisplayTab() != 'tree' && getDisplayTab() != 'mainMenu'" class="col right">
+        <div class="resizer" resize-direction="horizontal" v-if="getDisplayTab() != 'mainMenu'"></div>
+        <div id="rightColContainer" v-if="getDisplayTab() != 'mainMenu'" class="col right">
             <!-- Buttons -->
             <div class="tabNavButtonContainer">
                 <button onclick="goBack()" class="tabNavButton clickable">←</button>
