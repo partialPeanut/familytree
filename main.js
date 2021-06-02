@@ -231,7 +231,7 @@ function createUnspacedTree(container) {
                 nameButton.classList.add(cleanStr(tagName))
 
                 // If the tag exists in tagData, do things!
-                if (settings.tagData.includes(td => td.name == tagName)) {
+                if (settings.tagData.some(td => td.name == tagName)) {
                     tag = settings.tagData.find(td => td.name == tagName)
                     // If it's a symbol, add the symbol
                     if (tag.type.includes("SYMBOL")) {
