@@ -18,7 +18,8 @@ function loadVue() {
                 house: 'House',
                 tags: ['Tag 1', 'Tag 2'],
                 bigName: 'Big Name',
-                littleNames: ['Little 1', 'Little 2']
+                littleNames: ['Little 1', 'Little 2'],
+                div: undefined
             }],
             tabPosition: 0
         },
@@ -35,7 +36,13 @@ function loadVue() {
             displayTagInfo: function(tagName) {
                 console.log("Displaying " + tagName + " from menu")
                 tag = settings.tagData.find(td => td.name == tagName)
-                displayTagInfo(tag)
+                tabData = {
+                    tabType: "tagTab",
+                    name: tag.name,
+                    imgSrc: tag.imageAddress ? "https://drive.google.com/thumbnail?id=" + tag.imageAddress : undefined,
+                    description: tag.description
+                }
+                showTab(tabData)
             },
             goToName: function(sibName) {
                 console.log("Displaying " + sibName + " from menu")

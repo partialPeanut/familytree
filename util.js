@@ -270,6 +270,12 @@ function showTab(tabData) {
     appElement.tabHistory = appElement.tabHistory.slice(0, appElement.tabPosition+1)
     appElement.tabHistory.push(tabData)
     appElement.tabPosition++
+
+    if (tabData.div) {
+        setTimeout(function() {
+            tabData.div.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+        }, 0)
+    }
 }
 
 // Goes back one tab in the tab nav
@@ -277,15 +283,21 @@ function goBack() {
     if (appElement.tabPosition == 1) exitTab()
     else {
         appElement.tabPosition--
-        if (appElement.getDisplayTab() == "nameTab")
-            $('#' + cleanStr(appElement.getTabData().name))[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+        if (appElement.getTabData().div) {
+            setTimeout(function() {
+                appElement.getTabData().div.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+            }, 0)
+        }
     }
 }
 // Goes forward one tab in the tab nav
 function goForward() {
     appElement.tabPosition++
-    if (appElement.getDisplayTab() == "nameTab")
-        $('#' + cleanStr(appElement.getTabData().name))[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+    if (appElement.getTabData().div) {
+        setTimeout(function() {
+            appElement.getTabData().div.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+        }, 0)
+    }
 }
 
 // Goes back to tree
@@ -299,18 +311,8 @@ function exitTab() {
         house: 'House',
         tags: ['Tag 1', 'Tag 2'],
         bigName: 'Big Name',
-        littleNames: ['Little 1', 'Little 2']
+        littleNames: ['Little 1', 'Little 2'],
+        div: undefined
     }]
     appElement.tabPosition = 0
-}
-
-// Shows information for a given tag
-function displayTagInfo(tag) {
-    tabData = {
-        tabType: "tagTab",
-        name: tag.name,
-        imgSrc: tag.imageAddress ? "https://drive.google.com/thumbnail?id=" + tag.imageAddress : undefined,
-        description: tag.description
-    }
-    showTab(tabData)
 }

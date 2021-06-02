@@ -121,13 +121,10 @@ function addNameClicker(ele, sib) {
             house: sib.house,
             tags: sib.tags,
             bigName: sib.bigName,
-            littleNames: sib.littleNames
+            littleNames: sib.littleNames,
+            div: ele
         }
         showTab(tabData)
-
-        setTimeout(function() {
-            ele.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
-        }, 0)
     }
 
     ele.addEventListener('click', clickedNameHandler)
@@ -136,10 +133,14 @@ function addNameClicker(ele, sib) {
 // Allows a tag to be clicked on
 function addTagClicker(ele, tag) {
     const clickedTagHandler = function(e) {
-        displayTagInfo(tag)
-        setTimeout(function() {
-            ele.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
-        }, 0)
+        tabData = {
+            tabType: "tagTab",
+            name: tag.name,
+            imgSrc: tag.imageAddress ? "https://drive.google.com/thumbnail?id=" + tag.imageAddress : undefined,
+            description: tag.description,
+            div: ele
+        }
+        showTab(tabData)
     }
 
     ele.addEventListener('click', clickedTagHandler)
