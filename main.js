@@ -342,7 +342,7 @@ function spaceTree(container) {
             sibBlock.style.marginLeft = space + "px"
 
             prevSib = sib
-            prevEnd = $(sibBlock).position().left + sib.width - treeMarginLeft
+            prevEnd = sibBlock.getBoundingClientRect().right - container.containerDiv.getBoundingClientRect().left - treeMarginLeft
         })
     }
 
