@@ -113,7 +113,7 @@ function createContainerDivs() {
         })
         containerSplits.horizSplits.push(thisRowSplit)
     }
-    colSplit = Split(cColIDList, {
+    colSplit = Split(cRowIDList, {
         direction: 'vertical',
         cursor: 'row-resize',
         gutterSize: 6,
