@@ -81,7 +81,7 @@ function createContainerDivs() {
         containerRow.classList.add("container")
         containerRow.classList.add("row")
         crc.append(containerRow)
-        cRowIDList.append('#' + containerRow.id)
+        cRowIDList.push('#' + containerRow.id)
 
         thisRowContents = containers.filter(cont => cont.row == i)
         cColIDList = []
@@ -91,7 +91,7 @@ function createContainerDivs() {
             containerColumn.classList.add("container")
             containerColumn.classList.add("column")
             containerRow.append(containerColumn)
-            cColIDList.append('#' + containerColumn.id)
+            cColIDList.push('#' + containerColumn.id)
 
             treeContainerDiv = document.createElement('div')
             treeContainerDiv.id = "tree-container-" + i + "-" + j
