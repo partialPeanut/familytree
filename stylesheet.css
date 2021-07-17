@@ -102,7 +102,7 @@ html, body {
     cursor: grab;
     overflow: auto;
 }
-.tree{
+.tree {
     width: fit-content;
     white-space: nowrap;
     margin-top: var(--treeMarginTop);
@@ -111,15 +111,15 @@ html, body {
     margin-right: var(--treeMarginRight);
 }
 
-.tree > .row{
+.tree > .row {
     height: var(--blockHeight);
     white-space: nowrap;
 }
-.tree > .row.end{
+.tree > .row.end {
     height: var(--endBlockHeight);
 }
 
-.block{
+.block {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -128,12 +128,12 @@ html, body {
     margin-left: var(--blockMargin);
 }
 
-.nameAndSymbols{
+.nameAndSymbols {
     display: inline-flex;
     height: var(--nameHeight);
 }
 
-.name{
+.name {
     height: 100%;
     border-radius: 0px;
     user-select: none;
@@ -145,18 +145,18 @@ html, body {
     height: var(--nameHeight);
 }
 
-.line.vert{
+.line.vert {
     width: var(--lineWeight);
     height: var(--lineHeight);
 }
-.line.horiz{
+.line.horiz {
     display: inline-block;
     vertical-align: top;
     width: var(--lineWeight);
     height: var(--lineWeight);
 }
 
-.across{
+.across {
     height: var(--lineWeight);
     white-space: nowrap;
 }
