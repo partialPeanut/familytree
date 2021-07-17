@@ -225,7 +225,11 @@ function createUnspacedTree(container) {
             nameButton.classList.add('name')
             nameButton.classList.add('clickable')
             nameButton.classList.add(houseClean)
-            addNameClicker(nameButton, sib)
+            // If stub. should redirect to house info. Otherwise, redirects to sibling.
+            if (sib.tags.includes('stub')) {
+                tag = settings.tagData.find(td => td.name == sib.house)
+                addTagClicker(nameButton, tag)
+            } else addNameClicker(nameButton, sib)
             nas.append(nameButton)
 
             // Apply tags to nas
