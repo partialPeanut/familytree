@@ -315,4 +315,11 @@ function exitTab() {
         div: undefined
     }]
     appElement.tabPosition = 0
+    // Sets the fullWidth and col right divs back to default
+    setTimeout(function() {
+        fwEle = document.querySelector(".fullWidth")
+        fwEle.style.removeProperty('width')
+        colEle = document.querySelector(".col .right")
+        colEle.style.removeProperty('width')
+    }, 0)
 }
