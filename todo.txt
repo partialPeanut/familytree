@@ -1,5 +1,4 @@
  MINOR THINGS/FIXES
- + Make stubs register correctly as their house on click
  + Fix info-box resizer
  + Fix resizer jump
  + Fix resizers selecting things

@@ -13,6 +13,9 @@ function makeResizer(ele) {
         leftWidth = leftRect.width
         leftHeight = leftRect.height
 
+        document.body.style.userSelect = 'none'
+        document.body.style.pointerEvents = 'none'
+
         document.addEventListener('mousemove', mouseMoveHandler)
         document.addEventListener('mouseup', mouseUpHandler)
     }
@@ -38,9 +41,6 @@ function makeResizer(ele) {
         const cursor = direction === 'horizontal' ? 'col-resize' : 'row-resize'
         ele.style.cursor = cursor
         document.body.style.cursor = cursor
-    
-        document.body.style.userSelect = 'none'
-        document.body.style.pointerEvents = 'none'
     }
 
     const mouseUpHandler = function() {

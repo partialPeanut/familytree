@@ -101,7 +101,6 @@ html, body {
 .treeContainer {
     cursor: grab;
     overflow: auto;
-    border: 3px solid black;
 }
 .tree{
     width: fit-content;
