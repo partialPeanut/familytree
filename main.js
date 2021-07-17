@@ -108,7 +108,6 @@ function createContainerDivs() {
             thisContainer.treeDiv = treeDiv
         }
         thisRowSplit = Split(cColIDList, {
-            gutterSize: 6,
             snapOffset: 0,
         })
         containerSplits.horizSplits.push(thisRowSplit)
@@ -116,7 +115,6 @@ function createContainerDivs() {
     colSplit = Split(cRowIDList, {
         direction: 'vertical',
         cursor: 'row-resize',
-        gutterSize: 6,
         snapOffset: 0,
     })
     containerSplits.vertSplit = colSplit

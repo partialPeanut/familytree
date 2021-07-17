@@ -269,7 +269,8 @@ function setLittleAbsolutePositions(container, sib) {
 function showTab(tabData) {
     if (!appElement.split) {
         appElement.split = Split(['#leftColContainer', '#rightColContainer'], {
-            sizes: [67, 33]
+            gutterSize: 12,
+            sizes: [67, 33],
         })
     }
 
