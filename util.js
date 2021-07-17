@@ -323,5 +323,6 @@ function exitTab() {
     appElement.tabPosition = 0
     if (appElement.split) {
         appElement.split.destroy()
+        appElement.split = null
     }
 }
