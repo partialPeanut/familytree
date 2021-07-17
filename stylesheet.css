@@ -68,18 +68,18 @@ html, body {
     display: flex;
     flex-direction: column;
 }
-.containerRow {
+.container {
     display: flex;
     width: 100%;
     flex: auto;
-    flex-direction: row;
     overflow: auto;
 }
-.containerColumn {
-    display: flex;
-    height: 100%;
-    flex: auto;
-    overflow: auto;
+.container.row {
+    flex-direction: row;
+    min-height: 48px;
+}
+.container.column {
+    min-width: 48px;
 }
 .resizer {
     min-width: 6px;
