@@ -87,7 +87,7 @@ function createContainerDivs() {
         cColIDList = []
         for (j = 0; j < thisRowContents.length; j++) {
             containerColumn = document.createElement('div')
-            containerColumn.id = "container-column-" + j
+            containerColumn.id = "container-column-" + i + "-" + j
             containerColumn.classList.add("container")
             containerColumn.classList.add("column")
             containerRow.append(containerColumn)
