@@ -1,0 +1,10 @@
+ MINOR THINGS/FIXES
+ + Make stubs register correctly as their house on click
+ + Fix info-box resizer
+ + Fix resizer jump
+ + Fix resizers selecting things
+ + Make dragging icons do nothing
+
+ MAJOR CHANGES/ADDITIONS
+ + Settings page
+ + Add tab system, make that default lol

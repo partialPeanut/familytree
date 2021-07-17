@@ -112,11 +112,11 @@ html, body {
     margin-right: var(--treeMarginRight);
 }
 
-.row{
+.tree > .row{
     height: var(--blockHeight);
     white-space: nowrap;
 }
-.row.end{
+.tree > .row.end{
     height: var(--endBlockHeight);
 }
 
