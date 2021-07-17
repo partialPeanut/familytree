@@ -267,6 +267,12 @@ function setLittleAbsolutePositions(container, sib) {
 
 // Changes tab displayed alongside tree, or only the tree itself.
 function showTab(tabData) {
+    if (!appElement.split) {
+        appElement.split = Split(['#leftColContainer', '#rightColContainer'], {
+            sizes: [67, 33]
+        })
+    }
+
     appElement.tabHistory = appElement.tabHistory.slice(0, appElement.tabPosition+1)
     appElement.tabHistory.push(tabData)
     appElement.tabPosition++
@@ -315,11 +321,7 @@ function exitTab() {
         div: undefined
     }]
     appElement.tabPosition = 0
-    // Sets the fullWidth and col right divs back to default
-    setTimeout(function() {
-        fwEle = document.querySelector(".fullWidth")
-        fwEle.style.removeProperty('width')
-        colEle = document.querySelector(".col .right")
-        colEle.style.removeProperty('width')
-    }, 0)
+    if (appElement.split) {
+        appElement.split.destroy()
+    }
 }

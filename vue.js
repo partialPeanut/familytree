@@ -21,7 +21,8 @@ function loadVue() {
                 littleNames: ['Little 1', 'Little 2'],
                 div: undefined
             }],
-            tabPosition: 0
+            tabPosition: 0,
+            split: null
         },
         methods: {
             getDisplayTab: function() {

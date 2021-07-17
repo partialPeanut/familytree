@@ -8,6 +8,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+    <script src="https://unpkg.com/split.js/dist/split.min.js"></script>
 
     <script src="vue.js"></script>
     <script src="util.js"></script>
@@ -33,7 +34,6 @@
         </div>
 
         <!-- All versions of things that can pop up on the right -->
-        <div class="resizer" resize-direction="horizontal" v-if="getDisplayTab() != 'mainMenu'"></div>
         <div id="rightColContainer" v-if="getDisplayTab() != 'mainMenu'" class="col right">
             <!-- Buttons -->
             <div class="tabNavButtonContainer">

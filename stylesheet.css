@@ -29,9 +29,6 @@ html, body {
 .col {
     flex: auto;
 }
-.col.left {
-    width: 67%;
-}
 .col.right {
     display: flex;
     flex-direction: column;
@@ -64,6 +61,8 @@ html, body {
 }
 
 #containerRowContainer {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -79,22 +78,6 @@ html, body {
 }
 .container.column {
     min-width: 48px;
-}
-.resizer {
-    min-width: 6px;
-    min-height: 6px;
-    z-index: 1;
-}
-.resizer:hover {
-    background-color: black;
-}
-.resizer[resize-direction="horizontal"] {
-    cursor: col-resize;
-    margin: 0 -3px;
-}
-.resizer[resize-direction="vertical"] {
-    cursor: row-resize;
-    margin: -3px 0;
 }
 
 .treeContainer {
