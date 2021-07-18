@@ -300,7 +300,7 @@ function spaceTree(container) {
     minHeightSibs.forEach(sib => {
         calculateRelativePositions(container, sib)
 
-        // Put siblings at height 0 in the correct position*
+        // Put siblings at the top in the correct position*
         position = 0
         minHeightSibs.every(prevSib => {
             if (prevSib.name == sib.name) {
@@ -348,7 +348,9 @@ function spaceTree(container) {
         })
     }
 
-    console.log(`Without spacing, container ${container.name} has these siblings:`)
+    centerTopSib = getValueAtMiddleIndex(minHeightSibs)
+    centerTopSib.scrollIntoView({behavior: "auto", block: "start", inline: "center"})
+    console.log(`With spacing, container ${container.name} has these siblings:`)
     console.log(container.siblings)
 }
 

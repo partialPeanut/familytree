@@ -102,6 +102,12 @@ function maxValue(JSONArray, key) {
     return value
 }
 
+// Returns the value at the middle index (left bias) of an array.
+function getValueAtMiddleIndex(array) {
+    midIdx = Math.floor((array.length-1)/2)
+    return array[midIdx]
+}
+
 // Determines the distance of separation needed to make two siblings touch
 function distToTouch(sibLeft, sibRight) {
     leftWidths = sibLeft.branchWidths
