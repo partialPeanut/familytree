@@ -5,10 +5,10 @@ function sibRowToJSON(row) {
     sibJSON.pledgeClass = row[1]
     sibJSON.pledgeClassNumber = parseInt(row[6])
     sibJSON.gradYear = row[2]
-    sibJSON.bigName = row[3] == 'XXX' ?  null : row[3]
+    sibJSON.bigName = row[3] == '' ?  null : row[3]
     sibJSON.littleNames = []
-    sibJSON.house = row[4] == 'XXX' ? null : row[4]
-    sibJSON.tags = row[5] == 'XXX' ? [] : row[5].split(';')
+    sibJSON.house = row[4] == '' ? null : row[4]
+    sibJSON.tags = row[5] == '' ? [] : row[5].split(';')
 
     return sibJSON
 }
@@ -18,17 +18,18 @@ function tagRowToJSON(row) {
     tagJSON = {}
     tagJSON.name = row[0]
     tagJSON.description = row[1]
-    tagJSON.type = row[2]
-    if (row[3] != '') tagJSON.imageAddress = row[3]
-    if (row[4] != '') tagJSON.borderWidth = row[4]
-    if (row[5] != '') tagJSON.borderColor = row[5]
-    if (row[6] != '') tagJSON.backgroundColor = row[6]
-    if (row[7] != '') tagJSON.textColor = row[7]
-    if (row[8] != '') tagJSON.fontSize = row[8]
-    if (row[9] != '') tagJSON.lineHeight = row[9]
-    if (row[10] != '') tagJSON.fontName = row[10]
-    if (row[11] != '') tagJSON.outlineType = row[11]
-    if (row[12] != '') tagJSON.outlineColor = row[12]
+    tagJSON.relatedTags = row[2] == '' ? [] : row[2].split(';')
+    tagJSON.type = row[3]
+    if (row[3] != '') tagJSON.imageAddress = row[4]
+    if (row[4] != '') tagJSON.borderWidth = row[5]
+    if (row[5] != '') tagJSON.borderColor = row[6]
+    if (row[6] != '') tagJSON.backgroundColor = row[7]
+    if (row[7] != '') tagJSON.textColor = row[8]
+    if (row[8] != '') tagJSON.fontSize = row[9]
+    if (row[9] != '') tagJSON.lineHeight = row[10]
+    if (row[10] != '') tagJSON.fontName = row[11]
+    if (row[11] != '') tagJSON.outlineType = row[12]
+    if (row[12] != '') tagJSON.outlineColor = row[13]
 
     return tagJSON
 }
@@ -37,9 +38,10 @@ function tagRowToJSON(row) {
 function contaierRowToJSON(row) {
     contJSON = {}
     contJSON.name = row[0]
-    contJSON.row = parseInt(row[1])
-    contJSON.column = parseInt(row[2])
-    contJSON.houses = row[3].split(';')
+    contJSON.tabPos = row[1]
+    contJSON.row = parseInt(row[2])
+    contJSON.column = parseInt(row[3])
+    contJSON.houses = row[4].split(';')
 
     return contJSON
 }
@@ -356,7 +358,7 @@ function exitTab() {
         appElement.split.destroy()
         appElement.split = null
     }
-    
+
     setTimeout(function() {
         containers.forEach(cont => goToScrollLock(cont))
     }, 0)

@@ -64,13 +64,12 @@ function placeSiblings(result) {
         sibJSON = sibRowToJSON(result.values[x])
         // If the sib has no big, they're at height 0.
         if (sibJSON.bigName === null) {
-            // If they have no house, they're in the Lone Wolves or Asphodel, otherwise, they're a founder
+            // If they have no house, they're in the Lone Wolves or Asphodel
             if (sibJSON.house === null) {
                 //console.log(sibJSON.pledgeClass)
                 if (sibJSON.pledgeClass == "Alpha") sibJSON.house = "Lone Wolves"
                 else sibJSON.house = "Asphodel Clan"
             }
-            else sibJSON.tags.push("Founder")
 
             // Place them in the structure at height 0
             sibJSON.height = 0
@@ -80,9 +79,8 @@ function placeSiblings(result) {
             // Find the sib's big
             bigSib = siblings.find(sib => sib.name == sibJSON.bigName)
             if (bigSib !== undefined) {
-                // If they have no house, inherit their big's, otherwise, they're a founder
+                // If they have no house, inherit their big's
                 if (sibJSON.house === null) sibJSON.house = bigSib.house
-                else sibJSON.tags.push("Founder")
 
                 // Add themselves to their big's list of littles
                 bigSib.littleNames.push(sibJSON.name)
@@ -96,7 +94,6 @@ function placeSiblings(result) {
             else {
                 // If they have no house, inherit their big's, otherwise, they're Asphodel
                 if (sibJSON.house === null) sibJSON.house = "Asphodel Clan"
-                else sibJSON.tags.push("Founder")
 
                 // Put em in the array! But at -1.....
                 sibJSON.height = -1

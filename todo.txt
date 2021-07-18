@@ -1,10 +1,40 @@
  MINOR THINGS/FIXES
- + Default view in center
+ + Make the info bar Not Look Like Shit
+ + Add Show On Tree buttons to info tab
+ + Related tags
+ + Loading bar
 
  MAJOR CHANGES/ADDITIONS
- + Settings page
- + Download
- + Ashpodel wrapping
- + Add tab system, make that default lol
+ + Zoom!!
  + Main menu
- + Loading bar
+
+TAB SYSTEM
++ Switch between tabs of different trees
++ Reorder tabs
++ Create your own tab, highly customizable
+ - Name
+ - Select houses
+ - Time machine
+ - Wrapping
++ Edit/delete tabs
+
+SETTINGS PAGE
++ Light mode/dark mode/custom palette
++ Sizes
++ Font (w/ warning that some things might break)
++ Multi-window/tab system
+ - Edit window structure/add more
++ Download tree(s)
+
+INFORMATION PAGE
+
+SUGGESTIONS FORM
++ Blurb, "Found an error?" etc.
++ Email address (optional)
++ Subject line
++ Description
+
+SEARCH BAR
++ Search by name, pledge class, tags
++ Draws from master sibling array
++ Displays info tab
