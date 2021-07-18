@@ -107,18 +107,19 @@ function createContainerDivs() {
             thisContainer.containerDiv = treeContainerDiv
             thisContainer.treeDiv = treeDiv
         }
+        // Create a split between all elements in this row that keeps the content in the center in the center
         thisRowSplit = Split(cColIDList, {
             snapOffset: 0,
             onDragStart: function (sizes) {
                 thisRowContents.forEach(cont => {
-                    thisTreeContainer = cont.div.parentNode
+                    thisTreeContainer = cont.containerDiv
                     slx = thisTreeContainer.scrollLeft + thisTreeContainer.clientWidth/2
                     cont.scrollLock = [slx, thisTreeContainer.scrollTop]
                 })
             },
             onDrag: function (sizes) {
                 thisRowContents.forEach(cont => {
-                    thisTreeContainer = cont.div.parentNode
+                    thisTreeContainer = cont.containerDiv
                     stx = cont.scrollLock[0] - thisTreeContainer.clientWidth/2
                     thisTreeContainer.scrollTo(stx, cont.scrollLock[1])
                 })
@@ -126,6 +127,7 @@ function createContainerDivs() {
         })
         containerSplits.horizSplits.push(thisRowSplit)
     }
+    // Creates a split between all the rows
     colSplit = Split(cRowIDList, {
         direction: 'vertical',
         cursor: 'row-resize',

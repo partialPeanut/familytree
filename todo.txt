@@ -3,6 +3,7 @@
 
  MAJOR CHANGES/ADDITIONS
  + Settings page
+ + Download
  + Ashpodel wrapping
  + Add tab system, make that default lol
  + Main menu
