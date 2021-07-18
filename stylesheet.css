@@ -43,7 +43,7 @@ html, body {
 }
 
 .tabNavButtonContainer {
-    border-bottom: 3px solid black;
+    border-bottom: 4px solid #ddd;
     align-items: center;
     display: flex;
 }
