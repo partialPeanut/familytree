@@ -86,11 +86,11 @@ html, body {
     background-position: 50%;
 }
 .gutter.gutter-horizontal {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+    background-image: url('https://drive.google.com/thumbnail?id=1IAvf0H7o56uhZQxJ2WoXzEEVZA-B0VwH');
     cursor: col-resize;
 }
 .gutter.gutter-vertical {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');
+    background-image: url('https://drive.google.com/thumbnail?id=1-WbJlrWthLgST8J2uhgIBpEKz-kyi-kX');
     cursor: row-resize;
 }
 
