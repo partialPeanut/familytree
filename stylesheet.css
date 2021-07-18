@@ -44,15 +44,19 @@ html, body {
 
 .tabNavButtonContainer {
     border-bottom: 3px solid black;
+    align-items: center;
+    display: flex;
 }
 
 .tabNavButton {
     background-color: transparent;
 	border: 1px solid transparent;
 	font-size: 40px;
+    margin-left: 6px;
 }
 .tabNavButton.right {
-    justify-self: end;
+    margin-left: auto;
+    margin-right: 6px;
 }
 
 .clickable:hover {
