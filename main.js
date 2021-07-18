@@ -112,16 +112,12 @@ function createContainerDivs() {
             snapOffset: 0,
             onDragStart: function (sizes) {
                 thisRowContents.forEach(cont => {
-                    thisTreeContainer = cont.containerDiv
-                    slx = thisTreeContainer.scrollLeft + thisTreeContainer.clientWidth/2
-                    cont.scrollLock = [slx, thisTreeContainer.scrollTop]
+                    setScrollLock(cont)
                 })
             },
             onDrag: function (sizes) {
                 thisRowContents.forEach(cont => {
-                    thisTreeContainer = cont.containerDiv
-                    stx = cont.scrollLock[0] - thisTreeContainer.clientWidth/2
-                    thisTreeContainer.scrollTo(stx, cont.scrollLock[1])
+                    goToScrollLock(cont)
                 })
             },
         })

@@ -271,12 +271,34 @@ function setLittleAbsolutePositions(container, sib) {
     })
 }
 
+// Sets the position that the container will be focused on
+function setScrollLock(container) {
+    thisTreeContainer = container.containerDiv
+    slx = thisTreeContainer.scrollLeft + thisTreeContainer.clientWidth/2
+    container.scrollLock = [slx, thisTreeContainer.scrollTop]
+}
+
+// Scrolls a container to the position it should be locked at
+function goToScrollLock(container) {
+    thisTreeContainer = container.containerDiv
+    stx = container.scrollLock[0] - thisTreeContainer.clientWidth/2
+    thisTreeContainer.scrollTo(stx, container.scrollLock[1])
+}
+
 // Changes tab displayed alongside tree, or only the tree itself.
 function showTab(tabData) {
+    containers.forEach(cont => setScrollLock(cont))
+
     if (!appElement.split) {
         appElement.split = Split(['#leftColContainer', '#rightColContainer'], {
             gutterSize: 12,
             sizes: [67, 33],
+            onDragStart: function (sizes) {
+                containers.forEach(cont => setScrollLock(cont))
+            },
+            onDrag: function (sizes) {
+                containers.forEach(cont => goToScrollLock(cont))
+            },
         })
     }
 
@@ -284,11 +306,11 @@ function showTab(tabData) {
     appElement.tabHistory.push(tabData)
     appElement.tabPosition++
 
-    if (tabData.div) {
-        setTimeout(function() {
+    setTimeout(function() {
+        containers.forEach(cont => goToScrollLock(cont))
+        if (tabData.div)
             tabData.div.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
-        }, 0)
-    }
+    }, 0)
 }
 
 // Goes back one tab in the tab nav
@@ -315,6 +337,8 @@ function goForward() {
 
 // Goes back to tree
 function exitTab() {
+    containers.forEach(cont => setScrollLock(cont))
+
     appElement.tabHistory = [{
         tabType: 'tree',
         name: 'Name',
@@ -332,4 +356,8 @@ function exitTab() {
         appElement.split.destroy()
         appElement.split = null
     }
+    
+    setTimeout(function() {
+        containers.forEach(cont => goToScrollLock(cont))
+    }, 0)
 }
