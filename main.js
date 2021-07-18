@@ -109,6 +109,20 @@ function createContainerDivs() {
         }
         thisRowSplit = Split(cColIDList, {
             snapOffset: 0,
+            onDragStart: function (sizes) {
+                thisRowContents.forEach(cont => {
+                    thisTreeContainer = cont.div.parentNode
+                    slx = thisTreeContainer.scrollLeft + thisTreeContainer.clientWidth/2
+                    cont.scrollLock = [slx, thisTreeContainer.scrollTop]
+                })
+            },
+            onDrag: function (sizes) {
+                thisRowContents.forEach(cont => {
+                    thisTreeContainer = cont.div.parentNode
+                    stx = cont.scrollLock[0] - thisTreeContainer.clientWidth/2
+                    thisTreeContainer.scrollTo(stx, cont.scrollLock[1])
+                })
+            },
         })
         containerSplits.horizSplits.push(thisRowSplit)
     }
