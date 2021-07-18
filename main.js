@@ -2,9 +2,6 @@
 function main() {
     applySettings()
     createContainerDivs()
-
-    allResizers = document.querySelectorAll('.resizer')
-    allResizers.forEach(resizer => makeResizer(resizer))
     exitTab()
 
     // Loops through every container and builds individual trees for each
@@ -71,36 +68,30 @@ function applySettings() {
 function createContainerDivs() {
     console.log(`Creating all container divs...`)
 
+    containerSplits = {
+        horizSplits: [],
+        vertSplit: null
+    }
     crc = document.querySelector('#containerRowContainer')
     containerRows = maxValue(containers, 'row') + 1
+    cRowIDList = []
     for (i = 0; i < containerRows; i++) {
-        if (i != 0) {
-            rowResizer = document.createElement('div')
-            rowResizer.classList.add('resizer')
-            rowResizer.setAttribute('resize-direction', 'vertical')
-            crc.append(rowResizer)
-        }
-
         containerRow = document.createElement('div')
         containerRow.id = "container-row-" + i
         containerRow.classList.add("container")
         containerRow.classList.add("row")
         crc.append(containerRow)
+        cRowIDList.push('#' + containerRow.id)
 
         thisRowContents = containers.filter(cont => cont.row == i)
+        cColIDList = []
         for (j = 0; j < thisRowContents.length; j++) {
-            if (j != 0) {
-                colResizer = document.createElement('div')
-                colResizer.classList.add('resizer')
-                colResizer.setAttribute('resize-direction', 'horizontal')
-                containerRow.append(colResizer)
-            }
-            
             containerColumn = document.createElement('div')
-            containerColumn.id = "container-column-" + j
+            containerColumn.id = "container-column-" + i + "-" + j
             containerColumn.classList.add("container")
             containerColumn.classList.add("column")
             containerRow.append(containerColumn)
+            cColIDList.push('#' + containerColumn.id)
 
             treeContainerDiv = document.createElement('div')
             treeContainerDiv.id = "tree-container-" + i + "-" + j
@@ -116,7 +107,17 @@ function createContainerDivs() {
             thisContainer.containerDiv = treeContainerDiv
             thisContainer.treeDiv = treeDiv
         }
+        thisRowSplit = Split(cColIDList, {
+            snapOffset: 0,
+        })
+        containerSplits.horizSplits.push(thisRowSplit)
     }
+    colSplit = Split(cRowIDList, {
+        direction: 'vertical',
+        cursor: 'row-resize',
+        snapOffset: 0,
+    })
+    containerSplits.vertSplit = colSplit
 }
 
 // Copies and edits the set of siblings to a container
