@@ -139,8 +139,7 @@ function parseConjunctionGrid(result) {
     conjunctionGrid = {}
     romTypes = result.values[0]
     result.values.forEach(row => {
-        if (row == romTypes) return true
-        else {
+        if (row != romTypes)  {
             thisRowIDs = {}
             for (i = 1; i < row.length; i++) {
                 if (row[i] != '') thisRowIDs[romTypes[i]] = { imageAddress: row[i] }
