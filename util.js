@@ -80,6 +80,63 @@ function pledgeClassToSymbols(pledgeClassNumber) {
     return classSymbols[classNum] + metaClassSymbols[metaClassNum]
 }
 
+// Takes a tag and turns it into an html image node
+function createTagImage(tag) {
+    tagImage = document.createElement("img")
+    tagImage.src = "https://drive.google.com/thumbnail?id=" + tag.imageAddress
+    tagImage.classList.add("tagSymbol")
+    tagImage.classList.add("clickable")
+    addTagClicker(tagImage, tag)
+    
+    return tagImage
+}
+
+// Takes an array of tags and combines them into one
+function createTagConjunction(tagArray) {
+    newTagName = tagArray.join(' + ')
+    if (settings.tagData.some(td => td.name == newTagName))
+        return settings.tagData.find(td => td.name == newTagName)
+
+    newTag = {}
+    newTag.name = newTagName
+    newTag.type = "SYMBOL"
+
+    // Generate description and locate image address from constituent tags
+    newDesc = ""
+    currGridLev = JSON.parse(JSON.stringify(settings.conjunctionGrid))
+    tagArray.forEach(tag => {
+        if (newDesc != "") newDesc += '\n'
+        newDesc += tag.name + ": " + tag.description
+        currGridLev = currGridLev[tag.name]
+    })
+
+    // Generate related tags from constituent tags and their related tags
+    tai = 0
+    depth = -1
+    newRelatedTags = []
+    while (newRelatedTags.length < 3) {
+        if (depth < 0) newRelatedTags.push(tagArray[tai].name)
+        else {
+            thisNewRTag = tagArray[tai].relatedTags[depth]
+            if (!newRelatedTags.includes(thisNewRTag)) newRelatedTags.push(thisNewRTag)
+        }
+
+        tai++
+        if (tai == tagArray.length) {
+            tai = 0
+            depth++
+        }
+    }
+
+    newTag.description = newDesc
+    newTag.relatedTags = newRelatedTags
+    newTag.imageAddress = currGridLev.imageAddress ? currGridLev.imageAddress : "1WinxBtVthcMbDWOOEv3RTufurzWXCRvN"
+
+    settings.tagData.push(newTag)
+
+    return newTag
+}
+
 // Returns a little's big's JSON
 function getBig(sibSet, sib) {
     return sibSet.find(sibling => sibling.name == sib.bigName)

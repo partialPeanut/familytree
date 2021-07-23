@@ -246,6 +246,9 @@ function createUnspacedTree(container) {
             nas.append(nameButton)
 
             // Apply tags to nas
+            toPotentiallyConjunct = []
+            conjunction = []
+            conjuncting = false
             sib.tags.forEach(tagName => {
                 // Apply tags to classes for formatting
                 nameButton.classList.add(cleanStr(tagName))
@@ -255,11 +258,19 @@ function createUnspacedTree(container) {
                     tag = settings.tagData.find(td => td.name == tagName)
                     // If it's a symbol, add the symbol
                     if (tag.type.includes("SYMBOL")) {
-                        tagImage = document.createElement("img")
-                        tagImage.src = "https://drive.google.com/thumbnail?id=" + tag.imageAddress
-                        tagImage.classList.add("tagSymbol")
-                        tagImage.classList.add("clickable")
-                        addTagClicker(tagImage, tag)
+                        tagImage = createTagImage(tag)
+
+                        // Register conjunction of conjunctable tags
+                        if (tag.type.includes("CONJ")) {
+                            conjunction.push(tag)
+                            toPotentiallyConjunct.push(tagImage)
+                            conjuncting = true
+                        } else if (conjuncting) {
+                            conjuncting = false
+                            toPotentiallyConjunct.forEach(forsakenChild => nas.removeChild(forsakenChild))
+                            conjunctionImage = createTagImage(createTagConjunction(conjunction))
+                            nas.appendChild(conjunctionImage)
+                        }
                         nas.appendChild(tagImage)
                     }
                     // If it's an image background, add the image to the background
@@ -280,6 +291,7 @@ function createUnspacedTree(container) {
                     }
                 }
             })
+
 
             // The name itself
             if (sib.tags.includes('stub')) nameNameName = filterInvisText(sib.house)
