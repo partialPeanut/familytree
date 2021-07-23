@@ -139,7 +139,7 @@ function parseConjunctionGrid(result) {
     conjunctionGrid = {}
     romTypes = result.values[0]
     result.values.forEach(row => {
-        if (row[0] == '') return true
+        if (row == romTypes) return true
         else {
             thisRowIDs = {}
             for (i = 1; i < row.length; i++) {
