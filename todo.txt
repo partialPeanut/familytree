@@ -3,6 +3,7 @@
  + Add Show On Tree buttons to info tab
  + Related tags
  + Loading bar
+ + Tree margins
 
  MAJOR CHANGES/ADDITIONS
  + Zoom!!

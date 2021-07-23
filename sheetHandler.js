@@ -39,7 +39,7 @@ function getSheetValues() {
     // Get the spreadsheet bits and do stuff to em
     gapi.client.sheets.spreadsheets.values.batchGet({
         spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
-        ranges: ['Siblings!A2:G', 'Size Settings!A2:B', 'Tag Settings!A2:M', 'Container Settings!A2:D']
+        ranges: ['Siblings!A2:G', 'Size Settings!A2:B', 'Tag Settings!A2:N', 'Container Settings!A2:E']
       }).then((response) => {
         ranges = response.result.valueRanges
         settings = {}
