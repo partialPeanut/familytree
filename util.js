@@ -20,16 +20,16 @@ function tagRowToJSON(row) {
     tagJSON.description = row[1]
     tagJSON.relatedTags = row[2] == '' ? [] : row[2].split(';')
     tagJSON.type = row[3]
-    if (row[3] != '') tagJSON.imageAddress = row[4]
-    if (row[4] != '') tagJSON.borderWidth = row[5]
-    if (row[5] != '') tagJSON.borderColor = row[6]
-    if (row[6] != '') tagJSON.backgroundColor = row[7]
-    if (row[7] != '') tagJSON.textColor = row[8]
-    if (row[8] != '') tagJSON.fontSize = row[9]
-    if (row[9] != '') tagJSON.lineHeight = row[10]
-    if (row[10] != '') tagJSON.fontName = row[11]
-    if (row[11] != '') tagJSON.outlineType = row[12]
-    if (row[12] != '') tagJSON.outlineColor = row[13]
+    if (row[4] != '') tagJSON.imageAddress = row[4]
+    if (row[5] != '') tagJSON.borderWidth = row[5]
+    if (row[6] != '') tagJSON.borderColor = row[6]
+    if (row[7] != '') tagJSON.backgroundColor = row[7]
+    if (row[8] != '') tagJSON.textColor = row[8]
+    if (row[9] != '') tagJSON.fontSize = row[9]
+    if (row[10] != '') tagJSON.lineHeight = row[10]
+    if (row[11] != '') tagJSON.fontName = row[11]
+    if (row[12] != '') tagJSON.outlineType = row[12]
+    if (row[13] != '') tagJSON.outlineColor = row[13]
 
     return tagJSON
 }

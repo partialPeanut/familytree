@@ -39,14 +39,15 @@ function getSheetValues() {
     // Get the spreadsheet bits and do stuff to em
     gapi.client.sheets.spreadsheets.values.batchGet({
         spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
-        ranges: ['Siblings!A2:G', 'Size Settings!A2:B', 'Tag Settings!A2:N', 'Container Settings!A2:E']
+        ranges: ['Siblings!A2:G', 'Size Settings!A2:B', 'Tag Settings!A2:N', 'The Gay Grid!A1;H', 'Container Settings!A2:E']
       }).then((response) => {
         ranges = response.result.valueRanges
         settings = {}
         parseTags(ranges[2])
+        parseGayGrid(ranges[3])
         placeSiblings(ranges[0])
         setDefaultSizeSettings(ranges[1])
-        createContainerSettings(ranges[3])
+        createContainerSettings(ranges[4])
 
         main()
       })
@@ -122,7 +123,7 @@ function placeSiblings(result) {
 // Convert tag set into a usable json
 function parseTags(result) {
     defaultTagData = []
-    result.values.forEach(function(row) {
+    result.values.forEach(row => {
         tag = tagRowToJSON(row)
         defaultTagData.push(tag)
     })
@@ -133,13 +134,32 @@ function parseTags(result) {
     console.log(settings.tagData)
 }
 
+// Translate the Gay Grid
+function parseGayGrid(result) {
+    gayGrid = {}
+    romTypes = result.values[0]
+    result.values.forEach(row => {
+        if (row[0] == '') return true
+        else {
+            thisRowIDs = {}
+            for (i = 1; i < row.length; i++) {
+                if (row[i] != '') thisRowIDs[romTypes[i]] = row[i]
+            }
+            gayGrid[row[0]] = thisRowIDs
+        }
+    })
+
+    settings.gayGrid = gayGrid
+
+    console.log("Gay Grid:")
+    console.log(settings.gayGrid)
+}
+
 // Apply default size settings given by spreadsheet
 function setDefaultSizeSettings(result) {
     defaultSizes = {}
     docStyle = document.body.style
-    result.values.forEach(function(row) {
-        defaultSizes[cleanStr(row[0])] = parseInt(row[1])
-    })
+    result.values.forEach(row => defaultSizes[cleanStr(row[0])] = parseInt(row[1]))
 
     nameHeight = defaultSizes['nameHeight']
     lineHeight = defaultSizes['lineHeight']
