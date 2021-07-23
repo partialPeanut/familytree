@@ -266,10 +266,15 @@ function createUnspacedTree(container) {
                             toPotentiallyConjunct.push(tagImage)
                             conjuncting = true
                         } else if (conjuncting) {
+                            if (conjunction.length > 1) {
+                                toPotentiallyConjunct.forEach(forsakenChild => nas.removeChild(forsakenChild))
+                                conjunctionImage = createTagImage(createTagConjunction(conjunction))
+                                nas.appendChild(conjunctionImage)
+                            }
+
+                            toPotentiallyConjunct = []
+                            conjunction = []
                             conjuncting = false
-                            toPotentiallyConjunct.forEach(forsakenChild => nas.removeChild(forsakenChild))
-                            conjunctionImage = createTagImage(createTagConjunction(conjunction))
-                            nas.appendChild(conjunctionImage)
                         }
                         nas.appendChild(tagImage)
                     }
