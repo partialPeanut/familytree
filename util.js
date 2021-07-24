@@ -18,6 +18,7 @@ function tagRowToJSON(row) {
     tagJSON = {}
     tagJSON.name = row[0]
     tagJSON.description = row[1]
+    tagJSON.taggedSibs = []
     tagJSON.relatedTags = row[2] == '' ? [] : row[2].split(';')
     tagJSON.type = row[3]
     if (row[4] != '') tagJSON.imageAddress = row[4]
@@ -99,7 +100,7 @@ function createTagConjunction(tagArray) {
 
     newTagName = tagArray.map(tag => tag.name).join(' + ')
     if (settings.tagData.some(td => td.name == newTagName))
-        return settings.tagData.find(td => td.name == newTagName)
+        return getTag(newTagName)
 
     newTag = {}
     newTag.name = newTagName
@@ -141,6 +142,11 @@ function createTagConjunction(tagArray) {
     settings.tagData.push(newTag)
 
     return newTag
+}
+
+// Returns a tag's JSON
+function getTag(tagName) {
+    return settings.tagData.find(td => td.name == tagName)
 }
 
 // Returns a little's big's JSON
@@ -415,6 +421,7 @@ function exitTab() {
         name: 'Name',
         imgSrc: 'https://drive.google.com/thumbnail?id=1pIIIWQAERbpfE7mdgzFOvIzZnF7RKVjs',
         description: 'Description',
+        taggedSibs: ['Sib 1', 'Sib 2'],
         relatedTags: ['Tag 1', 'Tag 2', 'Tag 3'],
         pledgeClass: 'Pledge Class',
         house: 'House',

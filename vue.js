@@ -36,12 +36,13 @@ function loadVue() {
             },
             displayTagInfo: function(tagName) {
                 console.log("Displaying " + tagName + " from menu")
-                tag = settings.tagData.find(td => td.name == tagName)
+                tag = getTag(tagName)
                 tabData = {
                     tabType: "tagTab",
                     name: tag.name,
                     imgSrc: tag.imageAddress ? "https://drive.google.com/thumbnail?id=" + tag.imageAddress : undefined,
                     description: tag.description,
+                    taggedSibs: tag.taggedSibs,
                     relatedTags: tag.relatedTags,
                 }
                 showTab(tabData)

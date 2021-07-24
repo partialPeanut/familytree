@@ -61,8 +61,8 @@ function placeSiblings(result) {
 
     // Put all siblings into a JSON structure. This only works if the sheet is properly sorted and there are no spelling errors.
     siblings = []
-    for (x = 0; x < result.values.length; x++) {
-        sibJSON = sibRowToJSON(result.values[x])
+    result.values.forEach(val => {
+        sibJSON = sibRowToJSON(val)
         // If the sib has no big, they're at height 0.
         if (sibJSON.bigName === null) {
             // If they have no house, they're in the Lone Wolves or Asphodel
@@ -103,7 +103,7 @@ function placeSiblings(result) {
                 console.log("Something went wrong and " + sibJSON.name + " could not find their big, " + sibJSON.bigName)
             }
         }
-    }
+    })
 
     // Sorts siblings into the order they should appear in on the tree.
     function recursiveSort(sibA, sibB) {
@@ -116,6 +116,14 @@ function placeSiblings(result) {
     }
     siblings.sort(recursiveSort)
 
+    // Add siblings to their tags' references
+    siblings.forEach(sib => {
+        sib.tags.forEach(tagName => {
+            tag = getTag(tagName)
+            tag.taggedSibs.push(sib)
+        })
+    })
+        
     console.log("All Siblings:")
     console.log(siblings)
 }

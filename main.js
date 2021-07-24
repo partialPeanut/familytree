@@ -240,7 +240,7 @@ function createUnspacedTree(container) {
             nameButton.classList.add(houseClean)
             // If stub. should redirect to house info. Otherwise, redirects to sibling.
             if (sib.tags.includes('stub')) {
-                tag = settings.tagData.find(td => td.name == sib.house)
+                tag = getTag(sib.house)
                 addTagClicker(nameButton, tag)
             } else addNameClicker(nameButton, sib)
             nas.append(nameButton)
@@ -254,7 +254,7 @@ function createUnspacedTree(container) {
 
                 // If the tag exists in tagData, do things!
                 if (settings.tagData.some(td => td.name == tagName)) {
-                    tag = settings.tagData.find(td => td.name == tagName)
+                    tag = getTag(tagName)
                     // If it's a symbol, add the symbol
                     if (tag.type.includes("SYMBOL")) {
                         tagImage = createTagImage(tag)
@@ -267,7 +267,7 @@ function createUnspacedTree(container) {
 
                             // If this is the last to be conjuncted, do the conjoining!
                             if (sib.tags.indexOf(tagName) == sib.tags.length - 1 ||
-                                !settings.tagData.find(td => td.name == nextValueOf(sib.tags, tagName)).type.includes("CONJ")) {
+                                !getTag(nextValueOf(sib.tags, tagName)).type.includes("CONJ")) {
 
                                 if (conjunction.length > 1) {
                                     toPotentiallyConjunct.forEach(forsakenChild => nas.removeChild(forsakenChild))
