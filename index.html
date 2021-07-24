@@ -74,11 +74,18 @@
 
             <!-- Tag that opens when you click a tab. Wait no -->
             <div id="tagTab" v-if="getDisplayTab() == 'tagTab'">
+                <img v-if="getTabData().imgSrc" class="tagSymbol" :src="getTabData().imgSrc">
                 <h1>
-                    <img v-if="getTabData().imgSrc" class="tagSymbol" :src="getTabData().imgSrc">
                     {{ getTabData().name }}
                 </h1>
                 <p class="newline">{{ getTabData().description }}</p>
+                
+                <p>Related tags:</p>
+                <ol v-if="getTabData().relatedTags.length > 0">
+                    <li v-for="tagName in getTabData().tags">
+                        <button @click="displayTagInfo(tagName)">{{ tagName }}</button>
+                    </li>
+                </ol>
             </div>
         </div>
     </div>
