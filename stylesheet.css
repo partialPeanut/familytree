@@ -59,6 +59,10 @@ html, body {
     margin-right: 6px;
 }
 
+.secondaryTab {
+    overflow-y: auto;
+}
+
 .newline {
     white-space: pre-wrap;
 }

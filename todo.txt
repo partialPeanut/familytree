@@ -1,7 +1,6 @@
  MINOR THINGS/FIXES
  + Make the info bar Not Look Like Shit
  + Add Show On Tree buttons to info tab
- + Related tags
  + Loading bar
  + Tree margins
 

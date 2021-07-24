@@ -43,10 +43,10 @@
             </div>
 
             <!-- Settings tab -->
-            <div id="settings" v-if="getDisplayTab() == 'settings'"></div>
+            <div id="settings" class="secondaryTab" v-if="getDisplayTab() == 'settings'"></div>
 
             <!-- Tab that opens when you click a name. -->
-            <div id="nameTab" v-if="getDisplayTab() == 'nameTab'">
+            <div id="nameTab" class="secondaryTab" v-if="getDisplayTab() == 'nameTab'">
                 <h1>{{ unspecialText(getTabData().name) }}</h1>
                 <h2>{{ getTabData().pledgeClass }}</h2>
                 <h2><button @click="displayTagInfo(getTabData().house)">{{ getTabData().house }}</button></h2>
@@ -73,21 +73,21 @@
             </div>
 
             <!-- Tag that opens when you click a tab. Wait no -->
-            <div id="tagTab" v-if="getDisplayTab() == 'tagTab'">
+            <div id="tagTab" class="secondaryTab" v-if="getDisplayTab() == 'tagTab'">
                 <img v-if="getTabData().imgSrc" class="tagSymbol" :src="getTabData().imgSrc">
                 <h1>
                     {{ getTabData().name }}
                 </h1>
                 <p class="newline">{{ getTabData().description }}</p>
 
-                <h2>People with this tag:</h2>
+                <p>People with this tag:</p>
                 <ol v-if="getTabData().taggedSibs.length > 0">
                     <li v-for="sib in getTabData().taggedSibs">
                         <button @click="goToName(sib.name)">{{ unspecialText(sib.name) }}</button>
                     </li>
                 </ol>
 
-                <h2>Related tags:</h2>
+                <p>Related tags:</p>
                 <ol v-if="getTabData().relatedTags.length > 0">
                     <li v-for="tagName in getTabData().relatedTags">
                         <button @click="displayTagInfo(tagName)">{{ tagName }}</button>
