@@ -13,7 +13,7 @@ function main() {
             spaceTree(container)
             drawAcrossLines(container)
             makeDraggable(container.containerDiv)
-        }, 480);
+        }, 1200);
     })
 }
 
