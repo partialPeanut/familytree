@@ -173,6 +173,11 @@ function getValueAtMiddleIndex(array) {
     return array[midIdx]
 }
 
+// Returns the value in an array at the index one above the value given.
+function nextValueOf(array, value) {
+    return array[array.indexOf(value) + 1]
+}
+
 // Determines the distance of separation needed to make two siblings touch
 function distToTouch(sibLeft, sibRight) {
     leftWidths = sibLeft.branchWidths

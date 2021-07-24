@@ -248,7 +248,6 @@ function createUnspacedTree(container) {
             // Apply tags to nas
             toPotentiallyConjunct = []
             conjunction = []
-            conjuncting = false
             sib.tags.forEach(tagName => {
                 // Apply tags to classes for formatting
                 nameButton.classList.add(cleanStr(tagName))
@@ -259,25 +258,27 @@ function createUnspacedTree(container) {
                     // If it's a symbol, add the symbol
                     if (tag.type.includes("SYMBOL")) {
                         tagImage = createTagImage(tag)
+                        nas.appendChild(tagImage)
 
                         // Register conjunction of conjunctable tags
                         if (tag.type.includes("CONJ")) {
                             toPotentiallyConjunct.push(tagImage)
                             conjunction.push(tag)
-                            conjuncting = true
-                        }
-                        if (conjuncting && (!tag.type.includes("CONJ") || sib.tags.indexOf(tagName) == sib.tags.length - 1)) {
-                            if (conjunction.length > 1) {
-                                toPotentiallyConjunct.forEach(forsakenChild => nas.removeChild(forsakenChild))
-                                conjunctionImage = createTagImage(createTagConjunction(conjunction))
-                                nas.appendChild(conjunctionImage)
-                            }
 
-                            toPotentiallyConjunct = []
-                            conjunction = []
-                            conjuncting = false
+                            // If this is the last to be conjuncted, do the conjoining!
+                            if (sib.tags.indexOf(tagName) == sib.tags.length - 1 ||
+                                !settings.tagData.find(td => td.name == nextValueOf(sib.tags, tagName)).type.includes("CONJ")) {
+
+                                if (conjunction.length > 1) {
+                                    toPotentiallyConjunct.forEach(forsakenChild => nas.removeChild(forsakenChild))
+                                    conjunctionImage = createTagImage(createTagConjunction(conjunction))
+                                    nas.appendChild(conjunctionImage)
+                                }
+    
+                                toPotentiallyConjunct = []
+                                conjunction = []
+                            }
                         }
-                        nas.appendChild(tagImage)
                     }
                     // If it's an image background, add the image to the background
                     if (tag.type.includes("IMGBACKGROUND")) {
