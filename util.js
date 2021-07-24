@@ -92,19 +92,23 @@ function createTagImage(tag) {
     return tagImage
 }
 
-// Takes an array of tags and combines them into one
-function createTagConjunction(tagArray) {
-    conjNames = "Conjoining " + tagArray.length + " tags:"
+// Takes an array of tags attached to a sibling and combines them into one
+function createTagConjunction(sib, tagArray) {
+    conjNames = "Conjoining " + tagArray.length + " tags attached to " + sib.name + ":"
     tagArray.forEach(tag => conjNames += " " + tag.name)
     console.log(conjNames)
 
     newTagName = tagArray.map(tag => tag.name).join(' + ')
-    if (settings.tagData.some(td => td.name == newTagName))
-        return getTag(newTagName)
+    if (settings.tagData.some(td => td.name == newTagName)) {
+        notNewTag = getTag(newTagName)
+        notNewTag.taggedSibs.push(sib)
+        return notNewTag
+    }
 
     newTag = {}
     newTag.name = newTagName
     newTag.type = "SYMBOL"
+    newTag.taggedSibs = [sib]
 
     // Generate description and locate image address from constituent tags
     newDesc = ""
