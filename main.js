@@ -266,7 +266,7 @@ function createUnspacedTree(container) {
                             conjunction.push(tag)
                             conjuncting = true
                         } else if (conjuncting) {
-                            conjNames = "Conjoining " + conjunction.length + " tags:"
+                            conjNames = "Conjoining " + conjunction.length + " tags attached to " + sib.name + ":"
                             conjunction.forEach(tag => conjNames += " " + tag.name)
                             console.log(conjNames)
                             if (conjunction.length > 1) {
