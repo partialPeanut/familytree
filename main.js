@@ -262,10 +262,13 @@ function createUnspacedTree(container) {
 
                         // Register conjunction of conjunctable tags
                         if (tag.type.includes("CONJ")) {
-                            conjunction.push(tag)
                             toPotentiallyConjunct.push(tagImage)
+                            conjunction.push(tag)
                             conjuncting = true
                         } else if (conjuncting) {
+                            conjNames = "Conjoining " + conjunction.length + " tags:"
+                            conjunction.forEach(tag => conjNames += " " + tag.name)
+                            console.log(conjNames)
                             if (conjunction.length > 1) {
                                 toPotentiallyConjunct.forEach(forsakenChild => nas.removeChild(forsakenChild))
                                 conjunctionImage = createTagImage(createTagConjunction(conjunction))
