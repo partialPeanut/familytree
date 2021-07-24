@@ -79,10 +79,10 @@
                     {{ getTabData().name }}
                 </h1>
                 <p class="newline">{{ getTabData().description }}</p>
-                
+
                 <p>Related tags:</p>
                 <ol v-if="getTabData().relatedTags.length > 0">
-                    <li v-for="tagName in getTabData().tags">
+                    <li v-for="tagName in getTabData().relatedTags">
                         <button @click="displayTagInfo(tagName)">{{ tagName }}</button>
                     </li>
                 </ol>
