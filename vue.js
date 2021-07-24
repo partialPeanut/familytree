@@ -41,7 +41,8 @@ function loadVue() {
                     tabType: "tagTab",
                     name: tag.name,
                     imgSrc: tag.imageAddress ? "https://drive.google.com/thumbnail?id=" + tag.imageAddress : undefined,
-                    description: tag.description
+                    description: tag.description,
+                    relatedTags: tag.relatedTags,
                 }
                 showTab(tabData)
             },

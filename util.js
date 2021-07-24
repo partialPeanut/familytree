@@ -359,6 +359,7 @@ function goToScrollLock(container) {
 function showTab(tabData) {
     containers.forEach(cont => setScrollLock(cont))
 
+    // Turns tree display and info display into a Split with a gutter for resizing
     if (!appElement.split) {
         appElement.split = Split(['#leftColContainer', '#rightColContainer'], {
             gutterSize: 12,
@@ -414,6 +415,7 @@ function exitTab() {
         name: 'Name',
         imgSrc: 'https://drive.google.com/thumbnail?id=1pIIIWQAERbpfE7mdgzFOvIzZnF7RKVjs',
         description: 'Description',
+        relatedTags: ['Tag 1', 'Tag 2', 'Tag 3'],
         pledgeClass: 'Pledge Class',
         house: 'House',
         tags: ['Tag 1', 'Tag 2'],

@@ -64,6 +64,7 @@ function addTagClicker(ele, tag) {
             name: tag.name,
             imgSrc: tag.imageAddress ? "https://drive.google.com/thumbnail?id=" + tag.imageAddress : undefined,
             description: tag.description,
+            relatedTags: tag.relatedTags,
             div: ele
         }
         showTab(tabData)
