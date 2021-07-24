@@ -265,7 +265,8 @@ function createUnspacedTree(container) {
                             toPotentiallyConjunct.push(tagImage)
                             conjunction.push(tag)
                             conjuncting = true
-                        } else if (conjuncting) {
+                        }
+                        if (conjuncting && (!tag.type.includes("CONJ") || settings.tagData.indexOf(tag) == settings.tagData.length - 1)) {
                             conjNames = "Conjoining " + conjunction.length + " tags attached to " + sib.name + ":"
                             conjunction.forEach(tag => conjNames += " " + tag.name)
                             console.log(conjNames)
