@@ -93,7 +93,7 @@ function createTagImage(tag) {
 
 // Takes an array of tags and combines them into one
 function createTagConjunction(tagArray) {
-    newTagName = tagArray.join(' + ')
+    newTagName = tagArray.map(tag => tag.name).join(' + ')
     if (settings.tagData.some(td => td.name == newTagName))
         return settings.tagData.find(td => td.name == newTagName)
 

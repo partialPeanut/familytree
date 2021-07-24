@@ -8,7 +8,6 @@
  MAJOR CHANGES/ADDITIONS
  + Zoom!!
  + Main menu
- + Conjunction grid
 
 TAB SYSTEM
 + Switch between tabs of different trees
