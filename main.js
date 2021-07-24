@@ -266,10 +266,7 @@ function createUnspacedTree(container) {
                             conjunction.push(tag)
                             conjuncting = true
                         }
-                        if (conjuncting && (!tag.type.includes("CONJ") || settings.tagData.indexOf(tag) == settings.tagData.length - 1)) {
-                            conjNames = "Conjoining " + conjunction.length + " tags attached to " + sib.name + ":"
-                            conjunction.forEach(tag => conjNames += " " + tag.name)
-                            console.log(conjNames)
+                        if (conjuncting && (!tag.type.includes("CONJ") || sib.tags.indexOf(tagName) == sib.tags.length - 1)) {
                             if (conjunction.length > 1) {
                                 toPotentiallyConjunct.forEach(forsakenChild => nas.removeChild(forsakenChild))
                                 conjunctionImage = createTagImage(createTagConjunction(conjunction))
