@@ -102,6 +102,7 @@ function createTagConjunction(sib, tagArray) {
     if (settings.tagData.some(td => td.name == newTagName)) {
         notNewTag = getTag(newTagName)
         notNewTag.taggedSibs.push(sib)
+        notNewTag.taggedSibs.sort(function(a, b) { return a.pledgeClassNumber - b.pledgeClassNumber })
         return notNewTag
     }
 

@@ -121,6 +121,7 @@ function placeSiblings(result) {
         sib.tags.forEach(tagName => {
             tag = getTag(tagName)
             tag.taggedSibs.push(sib)
+            tag.taggedSibs.sort(function(a, b) { return a.pledgeClassNumber - b.pledgeClassNumber })
         })
     })
         
