@@ -39,15 +39,17 @@ function getSheetValues() {
     // Get the spreadsheet bits and do stuff to em
     gapi.client.sheets.spreadsheets.values.batchGet({
         spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
-        ranges: ['Siblings!A2:G', 'Size Settings!A2:B', 'Tag Settings!A2:N', 'Conjunction Grid!A1:N', 'Container Settings!A2:E']
+        ranges: ['Siblings!A2:G', 'Size Settings!A2:B', 'Misc Settings!A2:B', 'Tag Settings!A2:N', 'Conjunction Grid!A1:N', 'Container Settings!A2:E']
       }).then((response) => {
         ranges = response.result.valueRanges
         settings = {}
-        parseTags(ranges[2])
-        parseConjunctionGrid(ranges[3])
+        parseTags(ranges[3])
         placeSiblings(ranges[0])
-        setDefaultSizeSettings(ranges[1])
-        createContainerSettings(ranges[4])
+        parseSizeSettings(ranges[1])
+        parseMiscSettings(ranges[2])
+        parseConjunctionGrid(ranges[4])
+        createContainerSettings(ranges[5])
+        appElement.settings = settings
 
         main()
       })
@@ -164,7 +166,7 @@ function parseConjunctionGrid(result) {
 }
 
 // Apply default size settings given by spreadsheet
-function setDefaultSizeSettings(result) {
+function parseSizeSettings(result) {
     defaultSizes = {}
     docStyle = document.body.style
     result.values.forEach(row => defaultSizes[cleanStr(row[0])] = parseInt(row[1]))
@@ -180,6 +182,14 @@ function setDefaultSizeSettings(result) {
 
     console.log("Size Settings:")
     console.log(settings.sizes)
+}
+
+// Apply any misc settings given by spreadsheet
+function parseMiscSettings(result) {
+    result.values.forEach(row => settings[cleanStr(row[0])] = row[1])
+
+    console.log("All Settings:")
+    console.log(settings)
 }
 
 // Apply default container settings given by spreadsheet

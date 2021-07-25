@@ -30,7 +30,11 @@
         <!-- All versions of things that can pop up on the left -->
         <div id="leftColContainer" v-if="getDisplayTab() != 'mainMenu'" :class="{ fullWidth: getDisplayTab() == 'tree', col: getDisplayTab() != 'tree', left: getDisplayTab() != 'tree' }">
             <!-- The tabs with the tree in it, autofilled by script -->
-            <div id="containerRowContainer"></div>
+            <div id="mwContainerContainer" v-if="getSettings().containerStyle == 'multi-window'"></div>
+            <div id="tabsContainerContainerContainer" v-if="getSettings().containerStyle == 'tabs'">
+                <div id="tabsContainerContainer"></div>
+                <div id="tabButtonsContainer"></div>
+            </div>
         </div>
 
         <!-- All versions of things that can pop up on the right -->

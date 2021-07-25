@@ -1,3 +1,22 @@
+// Allows a tab to be clicked, displaying link
+function makeTabbable(ele, link) {
+    const clickedTabHandler = function() {
+        containerTabs = document.getElementsByClassName("containerTab")
+        containerTabs.forEach(tab => {
+            tab.style.display = "none"
+        })
+        link.style.display = "block"
+
+        tabs = document.getElementsByClassName("tabForContainer")
+        tabs.forEach(tab => {
+            tab.classList.remove('active')
+        })
+        ele.classList.add('active')
+    }
+
+    ele.addEventListener('click', clickedTabHandler)
+}
+
 // Allows an element to be grabbed and dragged to scroll
 function makeDraggable(ele) {
     pos = { top: 0, left: 0, x: 0, y: 0 }

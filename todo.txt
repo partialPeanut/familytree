@@ -3,6 +3,7 @@
  + Add Show On Tree buttons to info tab
  + Loading bar
  + Tree margins
+ + Make non-touching trees snap to mid
 
  MAJOR CHANGES/ADDITIONS
  + Zoom!!
@@ -22,7 +23,7 @@ SETTINGS PAGE
 + Light mode/dark mode/custom palette
 + Sizes
 + Font (w/ warning that some things might break)
-+ Multi-window/tab system
++ Multi-window/tab system switch
  - Edit window structure/add more
 + Download tree(s)
 

@@ -9,20 +9,10 @@ function loadVue() {
     appElement = new Vue({
         el: '#app',
         data: {
-            tabHistory: [{
-                tabType: 'load',
-                name: 'Name',
-                imgSrc: 'https://drive.google.com/thumbnail?id=1pIIIWQAERbpfE7mdgzFOvIzZnF7RKVjs',
-                description: 'Description',
-                pledgeClass: 'Pledge Class',
-                house: 'House',
-                tags: ['Tag 1', 'Tag 2'],
-                bigName: 'Big Name',
-                littleNames: ['Little 1', 'Little 2'],
-                div: undefined
-            }],
+            tabHistory: [{ tabType: 'load' }],
             tabPosition: 0,
-            split: null
+            split: null,
+            settings: null
         },
         methods: {
             getDisplayTab: function() {
@@ -30,6 +20,9 @@ function loadVue() {
             },
             getTabData: function() {
                 return this.tabHistory[this.tabPosition]
+            },
+            getSettings: function() {
+                return this.settings
             },
             canGoForward: function() {
                 return this.tabPosition < this.tabHistory.length - 1

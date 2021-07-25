@@ -39,10 +39,11 @@ function tagRowToJSON(row) {
 function contaierRowToJSON(row) {
     contJSON = {}
     contJSON.name = row[0]
-    contJSON.tabPos = row[1]
+    contJSON.tabPos = parseInt(row[1])
     contJSON.row = parseInt(row[2])
     contJSON.column = parseInt(row[3])
     contJSON.houses = row[4].split(';')
+    contJSON.structures = {}
 
     return contJSON
 }
@@ -421,20 +422,7 @@ function goForward() {
 function exitTab() {
     containers.forEach(cont => setScrollLock(cont))
 
-    appElement.tabHistory = [{
-        tabType: 'tree',
-        name: 'Name',
-        imgSrc: 'https://drive.google.com/thumbnail?id=1pIIIWQAERbpfE7mdgzFOvIzZnF7RKVjs',
-        description: 'Description',
-        taggedSibs: ['Sib 1', 'Sib 2'],
-        relatedTags: ['Tag 1', 'Tag 2', 'Tag 3'],
-        pledgeClass: 'Pledge Class',
-        house: 'House',
-        tags: ['Tag 1', 'Tag 2'],
-        bigName: 'Big Name',
-        littleNames: ['Little 1', 'Little 2'],
-        div: undefined
-    }]
+    appElement.tabHistory = [{ tabType: 'tree' }]
     appElement.tabPosition = 0
     if (appElement.split) {
         appElement.split.destroy()

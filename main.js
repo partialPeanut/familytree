@@ -1,7 +1,7 @@
 // It's main!
 function main() {
     applySettings()
-    createContainerDivs()
+    createAllContainerDivs()
     exitTab()
 
     // Loops through every container and builds individual trees for each
@@ -64,15 +64,38 @@ function applySettings() {
     })
 }
 
-// Create a whole fuck ton of nested divs to hold all the trees
-function createContainerDivs() {
+// Create all the elements necessary to display the tree in every way
+function createAllContainerDivs() {
     console.log(`Creating all container divs...`)
+    createLocalContainerDivs()
+    createMWContainerDivs()
+    createTabContainerDivs()
+    addLocalDivsToStructure()
+}
 
+// Create the local elements to hold the trees
+function createLocalContainerDivs() {
+    containers.forEach(container => {
+        // Create container div
+        treeContainerDiv = document.createElement('div')
+        treeContainerDiv.id = "tree-container-" + cleanStr(container.name)
+        treeContainerDiv.classList.add('treeContainer')
+
+        treeDiv = document.createElement('div')
+        treeDiv.classList.add('tree')
+
+        container.treeContainerDiv = treeContainerDiv
+        container.treeDiv = treeDiv
+    })
+}
+
+// Create a whole fuck ton of nested divs to hold all the trees for multi-window
+function createMWContainerDivs() {
     containerSplits = {
         horizSplits: [],
         vertSplit: null
     }
-    crc = document.querySelector('#containerRowContainer')
+    crc = document.querySelector('#mwContainerContainer')
     containerRows = maxValue(containers, 'row') + 1
     cRowIDList = []
     for (i = 0; i < containerRows; i++) {
@@ -93,32 +116,18 @@ function createContainerDivs() {
             containerRow.append(containerColumn)
             cColIDList.push('#' + containerColumn.id)
 
-            treeContainerDiv = document.createElement('div')
-            treeContainerDiv.id = "tree-container-" + i + "-" + j
-            treeContainerDiv.classList.add('treeContainer')
-            containerColumn.append(treeContainerDiv)
-
-            // Create the tree div and add it to the container div
-            treeDiv = document.createElement('div')
-            treeDiv.classList.add('tree')
-            treeContainerDiv.append(treeDiv)
-
             thisContainer = containers.find(cont => cont.row == i && cont.column == j)
-            thisContainer.containerDiv = treeContainerDiv
-            thisContainer.treeDiv = treeDiv
+            thisContainer.structure['multi-window'] = containerColumn
         }
+
         // Create a split between all elements in this row that keeps the content in the center in the center
         thisRowSplit = Split(cColIDList, {
             snapOffset: 0,
             onDragStart: function (sizes) {
-                thisRowContents.forEach(cont => {
-                    setScrollLock(cont)
-                })
+                thisRowContents.forEach(cont => setScrollLock(cont))
             },
             onDrag: function (sizes) {
-                thisRowContents.forEach(cont => {
-                    goToScrollLock(cont)
-                })
+                thisRowContents.forEach(cont => goToScrollLock(cont))
             },
         })
         containerSplits.horizSplits.push(thisRowSplit)
@@ -130,6 +139,34 @@ function createContainerDivs() {
         snapOffset: 0,
     })
     containerSplits.vertSplit = colSplit
+}
+
+// Create all the containers for the tabs
+function createTabContainerDivs() {
+    tcc = document.querySelector("#tabsContainerContainer")
+    tbc = document.querySelector("#tabButtonsContainer")
+    containers.forEach(container => {
+        containerDiv = document.createElement('div')
+        containerDiv.id = "container-tab-" + container.tabPos
+        containerDiv.classList.add("containerTab")
+        containerDiv.classList.add("row")
+        tcc.append(containerDiv)
+
+        tabButton = document.createElement('button')
+        tabButton.classList.add("tabForContainer")
+        tbc.append(tabButton)
+        makeTabbable(tabButton, containerDiv)
+
+        container.structure['tabs'] = containerDiv
+    })
+}
+
+// Adds container divs to structure
+function addLocalDivsToStructure() {
+    containers.forEach(cont => {
+        if (cont.containerDiv.parentNode) cont.containerDiv.parentNode.removeChild(cont.containerDiv)
+        container.structure[settings.containerStyle].appendChild(cont.containerDiv)
+    })
 }
 
 // Copies and edits the set of siblings to a container
@@ -163,7 +200,7 @@ function copySiblingSet(container) {
     container.siblings = newFilteredSibs.map(sib => {
         if (belongsUnaltered(sib)) return sib
         else if (belongsUnaltered(getBig(siblings, sib))) return {
-            name: sib.name,
+            name: sib.house,
             bigName: sib.bigName,
             littleNames: [],
             house: sib.house,
@@ -177,7 +214,7 @@ function copySiblingSet(container) {
                 if (belongsUnaltered(little)) validLittleNames.push(littleName)
             })
             return {
-                name: sib.name,
+                name: sib.house,
                 bigName: null,
                 littleNames: validLittleNames,
                 house: sib.house,

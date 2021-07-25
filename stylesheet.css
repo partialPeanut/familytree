@@ -72,7 +72,7 @@ html, body {
     cursor: pointer;
 }
 
-#containerRowContainer {
+#mwContainerContainer {
     width: 100%;
     height: 100%;
     display: flex;
@@ -104,6 +104,19 @@ html, body {
 .gutter.gutter-vertical {
     background-image: url('https://drive.google.com/thumbnail?id=1-WbJlrWthLgST8J2uhgIBpEKz-kyi-kX');
     cursor: row-resize;
+}
+
+#tabsContainerContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.containerTab {
+    display: flex;
+    width: 100%;
+    flex: auto;
+    overflow: auto;
 }
 
 .treeContainer {
