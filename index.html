@@ -38,7 +38,7 @@
         </div>
 
         <!-- All versions of things that can pop up on the right -->
-        <div id="rightColContainer" v-if="getDisplayTab() != 'mainMenu' && getDisplayTab() != 'load' && getDisplayTab() != 'tree'" class="col right">
+        <div id="rightColContainer" v-if="getDisplayTab() == 'settings' || getDisplayTab() == 'nameTab' || getDisplayTab() == 'tagTab'" class="col right">
             <!-- Buttons -->
             <div class="tabNavButtonContainer">
                 <button onclick="goBack()" class="tabNavButton clickable">🠔</button>
