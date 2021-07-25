@@ -15,6 +15,7 @@ function main() {
             makeDraggable(container.containerDiv)
         }, 1200);
     })
+    document.getElementsByClassName("tabForContainer")[0].trigger("click")
 }
 
 // Apply settings JSON to stylesheet and other places
