@@ -164,8 +164,8 @@ function createTabContainerDivs() {
 // Adds container divs to structure
 function addLocalDivsToStructure() {
     containers.forEach(cont => {
-        if (cont.containerDiv.parentNode) cont.containerDiv.parentNode.removeChild(cont.containerDiv)
-        container.structure[settings.containerStyle].appendChild(cont.containerDiv)
+        if (cont.treeContainerDiv.parentNode) cont.treeContainerDiv.parentNode.removeChild(cont.treeContainerDiv)
+        container.structure[settings.containerStyle].appendChild(cont.treeContainerDiv)
     })
 }
 
