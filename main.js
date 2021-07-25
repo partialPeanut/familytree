@@ -7,15 +7,16 @@ function main() {
     // Loops through every container and builds individual trees for each
     containers.forEach(container => {
         copySiblingSet(container)
-
         createUnspacedTree(container)
         setTimeout(function(){
             spaceTree(container)
             drawAcrossLines(container)
             makeDraggable(container.containerDiv)
-        }, 1200);
+        }, 1200)
     })
-    document.getElementsByClassName("tabForContainer")[0].click()
+    setTimeout(function() {
+        document.getElementsByClassName("tabForContainer")[0].click()
+    }, 1600)
 }
 
 // Apply settings JSON to stylesheet and other places
