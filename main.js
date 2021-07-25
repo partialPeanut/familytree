@@ -16,12 +16,6 @@ function main() {
     })
     setTimeout(function() {
         if (settings.containerStyle == 'tabs') document.getElementsByClassName("tabForContainer")[0].click()
-        containers.forEach(container => {
-            minSibHeight = minValue(container.siblings, 'height')
-            minHeightSibs = container.siblings.filter(thisSib => thisSib.height == minSibHeight)
-            centerTopSib = getValueAtMiddleIndex(minHeightSibs)
-            centerTopSib.div.scrollIntoView({behavior: "auto", block: "end", inline: "center"})
-        })
     }, 2400)
 }
 
@@ -429,6 +423,8 @@ function spaceTree(container) {
         })
     }
 
+    centerTopSib = getValueAtMiddleIndex(minHeightSibs)
+    centerTopSib.div.scrollIntoView({behavior: "auto", block: "end", inline: "center"})
     console.log(`With spacing, container ${container.name} has these siblings:`)
     console.log(container.siblings)
 }
