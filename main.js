@@ -150,7 +150,6 @@ function createTabContainerDivs() {
         containerDiv = document.createElement('div')
         containerDiv.id = "container-tab-" + container.tabPos
         containerDiv.classList.add("containerTab")
-        containerDiv.classList.add("row")
         tcc.append(containerDiv)
 
         tabButton = document.createElement('button')
@@ -169,7 +168,7 @@ function createTabContainerDivs() {
 function addLocalDivsToStructure() {
     containers.forEach(cont => {
         if (cont.containerDiv.parentNode) cont.containerDiv.parentNode.removeChild(cont.containerDiv)
-        container.structure[settings.containerStyle].appendChild(cont.containerDiv)
+        cont.structure[settings.containerStyle].appendChild(cont.containerDiv)
     })
 }
 
