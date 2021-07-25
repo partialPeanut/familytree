@@ -42,36 +42,6 @@ html, body {
     overflow: auto;
 }
 
-.tabNavButtonContainer {
-    border-bottom: 4px solid #ddd;
-    align-items: center;
-    display: flex;
-}
-
-.tabNavButton {
-    background-color: transparent;
-	border: 1px solid transparent;
-	font-size: 40px;
-    margin-left: 6px;
-}
-.tabNavButton.right {
-    margin-left: auto;
-    margin-right: 6px;
-}
-
-.secondaryTab {
-    overflow-y: auto;
-}
-
-.newline {
-    white-space: pre-wrap;
-}
-
-.clickable:hover {
-    transform: scale(1.1);
-    cursor: pointer;
-}
-
 #mwContainerContainer {
     width: 100%;
     height: 100%;
@@ -106,17 +76,52 @@ html, body {
     cursor: row-resize;
 }
 
-#tabsContainerContainer {
+#tabsContainerContainerContainer {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+#tabsContainerContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
 }
 .containerTab {
     display: flex;
     width: 100%;
     flex: auto;
     overflow: auto;
+}
+
+.tabNavButtonContainer {
+    border-bottom: 4px solid #ddd;
+    align-items: center;
+    display: flex;
+}
+
+.tabNavButton {
+    background-color: transparent;
+	border: 1px solid transparent;
+	font-size: 40px;
+    margin-left: 6px;
+}
+.tabNavButton.right {
+    margin-left: auto;
+    margin-right: 6px;
+}
+
+.secondaryTab {
+    overflow-y: auto;
+}
+
+.newline {
+    white-space: pre-wrap;
+}
+
+.clickable:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 .treeContainer {

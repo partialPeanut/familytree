@@ -2,15 +2,15 @@
 function makeTabbable(ele, link) {
     const clickedTabHandler = function() {
         containerTabs = document.getElementsByClassName("containerTab")
-        containerTabs.forEach(tab => {
-            tab.style.display = "none"
-        })
+        for (i = 0; i < containerTabs.length; i++) {
+            containerTabs[i].style.display = "none"
+        }
         link.style.display = "block"
 
         tabs = document.getElementsByClassName("tabForContainer")
-        tabs.forEach(tab => {
-            tab.classList.remove('active')
-        })
+        for (i = 0; i < tabs.length; i++) {
+            tabs[i].classList.remove('active')
+        }
         ele.classList.add('active')
     }
 

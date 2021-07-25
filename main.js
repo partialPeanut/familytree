@@ -83,6 +83,7 @@ function createLocalContainerDivs() {
 
         treeDiv = document.createElement('div')
         treeDiv.classList.add('tree')
+        treeContainerDiv.appendChild(treeDiv)
 
         container.containerDiv = treeContainerDiv
         container.treeDiv = treeDiv
@@ -155,6 +156,9 @@ function createTabContainerDivs() {
         tabButton = document.createElement('button')
         tabButton.classList.add("tabForContainer")
         tbc.append(tabButton)
+
+        nameName = document.createTextNode(container.name)
+        tabButton.appendChild(nameName)
         makeTabbable(tabButton, containerDiv)
 
         container.structure['tabs'] = containerDiv
@@ -275,6 +279,7 @@ function createUnspacedTree(container) {
             nameButton.classList.add('name')
             nameButton.classList.add('clickable')
             nameButton.classList.add(houseClean)
+
             // If stub. should redirect to house info. Otherwise, redirects to sibling.
             if (sib.tags.includes('stub')) {
                 tag = getTag(sib.house)
