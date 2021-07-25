@@ -84,7 +84,7 @@ function createLocalContainerDivs() {
         treeDiv = document.createElement('div')
         treeDiv.classList.add('tree')
 
-        container.treeContainerDiv = containerDiv
+        container.containerDiv = treeContainerDiv
         container.treeDiv = treeDiv
     })
 }
