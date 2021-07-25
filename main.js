@@ -84,7 +84,7 @@ function createLocalContainerDivs() {
         treeDiv = document.createElement('div')
         treeDiv.classList.add('tree')
 
-        container.treeContainerDiv = treeContainerDiv
+        container.treeContainerDiv = containerDiv
         container.treeDiv = treeDiv
     })
 }
@@ -164,8 +164,8 @@ function createTabContainerDivs() {
 // Adds container divs to structure
 function addLocalDivsToStructure() {
     containers.forEach(cont => {
-        if (cont.treeContainerDiv.parentNode) cont.treeContainerDiv.parentNode.removeChild(cont.treeContainerDiv)
-        container.structure[settings.containerStyle].appendChild(cont.treeContainerDiv)
+        if (cont.containerDiv.parentNode) cont.containerDiv.parentNode.removeChild(cont.containerDiv)
+        container.structure[settings.containerStyle].appendChild(cont.containerDiv)
     })
 }
 
