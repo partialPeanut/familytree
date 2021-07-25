@@ -36,14 +36,14 @@ function tagRowToJSON(row) {
 }
 
 // Converts a single container into a JSON format
-function contaierRowToJSON(row) {
+function containerRowToJSON(row) {
     contJSON = {}
     contJSON.name = row[0]
     contJSON.tabPos = parseInt(row[1])
     contJSON.row = parseInt(row[2])
     contJSON.column = parseInt(row[3])
     contJSON.houses = row[4].split(';')
-    contJSON.structures = {}
+    contJSON.structure = {}
 
     return contJSON
 }

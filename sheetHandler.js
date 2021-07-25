@@ -197,7 +197,7 @@ function createContainerSettings(result) {
     containers = []
     docStyle = document.body.style
     result.values.forEach(function(row) {
-        container = contaierRowToJSON(row)
+        container = containerRowToJSON(row)
         containers.push(container)
     })
 
