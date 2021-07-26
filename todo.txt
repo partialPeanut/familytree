@@ -4,6 +4,7 @@
  + Loading bar
  + Tree margins
  + Make non-touching trees snap to mid
+ + People with this tag for houses
 
  MAJOR CHANGES/ADDITIONS
  + Zoom!!
