@@ -29,7 +29,7 @@ function applySettings() {
     })
 
     // Tag data
-    stylesheet = document.styleSheets[0]
+    stylesheet = document.styleSheets[1]
     settings.tagData.forEach(tag => {
         if (tag.type.includes("STYLE")) {
             rule = "." + cleanStr(tag.name) + " {\n"
@@ -449,6 +449,7 @@ function spaceTree(container) {
 
     centerTopSib = getValueAtMiddleIndex(minHeightSibs)
     centerTopSib.div.scrollIntoView({behavior: "auto", block: "end", inline: "center"})
+    centerTopSib.div.scrollBy(0, -1000)
     console.log(`With spacing, container ${container.name} has these siblings:`)
     console.log(container.siblings)
 }
