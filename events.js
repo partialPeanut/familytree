@@ -3,9 +3,9 @@ function makeTabbable(ele, link) {
     const clickedTabHandler = function() {
         containerTabs = document.getElementsByClassName("containerTab")
         for (i = 0; i < containerTabs.length; i++) {
-            containerTabs[i].style.display = "none"
+            containerTabs[i].style.height = "0%"
         }
-        link.style.display = "block"
+        link.style.height = "100%"
 
         tabs = document.getElementsByClassName("tabForContainer")
         for (i = 0; i < tabs.length; i++) {

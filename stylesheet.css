@@ -84,10 +84,12 @@ html, body {
 }
 #tabsContainerContainer {
     display: flex;
+    height: 100%;
     overflow: auto;
     flex-direction: column;
 }
 .containerTab {
+    height: 100%;
     overflow: auto;
 }
 
