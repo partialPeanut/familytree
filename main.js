@@ -160,6 +160,7 @@ function createTabContainerDivs() {
 
         tabLink = document.createElement('a')
         tabLink.setAttribute('href', '#' + containerDiv.id)
+        tabButton.appendChild(tabLink)
 
         nameName = document.createTextNode(container.name)
         tabLink.appendChild(nameName)
@@ -170,7 +171,7 @@ function createTabContainerDivs() {
     tabs.find( ".ui-tabs-nav" ).sortable({
         axis: "x",
         stop: function() {
-          tabs.tabs( "refresh" );
+          tabs.tabs( "refresh" )
         }
     })
 }

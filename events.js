@@ -1,4 +1,5 @@
-// Allows a tab to be clicked, displaying link
+// Allows a tab to be clicked, displaying link (DEPRECATED: Now use jQueryUI)
+/*
 function makeTabbable(ele, link) {
     const clickedTabHandler = function() {
         containerTabs = document.getElementsByClassName("containerTab")
@@ -16,6 +17,7 @@ function makeTabbable(ele, link) {
 
     ele.addEventListener('click', clickedTabHandler)
 }
+*/
 
 // Allows an element to be grabbed and dragged to scroll
 function makeDraggable(ele) {

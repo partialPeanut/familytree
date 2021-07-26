@@ -126,8 +126,6 @@ function createTagConjunction(sib, tagArray) {
     depth = -1
     newRelatedTags = []
     while (newRelatedTags.length < 3) {
-        console.log("tai: " + tai + "\ndepth: " + depth + "\nnewRelatedTags: " + newRelatedTags)
-
         if (depth < 0) newRelatedTags.push(tagArray[tai].name)
         else {
             thisNewRTag = tagArray[tai].relatedTags[depth]
