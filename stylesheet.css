@@ -89,7 +89,7 @@ html, body {
     flex-direction: column;
 }
 .containerTab {
-    height: 100%;
+    height: 0%;
     overflow: auto;
 }
 

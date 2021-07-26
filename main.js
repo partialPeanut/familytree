@@ -170,6 +170,13 @@ function createTabContainerDivs() {
     tabs = $( tcc ).tabs()
     tabs.find( ".ui-tabs-nav" ).sortable({
         axis: "x",
+        create: function(e, ui) {
+            ui.panel.height('100%')
+        },
+        activate: function(e, ui) {
+            ui.oldPanel.height('0%')
+            ui.newPanel.height('100%')
+        },
         stop: function() {
           tabs.tabs( "refresh" )
         }
