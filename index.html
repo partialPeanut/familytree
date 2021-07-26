@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="stylesheet.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://unpkg.com/split.js/dist/split.min.js"></script>
 
     <script src="vue.js"></script>
@@ -32,8 +34,9 @@
             <!-- The tabs with the tree in it, autofilled by script -->
             <div id="mwContainerContainer" v-if="getDisplayTab() == 'load' || getSettings().containerStyle == 'multi-window'"></div>
             <div id="tabsContainerContainerContainer" v-if="getDisplayTab() == 'load' || getSettings().containerStyle == 'tabs'">
-                <div id="tabsContainerContainer"></div>
-                <div id="tabButtonsContainer"></div>
+                <div id="tabsContainerContainer">
+                    <ul id="tabButtonsContainer"></ul>
+                </div>
             </div>
         </div>
 

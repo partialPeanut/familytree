@@ -154,15 +154,24 @@ function createTabContainerDivs() {
         containerDiv.classList.add("containerTab")
         tcc.append(containerDiv)
 
-        tabButton = document.createElement('button')
+        tabButton = document.createElement('li')
         tabButton.classList.add("tabForContainer")
         tbc.append(tabButton)
 
+        tabLink = document.createElement('a')
+        tabLink.setAttribute('href', '#' + containerDiv.id)
+
         nameName = document.createTextNode(container.name)
-        tabButton.appendChild(nameName)
-        makeTabbable(tabButton, containerDiv)
+        tabLink.appendChild(nameName)
 
         container.structure['tabs'] = containerDiv
+    })
+    tabs = $( tcc ).tabs()
+    tabs.find( ".ui-tabs-nav" ).sortable({
+        axis: "x",
+        stop: function() {
+          tabs.tabs( "refresh" );
+        }
     })
 }
 
