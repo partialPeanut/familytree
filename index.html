@@ -43,7 +43,7 @@
         <!-- All versions of things that can pop up on the right -->
         <div id="rightColContainer" v-if="getDisplayTab() != 'mainMenu'" class="col right">
             <!-- Buttons -->
-            <div class="tabNavButtonContainer">
+            <div class="tabNavButtonContainer" v-if="getDisplayTab() == 'nameTab' || getDisplayTab() == 'tagTab'">
                 <button onclick="goBack()" class="tabNavButton clickable">🠔</button>
                 <button v-if="canGoForward()" onclick="goForward()" class="tabNavButton clickable">🠖</button>
                 <button onclick="exitTab()" class="tabNavButton right clickable">×</button>

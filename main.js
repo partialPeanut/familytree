@@ -152,7 +152,7 @@ function createTabContainerDivs() {
         containerDiv = document.createElement('div')
         containerDiv.id = "container-tab-" + container.tabPos
         containerDiv.classList.add("containerTab")
-        tcc.append(containerDiv)
+        tcc.insertBefore(containerDiv, tbc)
 
         tabButton = document.createElement('li')
         tabButton.classList.add("tabForContainer")
