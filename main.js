@@ -169,9 +169,15 @@ function createTabContainerDivs() {
     })
     tabs = $( tcc ).tabs({
         create: function(e, ui) {
+            panels = tabs.find( ".ui-tabs-panel" )
+            panels.removeAttr('aria-hidden')
+            panels.css("display", "")
             ui.panel.height('100%')
         },
         activate: function(e, ui) {
+            panels = tabs.find( ".ui-tabs-panel" )
+            panels.removeAttr('aria-hidden')
+            panels.css("display", "")
             ui.oldPanel.height('0%')
             ui.newPanel.height('100%')
         }
