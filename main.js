@@ -29,7 +29,7 @@ function applySettings() {
     })
 
     // Tag data
-    stylesheet = document.styleSheets[1]
+    stylesheet = document.styleSheets[0]
     settings.tagData.forEach(tag => {
         if (tag.type.includes("STYLE")) {
             rule = "." + cleanStr(tag.name) + " {\n"
