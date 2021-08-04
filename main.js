@@ -453,8 +453,7 @@ function spaceTree(container) {
     }
 
     centerTopSib = getValueAtMiddleIndex(minHeightSibs)
-    centerTopSib.div.scrollIntoView({behavior: "auto", block: "end", inline: "center"})
-    centerTopSib.div.scrollBy(0, -1000)
+    centerTopSib.div.scrollIntoView({behavior: "auto", block: "start", inline: "center"})
     console.log(`With spacing, container ${container.name} has these siblings:`)
     console.log(container.siblings)
 }
