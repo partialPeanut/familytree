@@ -27,13 +27,13 @@ function onResizeEvent() {
         containers.forEach(container => setScrollLock(container))
         atResizeStart = false
     }
-    
+
     containers.forEach(container => goToScrollLock(container))
 
     clearTimeout(atResizeEnd)
     atResizeEnd = setTimeout(function() {
         atResizeStart = true
-    }, 100)
+    }, 400)
 }
 
 // Allows an element to be grabbed and dragged to scroll
