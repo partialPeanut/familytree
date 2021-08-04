@@ -184,7 +184,11 @@ function createTabContainerDivs() {
     })
     tabs.find( ".ui-tabs-nav" ).sortable({
         axis: "x",
-        containment: "parent",
+        items: "> .tabForContainer",
+        revert: true,
+        activate: function(event, ui) {
+            ui.helper.css("position", "")
+        },
         stop: function() {
           tabs.tabs( "refresh" )
         }
