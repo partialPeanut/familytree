@@ -162,6 +162,7 @@ function createTabContainerDivs() {
 
         tabLink = document.createElement('a')
         tabLink.setAttribute('href', '#' + containerDiv.id)
+        tabLink.setAttribute('data-href', '#' + containerDiv.id)
         tabButton.appendChild(tabLink)
 
         nameName = document.createTextNode(container.name)
@@ -171,10 +172,18 @@ function createTabContainerDivs() {
     })
     tabs = $( tcc ).tabs({
         create: function(e, ui) {
+            anchors = $( tcc ).find( ".ui-tabs-anchor" )
+            anchors.removeAttr('href')
+
             panels = $( tcc ).find( ".ui-tabs-panel" )
             panels.removeAttr('aria-hidden')
             panels.css("display", "")
             ui.panel.height('100%')
+        },
+        beforeActivate: function(e, ui) {
+            thisLink = ui.newTab.firstChild
+            href = thisLink.getAttribute('data-href')
+            thisLink.setAttribute('href', href)
         },
         activate: function(e, ui) {
             panels = $( tcc ).find( ".ui-tabs-panel" )
@@ -182,6 +191,8 @@ function createTabContainerDivs() {
             panels.css("display", "")
             ui.oldPanel.height('0%')
             ui.newPanel.height('100%')
+
+            ui.newTab.firstChild.removeAttribute('href')
         }
     })
     tabs.find( ".ui-tabs-nav" ).sortable({
