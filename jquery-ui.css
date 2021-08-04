@@ -29,6 +29,7 @@
 	padding: .2em .2em 0;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 1em;
+	position: relative;
 }
 .ui-tabs .ui-tabs-nav li {
     list-style: none;
@@ -44,7 +45,6 @@
     float: left;
     padding: .5em 1em;
     text-decoration: none;
-	position: relative;
 }
 
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
