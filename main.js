@@ -181,9 +181,9 @@ function createTabContainerDivs() {
             ui.panel.height('100%')
         },
         beforeActivate: function(e, ui) {
-            thisLink = ui.newTab.firstChild
-            href = thisLink.getAttribute('data-href')
-            thisLink.setAttribute('href', href)
+            thisLink = $( ui.newTab ).children()
+            href = thisLink.getAttr('data-href')
+            thisLink.setAttr('href', href)
         },
         activate: function(e, ui) {
             panels = $( tcc ).find( ".ui-tabs-panel" )
@@ -192,7 +192,8 @@ function createTabContainerDivs() {
             ui.oldPanel.height('0%')
             ui.newPanel.height('100%')
 
-            ui.newTab.firstChild.removeAttribute('href')
+            thisLink = $( ui.newTab ).children()
+            thisLink.removeAttr('href')
         }
     })
     tabs.find( ".ui-tabs-nav" ).sortable({
