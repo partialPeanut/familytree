@@ -44,6 +44,7 @@
     float: left;
     padding: .5em 1em;
     text-decoration: none;
+	position: relative;
 }
 
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
@@ -67,9 +68,6 @@
     text-decoration: none;
 }
 
-.ui-corner-all {
-	border-radius: 3px;
-}
 .ui-corner-top {
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
