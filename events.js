@@ -19,6 +19,23 @@ function makeTabbable(ele, link) {
 }
 */
 
+// Handles scroll locking on resize
+atResizeStart = true
+var atResizeEnd
+function onResizeEvent() {
+    if (atResizeStart) {
+        containers.forEach(container => setScrollLock(container))
+        atResizeStart = false
+    }
+    
+    containers.forEach(container => goToScrollLock(container))
+
+    clearTimeout(atResizeEnd)
+    atResizeEnd = setTimeout(function() {
+        atResizeStart = true
+    }, 100)
+}
+
 // Allows an element to be grabbed and dragged to scroll
 function makeDraggable(ele) {
     pos = { top: 0, left: 0, x: 0, y: 0 }

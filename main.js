@@ -89,11 +89,9 @@ function createLocalContainerDivs() {
 
         container.containerDiv = treeContainerDiv
         container.treeDiv = treeDiv
-
-        treeContainerDiv.addEventListener('scroll', setScrollLock(container))
     })
 
-    window.onresize = function(){ containers.forEach(container => goToScrollLock(container)) }
+    window.onresize = onResizeEvent
 }
 
 // Create a whole fuck ton of nested divs to hold all the trees for multi-window

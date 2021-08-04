@@ -361,12 +361,8 @@ function setScrollLock(container) {
 // Scrolls a container to the position it should be locked at
 function goToScrollLock(container) {
     thisTreeContainer = container.containerDiv
-    thisTreeContainer.removeEventListener('scroll', setScrollLock)
-
     stx = container.scrollLock[0] - thisTreeContainer.clientWidth/2
     thisTreeContainer.scrollTo(stx, container.scrollLock[1])
-    
-    thisTreeContainer.addEventListener('scroll', setScrollLock(container))
 }
 
 // Changes tab displayed alongside tree, or only the tree itself.
