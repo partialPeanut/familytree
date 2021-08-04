@@ -82,6 +82,7 @@ function createLocalContainerDivs() {
         treeContainerDiv = document.createElement('div')
         treeContainerDiv.id = "tree-container-" + cleanStr(container.name)
         treeContainerDiv.classList.add('treeContainer')
+        treeContainerDiv.onscroll = setScrollLock(container)
 
         treeDiv = document.createElement('div')
         treeDiv.classList.add('tree')
@@ -90,6 +91,8 @@ function createLocalContainerDivs() {
         container.containerDiv = treeContainerDiv
         container.treeDiv = treeDiv
     })
+
+    window.onresize = containers.forEach(container => goToScrollLock(container))
 }
 
 // Create a whole fuck ton of nested divs to hold all the trees for multi-window
