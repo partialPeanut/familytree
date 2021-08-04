@@ -182,8 +182,8 @@ function createTabContainerDivs() {
         },
         beforeActivate: function(e, ui) {
             thisLink = $( ui.newTab ).children()
-            href = thisLink.getAttr('data-href')
-            thisLink.setAttr('href', href)
+            href = thisLink.attr('data-href')
+            thisLink.attr('href', href)
         },
         activate: function(e, ui) {
             panels = $( tcc ).find( ".ui-tabs-panel" )
