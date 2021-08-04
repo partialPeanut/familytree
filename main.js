@@ -187,7 +187,7 @@ function createTabContainerDivs() {
         items: "> .tabForContainer",
         revert: true,
         activate: function(event, ui) {
-            ui.helper.css("position", "")
+            ui.helper.css("top", "")
         },
         stop: function() {
           tabs.tabs( "refresh" )
