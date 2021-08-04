@@ -82,7 +82,7 @@ function createLocalContainerDivs() {
         treeContainerDiv = document.createElement('div')
         treeContainerDiv.id = "tree-container-" + cleanStr(container.name)
         treeContainerDiv.classList.add('treeContainer')
-        treeContainerDiv.onscroll = setScrollLock(container)
+        treeContainerDiv.addEventListener('scroll', setScrollLock(container))
 
         treeDiv = document.createElement('div')
         treeDiv.classList.add('tree')
