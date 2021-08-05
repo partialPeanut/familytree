@@ -198,15 +198,15 @@ function createTabContainerDivs() {
     })
     tabs.find( ".ui-tabs-nav" ).sortable({
         axis: "x",
+        containment: "parent",
         items: "> .tabForContainer",
         revert: true,
         start: function(e, ui) {
-            ui.helper.css("top", "")
-        },
-        change: function(e, ui) {
-            ui.helper.css("top", "")
+            ui.helper.css("margin", ".2em 0")
         },
         stop: function() {
+            ui.helper.css("margin", "")
+
             $( '[data-href]' ).each((idx, el) => {
                 el.setAttribute('href', el.getAttribute('data-href'))
             })
