@@ -201,10 +201,10 @@ function createTabContainerDivs() {
         items: "> .tabForContainer",
         revert: true,
         start: function(e, ui) {
-            ui.helper.removeAttr('top')
+            $( '.ui-sortable-helper' ).removeAttr('top')
         },
         change: function(e, ui) {
-            ui.helper.removeAttr('top')
+            $( '.ui-sortable-helper' ).removeAttr('top')
         },
         stop: function() {
             $( '[data-href]' ).each((idx, el) => {
