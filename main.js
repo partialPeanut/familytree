@@ -202,9 +202,9 @@ function createTabContainerDivs() {
         items: "> .tabForContainer",
         revert: true,
         start: function(e, ui) {
-            ui.helper.css("margin", ".2em 0")
+            ui.helper.css("margin", "calc(.2em + 1px) 0")
         },
-        stop: function() {
+        stop: function(e, ui) {
             ui.helper.css("margin", "")
 
             $( '[data-href]' ).each((idx, el) => {
