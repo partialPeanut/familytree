@@ -202,7 +202,7 @@ function createTabContainerDivs() {
         revert: true,
         start: function() {
             $( '[data-href]' ).each((idx, el) => {
-                el.attr('href', el.attr('data-href'))
+                el.setAttribute('href', el.getAttribute('data-href'))
             })
         },
         stop: function() {
