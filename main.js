@@ -201,8 +201,9 @@ function createTabContainerDivs() {
         items: "> .tabForContainer",
         revert: true,
         start: function(e, ui) {
-            refVar = ui
-            console.log(refVar)
+            ui.helper.removeAttr('top')
+        },
+        change: function(e, ui) {
             ui.helper.removeAttr('top')
         },
         stop: function() {
