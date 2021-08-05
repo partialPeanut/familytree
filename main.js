@@ -201,8 +201,9 @@ function createTabContainerDivs() {
         items: "> .tabForContainer",
         revert: true,
         start: function(e, ui) {
-            console.log(ui)
-            ui.helper.removeAttribute('top')
+            refVar = ui
+            console.log(refVar)
+            ui.helper.removeAttr('top')
         },
         stop: function() {
             $( '[data-href]' ).each((idx, el) => {
