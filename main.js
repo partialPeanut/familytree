@@ -201,6 +201,7 @@ function createTabContainerDivs() {
         items: "> .tabForContainer",
         revert: true,
         start: function(e, ui) {
+            console.log(ui)
             ui.helper.removeAttribute('top')
         },
         stop: function() {
