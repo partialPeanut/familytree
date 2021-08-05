@@ -203,6 +203,9 @@ function createTabContainerDivs() {
         start: function(e, ui) {
             ui.helper.css("top", "")
         },
+        change: function(e, ui) {
+            ui.helper.css("top", "")
+        },
         stop: function() {
             $( '[data-href]' ).each((idx, el) => {
                 el.setAttribute('href', el.getAttribute('data-href'))
