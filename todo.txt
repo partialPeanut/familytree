@@ -5,10 +5,20 @@
  + Tree margins
  + Make non-touching trees snap to mid
  + People with this tag for houses
+ + Don't display images if they don't load
+ + Active indicator for siblings that have been clicked on
+  - Display for hovering over button in sidebar?
+ + Alternative font
+ + Legend for houses/colors
+ + Minimize trees
+ + Switch to tab when navigating through sidebar
 
  MAJOR CHANGES/ADDITIONS
  + Zoom!!
  + Main menu
+ + LONGE tree with one class per row
+ + Legend
+ + Clan logos on tree
 
 TAB SYSTEM
 + Create your own tab, highly customizable
