@@ -26,7 +26,7 @@
 
 .ui-tabs .ui-tabs-nav {
 	margin: 0;
-	padding: .2em .2em 0;
+	padding: .2em;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 1em;
 	position: relative;
@@ -36,8 +36,8 @@
     float: left;
     position: relative;
     top: 0;
-    margin: 1px .2em 0 0;
-    border-bottom-width: 0;
+    margin: 1px .2em 1px 0;
+	border-radius: 3px;
     padding: 0;
     white-space: nowrap;
 }
@@ -67,9 +67,4 @@
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
     color: #ffffff;
     text-decoration: none;
-}
-
-.ui-corner-top {
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
 }
