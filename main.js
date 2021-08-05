@@ -200,8 +200,14 @@ function createTabContainerDivs() {
         axis: "x",
         items: "> .tabForContainer",
         revert: true,
+        start: function() {
+            $( [data-href] ).each((idx, el) => {
+                el.attr('href', el.attr('data-href'))
+            })
+        },
         stop: function() {
           tabs.tabs( "refresh" )
+          $( [data-href] ).removeAttr('href')
         }
     })
 }
