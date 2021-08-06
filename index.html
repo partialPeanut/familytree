@@ -55,27 +55,27 @@
 
             <!-- Tab that opens when you click a name. -->
             <div id="nameTab" class="secondaryTab" v-if="getDisplayTab() == 'nameTab'">
-                <h1>{{ unspecialText(getTabData().name) }}</h1>
-                <h2>{{ getTabData().pledgeClass }}</h2>
-                <h2><button @click="displayTagInfo(getTabData().house)">{{ getTabData().house }}</button></h2>
+                <h1>{{ unspecialText(getTabData().sib.name) }}</h1>
+                <h2>{{ getTabData().sib.pledgeClass }}</h2>
+                <h2><button @click="displayTagInfo(getTabData().sib.house)">{{ getTabData().sib.house }}</button></h2>
 
-                <ol v-if="getTabData().tags.length > 0">
-                    <li v-for="tagName in getTabData().tags">
+                <ol v-if="getTabData().sib.tags.length > 0">
+                    <li v-for="tagName in getTabData().sib.tags">
                         <button @click="displayTagInfo(tagName)">{{ tagName }}</button>
                     </li>
                 </ol>
 
-                <p v-if="getTabData().bigName != null">Big:
-                    <button @click="goToName(getTabData().bigName)">{{ unspecialText(getTabData().bigName) }}</button>
+                <p v-if="getTabData().sib.bigName != null">Big:
+                    <button @click="sibToName(getTabData().sib.bigName)">{{ unspecialText(getTabData().sib.bigName) }}</button>
                 </p>
 
-                <p v-if="getTabData().littleNames.length == 1">Little:
-                    <button @click="goToName(getTabData().littleNames[0])">{{ unspecialText(getTabData().littleNames[0]) }}</button>
+                <p v-if="getTabData().sib.littleNames.length == 1">Little:
+                    <button @click="sibToName(getTabData().sib.littleNames[0])">{{ unspecialText(getTabData().sib.littleNames[0]) }}</button>
                 </p>
-                <p v-if="getTabData().littleNames.length > 1">Littles:</p>
-                <ol v-if="getTabData().littleNames.length > 1">
-                    <li v-for="littleName in getTabData().littleNames">
-                        <button @click="goToName(littleName)">{{ unspecialText(littleName) }}</button>
+                <p v-if="getTabData().sib.littleNames.length > 1">Littles:</p>
+                <ol v-if="getTabData().sib.littleNames.length > 1">
+                    <li v-for="littleName in getTabData().sib.littleNames">
+                        <button @click="sibToName(littleName)">{{ unspecialText(littleName) }}</button>
                     </li>
                 </ol>
             </div>
@@ -83,24 +83,23 @@
             <!-- Tag that opens when you click a tab. Wait no -->
             <div id="tagTab" class="secondaryTab" v-if="getDisplayTab() == 'tagTab'">
                 <img v-if="getTabData().imgSrc" class="tagSymbol" :src="getTabData().imgSrc">
-                <h1>
-                    {{ getTabData().name }}
-                </h1>
-                <p class="newline">{{ getTabData().description }}</p>
+                <h1>{{ getTabData().tag.name }}</h1>
 
-                <p v-if="getTabData().taggedSibs.length > 0">
-                    <span v-if="getTabData().type.includes('HOUSE')">People in this house:</span>
-                    <span v-if="!getTabData().type.includes('HOUSE')">People with this tag:</span>
+                <p class="newline">{{ getTabData().tag.description }}</p>
+
+                <p v-if="getTabData().tag.taggedSibs.length > 0">
+                    <span v-if="getTabData().tag.type.includes('HOUSE')">People in this house:</span>
+                    <span v-if="!getTabData().tag.type.includes('HOUSE')">People with this tag:</span>
                 </p>
-                <ol v-if="getTabData().taggedSibs.length > 0">
-                    <li v-for="sib in getTabData().taggedSibs">
-                        <button @click="goToName(sib.name)">{{ unspecialText(sib.name) }}</button>
+                <ol v-if="getTabData().tag.taggedSibs.length > 0">
+                    <li v-for="sib in getTabData().tag.taggedSibs">
+                        <button @click="tagToName(sib.name)">{{ unspecialText(sib.name) }}</button>
                     </li>
                 </ol>
 
-                <p>Related tags:</p>
-                <ol v-if="getTabData().relatedTags.length > 0">
-                    <li v-for="tagName in getTabData().relatedTags">
+                <p v-if="getTabData().tag.relatedTags.length > 0">Related tags:</p>
+                <ol v-if="getTabData().tag.relatedTags.length > 0">
+                    <li v-for="tagName in getTabData().tag.relatedTags">
                         <button @click="displayTagInfo(tagName)">{{ tagName }}</button>
                     </li>
                 </ol>

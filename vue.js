@@ -1,11 +1,4 @@
 function loadVue() {
-    dataGetter = new Vue({
-        el: '#dataGetter',
-        data: {
-            manuals: true
-        }
-    })
-
     appElement = new Vue({
         el: '#app',
         data: {
@@ -33,9 +26,22 @@ function loadVue() {
                 tabData = tagToTab(tag)
                 showTab(tabData)
             },
-            goToName: function(sibName) {
-                console.log("Displaying " + sibName + " from menu")
-                $('#' + cleanStr(sibName) + ' button').trigger("click")
+            sibToName: function(sibName) {
+                console.log("Displaying " + sibName + " from a sibling")
+                currSib = this.getTabData().sib
+                newSib = currSib.container.siblings.find(sib => sib.name == sibName)
+                tabData = nameToTag(newSib)
+                showTab(tabData)
+            },
+            tagToName: function(sibName) {
+                console.log("Displaying " + sibName + " from a tag")
+                var newSib
+                containers.some(cont => {
+                    newSib = cont.siblings.find(sib => sib.name == sibName)
+                    if (newSib) return true
+                })
+                tabData = nameToTag(newSib)
+                showTab(tabData)
             }
         }
     })

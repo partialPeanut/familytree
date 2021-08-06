@@ -369,14 +369,8 @@ function goToScrollLock(container) {
 function sibToTab(sib) {
     tabData = {
         tabType: "nameTab",
-        name: sib.name,
-        pledgeClass: sib.pledgeClass,
-        house: sib.house,
-        tags: sib.tags,
-        bigName: sib.bigName,
-        littleNames: sib.littleNames,
-        div: sib.div,
-        container: sib.container
+        sib: sib,
+        div: sib.div
     }
     return tabData
 }
@@ -385,12 +379,9 @@ function sibToTab(sib) {
 function tagToTab(tag) {
     tabData = {
         tabType: "tagTab",
+        tag: tag,
         name: tag.name,
-        type: tag.type,
-        imgSrc: tag.imageAddress ? "https://drive.google.com/thumbnail?id=" + tag.imageAddress : undefined,
-        description: tag.description,
-        taggedSibs: tag.taggedSibs,
-        relatedTags: tag.relatedTags,
+        imgSrc: tag.imageAddress ? "https://drive.google.com/thumbnail?id=" + tag.imageAddress : undefined
     }
     return tabData
 }
@@ -422,7 +413,7 @@ function showTab(tabData) {
     setTimeout(function() {
         containers.forEach(cont => goToScrollLock(cont))
         if (tabData.div) {
-            if (tabData.container) $( tabData.container.structure.tabsTab.firstChild ).click()
+            if (tabData.sib) $( tabData.container.structure.tabsTab.firstChild ).click()
             tabData.div.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
         }
     }, 0)
