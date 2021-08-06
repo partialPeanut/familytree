@@ -8,17 +8,15 @@
  + Don't display images if they don't load
  + Active indicator for siblings that have been clicked on
   - Display for hovering over button in sidebar?
- + Alternative font
- + Legend for houses/colors
- + Minimize trees
  + Switch to tab when navigating through sidebar
 
  MAJOR CHANGES/ADDITIONS
  + Zoom!!
  + Main menu
- + LONGE tree with one class per row
+ + LONGE tree type with one pledge class per row
  + Legend
  + Clan logos on tree
+ + Minimize trees
 
 TAB SYSTEM
 + Create your own tab, highly customizable
@@ -29,6 +27,7 @@ TAB SYSTEM
 + Edit/delete tabs
 
 SETTINGS PAGE
++ Apply to this tree/Apply to all trees
 + Light mode/dark mode/custom palette
 + Sizes
 + Font (w/ warning that some things might break)

@@ -365,6 +365,34 @@ function goToScrollLock(container) {
     thisTreeContainer.scrollTo(stx, container.scrollLock[1])
 }
 
+// Parses siblings data into relevant tab data
+function sibToTab(sib) {
+    tabData = {
+        tabType: "nameTab",
+        name: sib.name,
+        pledgeClass: sib.pledgeClass,
+        house: sib.house,
+        tags: sib.tags,
+        bigName: sib.bigName,
+        littleNames: sib.littleNames,
+    }
+    return tabData
+}
+
+// Parses tag data into relevant tab data
+function tagToTab(tag) {
+    tabData = {
+        tabType: "tagTab",
+        name: tag.name,
+        type: tag.type,
+        imgSrc: tag.imageAddress ? "https://drive.google.com/thumbnail?id=" + tag.imageAddress : undefined,
+        description: tag.description,
+        taggedSibs: tag.taggedSibs,
+        relatedTags: tag.relatedTags,
+    }
+    return tabData
+}
+
 // Changes tab displayed alongside tree, or only the tree itself.
 function showTab(tabData) {
     containers.forEach(cont => setScrollLock(cont))
@@ -383,10 +411,12 @@ function showTab(tabData) {
         })
     }
 
+    // Adds tab info to tab history
     appElement.tabHistory = appElement.tabHistory.slice(0, appElement.tabPosition+1)
     appElement.tabHistory.push(tabData)
     appElement.tabPosition++
 
+    // Scroll to the correct spot
     setTimeout(function() {
         containers.forEach(cont => goToScrollLock(cont))
         if (tabData.div)

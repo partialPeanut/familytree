@@ -78,16 +78,8 @@ function makeDraggable(ele) {
 // Allows a name to be clicked on
 function addNameClicker(ele, sib) {
     const clickedNameHandler = function(e) {
-        tabData = {
-            tabType: "nameTab",
-            name: sib.name,
-            pledgeClass: sib.pledgeClass,
-            house: sib.house,
-            tags: sib.tags,
-            bigName: sib.bigName,
-            littleNames: sib.littleNames,
-            div: ele
-        }
+        tabData = sibToTab(sib)
+        tabData.tab = ele
         showTab(tabData)
     }
 
@@ -97,15 +89,8 @@ function addNameClicker(ele, sib) {
 // Allows a tag to be clicked on
 function addTagClicker(ele, tag) {
     const clickedTagHandler = function(e) {
-        tabData = {
-            tabType: "tagTab",
-            name: tag.name,
-            imgSrc: tag.imageAddress ? "https://drive.google.com/thumbnail?id=" + tag.imageAddress : undefined,
-            description: tag.description,
-            taggedSibs: tag.taggedSibs,
-            relatedTags: tag.relatedTags,
-            div: ele
-        }
+        tabData = tagToTab(tag)
+        tabData.div = ele
         showTab(tabData)
     }
 

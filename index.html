@@ -88,7 +88,10 @@
                 </h1>
                 <p class="newline">{{ getTabData().description }}</p>
 
-                <p v-if="getTabData().taggedSibs.length > 0">People with this tag:</p>
+                <p v-if="getTabData().taggedSibs.length > 0">
+                    <span v-if="getTabData().type.includes('HOUSE')">People in this house:</span>
+                    <span v-if="!getTabData().type.includes('HOUSE')">People with this tag:</span>
+                </p>
                 <ol v-if="getTabData().taggedSibs.length > 0">
                     <li v-for="sib in getTabData().taggedSibs">
                         <button @click="goToName(sib.name)">{{ unspecialText(sib.name) }}</button>

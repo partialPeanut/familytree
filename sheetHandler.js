@@ -120,6 +120,9 @@ function placeSiblings(result) {
 
     // Add siblings to their tags' references
     siblings.forEach(sib => {
+        house = getTag(sib.house)
+        house.taggedSibs.push(sib)
+        house.taggedSibs.sort(function(a, b) { return a.pledgeClassNumber - b.pledgeClassNumber })
         sib.tags.forEach(tagName => {
             tag = getTag(tagName)
             tag.taggedSibs.push(sib)
