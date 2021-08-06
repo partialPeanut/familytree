@@ -375,6 +375,15 @@ function sibToTab(sib) {
     return tabData
 }
 
+// Parses the name of a sibling with ambiguous origin to relevant tab data
+function containerlessSibToTab(sibName) {
+    sib = siblings.find(sib => sib.name == sibName)
+    tabData = {
+        tabType: "nameTab",
+        sib: sib
+    }
+}
+
 // Parses tag data into relevant tab data
 function tagToTab(tag) {
     tabData = {

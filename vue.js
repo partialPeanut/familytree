@@ -28,28 +28,29 @@ function loadVue() {
             },
             sibToName: function(sibName) {
                 console.log("Displaying " + sibName + " from a sibling")
+
                 currSib = this.getTabData().sib
-                newSib = currSib.container.siblings.find(sib => sib.name == sibName)
-                tabData = nameToTag(newSib)
+                if (currSib.container) {
+                    newSib = currSib.container.siblings.find(sib => sib.name == sibName)
+                    tabData = sibToTab(newSib)
+                }
+                else tabData = containerlessSibToTab(sibName)
+
                 showTab(tabData)
             },
             tagToName: function(sibName) {
                 console.log("Displaying " + sibName + " from a tag")
+                
                 var newSib
                 if (containers.some(cont => {
                     newSib = cont.siblings.find(sib => sib.name == sibName)
                     if (newSib) return true
                 })) {
-                    tabData = nameToTag(newSib)
+                    tabData = sibToTab(newSib)
                 }
                 // If this sibling does not exist in any container
-                else {
-                    newSib = siblings.find(sib => sib.name == sibName)
-                    tabData = {
-                        tabType: "nameTab",
-                        sib: newSib
-                    }
-                }
+                else tabData = containerlessSibToTab(sibName)
+
                 showTab(tabData)
             }
         }
