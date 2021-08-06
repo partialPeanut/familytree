@@ -33,14 +33,13 @@ function loadVue() {
                 if (currSib.container) {
                     newSib = currSib.container.siblings.find(sib => sib.name == sibName)
                     tabData = sibToTab(newSib)
+                    showTab(tabData)
                 }
-                else tabData = containerlessSibToTab(sibName)
-
-                showTab(tabData)
+                else this.tagToName(sibName)
             },
             tagToName: function(sibName) {
                 console.log("Displaying " + sibName + " from a tag")
-                
+
                 var newSib
                 if (containers.some(cont => {
                     newSib = cont.siblings.find(sib => sib.name == sibName)
