@@ -397,10 +397,10 @@ function tagToTab(tag) {
 
 // Changes tab displayed alongside tree, or only the tree itself.
 function showTab(tabData) {
+    containers.forEach(cont => setScrollLock(cont))
+
     // Turns tree display and info display into a Split with a gutter for resizing
     if (!appElement.split) {
-        containers.forEach(cont => setScrollLock(cont))
-
         appElement.split = Split(['#leftColContainer', '#rightColContainer'], {
             gutterSize: 12,
             sizes: [80, 20],
