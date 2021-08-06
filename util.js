@@ -422,7 +422,7 @@ function showTab(tabData) {
     setTimeout(function() {
         containers.forEach(cont => goToScrollLock(cont))
         if (tabData.div) {
-            if (tabData.sib) $( tabData.container.structure.tabsTab.firstChild ).click()
+            if (tabData.sib) $( tabData.sib.container.structure.tabsTab.firstChild ).click()
             tabData.div.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
         }
     }, 0)
