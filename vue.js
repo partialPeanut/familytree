@@ -36,11 +36,20 @@ function loadVue() {
             tagToName: function(sibName) {
                 console.log("Displaying " + sibName + " from a tag")
                 var newSib
-                containers.some(cont => {
+                if (containers.some(cont => {
                     newSib = cont.siblings.find(sib => sib.name == sibName)
                     if (newSib) return true
-                })
-                tabData = nameToTag(newSib)
+                })) {
+                    tabData = nameToTag(newSib)
+                }
+                // If this sibling does not exist in any container
+                else {
+                    newSib = siblings.find(sib => sib.name == sibName)
+                    tabData = {
+                        tabType: "nameTab",
+                        sib: newSib
+                    }
+                }
                 showTab(tabData)
             }
         }
