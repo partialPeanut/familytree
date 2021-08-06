@@ -79,7 +79,6 @@ function makeDraggable(ele) {
 function addNameClicker(ele, sib) {
     const clickedNameHandler = function(e) {
         tabData = sibToTab(sib)
-        tabData.tab = ele
         showTab(tabData)
     }
 

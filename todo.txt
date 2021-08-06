@@ -4,11 +4,8 @@
  + Loading bar
  + Tree margins
  + Make non-touching trees snap to mid
- + People with this tag for houses
- + Don't display images if they don't load
  + Active indicator for siblings that have been clicked on
   - Display for hovering over button in sidebar?
- + Switch to tab when navigating through sidebar
 
  MAJOR CHANGES/ADDITIONS
  + Zoom!!

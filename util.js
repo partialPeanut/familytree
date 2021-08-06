@@ -375,6 +375,8 @@ function sibToTab(sib) {
         tags: sib.tags,
         bigName: sib.bigName,
         littleNames: sib.littleNames,
+        div: sib.div,
+        container: sib.container
     }
     return tabData
 }
@@ -419,8 +421,10 @@ function showTab(tabData) {
     // Scroll to the correct spot
     setTimeout(function() {
         containers.forEach(cont => goToScrollLock(cont))
-        if (tabData.div)
+        if (tabData.div) {
+            if (tabData.container) $( tabData.container.structure.tabsTab.firstChild ).click()
             tabData.div.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+        }
     }, 0)
 }
 

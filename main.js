@@ -14,9 +14,6 @@ function main() {
             makeDraggable(container.containerDiv)
         }, 1200)
     })
-    setTimeout(function() {
-        if (settings.containerStyle == 'tabs') document.getElementsByClassName("tabForContainer")[0].click()
-    }, 2400)
 }
 
 // Apply settings JSON to stylesheet and other places
@@ -169,6 +166,7 @@ function createTabContainerDivs() {
         tabLink.appendChild(nameName)
 
         container.structure['tabs'] = containerDiv
+        container.structure['tabsTab'] = tabButton
     })
     tabs = $( tcc ).tabs({
         create: function(e, ui) {
@@ -253,14 +251,18 @@ function copySiblingSet(container) {
     newFilteredSibs = JSON.parse(JSON.stringify(filteredSibs))
     // Edits siblings into stubs if necessary
     container.siblings = newFilteredSibs.map(sib => {
-        if (belongsUnaltered(sib)) return sib
+        if (belongsUnaltered(sib)) {
+            sib.container = container
+            return sib
+        }
         else if (belongsUnaltered(getBig(siblings, sib))) return {
             name: sib.house,
             bigName: sib.bigName,
             littleNames: [],
             house: sib.house,
             tags: ['stub'],
-            height: sib.height
+            height: sib.height,
+            container: container
         }
         else {
             validLittleNames = []
@@ -274,7 +276,8 @@ function copySiblingSet(container) {
                 littleNames: validLittleNames,
                 house: sib.house,
                 tags: ['stub'],
-                height: sib.height
+                height: sib.height,
+                container: container
             }
         }
     })
