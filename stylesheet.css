@@ -43,12 +43,12 @@ html, body {
 }
 
 #menuBar {
-    height: 48px;
+    height: 36px;
     padding: 6px;
     display: flex;
 }
 .menuItem {
-    height: auto;
+    height: 36px;
     margin: 0 .2em 0 .0;
 }
 .subMenuIcon {
