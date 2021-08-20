@@ -29,7 +29,7 @@ function applySettings() {
     stylesheet = document.styleSheets[0]
     settings.tagData.forEach(tag => {
         if (tag.type.includes("STYLE")) {
-            rule = "." + tag.className + " {\n"
+            rule = "." + cleanStr(tag.name) + " {\n"
             if (tag.borderWidth) {
                 rule += "border-width: " + tag.borderWidth + "px;\n"
                 rule += "outline-offset: -" + tag.borderWidth + "px;\n"
@@ -48,13 +48,13 @@ function applySettings() {
             stylesheet.insertRule(rule, stylesheet.cssRules.length)
         }
         if (tag.type.includes("HOUSE")) {
-            rule = "." + tag.className + ".line {\n"
+            rule = "." + cleanStr(tag.name) + ".line {\n"
             rule += "background-color: " + tag.borderColor + ";\n"
             rule += "}"
 
             stylesheet.insertRule(rule, stylesheet.cssRules.length)
 
-            rule = "." + tag.className + ".stub {\n"
+            rule = "." + cleanStr(tag.name) + ".stub {\n"
             rule += "background-color: " + tag.borderColor + ";\n"
             rule += "}"
 
@@ -77,7 +77,7 @@ function createLocalContainerDivs() {
     containers.forEach(container => {
         // Create container div
         treeContainerDiv = document.createElement('div')
-        treeContainerDiv.id = "tree-container-" + container.className
+        treeContainerDiv.id = "tree-container-" + cleanStr(container.name)
         treeContainerDiv.classList.add('treeContainer')
 
         treeDiv = document.createElement('div')
@@ -306,17 +306,20 @@ function createUnspacedTree(container) {
             // Create a block where all the stuff for an individual sibling is held
             block = document.createElement('div')
             block.classList.add('block')
-            block.id = sib.className
+            block.id = cleanStr(sib.name)
             row.append(block)
 
             sib.div = block
+
+            // Get a class name from the sib's house
+            houseClean = cleanStr(sib.house)
 
             // If the sib has a big, add a line above the nas
             if (sib.bigName) {
                 topLine = document.createElement('div')
                 topLine.classList.add('line')
                 topLine.classList.add('vert')
-                topLine.classList.add(getBig(container.siblings, sib).houseClass)
+                topLine.classList.add(cleanStr(getBig(container.siblings, sib).house))
                 block.append(topLine)
             }
 
@@ -329,7 +332,7 @@ function createUnspacedTree(container) {
             nameButton = document.createElement("BUTTON")
             nameButton.classList.add('name')
             nameButton.classList.add('clickable')
-            nameButton.classList.add(sib.houseClass)
+            nameButton.classList.add(houseClean)
 
             // If stub. should redirect to house info. Otherwise, redirects to sibling.
             if (sib.tags.includes('stub')) {
@@ -345,11 +348,12 @@ function createUnspacedTree(container) {
                 tag = getTag(tagName)
 
                 // Apply tags to classes for formatting
-                nameButton.classList.add(tag.className)
-
+                nameButton.classList.add(cleanStr(tagName))
+                    
                 // If it's a symbol, add the symbol
                 if (tag.type.includes("SYMBOL")) {
                     tagImage = createTagImage(tag)
+                    tagImage.classList.add(tag.iconClassName)
                     nas.appendChild(tagImage)
 
                     // Register conjunction of conjunctable tags
@@ -392,8 +396,8 @@ function createUnspacedTree(container) {
 
 
             // The name itself
-            if (sib.tags.includes('stub')) nameNameName = sib.houseStyleText
-            else nameNameName = sib.styleText + ' ' + pledgeClassToSymbols(sib.pledgeClassNumber)
+            if (sib.tags.includes('stub')) nameNameName = filterInvisText(sib.house)
+            else nameNameName = filterInvisText(sib.name) + ' ' + pledgeClassToSymbols(sib.pledgeClassNumber)
             nameName = document.createTextNode(nameNameName)
             nameButton.appendChild(nameName)
 
@@ -402,7 +406,7 @@ function createUnspacedTree(container) {
                 botLine = document.createElement('div')
                 botLine.classList.add('line')
                 botLine.classList.add('vert')
-                botLine.classList.add(sib.houseClass)
+                botLine.classList.add(houseClean)
                 block.append(botLine)
             }
         })
@@ -516,7 +520,7 @@ function drawAcrossLines(container) {
             acrossLine = document.createElement("div")
             acrossLine.classList.add("line")
             acrossLine.classList.add("horiz")
-            acrossLine.classList.add(sib.houseClass)
+            acrossLine.classList.add(cleanStr(sib.house))
             acrossLine.style.marginLeft = leftSpace + "px"
             acrossLine.style.width = lineWidth.toFixed(0) + "px"
 

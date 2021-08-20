@@ -20,17 +20,12 @@ function unspecialText(string) {
 function sibRowToJSON(row) {
     sibJSON = {}
     sibJSON.name = row[0]
-    sibJSON.className = cleanStr(row[0])
-    sibJSON.styleText = filterInvisText(row[0])
-    sibJSON.plainText = unspecialText(row[0])
     sibJSON.pledgeClass = row[1]
     sibJSON.pledgeClassNumber = parseInt(row[6])
     sibJSON.gradYear = row[2]
     sibJSON.bigName = row[3] == '' ?  null : row[3]
     sibJSON.littleNames = []
     sibJSON.house = row[4] == '' ? null : row[4]
-    sibJSON.houseClass = row[4] == '' ? null : cleanStr(row[4])
-    sibJSON.houseStyleText = row[4] == '' ? null : filterInvisText(row[4])
     sibJSON.tags = row[5] == '' ? [] : row[5].split(';')
 
     return sibJSON
@@ -40,7 +35,6 @@ function sibRowToJSON(row) {
 function tagRowToJSON(row) {
     tagJSON = {}
     tagJSON.name = row[0]
-    tagJSON.className = cleanStr(row[0])
     tagJSON.iconClassName = cleanStr(row[0]) + "Icon"
     tagJSON.description = row[1]
     tagJSON.taggedSibs = []
@@ -64,7 +58,6 @@ function tagRowToJSON(row) {
 function containerRowToJSON(row) {
     contJSON = {}
     contJSON.name = row[0]
-    contJSON.className = cleanStr(row[0])
     contJSON.tabPos = parseInt(row[1])
     contJSON.row = parseInt(row[2])
     contJSON.column = parseInt(row[3])

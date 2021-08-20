@@ -17,6 +17,9 @@ function loadVue() {
             getSettings: function() {
                 return this.settings
             },
+            canGoBackward: function() {
+                return this.tabPosition > 1
+            },
             canGoForward: function() {
                 return this.tabPosition < this.tabHistory.length - 1
             },
