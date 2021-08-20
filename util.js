@@ -365,12 +365,17 @@ function goToScrollLock(container) {
     thisTreeContainer.scrollTo(stx, container.scrollLock[1])
 }
 
+// Gets the clickable element pertaining to the tab that a sibling is in
+function containeredSibTabClickable(sib) {
+    return sib.container.structure.tabsTab.firstChild
+}
+
 // Parses siblings data into relevant tab data
 function sibToTab(sib) {
     tabData = {
         tabType: "nameTab",
         sib: sib,
-        div: sib.div
+        ele: sib.div
     }
     return tabData
 }
@@ -413,17 +418,22 @@ function showTab(tabData) {
         })
     }
 
+    // Removes 'active' class from previously selected ele
+    lastEle = appElement.getTabData().ele
+    if (lastEle) lastEle.classList.remove("active")
+
     // Adds tab info to tab history
     appElement.tabHistory = appElement.tabHistory.slice(0, appElement.tabPosition+1)
     appElement.tabHistory.push(tabData)
     appElement.tabPosition++
 
-    // Scroll to the correct spot
+    // Scroll to the correct spot and add 'active' class to new ele
     setTimeout(function() {
         containers.forEach(cont => goToScrollLock(cont))
-        if (tabData.div) {
-            if (tabData.sib) $( tabData.sib.container.structure.tabsTab.firstChild ).click()
-            tabData.div.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+        if (tabData.ele) {
+            if (tabData.sib) $( containeredSibTabClickable(tabData.sib) ).click()
+            tabData.classList.add("active")
+            tabData.ele.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
         }
     }, 0)
 }
@@ -433,9 +443,9 @@ function goBack() {
     if (appElement.tabPosition == 1) exitTab()
     else {
         appElement.tabPosition--
-        if (appElement.getTabData().div) {
+        if (appElement.getTabData().ele) {
             setTimeout(function() {
-                appElement.getTabData().div.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+                appElement.getTabData().ele.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
             }, 0)
         }
     }
@@ -443,9 +453,9 @@ function goBack() {
 // Goes forward one tab in the tab nav
 function goForward() {
     appElement.tabPosition++
-    if (appElement.getTabData().div) {
+    if (appElement.getTabData().ele) {
         setTimeout(function() {
-            appElement.getTabData().div.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+            appElement.getTabData().ele.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
         }, 0)
     }
 }

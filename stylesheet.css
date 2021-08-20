@@ -140,6 +140,10 @@ html, body {
     transform: scale(1.1);
     cursor: pointer;
 }
+.active {
+    transform: scale(1.1);
+    text-shadow: 0 0 3px grey;
+}
 
 .treeContainer {
     height: 100%;

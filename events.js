@@ -89,7 +89,7 @@ function addNameClicker(ele, sib) {
 function addTagClicker(ele, tag) {
     const clickedTagHandler = function(e) {
         tabData = tagToTab(tag)
-        tabData.div = ele
+        tabData.ele = ele
         showTab(tabData)
     }
 
