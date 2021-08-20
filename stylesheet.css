@@ -141,9 +141,13 @@ html, body {
     transform: scale(1.1);
     cursor: pointer;
 }
-.active {
+.active.clickable {
     transform: scale(1.1);
-    text-shadow: 0 0 3px dimgray;
+    filter: drop-shadow(0 0 6px grey);
+}
+.active .clickable {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 6px grey);
 }
 
 .treeContainer {
