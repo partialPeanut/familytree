@@ -43,7 +43,7 @@ html, body {
 }
 
 #menuBar {
-    height: 36px;
+    height: auto;
     padding: 6px;
     display: flex;
 }
