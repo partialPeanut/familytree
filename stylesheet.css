@@ -55,6 +55,10 @@ html, body {
     height: 36px;
 }
 
+#treeTabs {
+    height: auto;
+}
+
 #mwContainerContainer {
     width: 100%;
     height: 100%;

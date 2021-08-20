@@ -43,10 +43,12 @@
             </div>
 
             <!-- The tabs with the tree in it, autofilled by script -->
-            <div id="mwContainerContainer" v-if="getDisplayTab() == 'load' || getSettings().containerStyle == 'multi-window'"></div>
-            <div id="tabsContainerContainerContainer" v-if="getDisplayTab() == 'load' || getSettings().containerStyle == 'tabs'">
-                <div id="tabsContainerContainer">
-                    <ul id="tabButtonsContainer"></ul>
+            <div id="treeTabs">
+                <div id="mwContainerContainer" v-if="getDisplayTab() == 'load' || getSettings().containerStyle == 'multi-window'"></div>
+                <div id="tabsContainerContainerContainer" v-if="getDisplayTab() == 'load' || getSettings().containerStyle == 'tabs'">
+                    <div id="tabsContainerContainer">
+                        <ul id="tabButtonsContainer"></ul>
+                    </div>
                 </div>
             </div>
         </div>
