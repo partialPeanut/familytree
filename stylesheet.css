@@ -148,7 +148,7 @@ html, body {
     transform: scale(1.1);
     filter: drop-shadow(0 0 6px grey);
 }
-.active .clickable {
+.active button {
     transform: scale(1.1);
     filter: drop-shadow(0 0 6px grey);
 }
