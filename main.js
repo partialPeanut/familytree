@@ -29,7 +29,7 @@ function applySettings() {
     stylesheet = document.styleSheets[0]
     settings.tagData.forEach(tag => {
         if (tag.type.includes("STYLE")) {
-            rule = "." + cleanStr(tag.name) + " {\n"
+            rule = "." + tag.className + " {\n"
             if (tag.borderWidth) {
                 rule += "border-width: " + tag.borderWidth + "px;\n"
                 rule += "outline-offset: -" + tag.borderWidth + "px;\n"
@@ -48,13 +48,13 @@ function applySettings() {
             stylesheet.insertRule(rule, stylesheet.cssRules.length)
         }
         if (tag.type.includes("HOUSE")) {
-            rule = "." + cleanStr(tag.name) + ".line {\n"
+            rule = "." + tag.className + ".line {\n"
             rule += "background-color: " + tag.borderColor + ";\n"
             rule += "}"
 
             stylesheet.insertRule(rule, stylesheet.cssRules.length)
 
-            rule = "." + cleanStr(tag.name) + ".stub {\n"
+            rule = "." + tag.className + ".stub {\n"
             rule += "background-color: " + tag.borderColor + ";\n"
             rule += "}"
 
@@ -77,7 +77,7 @@ function createLocalContainerDivs() {
     containers.forEach(container => {
         // Create container div
         treeContainerDiv = document.createElement('div')
-        treeContainerDiv.id = "tree-container-" + cleanStr(container.name)
+        treeContainerDiv.id = "tree-container-" + container.className
         treeContainerDiv.classList.add('treeContainer')
 
         treeDiv = document.createElement('div')
@@ -306,20 +306,17 @@ function createUnspacedTree(container) {
             // Create a block where all the stuff for an individual sibling is held
             block = document.createElement('div')
             block.classList.add('block')
-            block.id = cleanStr(sib.name)
+            block.id = sib.className
             row.append(block)
 
             sib.div = block
-
-            // Get a class name from the sib's house
-            houseClean = cleanStr(sib.house)
 
             // If the sib has a big, add a line above the nas
             if (sib.bigName) {
                 topLine = document.createElement('div')
                 topLine.classList.add('line')
                 topLine.classList.add('vert')
-                topLine.classList.add(cleanStr(getBig(container.siblings, sib).house))
+                topLine.classList.add(getBig(container.siblings, sib).houseClass)
                 block.append(topLine)
             }
 
@@ -332,7 +329,7 @@ function createUnspacedTree(container) {
             nameButton = document.createElement("BUTTON")
             nameButton.classList.add('name')
             nameButton.classList.add('clickable')
-            nameButton.classList.add(houseClean)
+            nameButton.classList.add(sib.houseClass)
 
             // If stub. should redirect to house info. Otherwise, redirects to sibling.
             if (sib.tags.includes('stub')) {
@@ -345,60 +342,58 @@ function createUnspacedTree(container) {
             toPotentiallyConjunct = []
             conjunction = []
             sib.tags.forEach(tagName => {
+                tag = getTag(tagName)
+
                 // Apply tags to classes for formatting
-                nameButton.classList.add(cleanStr(tagName))
+                nameButton.classList.add(tag.className)
 
-                // If the tag exists in tagData, do things!
-                if (settings.tagData.some(td => td.name == tagName)) {
-                    tag = getTag(tagName)
-                    // If it's a symbol, add the symbol
-                    if (tag.type.includes("SYMBOL")) {
-                        tagImage = createTagImage(tag)
-                        nas.appendChild(tagImage)
+                // If it's a symbol, add the symbol
+                if (tag.type.includes("SYMBOL")) {
+                    tagImage = createTagImage(tag)
+                    nas.appendChild(tagImage)
 
-                        // Register conjunction of conjunctable tags
-                        if (tag.type.includes("CONJ")) {
-                            toPotentiallyConjunct.push(tagImage)
-                            conjunction.push(tag)
+                    // Register conjunction of conjunctable tags
+                    if (tag.type.includes("CONJ")) {
+                        toPotentiallyConjunct.push(tagImage)
+                        conjunction.push(tag)
 
-                            // If this is the last to be conjuncted, do the conjoining!
-                            if (sib.tags.indexOf(tagName) == sib.tags.length - 1 ||
-                                !getTag(nextValueOf(sib.tags, tagName)).type.includes("CONJ")) {
+                        // If this is the last to be conjuncted, do the conjoining!
+                        if (sib.tags.indexOf(tagName) == sib.tags.length - 1 ||
+                            !getTag(nextValueOf(sib.tags, tagName)).type.includes("CONJ")) {
 
-                                if (conjunction.length > 1) {
-                                    toPotentiallyConjunct.forEach(forsakenChild => nas.removeChild(forsakenChild))
-                                    conjunctionImage = createTagImage(createTagConjunction(sib, conjunction))
-                                    nas.appendChild(conjunctionImage)
-                                }
-    
-                                toPotentiallyConjunct = []
-                                conjunction = []
+                            if (conjunction.length > 1) {
+                                toPotentiallyConjunct.forEach(forsakenChild => nas.removeChild(forsakenChild))
+                                conjunctionImage = createTagImage(createTagConjunction(sib, conjunction))
+                                nas.appendChild(conjunctionImage)
                             }
+
+                            toPotentiallyConjunct = []
+                            conjunction = []
                         }
                     }
-                    // If it's an image background, add the image to the background
-                    if (tag.type.includes("IMGBACKGROUND")) {
-                        nameButton.style.backgroundImage = 'url("https://drive.google.com/thumbnail?id=' + tag.imageAddress + '")'
-                        nameButton.style.backgroundRepeat = "repeat-x"
-                        nameButton.style.backgroundSize = "contain"
-                    }
-                    // If it's special, do whatever crazy bullshit
-                    if (tag.type.includes("SPECIAL")) {
-                        if (tag.name == "Dropped") {
-                            buttonStyle = window.getComputedStyle(nameButton)
-                            backgroundCol = buttonStyle.backgroundColor
-                            borderCol = buttonStyle.borderColor
-                            struckThroughString = "linear-gradient(0deg, " + backgroundCol + " 45%, " + borderCol + " 45%, " + borderCol + " 55%, " + backgroundCol + " 55%)"
-                            nameButton.style.background = struckThroughString
-                        }
+                }
+                // If it's an image background, add the image to the background
+                if (tag.type.includes("IMGBACKGROUND")) {
+                    nameButton.style.backgroundImage = 'url("https://drive.google.com/thumbnail?id=' + tag.imageAddress + '")'
+                    nameButton.style.backgroundRepeat = "repeat-x"
+                    nameButton.style.backgroundSize = "contain"
+                }
+                // If it's special, do whatever crazy bullshit
+                if (tag.type.includes("SPECIAL")) {
+                    if (tag.name == "Dropped") {
+                        buttonStyle = window.getComputedStyle(nameButton)
+                        backgroundCol = buttonStyle.backgroundColor
+                        borderCol = buttonStyle.borderColor
+                        struckThroughString = "linear-gradient(0deg, " + backgroundCol + " 45%, " + borderCol + " 45%, " + borderCol + " 55%, " + backgroundCol + " 55%)"
+                        nameButton.style.background = struckThroughString
                     }
                 }
             })
 
 
             // The name itself
-            if (sib.tags.includes('stub')) nameNameName = filterInvisText(sib.house)
-            else nameNameName = filterInvisText(sib.name) + ' ' + pledgeClassToSymbols(sib.pledgeClassNumber)
+            if (sib.tags.includes('stub')) nameNameName = sib.houseStyleText
+            else nameNameName = sib.styleText + ' ' + pledgeClassToSymbols(sib.pledgeClassNumber)
             nameName = document.createTextNode(nameNameName)
             nameButton.appendChild(nameName)
 
@@ -407,7 +402,7 @@ function createUnspacedTree(container) {
                 botLine = document.createElement('div')
                 botLine.classList.add('line')
                 botLine.classList.add('vert')
-                botLine.classList.add(houseClean)
+                botLine.classList.add(sib.houseClass)
                 block.append(botLine)
             }
         })
@@ -521,7 +516,7 @@ function drawAcrossLines(container) {
             acrossLine = document.createElement("div")
             acrossLine.classList.add("line")
             acrossLine.classList.add("horiz")
-            acrossLine.classList.add(cleanStr(sib.house))
+            acrossLine.classList.add(sib.houseClass)
             acrossLine.style.marginLeft = leftSpace + "px"
             acrossLine.style.width = lineWidth.toFixed(0) + "px"
 

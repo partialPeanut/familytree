@@ -141,6 +141,9 @@ html, body {
     transform: scale(1.1);
     cursor: pointer;
 }
+.hoverFromTab {
+    transform: scale(1.1);
+}
 .active.clickable {
     transform: scale(1.1);
     filter: drop-shadow(0 0 6px grey);

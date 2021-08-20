@@ -20,6 +20,16 @@ function loadVue() {
             canGoForward: function() {
                 return this.tabPosition < this.tabHistory.length - 1
             },
+            applyTagHoverFromTab: function(tagName) {
+                tag = getTag(tagName)
+                $( "." + tag.iconClassName ).addClass("hoverFromTab")
+            },
+            applySibHoverFromTab: function(sibName) {
+                $( "#" + cleanStr(sibName) + " .button" ).addClass("hoverFromTab")
+            },
+            removeHoverFromTab: function() {
+                $( ".hoverFromTab" ).removeClass("hoverFromTab")
+            },
             displayTagInfo: function(tagName) {
                 console.log("Displaying " + tagName + " from menu")
                 tag = getTag(tagName)
