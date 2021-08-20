@@ -429,7 +429,7 @@ function showTab(tabData) {
 
     // Removes 'active' class from previously selected ele
     $( ".active" ).removeClass("active")
-    if (tabData.tabType = 'tagTab') $( "." + tag.iconClassName ).addClass("active")
+    if (tabData.tabType == 'tagTab') $( "." + tag.iconClassName ).addClass("active")
 
     // Scroll to the correct spot and add 'active' class to new ele
     setTimeout(function() {
