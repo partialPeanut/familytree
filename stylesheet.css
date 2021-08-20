@@ -42,6 +42,19 @@ html, body {
     overflow: auto;
 }
 
+#menuBar {
+    height: auto;
+    display: flex;
+}
+.menuItem {
+    height: 36px;
+    margin: 6px 0 6px .2em;
+}
+.menuIcon {
+    width: 36px;
+    height: 36px;
+}
+
 #mwContainerContainer {
     width: 100%;
     height: 100%;

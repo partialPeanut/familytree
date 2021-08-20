@@ -32,6 +32,16 @@
     <div id="app" v-cloak>
         <!-- All versions of things that can pop up on the left -->
         <div id="leftColContainer" v-if="getDisplayTab() != 'mainMenu'" :class="{ fullWidth: getDisplayTab() == 'tree', col: getDisplayTab() != 'tree', left: getDisplayTab() != 'tree' }">
+            <!-- Bar with a bunch of doodads on it -->
+            <div id="menuBar">
+                <img id="infoIcon" class="menuItem menuIcon" src="https://drive.google.com/thumbnail?id=1TFLpYUj3riC2fIBV-tg9z7TQ1gYNshvQ" onclick="showTab({ tabType: 'info' })">
+                <img id="settingsIcon" class="menuItem menuIcon" src="https://drive.google.com/thumbnail?id=1gDTD0PQhGn1blzbsgbl73stcnZTQ2ayg" onclick="showTab({ tabType: 'settings' })">
+                <img id="suggestionsIcon" class="menuItem menuIcon" src="https://drive.google.com/thumbnail?id=1x7U-IQJ95lELsVWalZPxycSxRSBsEvHS" onclick="showTab({ tabType: 'suggestions' })">
+                <div id="searchBar" class="menuItem">
+                    <img id="searchIcon" class="menuIcon" src="https://drive.google.com/thumbnail?id=1daDZwN1WziUVLy0QPYp2HUvTxklmdsR2">
+                </div>
+            </div>
+
             <!-- The tabs with the tree in it, autofilled by script -->
             <div id="mwContainerContainer" v-if="getDisplayTab() == 'load' || getSettings().containerStyle == 'multi-window'"></div>
             <div id="tabsContainerContainerContainer" v-if="getDisplayTab() == 'load' || getSettings().containerStyle == 'tabs'">
@@ -51,7 +61,19 @@
             </div>
 
             <!-- Settings tab -->
-            <div id="settings" class="secondaryTab" v-if="getDisplayTab() == 'settings'"></div>
+            <div id="infoTab" class="secondaryTab" v-if="getDisplayTab() == 'info'">
+                <h1>This is where the info is!</h1>
+            </div>
+
+            <!-- Settings tab -->
+            <div id="settingsTab" class="secondaryTab" v-if="getDisplayTab() == 'settings'">
+                <h1>This is where the settings are!</h1>
+            </div>
+
+            <!-- Settings tab -->
+            <div id="suggestionsTab" class="secondaryTab" v-if="getDisplayTab() == 'suggestions'">
+                <h1>This is where the suggestions are!</h1>
+            </div>
 
             <!-- Tab that opens when you click a name. -->
             <div id="nameTab" class="secondaryTab" v-if="getDisplayTab() == 'nameTab'">
