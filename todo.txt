@@ -4,8 +4,6 @@
  + Loading bar
  + Tree margins
  + Make non-touching trees snap to mid
- + Active indicator for siblings that have been clicked on
-  - Display for hovering over button in sidebar?
 
  MAJOR CHANGES/ADDITIONS
  + Zoom!!

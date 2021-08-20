@@ -435,9 +435,13 @@ function showTab(tabData) {
     setTimeout(function() {
         containers.forEach(cont => goToScrollLock(cont))
         if (tabData.ele) {
-            if (tabData.sib) $( containeredSibTabClickable(tabData.sib) ).click()
-            tabData.ele.classList.add("active")
+            if (tabData.sib) {
+                sibTab = containeredSibTabClickable(tabData.sib)
+                if (!sibTab.parentNode.classList.contains('ui-state-active')) tabData.ele.scrollIntoView({behavior: "auto", block: "center", inline: "center"})
+                $( sibTab ).click()
+            }
             tabData.ele.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+            tabData.ele.classList.add("active")
         }
     }, 0)
 }
