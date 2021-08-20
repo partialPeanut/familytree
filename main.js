@@ -226,7 +226,7 @@ function addLocalDivsToStructure() {
 // Gives the menu items functionality
 function createMenu() {
     createCatComplete()
-    $( "searchInput" ).catcomplete({
+    $( "#searchInput" ).catcomplete({
         delay: 0,
         source: function(request, response) {
             matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" )
