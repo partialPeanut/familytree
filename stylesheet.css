@@ -28,8 +28,6 @@ html, body {
 
 .col {
     flex: auto;
-}
-.col.right {
     display: flex;
     flex-direction: column;
 }
@@ -40,23 +38,26 @@ html, body {
     bottom: 0;
     position: absolute;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 #menuBar {
-    height: auto;
+    height: 48px;
+    padding: 6px;
     display: flex;
 }
 .menuItem {
-    height: 36px;
-    margin: 6px 0 6px .2em;
+    height: auto;
+    margin: 0 .2em 0 .0;
 }
-.menuIcon {
-    width: 36px;
-    height: 36px;
+.subMenuIcon {
+    width: 24px;
+    height: 24px;
 }
 
 #treeTabs {
-    height: auto;
+    height: calc(100% - 48px);
 }
 
 #mwContainerContainer {
