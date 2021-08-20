@@ -85,21 +85,21 @@
 
                 <ol v-if="getTabData().sib.tags.length > 0">
                     <li v-for="tagName in getTabData().sib.tags">
-                        <button @mouseover="applyTagHoverFromTab(tagName)" @mouseleave="removeHoverFromTab" @click="displayTagInfo(tagName)">{{ tagName }}</button>
+                        <button v-on="{mouseover: applyTagHoverFromTab(tagName), mouseleave: removeHoverFromTab, click: displayTagInfo(tagName)}">{{ tagName }}</button>
                     </li>
                 </ol>
 
                 <p v-if="getTabData().sib.bigName != null">Big:
-                    <button @mouseover="applySibHoverFromTab(getTabData().sib.bigName)" @mouseleave="removeHoverFromTab" @click="sibToName(getTabData().sib.bigName)">{{ unspecialText(getTabData().sib.bigName) }}</button>
+                    <button v-on="{mouseover: applySibHoverFromTab(getTabData().sib.bigName), mouseleave: removeHoverFromTab, click: sibToName(getTabData().sib.bigName)}">{{ unspecialText(getTabData().sib.bigName) }}</button>
                 </p>
 
                 <p v-if="getTabData().sib.littleNames.length == 1">Little:
-                    <button @mouseover="applySibHoverFromTab(getTabData().sib.littleNames[0])" @mouseleave="removeHoverFromTab" @click="sibToName(getTabData().sib.littleNames[0])">{{ unspecialText(getTabData().sib.littleNames[0]) }}</button>
+                    <button v-on="{mouseover: applySibHoverFromTab(getTabData().sib.littleNames[0]), mouseleave: removeHoverFromTab, click: sibToName(getTabData().sib.littleNames[0])}">{{ unspecialText(getTabData().sib.littleNames[0]) }}</button>
                 </p>
                 <p v-if="getTabData().sib.littleNames.length > 1">Littles:</p>
                 <ol v-if="getTabData().sib.littleNames.length > 1">
                     <li v-for="littleName in getTabData().sib.littleNames">
-                        <button @mouseover="applySibHoverFromTab(littleName)" @mouseleave="removeHoverFromTab" @click="sibToName(littleName)">{{ unspecialText(littleName) }}</button>
+                        <button v-on="{mouseover: applySibHoverFromTab(littleName), mouseleave: removeHoverFromTab, click: sibToName(littleName)}">{{ unspecialText(littleName) }}</button>
                     </li>
                 </ol>
             </div>
@@ -117,14 +117,14 @@
                 </p>
                 <ol v-if="getTabData().tag.taggedSibs.length > 0">
                     <li v-for="sib in getTabData().tag.taggedSibs">
-                        <button @mouseover="applySibHoverFromTab(sib.name)" @mouseleave="removeHoverFromTab" @click="tagToName(sib.name)">{{ unspecialText(sib.name) }}</button>
+                        <button v-on="{mouseover: applySibHoverFromTab(sib.name), mouseleave: removeHoverFromTab, click: tagToName(sib.name)}"@mouseover="applySibHoverFromTab(sib.name)" @mouseleave="removeHoverFromTab" @click="tagToName(sib.name)">{{ unspecialText(sib.name) }}</button>
                     </li>
                 </ol>
 
                 <p v-if="getTabData().tag.relatedTags.length > 0">Related tags:</p>
                 <ol v-if="getTabData().tag.relatedTags.length > 0">
                     <li v-for="tagName in getTabData().tag.relatedTags">
-                        <button @mouseover="applyTagHoverFromTab(tagName)" @mouseleave="removeHoverFromTab" @click="displayTagInfo(tagName)">{{ tagName }}</button>
+                        <button v-on="{mouseover: applyTagHoverFromTab(tagName), mouseleave: removeHoverFromTab, click: displayTagInfo(tagName)}">{{ tagName }}</button>
                     </li>
                 </ol>
             </div>
