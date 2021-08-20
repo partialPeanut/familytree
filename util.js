@@ -422,14 +422,14 @@ function showTab(tabData) {
         })
     }
 
-    // Removes 'active' class from previously selected ele
-    lastEle = appElement.getTabData().ele
-    if (lastEle) lastEle.classList.remove("active")
-
     // Adds tab info to tab history
     appElement.tabHistory = appElement.tabHistory.slice(0, appElement.tabPosition+1)
     appElement.tabHistory.push(tabData)
     appElement.tabPosition++
+
+    // Removes 'active' class from previously selected ele
+    $( ".active" ).removeClass("active")
+    if (tabData.tabType = 'tagTab') $( "." + tag.iconClassName ).addClass("active")
 
     // Scroll to the correct spot and add 'active' class to new ele
     setTimeout(function() {
