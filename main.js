@@ -237,7 +237,7 @@ function createMenu() {
                         name: sib.name,
                         label: unspecialText(sib.name),
                         category: cont.name,
-                        value: sib
+                        link: sib
                     })
                 })
             })
@@ -246,15 +246,15 @@ function createMenu() {
                     name: sib.name,
                     label: unspecialText(sib.name),
                     category: "None",
-                    value: sib
+                    link: sib
                 })
             })
 
             response(dataSet)
         },
         select: function(e, ui) {
-            if (ui.item.category == "None") tabData = containerlessSibToTab(ui.item.value)
-            else tabData = sibToTab(ui.item.value)
+            if (ui.item.category == "None") tabData = containerlessSibToTab(ui.item.link)
+            else tabData = sibToTab(ui.item.link)
 
             showTab(tabData)
         }
