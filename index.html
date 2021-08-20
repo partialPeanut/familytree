@@ -117,7 +117,7 @@
                 </p>
                 <ol v-if="getTabData().tag.taggedSibs.length > 0">
                     <li v-for="sib in getTabData().tag.taggedSibs">
-                        <button v-on="{mouseover: applySibHoverFromTab(sib.name), mouseleave: removeHoverFromTab, click: tagToName(sib.name)}"@mouseover="applySibHoverFromTab(sib.name)" @mouseleave="removeHoverFromTab" @click="tagToName(sib.name)">{{ unspecialText(sib.name) }}</button>
+                        <button v-on="{mouseover: applySibHoverFromTab(sib.name), mouseleave: removeHoverFromTab, click: tagToName(sib.name)}">{{ unspecialText(sib.name) }}</button>
                     </li>
                 </ol>
 
