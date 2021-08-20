@@ -432,7 +432,7 @@ function showTab(tabData) {
         containers.forEach(cont => goToScrollLock(cont))
         if (tabData.ele) {
             if (tabData.sib) $( containeredSibTabClickable(tabData.sib) ).click()
-            tabData.classList.add("active")
+            tabData.ele.classList.add("active")
             tabData.ele.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
         }
     }, 0)
