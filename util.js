@@ -67,6 +67,30 @@ function containerRowToJSON(row) {
     return contJSON
 }
 
+// Creates a custom widget that splits autocomplete into categories automatically
+function createCatComplete() {
+    $.widget( "custom.catcomplete", $.ui.autocomplete, {
+        _create: function() {
+          this._super()
+          this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" )
+        },
+        _renderMenu: function( ul, items ) {
+          var that = this,
+            currentCategory = ""
+          $.each( items, function( index, item ) {
+            if ( item.category != currentCategory ) {
+              ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" )
+              currentCategory = item.category
+            }
+            li = that._renderItemData( ul, item )
+            if ( item.category ) {
+              li.attr( "aria-label", item.category + " : " + item.label )
+            }
+          })
+        }
+    })
+}
+
 // Turns a number of pixels into an integer
 function pxToInt(pixels) {
     return parseInt(pixels.replace(/px/g, ''))

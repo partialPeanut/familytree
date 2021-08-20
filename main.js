@@ -2,6 +2,7 @@
 function main() {
     applySettings()
     createAllContainerDivs()
+    createMenu()
     exitTab()
 
     // Loops through every container and builds individual trees for each
@@ -219,6 +220,42 @@ function addLocalDivsToStructure() {
     containers.forEach(cont => {
         if (cont.containerDiv.parentNode) cont.containerDiv.parentNode.removeChild(cont.containerDiv)
         cont.structure[settings.containerStyle].appendChild(cont.containerDiv)
+    })
+}
+
+// Gives the menu items functionality
+function createMenu() {
+    createCatComplete()
+    $( "searchInput" ).catcomplete({
+        delay: 0,
+        source: function(request, response) {
+            matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" )
+            dataSet = []
+            containers.forEach(cont => {
+                cont.siblings.filter(sib => matcher.test(sib.name)).forEach(sib => {
+                    dataSet.push({
+                        label: sib.name,
+                        category: container.name,
+                        value: sib
+                    })
+                })
+            })
+            siblings.filter(sib => !dataSet.some(dat => dat.label == sib.name) && matcher.test(sib.name)).forEach(sib => {
+                dataSet.push({
+                    label: sib.name,
+                    category: "None",
+                    value: sib
+                })
+            })
+
+            response(dataSet)
+        },
+        select: function(e, ui) {
+            if (ui.item.category == "None") tabData = containerlessSibToTab(ui.item.value)
+            else tabData = sibToTab(ui.item.value)
+
+            showTab(tabData)
+        }
     })
 }
 
