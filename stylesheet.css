@@ -42,19 +42,19 @@ html, body {
     flex-direction: column;
 }
 
-#menuBar {
-    height: auto;
-    padding: 8px;
+.barTop {
+    height: 56px;
     display: flex;
-    border-bottom: 4px solid #dddddd;
+    align-items: center;
+    border-bottom: 4px solid #ddd;
     background: #e9e9e9;
 }
 .menuItem {
     height: 40px;
-    margin: 0 .2em 0 .0;
+    margin: 0 0 0 .2em;
 }
 .subMenuIcon {
-    height: 32px;
+    height: 27px;
 }
 
 #treeTabs {
@@ -110,12 +110,6 @@ html, body {
 .containerTab {
     height: 0%;
     overflow: auto;
-}
-
-.tabNavButtonContainer {
-    border-bottom: 4px solid #ddd;
-    align-items: center;
-    display: flex;
 }
 
 .tabNavButton {

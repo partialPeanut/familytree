@@ -33,7 +33,7 @@
         <!-- All versions of things that can pop up on the left -->
         <div id="leftColContainer" v-if="getDisplayTab() != 'mainMenu'" :class="{ fullWidth: getDisplayTab() == 'tree', col: getDisplayTab() != 'tree', left: getDisplayTab() != 'tree' }">
             <!-- Bar with a bunch of doodads on it -->
-            <div id="menuBar">
+            <div id="menuBar" class="barTop">
                 <img id="infoIcon" class="menuItem clickable" src="https://drive.google.com/thumbnail?id=1TFLpYUj3riC2fIBV-tg9z7TQ1gYNshvQ" onclick="showTab({ tabType: 'info', ele: this })">
                 <img id="settingsIcon" class="menuItem clickable" src="https://drive.google.com/thumbnail?id=1gDTD0PQhGn1blzbsgbl73stcnZTQ2ayg" onclick="showTab({ tabType: 'settings', ele: this })">
                 <img id="suggestionsIcon" class="menuItem clickable" src="https://drive.google.com/thumbnail?id=1x7U-IQJ95lELsVWalZPxycSxRSBsEvHS" onclick="showTab({ tabType: 'suggestions', ele: this })">
@@ -56,7 +56,7 @@
         <!-- All versions of things that can pop up on the right -->
         <div id="rightColContainer" v-if="getDisplayTab() != 'mainMenu'" class="col right">
             <!-- Buttons -->
-            <div class="tabNavButtonContainer" v-if="getDisplayTab() == 'nameTab' || getDisplayTab() == 'tagTab'">
+            <div class="tabNavButtonContainer barTop" v-if="getDisplayTab() == 'nameTab' || getDisplayTab() == 'tagTab'">
                 <button :style="{ opacity: canGoBackward() ? 1 : 0 }" onclick="goBack()" class="tabNavButton clickable">🠔</button>
                 <button v-if="canGoForward()" onclick="goForward()" class="tabNavButton clickable">🠖</button>
                 <button onclick="exitTab()" class="tabNavButton right clickable">×</button>
