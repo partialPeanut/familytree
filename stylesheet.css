@@ -137,12 +137,9 @@ html, body {
 }
 .hoverFromTab {
     transform: scale(1.1);
+    z-index: 1;
 }
-.active.clickable {
-    transform: scale(1.1);
-    filter: drop-shadow(0 0 6px grey);
-}
-.active button {
+.active.clickable, .active button {
     transform: scale(1.1);
     filter: drop-shadow(0 0 6px grey);
 }
