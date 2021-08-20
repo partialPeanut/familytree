@@ -234,15 +234,17 @@ function createMenu() {
             containers.forEach(cont => {
                 cont.siblings.filter(sib => matcher.test(sib.name)).forEach(sib => {
                     dataSet.push({
-                        label: sib.name,
-                        category: container.name,
+                        name: sib.name,
+                        label: unspecialText(sib.name),
+                        category: cont.name,
                         value: sib
                     })
                 })
             })
-            siblings.filter(sib => !dataSet.some(dat => dat.label == sib.name) && matcher.test(sib.name)).forEach(sib => {
+            siblings.filter(sib => !dataSet.some(dat => dat.name == sib.name) && matcher.test(sib.name)).forEach(sib => {
                 dataSet.push({
-                    label: sib.name,
+                    name: sib.name,
+                    label: unspecialText(sib.name),
                     category: "None",
                     value: sib
                 })
