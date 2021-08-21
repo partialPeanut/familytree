@@ -27,8 +27,8 @@ function loadVue() {
                 tag = getTag(tagName)
                 $( "." + tag.iconClassName ).addClass("hoverFromTab")
             },
-            applySibHoverFromTab: function(sibName) {
-                $( "#" + cleanStr(sibName) + " button" ).addClass("hoverFromTab")
+            applySibHoverFromTab: function(sib) {
+                $( "#" + cleanStr(sib.name) + " button" ).addClass("hoverFromTab")
             },
             removeHoverFromTab: function() {
                 $( ".hoverFromTab" ).removeClass("hoverFromTab")

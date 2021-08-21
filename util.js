@@ -24,7 +24,7 @@ function sibRowToJSON(row) {
     sibJSON.pledgeClassNumber = parseInt(row[6])
     sibJSON.gradYear = row[2]
     sibJSON.bigName = row[3] == '' ?  null : row[3]
-    sibJSON.littleNames = []
+    sibJSON.littles = []
     sibJSON.house = row[4] == '' ? null : row[4]
     sibJSON.tags = row[5] == '' ? [] : row[5].split(';')
 
@@ -180,16 +180,6 @@ function getTag(tagName) {
     return settings.tagData.find(td => td.name == tagName)
 }
 
-// Returns a little's big's JSON
-function getBig(sibSet, sib) {
-    return sibSet.find(sibling => sibling.name == sib.bigName)
-}
-
-// Returns a big's little's JSON from their index
-function getLittle(sibSet, big, littleIndex) {
-    return sibSet.find(sibling => sibling.name == big.littleNames[littleIndex])
-}
-
 // Returns the minimum value of a key in an array of JSONs.
 function minValue(JSONArray, key) {
     value = JSONArray[0][key]
@@ -277,28 +267,25 @@ function calculateRelativePositions(container, sib) {
     sib.littleRelPos = [0]
 
     // If has no littles, return, else do recursion
-    if (sib.littleNames.length == 0) return
-    else sib.littleNames.forEach(function(littleName, idx) {
-        calculateRelativePositions(container, getLittle(container.siblings, sib, idx))
-    })
+    if (sib.littles.length == 0) return
+    else sib.littles.forEach(little => calculateRelativePositions(container, little))
 
     // Do simple case of one little
-    if (sib.littleNames.length == 1) {
-        little = getLittle(container.siblings, sib, 0)
+    if (sib.littles.length == 1) {
+        little = sib.littles[0]
         sib.branchWidths = sib.branchWidths.concat(little.branchWidths)
         return
     }
 
     // FOR MULTIPLE LITTLES:
     // Loop through other littles and determine the necessary distance from each previous other little
-    sib.littleNames.forEach(function(littleName, idx) {
+    sib.littles.forEach(function(little, idx) {
         if (idx == 0) return
-        little = getLittle(container.siblings, sib, idx)
 
         pos = 0
         limiter = idx-1
         for (jdx = idx-1; jdx >= 0; jdx--) {
-            testLittle = getLittle(container.siblings, sib, jdx)
+            testLittle = sib.littles[jdx]
             thisPos = Math.floor(sib.littleRelPos[jdx] + distToTouch(testLittle, little) + settings.sizes['blockMargin'])
 
             // This little is indeed pushed back by a prior little
@@ -337,14 +324,11 @@ function calculateRelativePositions(container, sib) {
 
     // Determine the deepest this rabbit hole goes
     longestLength = 0
-    sib.littleNames.forEach(function(littleName, idx) {
-        little = getLittle(container.siblings, sib, idx)
-        longestLength = Math.max(longestLength, little.branchWidths.length)
-    })
+    sib.littles.forEach(little => longestLength = Math.max(longestLength, little.branchWidths.length))
 
     // Add littles' hitboxes
     leftIdx = 0
-    rightIdx = sib.littleNames.length-1
+    rightIdx = sib.littles.length-1
     for (i = 0; i < longestLength; i++) {
         // Find the leftest little with a descendent of this height and get how far left it is
         leftLittle = getLittle(container.siblings, sib, leftIdx)
@@ -369,8 +353,7 @@ function calculateRelativePositions(container, sib) {
 
 // Sets littles' absolute positions recursively
 function setLittleAbsolutePositions(container, sib) {
-    sib.littleNames.forEach(function(littleName, idx) {
-        little = getLittle(container.siblings, sib, idx)
+    sib.littles.forEach(function(little, idx) {
         relPos = sib.littleRelPos[idx]
 
         little.position = Math.floor(sib.position + relPos)

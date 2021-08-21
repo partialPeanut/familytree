@@ -79,38 +79,24 @@ function placeSiblings(result) {
             siblings.push(sibJSON)
         }
         else {
-            // Find the sib's big
-            bigSib = siblings.find(sib => sib.name == sibJSON.bigName)
-            if (bigSib !== undefined) {
-                // If they have no house, inherit their big's
-                if (sibJSON.house === null) sibJSON.house = bigSib.house
+            sibJSON.big = siblings.find(sib => sib.name == sibJSON.bigName)
 
-                // Add themselves to their big's list of littles
-                bigSib.littleNames.push(sibJSON.name)
+            // If they have no house, inherit their big's
+            if (sibJSON.house === null) sibJSON.house = sibJSON.big.house
 
-                // Put em in the array!
-                sibJSON.height = bigSib.height+1
-                siblings.push(sibJSON)
-            }
+            // Add themselves to their big's list of littles
+            sibJSON.big.littles.push(sibJSON)
 
-            // There has been some error or misspelling.
-            else {
-                // If they have no house, inherit their big's, otherwise, they're Asphodel
-                if (sibJSON.house === null) sibJSON.house = "Asphodel Clan"
-
-                // Put em in the array! But at -1.....
-                sibJSON.height = -1
-                siblings.push(sibJSON)
-
-                console.log("Something went wrong and " + sibJSON.name + " could not find their big, " + sibJSON.bigName)
-            }
+            // Put em in the array!
+            sibJSON.height = sibJSON.big.height+1
+            siblings.push(sibJSON)
         }
     })
 
     // Sorts siblings into the order they should appear in on the tree.
     function recursiveSort(sibA, sibB) {
         if (sibA.height != sibB.height) return sibA.height < sibB.height ? -1 : 1
-        else if (sibA.height == 0 || sibA.bigName == sibB.bigName) {
+        else if (sibA.height == 0 || sibA.big.name == sibB.big.name) {
             if (sibA.pledgeClassNumber != sibB.pledgeClassNumber) return sibA.pledgeClassNumber - sibB.pledgeClassNumber
             else return sibA.name < sibB.name ? -1 : 1
         }

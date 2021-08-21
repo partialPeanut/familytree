@@ -290,10 +290,9 @@ function copySiblingSet(container) {
         if (belongsUnaltered(sib) || belongsUnaltered(getBig(siblings, sib))) return true
         else {
             found = false
-            sib.littleNames.forEach((littleName, idx) => {
-                little = getLittle(siblings, sib, idx)
+            sib.littles.forEach(little => {
                 if (belongsUnaltered(little)) {
-                    console.log(`${littleName} granted ${sib.name} above stub rights.`)
+                    console.log(`${little.name} granted ${sib.name} above stub rights.`)
                     found = true
                     return false
                 }
@@ -307,33 +306,47 @@ function copySiblingSet(container) {
     container.siblings = newFilteredSibs.map(sib => {
         if (belongsUnaltered(sib)) {
             sib.container = container
+
+            // Remove the stubs
+            if (!belongsUnaltered(sib.big)) sib.big = undefined
+            sib.littles.forEach((little, idx) => {
+                if (!belongsUnaltered(little)) sib.littles.splice(idx, 1)
+            })
+
             return sib
         }
-        else if (belongsUnaltered(getBig(siblings, sib))) return {
-            name: sib.house,
-            bigName: sib.bigName,
-            littleNames: [],
-            house: sib.house,
-            tags: ['stub'],
-            height: sib.height,
-            container: container,
-            div: sib.div
-        }
-        else {
-            validLittleNames = []
-            sib.littleNames.forEach((littleName, idx) => {
-                little = getLittle(siblings, sib, idx)
-                if (belongsUnaltered(little)) validLittleNames.push(littleName)
-            })
-            return {
+        else if (belongsUnaltered(sib.big)) {
+            stubJSON = {
                 name: sib.house,
-                littleNames: validLittleNames,
+                big: sib.big,
+                littles: [],
                 house: sib.house,
                 tags: ['stub'],
                 height: sib.height,
                 container: container,
                 div: sib.div
             }
+            stubJSON.big.littles.push(stubJSON)
+            return stubJSON
+        }
+        else {
+            validLittles = []
+            sib.littles.forEach(little => {
+                if (belongsUnaltered(little)) validLittles.push(little)
+            })
+            stubJSON = {
+                name: sib.house,
+                littles: validLittles,
+                house: sib.house,
+                tags: ['stub'],
+                height: sib.height,
+                container: container,
+                div: sib.div
+            }
+            stubJSON.forEach(little => {
+                little.big = stubJSON
+            })
+            return stubJSON
         }
     })
 }
@@ -370,11 +383,11 @@ function createUnspacedTree(container) {
             houseClean = cleanStr(sib.house)
 
             // If the sib has a big, add a line above the nas
-            if (sib.bigName) {
+            if (sib.big) {
                 topLine = document.createElement('div')
                 topLine.classList.add('line')
                 topLine.classList.add('vert')
-                topLine.classList.add(cleanStr(getBig(container.siblings, sib).house))
+                topLine.classList.add(cleanStr(sib.big.house))
                 block.append(topLine)
             }
 
@@ -456,7 +469,7 @@ function createUnspacedTree(container) {
             nameButton.appendChild(nameName)
 
             // If the sib has any littles, add a line below the nas
-            if (sib.littleNames.length > 0) {
+            if (sib.littles.length > 0) {
                 botLine = document.createElement('div')
                 botLine.classList.add('line')
                 botLine.classList.add('vert')
@@ -556,15 +569,15 @@ function drawAcrossLines(container) {
 
         thisRowSibs = container.siblings.filter(thisSib => thisSib.height == height)
         thisRowSibs.forEach(sib => {
-            if (sib.littleNames.length == 1) {
-                little = getLittle(container.siblings, sib, 0)
+            if (sib.littles.length == 1) {
+                little = sib.littles[0]
 
                 leftSpace = little.position - prevEnd - lineWeight/2
                 lineWidth = lineWeight
             }
-            else if (sib.littleNames.length > 1) {
-                firstLittle = getLittle(container.siblings, sib, 0)
-                lastLittle = getLittle(container.siblings, sib, sib.littleNames.length-1)
+            else if (sib.littles.length > 1) {
+                firstLittle = sib.littles[0]
+                lastLittle = sib.littles[sib.littles.length-1]
 
                 leftSpace = firstLittle.position - prevEnd - lineWeight/2
                 lineWidth = lastLittle.position - firstLittle.position + lineWeight

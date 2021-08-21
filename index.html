@@ -91,17 +91,17 @@
                     </li>
                 </ol>
 
-                <p v-if="getTabData().sib.bigName != null">Big:
-                    <button @mouseover="applySibHoverFromTab(getTabData().sib.bigName)" @mouseleave="removeHoverFromTab" @click="sibToName(getTabData().sib.bigName)">{{ unspecialText(getTabData().sib.bigName) }}</button>
+                <p v-if="getTabData().sib.big != null">Big:
+                    <button @mouseover="applySibHoverFromTab(getTabData().sib.big)" @mouseleave="removeHoverFromTab" @click="sibToName(getTabData().sib.big)">{{ unspecialText(getTabData().sib.big.name) }}</button>
                 </p>
 
-                <p v-if="getTabData().sib.littleNames.length == 1">Little:
-                    <button @mouseover="applySibHoverFromTab(getTabData().sib.littleNames[0])" @mouseleave="removeHoverFromTab" @click="sibToName(getTabData().sib.littleNames[0])">{{ unspecialText(getTabData().sib.littleNames[0]) }}</button>
+                <p v-if="getTabData().sib.littles.length == 1">Little:
+                    <button @mouseover="applySibHoverFromTab(getTabData().sib.littles[0])" @mouseleave="removeHoverFromTab" @click="sibToName(getTabData().sib.littles[0])">{{ unspecialText(getTabData().sib.littles[0].name) }}</button>
                 </p>
-                <p v-if="getTabData().sib.littleNames.length > 1">Littles:</p>
-                <ol v-if="getTabData().sib.littleNames.length > 1">
-                    <li v-for="littleName in getTabData().sib.littleNames">
-                        <button @mouseover="applySibHoverFromTab(littleName)" @mouseleave="removeHoverFromTab" @click="sibToName(littleName)">{{ unspecialText(littleName) }}</button>
+                <p v-if="getTabData().sib.littles.length > 1">Littles:</p>
+                <ol v-if="getTabData().sib.littles.length > 1">
+                    <li v-for="little in getTabData().sib.littles">
+                        <button @mouseover="applySibHoverFromTab(little)" @mouseleave="removeHoverFromTab" @click="sibToName(little)">{{ unspecialText(little.name) }}</button>
                     </li>
                 </ol>
             </div>
@@ -119,7 +119,7 @@
                 </p>
                 <ol v-if="getTabData().tag.taggedSibs.length > 0">
                     <li v-for="sib in getTabData().tag.taggedSibs">
-                        <button @mouseover="applySibHoverFromTab(sib.name)" @mouseleave="removeHoverFromTab" @click="tagToName(sib.name)">{{ unspecialText(sib.name) }}</button>
+                        <button @mouseover="applySibHoverFromTab(sib)" @mouseleave="removeHoverFromTab" @click="tagToName(sib)">{{ unspecialText(sib.name) }}</button>
                     </li>
                 </ol>
 
