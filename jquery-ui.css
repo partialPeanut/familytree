@@ -127,6 +127,24 @@
 	margin: -1px;
 }
 
+.ui-tooltip {
+	padding: 8px;
+	position: absolute;
+	z-index: 9999;
+	max-width: 300px;
+
+    border: 1px solid #c5c5c5;
+	background: #fff;
+	color: #333;
+}
+body .ui-tooltip {
+	border-width: 2px;
+}
+
+.ui-corner-all {
+    border-radius: 3px;
+}
+
 .ui-widget {
 	font-family: Arial,Helvetica,sans-serif;
 	font-size: 1em;
@@ -139,4 +157,8 @@
 .ui-widget textarea {
 	font-family: Arial,Helvetica,sans-serif;
 	font-size: 1em;
+}
+.ui-widget-shadow {
+	-webkit-box-shadow: 0px 0px 5px #666666;
+	box-shadow: 0px 0px 5px #666666;
 }
