@@ -39,16 +39,14 @@ function loadVue() {
                 tabData = tagToTab(tag)
                 showTab(tabData)
             },
-            sibToName: function(sibName) {
-                console.log("Displaying " + sibName + " from a sibling")
+            sibToName: function(sib) {
+                console.log("Displaying " + sib.name + " from a sibling")
 
-                currSib = this.getTabData().sib
-                if (currSib.container) {
-                    newSib = currSib.container.siblings.find(sib => sib.name == sibName)
-                    tabData = sibToTab(newSib)
+                if (sib.container) {
+                    tabData = sibToTab(sib)
                     showTab(tabData)
                 }
-                else this.tagToName(sibName)
+                else this.tagToName(sib.name)
             },
             tagToName: function(sibName) {
                 console.log("Displaying " + sibName + " from a tag")
