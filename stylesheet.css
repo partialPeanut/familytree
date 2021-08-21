@@ -30,6 +30,8 @@ html, body {
     flex: auto;
     display: flex;
     flex-direction: column;
+
+    background: #f6f6f6;
 }
 
 .fullWidth {
@@ -40,6 +42,8 @@ html, body {
     overflow: auto;
     display: flex;
     flex-direction: column;
+
+    background: #f6f6f6;
 }
 
 .barTop {
@@ -69,7 +73,7 @@ html, body {
     border: 2px solid #ddd;
     border-radius: 6px;
     padding: 4px 8px;
-    background: #fff;
+    background: #f6f6f6;
     display: flex;
     align-items: center;
     justify-content: space-evenly;

@@ -436,6 +436,7 @@ function showTab(tabData) {
         appElement.split = Split(['#leftColContainer', '#rightColContainer'], {
             gutterSize: 12,
             sizes: [80, 20],
+            minSize: 300,
             onDragStart: function (sizes) {
                 containers.forEach(cont => setScrollLock(cont))
             },
