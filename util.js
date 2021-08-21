@@ -112,6 +112,7 @@ function createTagImage(tag) {
     tagImage.classList.add("tagSymbol")
     tagImage.classList.add("clickable")
     tagImage.classList.add(tag.iconClassName)
+    tagImage.setAttribute('title', unspecialText(tag.name))
     addTagClicker(tagImage, tag)
     
     return tagImage

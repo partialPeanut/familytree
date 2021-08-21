@@ -405,7 +405,6 @@ function createUnspacedTree(container) {
                 // If it's a symbol, add the symbol
                 if (tag.type.includes("SYMBOL")) {
                     tagImage = createTagImage(tag)
-                    tagImage.classList.add(tag.iconClassName)
                     nas.appendChild(tagImage)
 
                     // Register conjunction of conjunctable tags
