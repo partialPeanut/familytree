@@ -227,7 +227,7 @@ function addLocalDivsToStructure() {
 function createMenu() {
     // Applies tooltips to all elements with the title attribute
     $( document ).tooltip({
-        position: {my: "center top", at: "center bottom"}
+        position: {my: "center top", at: "center bottom+15"}
     })
 
     // Creates the autocomplete/search element
