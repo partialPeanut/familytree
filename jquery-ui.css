@@ -71,6 +71,9 @@
 
 .ui-autocomplete-input {
 	width: 300px;
+	height: 80%;
+	border: none;
+	font-size: 16px;
 }
 .ui-autocomplete {
 	position: absolute;

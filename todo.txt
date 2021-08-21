@@ -40,5 +40,3 @@ SUGGESTIONS FORM
 
 SEARCH BAR
 + Search by name, pledge class, tags
-+ Draws from master sibling array
-+ Displays info tab
