@@ -239,9 +239,9 @@ function evenSpacing(container, big, leftCap, rightCap) {
     }
 
     // Do a bunch of calculating
-    rightestMiddleLittle = getLittle(container.siblings, big, rightCap-1)
+    rightestMiddleLittle = big.littles[rightCap-1]
     rightestMiddlePos = big.littleRelPos[rightCap-1]
-    rightLittle = getLittle(container.siblings, big, rightCap)
+    rightLittle = big.littles[rightCap]
     rightPos = big.littleRelPos[rightCap]
     gap = rightPos + rightLittle.branchWidths[0][0] - rightestMiddlePos - rightestMiddleLittle.branchWidths[0][1] - settings.sizes['blockMargin']
 
@@ -331,18 +331,18 @@ function calculateRelativePositions(container, sib) {
     rightIdx = sib.littles.length-1
     for (i = 0; i < longestLength; i++) {
         // Find the leftest little with a descendent of this height and get how far left it is
-        leftLittle = getLittle(container.siblings, sib, leftIdx)
+        leftLittle = sib.littles[leftIdx]
         while (leftLittle.branchWidths.length <= i) {
             leftIdx++
-            leftLittle = getLittle(container.siblings, sib, leftIdx)
+            leftLittle = sib.littles[leftIdx]
         }
         leftWidth = leftLittle.branchWidths[i][0] + sib.littleRelPos[leftIdx]
 
         // Find the rightest little with a descendent of this height and get how far right it is
-        rightLittle = getLittle(container.siblings, sib, rightIdx)
+        rightLittle = sib.littles[rightIdx]
         while (rightLittle.branchWidths.length <= i) {
             rightIdx--
-            rightLittle = getLittle(container.siblings, sib, rightIdx)
+            rightLittle = sib.littles[rightIdx]
         }
         rightWidth = rightLittle.branchWidths[i][1] + sib.littleRelPos[rightIdx]
 

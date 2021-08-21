@@ -287,7 +287,7 @@ function copySiblingSet(container) {
 
     // Filters the set of all siblings down to the siblings that belong in this container
     filteredSibs = siblings.filter(sib => {
-        if (belongsUnaltered(sib) || belongsUnaltered(getBig(siblings, sib))) return true
+        if (belongsUnaltered(sib) || belongsUnaltered(sib.big)) return true
         else {
             found = false
             sib.littles.forEach(little => {
