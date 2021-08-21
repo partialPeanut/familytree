@@ -316,7 +316,8 @@ function copySiblingSet(container) {
             house: sib.house,
             tags: ['stub'],
             height: sib.height,
-            container: container
+            container: container,
+            div: sib.div
         }
         else {
             validLittleNames = []
@@ -326,12 +327,12 @@ function copySiblingSet(container) {
             })
             return {
                 name: sib.house,
-                bigName: null,
                 littleNames: validLittleNames,
                 house: sib.house,
                 tags: ['stub'],
                 height: sib.height,
-                container: container
+                container: container,
+                div: sib.div
             }
         }
     })
