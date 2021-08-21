@@ -34,12 +34,12 @@
         <div id="leftColContainer" v-if="getDisplayTab() != 'mainMenu'" :class="{ fullWidth: getDisplayTab() == 'tree', col: getDisplayTab() != 'tree', left: getDisplayTab() != 'tree' }">
             <!-- Bar with a bunch of doodads on it -->
             <div id="menuBar" class="barTop">
-                <img id="infoIcon" class="menuItem clickable" src="https://drive.google.com/thumbnail?id=1TFLpYUj3riC2fIBV-tg9z7TQ1gYNshvQ" onclick="showTab({ tabType: 'info', ele: this })">
-                <img id="settingsIcon" class="menuItem clickable" src="https://drive.google.com/thumbnail?id=1gDTD0PQhGn1blzbsgbl73stcnZTQ2ayg" onclick="showTab({ tabType: 'settings', ele: this })">
-                <img id="suggestionsIcon" class="menuItem clickable" src="https://drive.google.com/thumbnail?id=1x7U-IQJ95lELsVWalZPxycSxRSBsEvHS" onclick="showTab({ tabType: 'suggestions', ele: this })">
+                <img id="infoIcon" title="Information" class="menuItem clickable" src="https://drive.google.com/thumbnail?id=1TFLpYUj3riC2fIBV-tg9z7TQ1gYNshvQ" onclick="showTab({ tabType: 'info', ele: this })">
+                <img id="settingsIcon" title="Settings" class="menuItem clickable" src="https://drive.google.com/thumbnail?id=1gDTD0PQhGn1blzbsgbl73stcnZTQ2ayg" onclick="showTab({ tabType: 'settings', ele: this })">
+                <img id="suggestionsIcon" title="Suggestions" class="menuItem clickable" src="https://drive.google.com/thumbnail?id=1x7U-IQJ95lELsVWalZPxycSxRSBsEvHS" onclick="showTab({ tabType: 'suggestions', ele: this })">
                 <div id="spaceBar" class="menuItem"></div>
                 <div id="searchBar" class="menuItem">
-                    <label for="searchInput"><img id="searchIcon" class="subMenuIcon" src="https://drive.google.com/thumbnail?id=1daDZwN1WziUVLy0QPYp2HUvTxklmdsR2"></label>
+                    <label for="searchInput"><img id="searchIcon" title="Search by name" class="subMenuIcon" src="https://drive.google.com/thumbnail?id=1daDZwN1WziUVLy0QPYp2HUvTxklmdsR2"></label>
                     <input type="text" id="searchInput" name="searchInput" placeholder="Search..."></input>
                 </div>
             </div>

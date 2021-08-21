@@ -225,6 +225,10 @@ function addLocalDivsToStructure() {
 
 // Gives the menu items functionality
 function createMenu() {
+    // Applies tooltips to all elements with the title attribute
+    $( document ).tooltip()
+
+    // Creates the autocomplete/search element
     createCatComplete()
     $( "#searchInput" ).catcomplete({
         delay: 0,
@@ -245,15 +249,24 @@ function createMenu() {
                 dataSet.push({
                     name: sib.name,
                     label: unspecialText(sib.name),
-                    category: "None",
+                    category: "Other Siblings",
                     link: sib
+                })
+            })
+            settings.tagData.filter(tag => matcher.test(tag.name)).forEach(tag => {
+                dataSet.push({
+                    name: tag.name,
+                    label: unspecialText(tag.name),
+                    category: "Tags",
+                    link: tag
                 })
             })
 
             response(dataSet)
         },
         select: function(e, ui) {
-            if (ui.item.category == "None") tabData = containerlessSibToTab(ui.item.link)
+            if (ui.item.category == "Other Siblings") tabData = containerlessSibToTab(ui.item.link)
+            else if (ui.item.category == "Tags") tabData = tagToTab(ui.item.link)
             else tabData = sibToTab(ui.item.link)
 
             showTab(tabData)
