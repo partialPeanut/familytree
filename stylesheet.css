@@ -177,6 +177,7 @@ html, body {
     white-space: nowrap;
     position: relative;
     top: var(--treeMarginTop);
+    left: var(--treeMarginLeft);
 
     transform-origin: top left;
 }
