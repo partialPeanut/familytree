@@ -281,7 +281,14 @@ function copySiblingSet(container) {
     console.log(`Copying the sibling set for container ${container.name}...`)
 
     // Edits siblings into stubs if necessary
-    container.siblings = siblings.map(sib => {
+    container.siblings = siblings.filter(sib => {
+        belongs = belongsUnaltered(sib)
+        if (sib.big && belongsUnaltered(container, sib.big)) belongs = true
+        sib.littles.forEach(little => {
+            if (belongsUnaltered(container, little)) belongs = true
+        })
+        return belongs
+    }).map(sib => {
         validLittleNames = []
         sib.littles.forEach(little => {
             if (belongsUnaltered(container, little)) validLittleNames.push(little.name)
@@ -303,7 +310,7 @@ function copySiblingSet(container) {
 
             return sibJSON
         }
-        else if (belongsUnaltered(container, sib.big) || validLittleNames.length > 0) {
+        else {
             stubJSON = {
                 name: sib.house,
                 littles: [],
