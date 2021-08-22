@@ -413,6 +413,7 @@ function containerlessSibToTab(sibName) {
         tabType: "nameTab",
         sib: sib
     }
+    return tabData
 }
 
 // Parses tag data into relevant tab data

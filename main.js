@@ -282,7 +282,7 @@ function copySiblingSet(container) {
 
     // Edits siblings into stubs if necessary
     container.siblings = siblings.filter(sib => {
-        belongs = belongsUnaltered(sib)
+        belongs = belongsUnaltered(container, sib)
         if (sib.big && belongsUnaltered(container, sib.big)) belongs = true
         sib.littles.forEach(little => {
             if (belongsUnaltered(container, little)) belongs = true
