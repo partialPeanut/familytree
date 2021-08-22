@@ -277,7 +277,7 @@ function calculateRelativePositions(container, sib) {
     thisW = Math.ceil(thisW)
     $( thisBlock ).width(thisW)
 
-    buttonWidth = Math.ceil( $( thisBlock ).find( "button" ).css("width") )
+    buttonWidth = Math.ceil(pxToInt( $( thisBlock ).find( "button" ).css("width") ))
     lineWeight = settings.sizes['lineWeight']
     leftHang = Math.min(thisW/2, buttonWidth - lineWeight/2)
     rightHang = Math.max(thisW/2, thisW - buttonWidth + lineWeight/2)
