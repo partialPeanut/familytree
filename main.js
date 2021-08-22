@@ -510,13 +510,7 @@ function spaceTree(container) {
     minSibHeight = minValue(container.siblings, 'height')
     maxSibHeight = maxValue(container.siblings, 'height')
     for (i = minSibHeight ; i <= maxSibHeight; i++) {
-        prevSib = {
-            position: 0,
-            height: 0,
-            branchWidths: [[0,0]]
-        }
         prevEnd = 0
-
         thisRowSibs = container.siblings.filter(thisSib => thisSib.height == i)
         thisRowSibs.forEach(sib => {
             space = sib.position - prevEnd + sib.branchWidths[0][0]
@@ -524,7 +518,6 @@ function spaceTree(container) {
             sibBlock = sib.div
             sibBlock.style.marginLeft = space + "px"
 
-            prevSib = sib
             prevEnd = sibBlock.getBoundingClientRect().right - container.containerDiv.getBoundingClientRect().left - treeMarginLeft
         })
     }
