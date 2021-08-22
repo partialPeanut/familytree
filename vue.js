@@ -42,7 +42,13 @@ function loadVue() {
             sibToName: function(sib) {
                 console.log("Displaying " + sib.name + " from a sibling")
 
-                if (sib.container) {
+                if (sib.tags.includes('stub')) {
+                    tag = getTag(sib.house)
+                    tabData = tagToTab(tag)
+                    tabData.ele = ele
+                    showTab(tabData)
+                }
+                else if (sib.container) {
                     tabData = sibToTab(sib)
                     showTab(tabData)
                 }
