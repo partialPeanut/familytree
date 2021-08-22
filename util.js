@@ -137,7 +137,7 @@ function createTagImage(tag) {
 // Takes an array of tags attached to a sibling and combines them into one
 function createTagConjunction(sib, tagArray) {
     conjNames = "Conjoining " + tagArray.length + " tags attached to " + sib.name + ": "
-    conjNames += tagArray.join(", ")
+    conjNames += tagArray.map(tag => tag.name).join(", ")
     console.log(conjNames)
 
     newTagName = tagArray.map(tag => tag.name).join(' + ')
