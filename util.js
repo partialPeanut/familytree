@@ -230,8 +230,8 @@ function distToTouch(sibLeft, sibRight) {
     heightDiff = sibLeft.height - sibRight.height
 
     // If they wouldn't touch, they can go on top of each other
-    if ((heightDiff > 0 && leftWidths.length <= heightDiff)
-    || (heightDiff < 0 && rightWidths.length <= -heightDiff))
+    if ((heightDiff > 0 && rightWidths.length <= heightDiff)
+    || (heightDiff < 0 && leftWidths.length <= -heightDiff))
         return 0
 
     // Loop through heights looking for the most conflicting littles

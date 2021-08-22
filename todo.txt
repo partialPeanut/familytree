@@ -3,6 +3,11 @@
  + Loading bar
  + Make non-touching trees snap to mid
  + Make parent stubs actually work
+ + Alternate for images not loading
+ + Firefox breaks some things
+  - Asphodel is grey
+  - Dropped doesn't load
+ + Fix lines disconnecting if name has too many tags
 
  MAJOR CHANGES/ADDITIONS
  + Zoom!!
