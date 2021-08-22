@@ -77,6 +77,12 @@ function recursiveSiblingSort(sibA, sibB) {
     else return recursiveSiblingSort(sibA.big, sibB.big)
 }
 
+// Test if a sibling belongs unaltered in a container.
+function belongsUnaltered(container, sib) {
+    if (sib !== undefined) return container.houses.includes(sib.house)
+    else return false
+}
+
 // Creates a custom widget that splits autocomplete into categories automatically
 function createCatComplete() {
     $.widget( "custom.catcomplete", $.ui.autocomplete, {

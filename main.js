@@ -280,19 +280,14 @@ function createMenu() {
 function copySiblingSet(container) {
     console.log(`Copying the sibling set for container ${container.name}...`)
 
-    function belongsUnaltered(sib) {
-        if (sib !== undefined) return container.houses.includes(sib.house)
-        else return false
-    }
-
     // Edits siblings into stubs if necessary
     container.siblings = siblings.map(sib => {
         validLittleNames = []
         sib.littles.forEach(little => {
-            if (belongsUnaltered(little)) validLittleNames.push(little.name)
+            if (belongsUnaltered(container, little)) validLittleNames.push(little.name)
         })
 
-        if (belongsUnaltered(sib)) {
+        if (belongsUnaltered(container, sib)) {
             sibJSON = {
                 name: sib.name,
                 littles: [],
@@ -304,11 +299,11 @@ function copySiblingSet(container) {
                 height: sib.height,
                 container: container
             }
-            if (belongsUnaltered(sib.big)) sibJSON.bigName = sib.bigName
+            if (belongsUnaltered(container, sib.big)) sibJSON.bigName = sib.bigName
 
             return sibJSON
         }
-        else if (belongsUnaltered(sib.big) || validLittleNames.length > 0) {
+        else if (belongsUnaltered(container, sib.big) || validLittleNames.length > 0) {
             stubJSON = {
                 name: sib.house,
                 littles: [],
@@ -317,7 +312,7 @@ function copySiblingSet(container) {
                 height: sib.height,
                 container: container
             }
-            if (belongsUnaltered(sib.big)) stubJSON.bigName = sib.bigName
+            if (belongsUnaltered(container, sib.big)) stubJSON.bigName = sib.bigName
             if (validLittleNames.length > 0) stubJSON.littleNames = validLittleNames
 
             return stubJSON
