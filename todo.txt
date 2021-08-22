@@ -8,6 +8,7 @@
   - Asphodel is grey
   - Dropped doesn't load
  + Fix lines disconnecting if name has too many tags
+ + McDucker stub color is wrong
 
  MAJOR CHANGES/ADDITIONS
  + Zoom!!
