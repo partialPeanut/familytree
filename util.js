@@ -273,9 +273,9 @@ function evenSpacing(container, big, leftCap, rightCap) {
 // Stores the corrected relative positions and hitboxes of a sib's descendants.
 function calculateRelativePositions(container, sib) {
     thisBlock = sib.div
-    thisW = $(thisBlock).width()
+    thisW = $( thisBlock ).width()
     thisW = Math.ceil(thisW)
-    $(thisBlock).width(thisW)
+    $( thisBlock ).width(thisW)
 
     sib.width = thisW
     sib.branchWidths = [[]]

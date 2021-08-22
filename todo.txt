@@ -1,9 +1,8 @@
  MINOR THINGS/FIXES
  + Make the info bar Not Look Like Shit
- + Add Show On Tree buttons to info tab
  + Loading bar
- + Tree margins
  + Make non-touching trees snap to mid
+ + Make parent stubs actually work
 
  MAJOR CHANGES/ADDITIONS
  + Zoom!!

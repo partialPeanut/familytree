@@ -482,7 +482,7 @@ function spaceTree(container) {
     blockMargin = settings.sizes['blockMargin']
     treeMarginLeft = settings.sizes['treeMarginLeft']
 
-    biglessSibs = container.siblings.filter(thisSib => thisSib.height == minSibHeight)
+    biglessSibs = container.siblings.filter(thisSib => !thisSib.big)
     biglessSibs.forEach(sib => {
         calculateRelativePositions(container, sib)
 
