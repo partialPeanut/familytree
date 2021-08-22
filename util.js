@@ -232,7 +232,7 @@ function distToTouch(sibLeft, sibRight) {
     // If they wouldn't touch, they can go on top of each other
     if ((heightDiff > 0 && leftWidths.length <= heightDiff)
     || (heightDiff < 0 && rightWidths.length <= -heightDiff))
-        return 0
+        return -settings.sizes['blockMargin']
 
     // Loop through heights looking for the most conflicting littles
     start = Math.max(heightDiff, 0)
