@@ -153,8 +153,6 @@ function parseSizeSettings(result) {
 
     nameHeight = defaultSizes['nameHeight']
     lineHeight = defaultSizes['lineHeight']
-    endBlockHeight = nameHeight + lineHeight
-    defaultSizes['endBlockHeight'] = endBlockHeight
     blockHeight = nameHeight + 2*lineHeight
     defaultSizes['blockHeight'] = blockHeight
 

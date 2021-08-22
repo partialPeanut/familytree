@@ -357,8 +357,6 @@ function createUnspacedTree(container) {
         row = document.createElement('div')
         row.id = 'row-' + i
         row.classList.add('row')
-        if (i == minSibHeight || i == maxSibHeight)
-            row.classList.add('end')
         treeDiv.append(row)
 
         // Loop through the siblings in this row
@@ -375,17 +373,15 @@ function createUnspacedTree(container) {
             // Get a class name from the sib's house
             houseClean = cleanStr(sib.house)
 
-            // If the sib has a big, add a line above the nas
-            if (sib.big || sib.tags.includes('stub')) {
-                topLine = document.createElement('div')
-                topLine.classList.add('line')
-                topLine.classList.add('vert')
+            // Add a line above the nas which is transparent if there should not be a line there
+            topLine = document.createElement('div')
+            topLine.classList.add('line')
+            topLine.classList.add('vert')
 
-                if (sib.big) topLine.classList.add(cleanStr(sib.big.house))
-                else topLine.classList.add("transparent")
-                
-                block.append(topLine)
-            }
+            if (sib.big) topLine.classList.add(cleanStr(sib.big.house))
+            else topLine.classList.add("transparent")
+
+            block.append(topLine)
 
             // The nas (name and symbols), which contains the sib's name and all the symbols attached to them
             nas = document.createElement('div')

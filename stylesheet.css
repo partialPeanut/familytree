@@ -184,9 +184,6 @@ html, body {
     height: var(--blockHeight);
     white-space: nowrap;
 }
-.tree > .row.end {
-    height: var(--endBlockHeight);
-}
 
 .block {
     display: inline-flex;
