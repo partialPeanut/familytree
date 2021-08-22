@@ -170,14 +170,15 @@ html, body {
     height: 100%;
     cursor: grab;
     overflow: auto;
+
+    padding-top: var(--treeMarginTop);
+    padding-left: var(--treeMarginLeft);
+    padding-bottom: var(--treeMarginBottom);
+    padding-right: var(--treeMarginRight);
 }
 .tree {
     width: fit-content;
     white-space: nowrap;
-    margin-top: var(--treeMarginTop);
-    margin-left: var(--treeMarginLeft);
-    margin-bottom: var(--treeMarginBottom);
-    margin-right: var(--treeMarginRight);
 }
 
 .tree > .row {
