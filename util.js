@@ -282,6 +282,9 @@ function calculateRelativePositions(container, sib) {
     leftHang = Math.min(thisW/2, buttonWidth - lineWeight/2)
     rightHang = Math.max(thisW/2, thisW - buttonWidth + lineWeight/2)
 
+    hangDiff = thisW/2 - leftHang
+    $( thisBlock ).find( ".line.vert" ).css('right', hangDiff)
+
     sib.width = thisW
     sib.branchWidths = [[-leftHang, rightHang]]
     sib.littleRelPos = [0]
