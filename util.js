@@ -247,7 +247,7 @@ function distToTouch(sibLeft, sibRight) {
 }
 
 // Evenly spaces all littles between two "cap" littles
-function evenSpacing(container, big, leftCap, rightCap) {
+function evenSpacing(big, leftCap, rightCap) {
     capDiff = rightCap - leftCap
     if (capDiff == 1) {
         console.log("Something's gone horribly wrong with the evenSpacing thing")
@@ -277,9 +277,13 @@ function calculateRelativePositions(container, sib) {
     thisW = Math.ceil(thisW)
     $( thisBlock ).width(thisW)
 
+    buttonWidth = Math.ceil( $( thisBLock ).find( "button" ).css("width") )
+    lineWeight = settings.sizes['lineWeight']
+    leftHang = Math.min(thisW/2, buttonWidth - lineWeight/2)
+    rightHang = Math.max(thisW/2, thisW - buttonWidth + lineWeight/2)
+
     sib.width = thisW
-    sib.branchWidths = [[]]
-    sib.branchWidths[0] = [-thisW/2, thisW/2]
+    sib.branchWidths = [[-leftHang, rightHang]]
     sib.littleRelPos = [0]
 
     // If has no littles, return, else do recursion
@@ -315,11 +319,11 @@ function calculateRelativePositions(container, sib) {
 
         // If it can, evenly space littles that have wiggle room
         if (limiter < idx-1) {
-            evenSpacing(container, sib, limiter, idx)
+            evenSpacing(sib, limiter, idx)
         }
     })
 
-    // Adjust to make big in the center // TODO: SNAP TO FIRST SETTING
+    // Adjust to make big in the center
     rightestPos = sib.littleRelPos[sib.littleRelPos.length-1]
     sib.littleRelPos.forEach(function(val, vdx) {
         sib.littleRelPos[vdx] = val - Math.floor(rightestPos/2)
@@ -328,7 +332,7 @@ function calculateRelativePositions(container, sib) {
     // Adjust slightly for ocd if littles are close enough to make a straight line
     adj = 0
     sib.littleRelPos.forEach(function(val, vdx) {
-        if (Math.abs(val) < 10) { // TODO: OCD TOLERANCE SETTING (snap to option?)
+        if (Math.abs(val) < 10) {
             adj = -val
             if (adj != 0) console.log("Adjusting " + sib.name +"'s littles by " + val + " for OCD reasons!")
             return false

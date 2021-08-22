@@ -12,10 +12,14 @@
  MAJOR CHANGES/ADDITIONS
  + Zoom!!
  + Main menu
- + LONGE tree type with one pledge class per row
  + Legend
  + Clan logos on tree
  + Minimize trees
+
+FUNKY TREE STYLES
+ + One pledge class per row
+ + Snap to first little
+ + OCD Tolerance
 
 TAB SYSTEM
 + Create your own tab, highly customizable
