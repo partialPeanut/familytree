@@ -70,7 +70,7 @@ function containerRowToJSON(row) {
 // Sorts siblings into the order they should appear in on the tree.
 function recursiveSiblingSort(sibA, sibB) {
     if (sibA.height != sibB.height) return sibA.height < sibB.height ? -1 : 1
-    else if (sibA.height == 0 || sibA.big.name == sibB.big.name) {
+    else if (!sibA.big || sibA.big.name == sibB.big.name) {
         if (sibA.pledgeClassNumber != sibB.pledgeClassNumber) return sibA.pledgeClassNumber - sibB.pledgeClassNumber
         else return sibA.name < sibB.name ? -1 : 1
     }
