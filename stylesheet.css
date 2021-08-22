@@ -225,6 +225,9 @@ html, body {
     width: var(--lineWeight);
     height: var(--lineWeight);
 }
+.line.transparent {
+    color: transparent;
+}
 
 .across {
     height: var(--lineWeight);

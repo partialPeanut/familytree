@@ -376,11 +376,14 @@ function createUnspacedTree(container) {
             houseClean = cleanStr(sib.house)
 
             // If the sib has a big, add a line above the nas
-            if (sib.big) {
+            if (sib.big || sib.tags.includes('stub')) {
                 topLine = document.createElement('div')
                 topLine.classList.add('line')
                 topLine.classList.add('vert')
-                topLine.classList.add(cleanStr(sib.big.house))
+
+                if (sib.big) topLine.classList.add(cleanStr(sib.big.house))
+                else topLine.classList.add("transparent")
+                
                 block.append(topLine)
             }
 
