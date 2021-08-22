@@ -74,7 +74,7 @@ function recursiveSiblingSort(sibA, sibB) {
         if (sibA.pledgeClassNumber != sibB.pledgeClassNumber) return sibA.pledgeClassNumber - sibB.pledgeClassNumber
         else return sibA.name < sibB.name ? -1 : 1
     }
-    else return recursiveSort(sibA.big, sibB.big)
+    else return recursiveSiblingSort(sibA.big, sibB.big)
 }
 
 // Creates a custom widget that splits autocomplete into categories automatically
