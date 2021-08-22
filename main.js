@@ -1,3 +1,5 @@
+import deepCloneMap from 'deep-clone-map'
+
 // It's main!
 function main() {
     applySettings()
@@ -285,70 +287,61 @@ function copySiblingSet(container) {
         else return false
     }
 
-    // Filters the set of all siblings down to the siblings that belong in this container
-    filteredSibs = siblings.filter(sib => {
-        if (belongsUnaltered(sib) || belongsUnaltered(sib.big)) return true
-        else {
-            found = false
-            sib.littles.forEach(little => {
-                if (belongsUnaltered(little)) {
-                    console.log(`${little.name} granted ${sib.name} above stub rights.`)
-                    found = true
-                    return false
-                }
-            })
-            return found
-        }
-    })
-    // Launders the JSON to make it a copy rather than a reference
-    newFilteredSibs = JSON.parse(JSON.stringify(filteredSibs))
     // Edits siblings into stubs if necessary
-    container.siblings = newFilteredSibs.map(sib => {
+    container.siblings = siblings.map(sib => {
+        validLittleNames = []
+        sib.littles.forEach(little => {
+            if (belongsUnaltered(little)) validLittleNames.push(little.name)
+        })
+
         if (belongsUnaltered(sib)) {
-            sib.container = container
+            sibJSON = {
+                name: sib.name,
+                littles: [],
+                pledgeClass: sib.pledgeClass,
+                pledgeClassNumber: sib.pledgeClassNumber,
+                gradYear: sib.gradYear,
+                house: sib.house,
+                tags: sib.tags,
+                height: sib.height,
+                container: container
+            }
+            if (belongsUnaltered(sib.big)) sibJSON.bigName = sib.bigName
 
-            // Remove the stubs
-            if (!belongsUnaltered(sib.big)) sib.big = undefined
-            sib.littles.forEach((little, idx) => {
-                if (!belongsUnaltered(little)) sib.littles.splice(idx, 1)
-            })
-
-            return sib
+            return sibJSON
         }
-        else if (belongsUnaltered(sib.big)) {
+        else if (belongsUnaltered(sib.big) || validLittleNames.length > 0) {
             stubJSON = {
                 name: sib.house,
-                big: sib.big,
                 littles: [],
                 house: sib.house,
                 tags: ['stub'],
                 height: sib.height,
-                container: container,
-                div: sib.div
+                container: container
             }
-            stubJSON.big.littles.push(stubJSON)
-            return stubJSON
-        }
-        else {
-            validLittles = []
-            sib.littles.forEach(little => {
-                if (belongsUnaltered(little)) validLittles.push(little)
-            })
-            stubJSON = {
-                name: sib.house,
-                littles: validLittles,
-                house: sib.house,
-                tags: ['stub'],
-                height: sib.height,
-                container: container,
-                div: sib.div
-            }
-            stubJSON.forEach(little => {
-                little.big = stubJSON
-            })
+            if (belongsUnaltered(sib.big)) stubJSON.bigName = sib.bigName
+            if (validLittleNames.length > 0) stubJSON.littleNames = validLittleNames
+
             return stubJSON
         }
     })
+
+    // Link all siblings in big/little heirarchy
+    container.siblings.forEach(sib => {
+        if (sib.bigName) {
+            sib.big = container.siblings.find(sibling => sibling.name == sib.bigName)
+            sib.big.littles.push(sib)
+        }
+        if (sib.littleNames) {
+            sib.littleNames.forEach(littleName => {
+                little = container.siblings.find(sibling => sibling.name == littleName)
+                sib.littles.push(little)
+                little.big = sib
+            })
+        }
+    })
+
+    container.siblings.sort(recursiveSiblingSort)
 }
 
 // Places all blocks roughly down, in the right order but not correctly positioned
