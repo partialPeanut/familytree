@@ -1,5 +1,3 @@
-import deepCloneMap from 'deep-clone-map'
-
 // It's main!
 function main() {
     applySettings()
