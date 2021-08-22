@@ -173,17 +173,18 @@ html, body {
 }
 .tree {
     width: fit-content;
+    height: inherit;
     white-space: nowrap;
+    position: relative;
+    top: var(--treeMarginTop);
 
-    margin-top: var(--treeMarginTop);
-    margin-left: var(--treeMarginLeft);
-    margin-bottom: var(--treeMarginBottom);
-    margin-right: var(--treeMarginRight);
+    transform-origin: top left;
 }
 
 .tree > .row {
     height: var(--blockHeight);
     white-space: nowrap;
+    padding: 0 var(--treeMarginRight) 0 0;
 }
 
 .block {
@@ -230,4 +231,5 @@ html, body {
 .across {
     height: var(--lineWeight);
     white-space: nowrap;
+    padding: 0 var(--treeMarginRight) 0 0;
 }
