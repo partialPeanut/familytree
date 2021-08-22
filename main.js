@@ -482,14 +482,13 @@ function spaceTree(container) {
     blockMargin = settings.sizes['blockMargin']
     treeMarginLeft = settings.sizes['treeMarginLeft']
 
-    minSibHeight = minValue(container.siblings, 'height')
-    minHeightSibs = container.siblings.filter(thisSib => thisSib.height == minSibHeight)
-    minHeightSibs.forEach(sib => {
+    biglessSibs = container.siblings.filter(thisSib => thisSib.height == minSibHeight)
+    biglessSibs.forEach(sib => {
         calculateRelativePositions(container, sib)
 
         // Put siblings at the top in the correct position*
         position = 0
-        minHeightSibs.every(prevSib => {
+        biglessSibs.every(prevSib => {
             if (prevSib.name == sib.name) {
                 position = Math.max(sib.branchWidths[0][0] + blockMargin, position)
                 return false
@@ -505,17 +504,12 @@ function spaceTree(container) {
         })
 
         setLittleAbsolutePositions(container, sib)
-
-        space = sib.position - prevEnd + sib.branchWidths[0][0]
-
-        sibBlock = sib.div
-        sibBlock.style.marginLeft = space + "px"
-
-        prevEnd = sib.position + sib.branchWidths[0][1]
     })
 
+    // Calculate all the margins
+    minSibHeight = minValue(container.siblings, 'height')
     maxSibHeight = maxValue(container.siblings, 'height')
-    for (i = minSibHeight + 1; i <= maxSibHeight; i++) {
+    for (i = minSibHeight ; i <= maxSibHeight; i++) {
         prevSib = {
             position: 0,
             height: 0,
@@ -535,7 +529,7 @@ function spaceTree(container) {
         })
     }
 
-    centerTopSib = getValueAtMiddleIndex(minHeightSibs)
+    centerTopSib = getValueAtMiddleIndex(biglessSibs)
     centerTopSib.div.scrollIntoView({behavior: "auto", block: "start", inline: "center"})
     container.containerDiv.scrollTop = 0
     console.log(`With spacing, container ${container.name} has these siblings:`)
