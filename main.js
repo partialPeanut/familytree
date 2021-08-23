@@ -238,16 +238,26 @@ function createMenu() {
     $( '.controlgroup' ).controlgroup()
 
     // Create menu for choosing search type
+    var ststt
     $( '#searchTypeSelect' ).selectmenu({
         classes: {
-            "ui-selectmenu-button": "ui-icon"
+            "ui-selectmenu-button": "ui-button-icon-only"
+        },
+        create: function(e, ui) {
+            $( "#searchTypeSelect-button" ).prop('title', 'Search by name')
+            ststt = $( "#searchTypeSelect-button" ).tooltip()
+        },
+        open: function(e, ui) {
+            ststt.disable()
         },
         change: function(e, ui) {
-            console.log(ui)
             ele = $( ui.item.element )
-            settings.searchType = ele.prop('type')
-            $( "#searchIcon" ).prop('title', ele.text())
-        }
+            settings.searchType = ele.attr('type')
+            $( "#searchTypeSelect-button" ).prop('title', ele.text())
+        },
+        close: function(e, ui) {
+            ststt.enable()
+        },
     })
 
     // Creates the autocomplete/search element

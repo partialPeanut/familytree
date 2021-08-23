@@ -164,7 +164,7 @@
 	right: 0;
 }
 .ui-button {
-	padding: .4em 1em;
+	/* padding: .4em 1em; */
 	display: inline-block;
 	position: relative;
 	line-height: normal;
@@ -717,7 +717,7 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-selectmenu-icon.ui-icon {
 	float: right;
-	margin-top: 0;
+	/* margin-top: 0; */
 }
 .ui-slider {
 	position: relative;
@@ -1117,7 +1117,7 @@ a.ui-button:active,
 .ui-icon-triangle-1-ne { background-position: -16px -16px; }
 .ui-icon-triangle-1-e { background-position: -32px -16px; }
 .ui-icon-triangle-1-se { background-position: -48px -16px; }
-.ui-icon-triangle-1-s { background-position: -65px -16px; }
+.ui-icon-triangle-1-s {background-position: -65px -16px;}
 .ui-icon-triangle-1-sw { background-position: -80px -16px; }
 .ui-icon-triangle-1-w { background-position: -96px -16px; }
 .ui-icon-triangle-1-nw { background-position: -112px -16px; }

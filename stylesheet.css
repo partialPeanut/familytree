@@ -89,7 +89,8 @@ html, body {
     z-index: 1;
 }
 #searchTypeSelect-button {
-    width: 24px;
+    width: 18px;
+    height: 18px;
 }
 #searchInput {
     width: 300px;
