@@ -240,7 +240,7 @@ function createMenu() {
     // Create menu for choosing search type
     $( '#searchTypeSelect' ).selectmenu({
         classes: {
-            "ui-selectmenu-button": "ui-button-icon"
+            "ui-selectmenu-button": "ui-icon"
         },
         change: function(e, ui) {
             console.log(ui)
