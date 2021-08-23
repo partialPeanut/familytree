@@ -215,14 +215,16 @@ html, body {
     height: var(--nameHeight);
 }
 
-.line.vert {
+.line {
     width: var(--lineWeight);
+}
+.line.vert {
+    position: relative;
     height: var(--lineHeight);
 }
 .line.horiz {
     display: inline-block;
     vertical-align: top;
-    width: var(--lineWeight);
     height: var(--lineWeight);
 }
 .line.transparent {
