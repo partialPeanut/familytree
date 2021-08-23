@@ -243,9 +243,9 @@ function createMenu() {
             "ui-selectmenu-button": "ui-button-icon-only demo-splitbutton-select"
         },
         change: function(e, ui) {
-            console.log(ui)
-            //settings.searchType = ui.type
-            //$( "#searchIcon" ).prop('title', ui.type)
+            searchType = ui.item.element.prop('type')
+            settings.searchType = searchType
+            $( "#searchIcon" ).prop('title', searchType)
         }
     })
 
