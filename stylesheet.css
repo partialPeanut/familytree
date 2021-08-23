@@ -78,6 +78,12 @@ html, body {
     align-items: center;
     justify-content: space-evenly;
 }
+#searchTypeSelect-button {
+    background-image: url('images/search-icon-with-arrow.png');
+    background-size: 24px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 #searchInput {
     width: 300px;
 	height: 80%;
