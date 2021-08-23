@@ -170,6 +170,10 @@ function createTabContainerDivs() {
         container.structure['tabsTab'] = tabButton
     })
     tabs = $( tcc ).tabs({
+        classes: {
+            "ui-tabs-nav": "",
+            "ui-tabs-tab": "ui-corner-all"
+        },
         create: function(e, ui) {
             anchors = $( tcc ).find( ".ui-tabs-anchor" )
             anchors.removeAttr('href')
@@ -239,8 +243,9 @@ function createMenu() {
             "ui-selectmenu-button": "ui-button-icon-only demo-splitbutton-select"
         },
         change: function(e, ui) {
-            settings.searchType = ui.type
-            $( "#searchIcon" ).attr('title', ui.type)
+            console.log(ui)
+            //settings.searchType = ui.type
+            //$( "#searchIcon" ).prop('title', ui.type)
         }
     })
 
