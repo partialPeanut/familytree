@@ -13,7 +13,7 @@ function main() {
             spaceTree(container)
             drawAcrossLines(container)
             makeDraggable(container.containerDiv)
-        }, 2000)
+        }, 1200)
     })
 }
 
@@ -520,6 +520,9 @@ function spaceTree(container) {
             prevEnd = sibBlock.getBoundingClientRect().right - container.containerDiv.getBoundingClientRect().left - treeMarginLeft
         })
     }
+
+    // Make left margin auto
+    $( ".tree" ).css('margin-left', 'auto')
 
     centerTopSib = getValueAtMiddleIndex(biglessSibs)
     centerTopSib.div.scrollIntoView({behavior: "auto", block: "start", inline: "center"})
