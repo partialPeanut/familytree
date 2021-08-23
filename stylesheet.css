@@ -78,11 +78,18 @@ html, body {
     align-items: center;
     justify-content: space-evenly;
 }
+#searchBar > label {
+    display: flex;
+    justify-content: center;
+}
+#searchIcon {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    z-index: 1;
+}
 #searchTypeSelect-button {
-    background-image: url('images/search-icon-with-arrow.png');
-    background-size: 24px 30px;
-    background-repeat: no-repeat;
-    background-position: center;
+    width: 24px;
 }
 #searchInput {
     width: 300px;
