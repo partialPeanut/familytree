@@ -243,9 +243,10 @@ function createMenu() {
             "ui-selectmenu-button": "ui-button-icon"
         },
         change: function(e, ui) {
-            searchType = ui.item.element.prop('type')
-            settings.searchType = searchType
-            $( "#searchIcon" ).prop('title', searchType)
+            console.log(ui)
+            ele = $( ui.item.element )
+            settings.searchType = ele.prop('type')
+            $( "#searchIcon" ).prop('title', ele.text())
         }
     })
 
