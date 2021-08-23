@@ -522,7 +522,7 @@ function spaceTree(container) {
     }
 
     // Make left margin auto
-    $( ".tree" ).css('margin-left', 'auto')
+    $( treeDiv ).css('margin-left', 'auto')
 
     centerTopSib = getValueAtMiddleIndex(biglessSibs)
     centerTopSib.div.scrollIntoView({behavior: "auto", block: "start", inline: "center"})
