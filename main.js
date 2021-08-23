@@ -238,17 +238,18 @@ function createMenu() {
     $( '.controlgroup' ).controlgroup()
 
     // Create menu for choosing search type
-    var ststt
     $( '#searchTypeSelect' ).selectmenu({
         classes: {
             "ui-selectmenu-button": "ui-button-icon-only"
         },
         create: function(e, ui) {
             $( "#searchTypeSelect-button" ).prop('title', 'Search by name')
-            ststt = $( "#searchTypeSelect-button" ).tooltip()
+            $( "#searchTypeSelect-button" ).tooltip({
+                position: {my: "center top", at: "center bottom+15"}
+            })
         },
         open: function(e, ui) {
-            ststt.disable()
+            $( "#searchTypeSelect-button" ).tooltip('disable')
         },
         change: function(e, ui) {
             ele = $( ui.item.element )
@@ -256,7 +257,7 @@ function createMenu() {
             $( "#searchTypeSelect-button" ).prop('title', ele.text())
         },
         close: function(e, ui) {
-            ststt.enable()
+            $( "#searchTypeSelect-button" ).tooltip('enable')
         },
     })
 
