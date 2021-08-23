@@ -102,6 +102,7 @@
 	cursor: default;
 	width: 300px;
 	max-height: 400px;
+    z-index: 2;
     overflow-y: auto;
     overflow-x: hidden;
 
