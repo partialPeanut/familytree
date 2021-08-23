@@ -173,7 +173,7 @@ html, body {
 }
 .tree {
     width: fit-content;
-    height: inherit;
+    height: calc(100% - var(--treeMarginTop));
     white-space: nowrap;
     position: relative;
     top: var(--treeMarginTop);
