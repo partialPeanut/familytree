@@ -116,11 +116,11 @@ html, body {
     background-position: 50%;
 }
 .gutter.gutter-horizontal {
-    background-image: url('https://drive.google.com/thumbnail?id=1IAvf0H7o56uhZQxJ2WoXzEEVZA-B0VwH');
+    background-image: url('images/grabbar-image.png');
     cursor: col-resize;
 }
 .gutter.gutter-vertical {
-    background-image: url('https://drive.google.com/thumbnail?id=1-WbJlrWthLgST8J2uhgIBpEKz-kyi-kX');
+    background-image: url('images/grabbar-image-vert.png');
     cursor: row-resize;
 }
 
