@@ -156,6 +156,7 @@ html, body {
 .clickable:hover {
     transform: scale(1.1);
     cursor: pointer;
+    z-index: 1;
 }
 .hoverFromTab {
     transform: scale(1.1);
