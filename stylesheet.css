@@ -153,19 +153,15 @@ html, body {
     white-space: pre-wrap;
 }
 
-.clickable:hover {
+.clickable:hover, .hoverFromTab, .active.clickable, .active button {
     transform: scale(1.1);
-    cursor: pointer;
     z-index: 1;
 }
-.hoverFromTab {
-    transform: scale(1.1);
-    z-index: 1;
+.clickable:hover {
+    cursor: pointer;
 }
 .active.clickable, .active button {
-    transform: scale(1.1);
     filter: drop-shadow(0 0 6px grey);
-    z-index: 1;
 }
 
 .treeContainer {
