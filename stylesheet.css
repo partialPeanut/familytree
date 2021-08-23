@@ -167,6 +167,7 @@ html, body {
 }
 
 .treeContainer {
+    width: 100%;
     height: 100%;
     cursor: grab;
     overflow: auto;
@@ -177,7 +178,8 @@ html, body {
     white-space: nowrap;
     position: relative;
     top: var(--treeMarginTop);
-    left: var(--treeMarginLeft);
+    margin-left: auto;
+    margin-right: auto;
 
     transform-origin: top left;
 }
@@ -185,7 +187,7 @@ html, body {
 .tree > .row {
     height: var(--blockHeight);
     white-space: nowrap;
-    padding: 0 var(--treeMarginRight) 0 0;
+    padding: 0 var(--treeMarginRight) 0 var(--treeMarginLeft);
 }
 
 .block {
@@ -234,5 +236,5 @@ html, body {
 .across {
     height: var(--lineWeight);
     white-space: nowrap;
-    padding: 0 var(--treeMarginRight) 0 0;
+    padding: 0 var(--treeMarginRight) 0 var(--treeMarginLeft);
 }
