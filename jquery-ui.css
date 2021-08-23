@@ -866,12 +866,15 @@ button.ui-button::-moz-focus-inner {
 .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor {
 	cursor: pointer;
 }
+/*
 .ui-tabs .ui-tabs-panel {
 	/* display: block; */
 	/* border-width: 0; */
 	/* padding: 1em 1.4em; */
 	/* background: none; */
+/*
 }
+*/
 .ui-tooltip {
 	padding: 8px;
 	position: absolute;
@@ -890,16 +893,22 @@ body .ui-tooltip {
 .ui-widget .ui-widget {
 	font-size: 1em;
 }
+
+/*
 .ui-widget input,
 .ui-widget select,
 .ui-widget textarea,
 .ui-widget button {
 	/* font-family: Arial,Helvetica,sans-serif; */
 	/* font-size: 1em; */
+/*
 }
 .ui-widget.ui-widget-content {
 	/* border: 1px solid #c5c5c5; */
+/*
 }
+*/
+
 .ui-widget-content {
 	/* border: 1px solid #dddddd; */
 	background: #ffffff;
