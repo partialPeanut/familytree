@@ -230,6 +230,20 @@ function createMenu() {
         position: {my: "center top", at: "center bottom+15"}
     })
 
+    // Creates controlgroups for all controlgroups
+    $( '.controlgroup' ).controlgroup()
+
+    // Create menu for choosing search type
+    $( '#searchTypeSelect' ).selectmenu({
+        classes: {
+            "ui-selectmenu-button": "ui-button-icon-only demo-splitbutton-select"
+        },
+        change: function(e, ui) {
+            settings.searchType = ui.type
+            $( "#searchIcon" ).attr('title', ui.type)
+        }
+    })
+
     // Creates the autocomplete/search element
     createCatComplete()
     $( "#searchInput" ).catcomplete({
@@ -238,38 +252,42 @@ function createMenu() {
             matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" )
             dataSet = []
             containers.forEach(cont => {
-                cont.siblings.filter(sib => matcher.test(sib.name)).forEach(sib => {
-                    dataSet.push({
-                        name: sib.name,
-                        label: unspecialText(sib.name),
-                        category: cont.name,
-                        link: sib
-                    })
+                cont.siblings.filter(sib => doesSibMatchSearch(matcher, sib)).forEach(sib => {
+                    result = buildSibSearchResult(matcher, sib)
+                    result.category = cont.name
+                    dataSet.push(result)
                 })
             })
-            siblings.filter(sib => !dataSet.some(dat => dat.name == sib.name) && matcher.test(sib.name)).forEach(sib => {
-                dataSet.push({
-                    name: sib.name,
-                    label: unspecialText(sib.name),
-                    category: "Other Siblings",
-                    link: sib
-                })
-            })
-            settings.tagData.filter(tag => matcher.test(tag.name)).forEach(tag => {
-                dataSet.push({
-                    name: tag.name,
-                    label: unspecialText(tag.name),
-                    category: "Tags",
-                    link: tag
-                })
+            siblings.filter(sib => !dataSet.some(dat => dat.name == sib.name) && doesSibMatchSearch(matcher, sib)).forEach(sib => {
+                result = buildSibSearchResult(matcher, sib)
+                result.category = "Other Siblings"
+                dataSet.push(result)
             })
 
+            if (settings.searchType == 'name' || settings.searchType == 'tag') {
+                settings.tagData.filter(tag => matcher.test(tag.name)).forEach(tag => {
+                    dataSet.push({
+                        label: unspecialText(tag.name),
+                        category: "Tags",
+                        link: tag
+                    })
+                })
+            }
+            
             response(dataSet)
         },
         select: function(e, ui) {
-            if (ui.item.category == "Other Siblings") tabData = containerlessSibToTab(ui.item.link)
-            else if (ui.item.category == "Tags") tabData = tagToTab(ui.item.link)
-            else tabData = sibToTab(ui.item.link)
+            switch (ui.item.category) {
+                case 'Other Siblings':
+                    tabData = containerlessSibToTab(ui.item.link)
+                    break
+                case 'Tags':
+                    tabData = tagToTab(ui.item.link)
+                    break
+                default:
+                    tabData = sibToTab(ui.item.link)
+                    break
+            }
 
             showTab(tabData)
         }

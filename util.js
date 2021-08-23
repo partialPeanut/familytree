@@ -91,7 +91,10 @@ function createCatComplete() {
             this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" )
         },
         _renderMenu: function( ul, items ) {
-            var that = this,
+            var that = this
+            if (items.length == 0) {
+                ul.append( "<li class='ui-autocomplete-category'>No results found!</li>" )
+            }
             currentCategory = ""
             $.each( items, function( index, item ) {
                 if ( item.category != currentCategory ) {
@@ -103,6 +106,50 @@ function createCatComplete() {
             })
         }
     })
+}
+
+// Tests a sibling to see if they belong in this search
+function doesSibMatchSearch(matcher, sib) {
+    switch (settings.searchType) {
+        case 'name':
+            return matcher.test(sib.name)
+        case 'class':
+            return matcher.test(sib.pledgeClass)
+        case 'tag':
+            found = false
+            sib.tags.forEach(tagName => {
+                if (matcher.test(tagName)) {
+                    found = true
+                    return false
+                }
+            })
+            return found
+    }
+}
+
+// Creates a search result based on search type
+function buildSibSearchResult(matcher, sib) {
+    result = { link: sib }
+    cleanName = unspecialText(sib.name)
+    switch (settings.searchType) {
+        case 'name':
+            result.label = cleanName
+            return result
+        case 'class':
+            result.label = cleanName + ' (' + sib.pledgeClass + ')'
+            result.value = cleanName
+            return result
+        case 'tag':
+            applicableTags = []
+            sib.tags.forEach(tagName => {
+                if (matcher.test(tagName)) applicableTags.push(tagName)
+            })
+            result.label = cleanName + ' (' + applicableTags.join(', ') + ')'
+            result.value = cleanName
+            return result
+        default:
+            return false
+    }
 }
 
 // Turns a number of pixels into an integer

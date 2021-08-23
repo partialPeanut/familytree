@@ -39,7 +39,14 @@
                 <img id="suggestionsIcon" title="Suggestions" class="menuItem clickable" src="https://drive.google.com/thumbnail?id=1yCW-as2K4pM1SkRfZiYlYL-2kBwAzaS8" onclick="showTab({ tabType: 'suggestions', ele: this })">
                 <div id="spaceBar" class="menuItem"></div>
                 <div id="searchBar" class="menuItem">
-                    <label for="searchInput"><img id="searchIcon" title="Search by name" class="subMenuIcon" src="https://drive.google.com/thumbnail?id=1AUOQUvb8IfVHr9wRE9jSHug1CrIRpgCi"></label>
+                    <label for="searchInput" class="controlgroup">
+                        <img id="searchIcon" title="Search by name" class="subMenuIcon" src="https://drive.google.com/thumbnail?id=1AUOQUvb8IfVHr9wRE9jSHug1CrIRpgCi">
+                        <select id="searchTypeSelect">
+                            <option type="name" selected="selected">Search by name</option>
+                            <option type="class">Search by pledge class</option>
+                            <option type="tag">Search by tags</option>
+                        </select>
+                    </label>
                     <input type="text" id="searchInput" name="searchInput" placeholder="Search..."></input>
                 </div>
             </div>
