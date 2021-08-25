@@ -254,8 +254,9 @@ function createMenu() {
         select: function(e, ui) {
             ele = $( ui.item.element )
             settings.searchType = ele.attr('type')
-            $( "#searchTypeSelect-button" ).prop('title', ele.text())
-            e.preventDefault()
+            setTimeout(function(){
+                $( "#searchTypeSelect-button" ).prop('title', ele.text())
+            }, 100)
         },
         close: function(e, ui) {
             $( "#searchTypeSelect-button" ).tooltip('enable')
