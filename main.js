@@ -251,7 +251,7 @@ function createMenu() {
         open: function(e, ui) {
             $( "#searchTypeSelect-button" ).tooltip('disable')
         },
-        change: function(e, ui) {
+        select: function(e, ui) {
             ele = $( ui.item.element )
             settings.searchType = ele.attr('type')
             $( "#searchTypeSelect-button" ).prop('title', ele.text())
