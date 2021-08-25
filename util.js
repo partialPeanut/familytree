@@ -129,7 +129,7 @@ function doesSibMatchSearch(matcher, sib) {
 
 // Creates a search result based on search type
 function buildSibSearchResult(matcher, sib) {
-    result = { link: sib }
+    result = { sibName: sib.name, link: sib }
     cleanName = unspecialText(sib.name)
     switch (settings.searchType) {
         case 'name':

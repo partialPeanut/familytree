@@ -277,7 +277,7 @@ function createMenu() {
                     dataSet.push(result)
                 })
             })
-            siblings.filter(sib => !dataSet.some(dat => dat.name == sib.name) && doesSibMatchSearch(matcher, sib)).forEach(sib => {
+            siblings.filter(sib => !dataSet.some(dat => dat.sibName == sib.name) && doesSibMatchSearch(matcher, sib)).forEach(sib => {
                 result = buildSibSearchResult(matcher, sib)
                 result.category = "Other Siblings"
                 dataSet.push(result)
