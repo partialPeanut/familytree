@@ -497,14 +497,15 @@ function createUnspacedTree(container) {
             nameName = document.createTextNode(nameNameName)
             nameButton.appendChild(nameName)
 
-            // If the sib has any littles, add a line below the nas
-            if (sib.littles.length > 0) {
-                botLine = document.createElement('div')
-                botLine.classList.add('line')
-                botLine.classList.add('vert')
-                botLine.classList.add(houseClean)
-                block.append(botLine)
-            }
+            // If the sib has any littles, add a line below the nas, else make it transparent
+            botLine = document.createElement('div')
+            botLine.classList.add('line')
+            botLine.classList.add('vert')
+
+            if (sib.littles.length > 0) botLine.classList.add(houseClean)
+            else botLine.classList.add("transparent")
+
+            block.append(botLine)
         })
     }
 }

@@ -108,6 +108,10 @@
 	top: 0;
 	left: 0;
 	cursor: default;
+
+    max-height: 400px;
+	overflow-x: clip;
+	overflow-y: auto;
 }
 .ui-widget-content.ui-autocomplete-category {
     border: 1px solid #dddddd;
