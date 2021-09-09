@@ -207,6 +207,7 @@ html, body {
 }
 
 .tree > .row {
+    display: flex;
     height: var(--blockHeight);
     white-space: nowrap;
     padding: 0 var(--treeMarginRight) 0 var(--treeMarginLeft);
