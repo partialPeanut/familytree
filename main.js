@@ -205,6 +205,7 @@ function createTabContainerDivs() {
         items: "> .tabForContainer",
         revert: true,
         start: function(e, ui) {
+            ui.item.css("top", "")
             ui.item.css("margin", "calc(.2em + 1px) 0")
         },
         stop: function(e, ui) {
