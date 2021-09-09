@@ -492,10 +492,23 @@ function createUnspacedTree(container) {
 
 
             // The name itself
-            if (sib.tags.includes('stub')) nameNameName = filterInvisText(sib.house)
-            else nameNameName = filterInvisText(sib.name) + ' ' + pledgeClassToSymbols(sib.pledgeClassNumber)
-            nameName = document.createTextNode(nameNameName)
-            nameButton.appendChild(nameName)
+            if (sib.tags.includes('stub')) {
+                nameNameName = filterInvisText(sib.house)
+                nameName = document.createTextNode(nameNameName)
+                nameButton.appendChild(nameName)
+            }
+            else {
+                nameNameName = filterInvisText(sib.name)
+                nameName = document.createTextNode(nameNameName)
+                nameButton.appendChild(nameName)
+
+                pledgeClassText = document.createTextNode(' ' + pledgeClassToSymbols(sib.pledgeClassNumber))
+                pledgeClassNode = createElement('A')
+                pledgeClassNode.appendChild(pledgeClassText)
+                nameButton.appendChild(pledgeClassNode)
+            }
+
+            
 
             // If the sib has any littles, add a line below the nas, else make it transparent
             botLine = document.createElement('div')
