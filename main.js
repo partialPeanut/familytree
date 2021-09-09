@@ -503,7 +503,7 @@ function createUnspacedTree(container) {
                 nameButton.appendChild(nameName)
 
                 pledgeClassText = document.createTextNode(' ' + pledgeClassToSymbols(sib.pledgeClassNumber))
-                pledgeClassNode = createElement('A')
+                pledgeClassNode = document.createElement('A')
                 pledgeClassNode.appendChild(pledgeClassText)
                 nameButton.appendChild(pledgeClassNode)
             }
