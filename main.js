@@ -208,6 +208,8 @@ function createTabContainerDivs() {
             ui.item.css("top", "calc(100% - 42px)")
         },
         stop: function(e, ui) {
+            ui.item.css("top", "")
+
             $( '[data-href]' ).each((idx, el) => {
                 el.setAttribute('href', el.getAttribute('data-href'))
             })
