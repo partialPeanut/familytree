@@ -164,12 +164,15 @@ function createTabContainerDivs() {
 
         $( zoomSlider ).slider({
             orientation: "vertical",
-            min: 0.1,
-            max: 2,
+            min: 0,
+            max: 1.9,
             step: 0.1,
             value: 1,
             slide: function( event, ui ) {
-                $( this ).parent().parent().find( '.tree' ).css("transform", "scale(" + ui.value + ")")
+                trueVal = 2 - ui.value
+                $( this ).parent().parent().find( '.tree' ).css("transform", "scale(" + trueVal + ")")
+                $( this ).parent().parent().css('height', '99%')
+                $( this ).parent().parent().css('height', '100%')
             }
         })
 
