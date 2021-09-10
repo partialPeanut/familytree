@@ -206,6 +206,14 @@ html, body {
     transform-origin: top left;
 }
 
+.zoom-slider {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    height: 200px;
+    z-index: 12;
+}
+
 .tree > .row {
     display: flex;
     height: var(--blockHeight);

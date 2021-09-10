@@ -154,6 +154,21 @@ function createTabContainerDivs() {
         containerDiv.classList.add("containerTab")
         tcc.insertBefore(containerDiv, tbc)
 
+        zoomSlider = document.createElement('div')
+        zoomSlider.classList.add('zoom-slider')
+        containerDiv.appendChild(zoomSlider)
+
+        $( zoomSlider ).slider({
+            orientation: "vertical",
+            min: 0.1,
+            max: 2,
+            step: 0.1,
+            value: 1,
+            slide: function( event, ui ) {
+                $( "#" + containerDiv.id + " .tree" ).css("transform", "scale(" + ui.value + ")")
+            }
+        })
+
         tabButton = document.createElement('li')
         tabButton.classList.add("tabForContainer")
         tbc.append(tabButton)
