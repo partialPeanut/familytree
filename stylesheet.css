@@ -206,12 +206,14 @@ html, body {
     transform-origin: top left;
 }
 
-.zoom-slider {
+.zoom-container {
     position: absolute;
     top: 32px;
     right: 32px;
-    height: 200px;
     z-index: 12;
+}
+.zoom-slider {
+    height: 200px;
 }
 
 .tree > .row {

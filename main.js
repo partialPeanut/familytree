@@ -154,9 +154,13 @@ function createTabContainerDivs() {
         containerDiv.classList.add("containerTab")
         tcc.insertBefore(containerDiv, tbc)
 
+        sliderContainer = document.createElement('div')
+        sliderContainer.classList.add('zoom-container')
+        containerDiv.appendChild(sliderContainer)
+
         zoomSlider = document.createElement('div')
         zoomSlider.classList.add('zoom-slider')
-        containerDiv.appendChild(zoomSlider)
+        sliderContainer.appendChild(zoomSlider)
 
         $( zoomSlider ).slider({
             orientation: "vertical",
@@ -165,7 +169,7 @@ function createTabContainerDivs() {
             step: 0.1,
             value: 1,
             slide: function( event, ui ) {
-                $( this ).next( "* .tree" ).css("transform", "scale(" + ui.value + ")")
+                $( this ).parent().parent().find( '.tree' ).css("transform", "scale(" + ui.value + ")")
             }
         })
 
@@ -198,8 +202,8 @@ function createTabContainerDivs() {
             panels.css("display", "")
             ui.panel.height('100%')
 
-            $( ".zoom-slider" ).css('display', 'none')
-            ui.panel.find( ".zoom-slider" ).css('display', 'initial')
+            $( ".zoom-container" ).css('display', 'none')
+            ui.panel.find( ".zoom-container" ).css('display', 'initial')
         },
         beforeActivate: function(e, ui) {
             thisLink = $( ui.newTab ).children()
@@ -213,8 +217,8 @@ function createTabContainerDivs() {
             ui.oldPanel.height('0%')
             ui.newPanel.height('100%')
 
-            ui.oldPanel.find( ".zoom-slider" ).css('display', 'none')
-            ui.newPanel.find( ".zoom-slider" ).css('display', 'initial')
+            ui.oldPanel.find( ".zoom-container" ).css('display', 'none')
+            ui.newPanel.find( ".zoom-container" ).css('display', 'initial')
 
             thisLink = $( ui.newTab ).children()
             thisLink.removeAttr('href')

@@ -733,7 +733,7 @@ button.ui-button::-moz-focus-inner {
 	/* margin-top: 0; */
 }
 .ui-slider {
-	position: relative;
+	/* position: relative; */
 	text-align: left;
 }
 .ui-slider .ui-slider-handle {
@@ -780,7 +780,7 @@ button.ui-button::-moz-focus-inner {
 
 .ui-slider-vertical {
 	width: .8em;
-	height: 100px;
+	/* height: 100px; */
 }
 .ui-slider-vertical .ui-slider-handle {
 	left: -.3em;
