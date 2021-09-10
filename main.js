@@ -165,7 +165,7 @@ function createTabContainerDivs() {
             step: 0.1,
             value: 1,
             slide: function( event, ui ) {
-                $( "#" + containerDiv.id + " .tree" ).css("transform", "scale(" + ui.value + ")")
+                $( this ).next( "* .tree" ).css("transform", "scale(" + ui.value + ")")
             }
         })
 
@@ -197,6 +197,9 @@ function createTabContainerDivs() {
             panels.removeAttr('aria-hidden')
             panels.css("display", "")
             ui.panel.height('100%')
+
+            $( ".zoom-slider" ).css('display', 'none')
+            ui.panel.find( ".zoom-slider" ).css('display', 'initial')
         },
         beforeActivate: function(e, ui) {
             thisLink = $( ui.newTab ).children()
@@ -209,6 +212,9 @@ function createTabContainerDivs() {
             panels.css("display", "")
             ui.oldPanel.height('0%')
             ui.newPanel.height('100%')
+
+            ui.oldPanel.find( ".zoom-slider" ).css('display', 'none')
+            ui.newPanel.find( ".zoom-slider" ).css('display', 'initial')
 
             thisLink = $( ui.newTab ).children()
             thisLink.removeAttr('href')
