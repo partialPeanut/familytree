@@ -55,7 +55,9 @@
                 <div id="mwContainerContainer" v-if="getDisplayTab() == 'load' || getSettings().containerStyle == 'multi-window'"></div>
                 <div id="tabsContainerContainerContainer" v-if="getDisplayTab() == 'load' || getSettings().containerStyle == 'tabs'">
                     <div id="tabsContainerContainer">
-                        <ul id="tabButtonsContainer"></ul>
+                        <div id="tbcWrapper">
+                            <ul id="tabButtonsContainer"></ul>
+                        </div>
                     </div>
                 </div>
             </div>

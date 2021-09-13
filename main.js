@@ -147,12 +147,13 @@ function createMWContainerDivs() {
 // Create all the containers for the tabs
 function createTabContainerDivs() {
     tcc = document.querySelector("#tabsContainerContainer")
+    tbcW = document.querySelector("#tbcWrapper")
     tbc = document.querySelector("#tabButtonsContainer")
     containers.forEach(container => {
         containerDiv = document.createElement('div')
         containerDiv.id = "container-tab-" + container.tabPos
         containerDiv.classList.add("containerTab")
-        tcc.insertBefore(containerDiv, tbc)
+        tcc.insertBefore(containerDiv, tbcW)
 
         sliderContainer = document.createElement('div')
         sliderContainer.classList.add('zoom-container')
