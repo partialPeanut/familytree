@@ -151,7 +151,7 @@ html, body {
     padding: 0 0 0 4px;
 }
 #addTabButton {
-    margin: .2em 4px;
+    margin: calc(.2em + 1px) 4px;
     cursor: pointer;
     user-select: none;
 }
