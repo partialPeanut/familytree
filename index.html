@@ -104,6 +104,16 @@
                     <button @mouseover="applySibHoverFromTab(getTabData().sib.big)" @mouseleave="removeHoverFromTab" @click="sibToName(getTabData().sib.big)">{{ unspecialText(getTabData().sib.big.name) }}</button>
                 </p>
 
+                <p v-if="getTabData().sib.otherselves.length == 1">Other Version on This Tree:
+                    <button @mouseover="applySibHoverFromTab(getTabData().sib.otherselves[0])" @mouseleave="removeHoverFromTab" @click="sibToName(getTabData().sib.otherselves[0])">{{ unspecialText(getTabData().sib.otherselves[0].name) }}</button>
+                </p>
+                <p v-if="getTabData().sib.otherselves.length > 1">Other Versions on This Tree:</p>
+                <ol v-if="getTabData().sib.otherselves.length > 1">
+                    <li v-for="otherself in getTabData().sib.otherselves">
+                        <button @mouseover="applySibHoverFromTab(otherself)" @mouseleave="removeHoverFromTab" @click="sibToName(otherself)">{{ unspecialText(otherself.name) }}</button>
+                    </li>
+                </ol>
+
                 <p v-if="getTabData().sib.littles.length == 1">Little:
                     <button @mouseover="applySibHoverFromTab(getTabData().sib.littles[0])" @mouseleave="removeHoverFromTab" @click="sibToName(getTabData().sib.littles[0])">{{ unspecialText(getTabData().sib.littles[0].name) }}</button>
                 </p>

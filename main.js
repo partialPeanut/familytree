@@ -369,6 +369,7 @@ function copySiblingSet(container) {
                 gradYear: sib.gradYear,
                 house: sib.house,
                 tags: sib.tags,
+                otherselvesNames: sib.otherselvesNames,
                 height: sib.height,
                 container: container
             }
@@ -392,12 +393,19 @@ function copySiblingSet(container) {
         }
     })
 
-    // Link all siblings in big/little heirarchy
+    // Link all siblings in big/little heirarchy (plus otherselves)
     container.siblings.forEach(sib => {
         if (sib.bigName) {
             sib.big = container.siblings.find(sibling => sibling.name == sib.bigName)
             sib.big.littles.push(sib)
         }
+
+        sib.otherselves = []
+        sib.otherselvesNames.forEach(otherselfName => {
+            otherself = container.siblings.find(sib => sib.name == otherselfName)
+            sib.otherselves.push(otherself)
+        })
+
         if (sib.littleNames) {
             sib.littleNames.forEach(littleName => {
                 little = container.siblings.find(sibling => sibling.name == littleName)

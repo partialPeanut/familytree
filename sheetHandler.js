@@ -39,7 +39,7 @@ function getSheetValues() {
     // Get the spreadsheet bits and do stuff to em
     gapi.client.sheets.spreadsheets.values.batchGet({
         spreadsheetId: '1tmPGcVRGJIzRfyHdBvNvPNYUoEfSKlbbklQR54dzoAQ',
-        ranges: ['Siblings!A2:G', 'Size Settings!A2:B', 'Misc Settings!A2:B', 'Tag Settings!A2:N', 'Conjunction Grid!A1:N', 'Container Settings!A2:E']
+        ranges: ['Siblings!A2:H', 'Size Settings!A2:B', 'Misc Settings!A2:B', 'Tag Settings!A2:N', 'Conjunction Grid!A1:N', 'Container Settings!A2:E']
       }).then((response) => {
         ranges = response.result.valueRanges
         settings = {}
@@ -95,7 +95,7 @@ function placeSiblings(result) {
 
     siblings.sort(recursiveSiblingSort)
 
-    // Add siblings to their tags' references
+    // Add siblings to their tags' references and connect them if they have otherselves
     siblings.forEach(sib => {
         house = getTag(sib.house)
         house.taggedSibs.push(sib)
@@ -104,6 +104,12 @@ function placeSiblings(result) {
             tag = getTag(tagName)
             tag.taggedSibs.push(sib)
             tag.taggedSibs.sort(function(a, b) { return a.pledgeClassNumber - b.pledgeClassNumber })
+        })
+
+        sib.otherselves = []
+        sib.otherselvesNames.forEach(otherselfName => {
+            otherself = siblings.find(sib => sib.name == otherselfName)
+            sib.otherselves.push(otherself)
         })
     })
         

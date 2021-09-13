@@ -27,6 +27,7 @@ function sibRowToJSON(row) {
     sibJSON.littles = []
     sibJSON.house = row[4] == '' ? null : row[4]
     sibJSON.tags = row[5] == '' ? [] : row[5].split(';')
+    sibJSON.otherselvesNames = row[6] == '' ? [] : row[6].split(';')
 
     return sibJSON
 }
