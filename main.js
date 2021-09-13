@@ -402,8 +402,10 @@ function copySiblingSet(container) {
 
         sib.otherselves = []
         sib.otherselvesNames.forEach(otherselfName => {
-            otherself = container.siblings.find(sib => sib.name == otherselfName)
-            sib.otherselves.push(otherself)
+            if (container.siblings.includes(sib => sib.name == otherselfName)) {
+                otherself = container.siblings.find(sib => sib.name == otherselfName)
+                sib.otherselves.push(otherself)
+            }
         })
 
         if (sib.littleNames) {
