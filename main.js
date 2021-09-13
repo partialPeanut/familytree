@@ -509,7 +509,7 @@ function createUnspacedTree(container) {
                 }
                 // If it's special, do whatever crazy bullshit
                 if (tag.type.includes("SPECIAL")) {
-                    if (tag.name == "Dropped") {
+                    if (tag.name == "Dropped" || tag.name == "Moved") {
                         buttonStyle = window.getComputedStyle(nameButton)
                         backgroundCol = buttonStyle.backgroundColor
                         borderCol = buttonStyle.borderColor

@@ -3,9 +3,11 @@
  + Loading bar
  + Make non-touching trees snap to mid
  + Alternate for images not loading
+ + Parts of composite symbols should count as the composite for hovering on tabs
  + Firefox breaks some things
   - Asphodel is grey
   - Dropped doesn't load
+  - Lines?????
  + McDucker stub color is wrong
 
  MAJOR CHANGES/ADDITIONS
@@ -14,6 +16,7 @@
  + Legend
  + Clan logos on tree
  + Minimize trees
+ + Interact with stub to go to clan tree
 
 FUNKY TREE STYLES
  + One pledge class per row
