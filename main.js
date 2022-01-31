@@ -235,7 +235,8 @@ function createTabContainerDivs() {
         items: "> .tabForContainer",
         revert: true,
         start: function(e, ui) {
-            ui.item.css("top", "calc(100% - 42px)")
+            buttonHeight = $( '#tabButtonsContainer' ).getBoundingClientRect.top + 3.2
+            ui.item.css("top", `${buttonHeight}px`)
         },
         stop: function(e, ui) {
             ui.item.css("top", "")
