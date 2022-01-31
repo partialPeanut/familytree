@@ -235,8 +235,11 @@ function createTabContainerDivs() {
         items: "> .tabForContainer",
         revert: true,
         start: function(e, ui) {
-            buttonHeight = tbc.getBoundingClientRect().top + 3.2
-            ui.item.css("top", `${buttonHeight}px`)
+            // Jank to make displaced tabs have the right height
+            if ($( tbc ).get(0).scrollWidth > $( tbc ).innerWidth()) {
+                ui.item.css("top", `calc(100%-62px)`)
+            }
+            else ui.item.css("top", `calc(100%-42px)`)
         },
         stop: function(e, ui) {
             ui.item.css("top", "")
