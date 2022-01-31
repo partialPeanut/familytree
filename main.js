@@ -166,8 +166,8 @@ function createTabContainerDivs() {
 
         $( zoomSlider ).slider({
             orientation: "vertical",
-            min: 0,
-            max: 1.9,
+            min: 0.1,
+            max: 2,
             step: 0.1,
             value: 1,
             slide: function( event, ui ) {

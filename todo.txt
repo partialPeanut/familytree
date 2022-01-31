@@ -4,17 +4,15 @@
  + Make non-touching trees snap to mid
  + Alternate for images not loading
  + Parts of composite symbols should count as the composite for hovering on tabs
- + Firefox breaks some things
-  - Asphodel is grey
-  - Dropped doesn't load
-  - Lines?????
  + McDucker stub color is wrong
+ + Link otherselves in tab
+ + Tag -> sib should give options of which tree to go to
+ + Dragging tabs break when scroll bar is active
 
  MAJOR CHANGES/ADDITIONS
- + Zoom!!
  + Main menu
  + Legend
- + Clan logos on tree
+ + Clan logos on trees
  + Minimize trees
  + Interact with stub to go to clan tree
 
@@ -47,6 +45,3 @@ SUGGESTIONS FORM
 + Email address (optional)
 + Subject line
 + Description
-
-SEARCH BAR
-+ Search by name, pledge class, tags
