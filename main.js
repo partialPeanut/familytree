@@ -383,6 +383,7 @@ function copySiblingSet(container) {
                 littles: [],
                 house: sib.house,
                 tags: ['stub'],
+                otherselvesNames: [],
                 height: sib.height,
                 container: container
             }
@@ -401,7 +402,7 @@ function copySiblingSet(container) {
         }
 
         sib.otherselves = []
-        if (!sib.otherselvesNames) console.log(`${sib.name} has nonexistant otherselves: ${sib.otherselvesNames}`)
+        if (!sib.otherselvesNames) console.log(`${sib.name} has broken otherselves: ${sib.otherselvesNames}`)
         sib.otherselvesNames.forEach(otherselfName => {
             if (container.siblings.includes(sib => sib.name == otherselfName)) {
                 otherself = container.siblings.find(sib => sib.name == otherselfName)
