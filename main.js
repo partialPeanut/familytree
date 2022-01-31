@@ -9,11 +9,12 @@ function main() {
     containers.forEach(container => {
         copySiblingSet(container)
         createUnspacedTree(container)
+        // Arbitrarily long timer to ensure everything loads properly, 3s is likely overkill
         setTimeout(function(){
             spaceTree(container)
             drawAcrossLines(container)
             makeDraggable(container.containerDiv)
-        }, 1200)
+        }, 3000)
     })
 }
 
@@ -170,7 +171,7 @@ function createTabContainerDivs() {
             step: 0.1,
             value: 1,
             slide: function( event, ui ) {
-                trueVal = 2 - ui.value
+                trueVal = ui.value
                 $( this ).parent().parent().find( '.tree' ).css("transform", "scale(" + trueVal + ")")
                 $( this ).parent().parent().css('height', '99%')
                 $( this ).parent().parent().css('height', '100%')

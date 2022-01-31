@@ -754,6 +754,13 @@ button.ui-button::-moz-focus-inner {
 	background-position: 0 0;
 }
 
+.ui-slider.ui-widget-content {
+	background: #ddd;
+}
+.ui-slider-handle.ui-state-default {
+	background: #bbb;
+}
+
 /* support: IE8 - See #6727 */
 .ui-slider.ui-state-disabled .ui-slider-handle,
 .ui-slider.ui-state-disabled .ui-slider-range {
