@@ -30,7 +30,6 @@ function sibRowToJSON(row) {
     sibJSON.house = row[4] == '' ? null : row[4]
     sibJSON.tags = row[5] == '' ? [] : row[5].split(';')
     sibJSON.otherselvesNames = row[6] == '' ? [] : row[6].split(';')
-    if (sibJSON.otherselvesNames != []) console.log(`Otherself array: ${sibJSON.otherselvesNames}`)
 
     return sibJSON
 }

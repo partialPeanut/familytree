@@ -401,6 +401,7 @@ function copySiblingSet(container) {
         }
 
         sib.otherselves = []
+        if (!sib.otherselvesNames) console.log(`${sib.name} has nonexistant otherselves: ${sib.otherselvesNames}`)
         sib.otherselvesNames.forEach(otherselfName => {
             if (container.siblings.includes(sib => sib.name == otherselfName)) {
                 otherself = container.siblings.find(sib => sib.name == otherselfName)
