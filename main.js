@@ -235,7 +235,7 @@ function createTabContainerDivs() {
         items: "> .tabForContainer",
         revert: true,
         start: function(e, ui) {
-            buttonHeight = tbc.getBoundingClientRect.top + 3.2
+            buttonHeight = tbc.getBoundingClientRect().top + 3.2
             ui.item.css("top", `${buttonHeight}px`)
         },
         stop: function(e, ui) {
