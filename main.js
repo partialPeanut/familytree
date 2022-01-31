@@ -286,6 +286,7 @@ function createMenu() {
             settings.searchType = ele.attr('type')
             setTimeout(function(){
                 $( "#searchTypeSelect-button" ).prop('title', ele.text())
+                $( "#searchInput" ).prop('placeholder', `${ele.text()}...`)
             }, 100)
         },
         close: function(e, ui) {
