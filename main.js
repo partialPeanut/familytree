@@ -237,9 +237,9 @@ function createTabContainerDivs() {
         start: function(e, ui) {
             // Jank to make displaced tabs have the right height
             if ($( tbc ).get(0).scrollWidth > $( tbc ).innerWidth()) {
-                ui.item.css("top", `calc(100%-62px)`)
+                ui.item.css("top", `calc(100% - 62px)`)
             }
-            else ui.item.css("top", `calc(100%-42px)`)
+            else ui.item.css("top", `calc(100% - 42px)`)
         },
         stop: function(e, ui) {
             ui.item.css("top", "")
