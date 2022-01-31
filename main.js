@@ -239,7 +239,7 @@ function createTabContainerDivs() {
             if ($( tbc ).get(0).scrollWidth > $( tbc ).innerWidth()) {
                 ui.item.css("top", `calc(100% - 62px)`)
             }
-            else ui.item.css("top", `calc(100% - 38.5px)`)
+            else ui.item.css("top", `calc(100% - 45.5px)`)
         },
         stop: function(e, ui) {
             ui.item.css("top", "")
