@@ -80,6 +80,7 @@ function placeSiblings(result) {
         }
         else {
             sibJSON.big = siblings.find(sib => sib.name == sibJSON.bigName)
+            if (sibJSON.big == undefined) console.log(`ERROR: ${sibJSON.bigName} is not a valid big!`)
 
             // If they have no house, inherit their big's
             if (sibJSON.house === null) sibJSON.house = sibJSON.big.house
