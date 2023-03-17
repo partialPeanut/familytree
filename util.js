@@ -566,3 +566,11 @@ function exitTab() {
         containers.forEach(cont => goToScrollLock(cont))
     }, 0)
 }
+
+// Saves the current tree as an svg and tries to download it
+function saveCurrentTree() {
+    tcc = document.querySelector("#tabsContainerContainer")
+    treeToCapture = $( "#container-tab-" + $( tcc ).tabs( "option", "active" ) + " .treeContainer" )
+
+    html2canvas(treeToCapture)
+}

@@ -1,4 +1,6 @@
  MINOR THINGS/FIXES
+ + Pronouns
+ + Scroll to zoom
  + Make the info bar Not Look Like Shit
  + Loading bar
  + Make non-touching trees snap to mid

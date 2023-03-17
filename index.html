@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="stylesheet" href="jquery-ui.css">
 
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -37,6 +38,7 @@
                 <img id="infoIcon" title="Information" class="menuItem clickable" src="images/information-icon.png" onclick="showTab({ tabType: 'info', ele: this })">
                 <img id="settingsIcon" title="Settings" class="menuItem clickable" src="images/settings-icon.png" onclick="showTab({ tabType: 'settings', ele: this })">
                 <img id="suggestionsIcon" title="Suggestions" class="menuItem clickable" src="images/suggestions-icon.png" onclick="showTab({ tabType: 'suggestions', ele: this })">
+                <img id="saveTreeIcon" title="Save Current Tree" class="menuItem clickable" src="images/save-tree-icon.png" onclick="saveCurrentTree()">
                 <div id="spaceBar" class="menuItem"></div>
                 <div id="searchBar" class="menuItem">
                     <label for="searchInput">
